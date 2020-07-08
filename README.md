@@ -95,8 +95,7 @@ App that connects local tennis players for matches and practice. Accounts made b
     * profile
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="https://github.com/xuangela/Tennis-Connect/blob/master/court%20type.pdf" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
