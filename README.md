@@ -33,34 +33,34 @@ App that connects local tennis players for matches and practice. Accounts made b
 * User can login/logout 
 * User can view where local tennis courts are 
 * users can send or not send match request
-* user can use camera to verify match progress/outcome
+* user can use camera to set pfp
 * user can view current match requests
 * user can view their information
 * user can view  match record
 
 **Optional Nice-to-have Stories**
 
+* user can set time and location for match requests
 * calendar integration for match time suggestions
-* when user match requests, they choose a court, which will indicate to other users that the court if not available
-* coach status and dedicated coach searches, complete with ratings and reviews 
-* user can make match requests to other players
-* court availability schedule depending on matches that are scheduled and operating hours
+* user can edit and resend match requests from other players
 * ratings system that adjusts player rating according to match history and initial experience level
-* user can view match record
 * user can view their skill level
-* user can view skill view progress based on opponent feedback
+* opponent feedback for player's sportsmanship
+
+**Extra reach stories**
+* coach status and dedicated coach searches, complete with ratings and reviews 
 
 ### 2. Screen Archetypes
 
 * Login/Register
    *  User can register a new account 
    *  User can login/logout 
+   * user can use camera to set pfp
 * Map View
     * User can view where local tennis courts are 
 * Detail 
     * users can send or not send match request
 * Stream 
-    * user can use camera to log match outcome
     * user can view current match requests
     * user can view  match record
 * Profile 
