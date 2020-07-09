@@ -37,6 +37,7 @@ App that connects local tennis players for matches and practice. Accounts made b
 * user can view current match requests
 * user can view their information
 * user can view  match record
+* user can delete sent match request 
 
 **Optional Nice-to-have Stories**
 
@@ -60,17 +61,19 @@ App that connects local tennis players for matches and practice. Accounts made b
 * Login/Register
    *  User can register a new account 
    *  User can login/logout 
-   * user can use camera to set pfp
 * Map View
-    * User can view where local tennis courts are 
-* Detail 
+    * User can view where local tennis courts are
+* Detail: match request
+    * user can view current match requests
+    * user can delete sent match request 
+* Detail: Player suggestion 
     * users can send or not send match request
 * Stream 
-    * user can view current match requests
     * user can view  match record
 * Profile 
     * user can view their information
-
+   * user can use camera to set pfp
+   
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
@@ -85,20 +88,23 @@ App that connects local tennis players for matches and practice. Accounts made b
 * Login/Register
    *  Profile
 * Map View
-    * Detail 
+    * Detail: Player suggestion
     * Stream 
     * Profile
-* Detail 
+    * Detail: match request
+* Detail: match request (present modally)
+    * Map View
+* Detail: Player suggestion
     * Map View 
     * Stream 
     * Profile
 * Stream 
     * Map View 
-    * Dertail 
+    * Detail: Player suggestion 
     * Profile
 * Profile 
     * Map View 
-    * Detail Stream 
+    * Detail: Player suggestion 
     * Stream 
     * Login/Register
 
@@ -140,11 +146,13 @@ App that connects local tennis players for matches and practice. Accounts made b
 | pfp     | File     | jpeg converted to binary|
 | caption     | String   | description of experience|
 | gender     | String    | visibility dependent on settings|
-| settingsore     | array of boolean       | visibility, suggestion filtering, court options|
-| confirmed requests     | array of pointers to Matches    | confirmed by both players|
-|sent match requests     | array of pointers to Matches    | sent by this user|
-| received match requests    | array of pointers to Matches    | received by this user|
+| settings     | array of boolean       | visibility, suggestion filtering, court options|
+| confirmedRequests     | array of pointers to Matches    | confirmed by both players|
+|sentRequests     | array of pointers to Matches    | sent by this user|
+| receivedRequests    | array of pointers to Matches    | received by this user|
+| completedRequests     | array of pointers to Matches    | already played matches|
 | viable courts    | array of pointer to Court    | generated at registration (closest 10?)|
+| match suggestions    | array of Users    | [insert complex algorithm work]|
 
 
 **Court** 
@@ -159,11 +167,36 @@ App that connects local tennis players for matches and practice. Accounts made b
 ### Networking
 
 * Login/Register
+    * (Create/POST) make a new user 
 * Map View
-* Detail 
+    * (Read/GET) view all match requests 
+        * example of just getting the confirmed matches
+
+                PFQuery *query = PFQuery(className:"User")
+                query.order(byDescending: "createdAt")
+                query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+                   if let error = error {
+                      print(error.localizedDescription)
+                   } else if let posts = posts {
+                      print("Successfully retrieved \(posts.count) posts.")
+                      // TODO: Do something with posts...
+                   }
+                }
+    * (Read/GET) view all courts 
+* Detail: match request (present modally)
+    * (Update/PUT) confirm/reject received match requests 
+    * (Delete/DELETE) delete sent match request
+* Detail: Player suggestion
+    * (Read/GET) view the match suggestions
+    * (Update/PUT) when rejecting a potential match, updates the match suggesstions property of the user 
+    * (Create/POST) make a new match request when approving a suggestion
 * Stream 
+    * (Read/GET) get the completed matches
 * Profile 
-- [Add list of network requests by screen ]
+    * (Update/PUT) modify settings and user information
+    * (Read/GET) view user settings 
+
+
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
 
