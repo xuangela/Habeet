@@ -31,41 +31,41 @@ App that connects local tennis players for matches and practice. Accounts made b
 
 * User can register a new account 
 * User can login/logout 
-* User can view where local tennis courts are and court availibility 
-* users can search for people to play with
-* users can filter based on age group, skill level, availability
-* user can view their skill level
-* user can view skill view progress based on opponent feedback
-* user can view match record
-* user uses camera to verify match progress/outcome
-* user can log match result for rating changes
- 
+* User can view where local tennis courts are 
+* users can send or not send match request
+* user can use camera to verify match progress/outcome
+* user can view current match requests
+* user can view their information
+* user can view  match record
 
 **Optional Nice-to-have Stories**
 
-* calendar integration for time suggestions
-* users can log that they are at a tennis court, which will indicate to other users that the court if not available
+* calendar integration for match time suggestions
+* when user match requests, they choose a court, which will indicate to other users that the court if not available
 * coach status and dedicated coach searches, complete with ratings and reviews 
-* user can add friends
 * user can make match requests to other players
+* court availability schedule depending on matches that are scheduled and operating hours
+* ratings system that adjusts player rating according to match history and initial experience level
+* user can view match record
+* user can view their skill level
+* user can view skill view progress based on opponent feedback
 
 ### 2. Screen Archetypes
 
 * Login/Register
    *  User can register a new account 
    *  User can login/logout 
-* Stream 
-    * users can search for people to play with 
-    * users can filter based on age group, skill level, availability
 * Map View
-    * User can view where local tennis courts are and court availability
-* Profile
-    * user can view their skill level
-    * user can view skill view progress based on opponent feedback
-    * user can view match record 
-* Creation 
-    * user uses camera to verify match progress/outcome
-    * user can log match result for rating changes
+    * User can view where local tennis courts are 
+* Detail 
+    * users can send or not send match request
+* Stream 
+    * user can use camera to log match outcome
+    * user can view current match requests
+    * user can view  match record
+* Profile 
+    * user can view their information
+
 
 
 ### 3. Navigation
@@ -73,26 +73,31 @@ App that connects local tennis players for matches and practice. Accounts made b
 **Tab Navigation** (Tab to Screen)
 
 * Map View
+* Detail
+* Stream
 * Profile
-* Stream 
 
 **Flow Navigation** (Screen to Screen)
 
 * Login/Register
-   * profile
-* Stream 
-    * map view
-    * profile 
+   *  Profile
 * Map View
-    * profile 
-    * stream
-* Profile
-    * creation
-    * map view
-    * stream 
-    * login
-* Creation 
-    * profile
+    * Detail 
+    * Stream 
+    * Profile
+* Detail 
+    * Map View 
+    * Stream 
+    * Profile
+* Stream 
+    * Map View 
+    * Dertail 
+    * Profile
+* Profile 
+    * Map View 
+    * Detail Stream 
+    * Stream 
+    * Login/Register
 
 ## Wireframes
 <img src="https://github.com/xuangela/Tennis-Connect/blob/master/wireframes.jpg" width=600>
