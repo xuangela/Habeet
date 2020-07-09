@@ -46,9 +46,14 @@ App that connects local tennis players for matches and practice. Accounts made b
 * ratings system that adjusts player rating according to match history and initial experience level
 * user can view their skill level
 * opponent feedback for player's sportsmanship
+* alerts for upcoming matches, received and confirmed requests
+* record of missed matches, impacting future match ups
+* user can update their court search, not have it be based on their current location
+    * can search in the map for the location and tap a location to display the courts in that area
 
 **Extra reach stories**
 * coach status and dedicated coach searches, complete with ratings and reviews 
+* doubles matches
 
 ### 2. Screen Archetypes
 
@@ -100,7 +105,7 @@ App that connects local tennis players for matches and practice. Accounts made b
     * Login/Register
 
 ## Wireframes
-<img src="https://github.com/xuangela/Tennis-Connect/blob/master/Simplified%20wireframes.jpg" width=600>
+<img src="https://github.com/xuangela/Tennis-Connect/blob/master/wireframes.jpg" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
