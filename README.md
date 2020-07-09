@@ -71,8 +71,6 @@ App that connects local tennis players for matches and practice. Accounts made b
 * Profile 
     * user can view their information
 
-
-
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
@@ -111,11 +109,60 @@ App that connects local tennis players for matches and practice. Accounts made b
 
 ### [BONUS] Interactive Prototype
 
-## Schema 
-[This section will be completed in Unit 9]
+## Schema
+
 ### Models
-[Add table of models]
+
+
+**Match**
+
+
+| Property | Type | Description |
+| -------- | -------- | -------- |
+| Sender     | pointer to PFUser     | unique id for player who sent the match request|
+| Receiver     | pointer to PFUser     | unique id for player who sent the match request|
+| Court     | pointer to Court     | court location, generated using foursquare api|
+| time     | DateTime     | what time the match is scheduled at|
+| confirmed     | Boolean   | is everything confirmed?|
+| completed     | Boolean    | did the players play?|
+| Score     | array of numbers      | set and match points|
+
+
+
+
+**User**
+
+| Property | Type | Description |
+| -------- | -------- | -------- |
+| years played     | Number | used in match suggestion|
+| name     | String     | first or full depending on visibilty settings|
+| age     | Number     | visibility dependent on settings|
+| pfp     | File     | jpeg converted to binary|
+| caption     | String   | description of experience|
+| gender     | String    | visibility dependent on settings|
+| settingsore     | array of boolean       | visibility, suggestion filtering, court options|
+| confirmed requests     | array of pointers to Matches    | confirmed by both players|
+|sent match requests     | array of pointers to Matches    | sent by this user|
+| received match requests    | array of pointers to Matches    | received by this user|
+| viable courts    | array of pointer to Court    | generated at registration (closest 10?)|
+
+
+**Court** 
+
+| Property | Type | Description |
+| -------- | -------- | -------- |
+| players     | array of pointers to Users | players who have this court in their viable courts list|
+| name     | String     | name of the court|
+| coordinates     | array of Number     | CLLocationCoordinate2D, lat and long using WGS 84 reference frame|
+
+
 ### Networking
+
+* Login/Register
+* Map View
+* Detail 
+* Stream 
+* Profile 
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
