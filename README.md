@@ -153,7 +153,7 @@ App that connects local tennis players for matches and practice. Accounts made b
 | completedRequests     | array of pointers to Matches    | already played matches|
 | viable courts    | array of pointer to Court    | generated at registration (closest 10?)|
 | match suggestions    | array of Users    | [insert complex algorithm work]|
-| played before | array of Users    | players already played with before|
+| starredUsers | array of Users    | for future match recommendations|
 
 
 **Court** 
