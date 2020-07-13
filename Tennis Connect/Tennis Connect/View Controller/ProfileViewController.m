@@ -10,7 +10,6 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import <DateTools/DateTools.h>
-#import <Parse/PFImageView.h>
 @import Parse;
 
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -55,11 +54,11 @@
     self.usernameLabel.text = [@"@" stringByAppendingString:[user valueForKey:@"username"]];
     self.genderLabel.text = [user valueForKey:@"gender"];
     self.contactNumLabel.text = [user valueForKey:@"contact"];
-    NSDate *dob =[user valueForKey:@"age"];
-    self.ageLabel.text = [NSDate timeAgoSinceDate:dob];
+    NSInteger age =[[user valueForKey:@"age"] yearsAgo];
+    self.ageLabel.text = [NSString stringWithFormat: @"%ld", (long)age];
     
-    if ([user objectForKey:@"pfp"]) {
-        self.pfpView.file = [user objectForKey:@"pfp"];
+    if ([user objectForKey:@"picture"]) {
+        self.pfpView.file = [user objectForKey:@"picture"];
         [self.pfpView loadInBackground];
     }
 }
@@ -82,13 +81,18 @@
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
+    PFUser *user = [PFUser currentUser];
     UIImage *image = info[UIImagePickerControllerEditedImage];
     UIImage *resizedImage = [self resizeImage:image withSize:CGSizeMake(1000, 1000)];
 
     [self.pfpView setImage:resizedImage];
     NSData *pictureData = UIImagePNGRepresentation(self.pfpView.image);
-    [PFUser currentUser][@"picture"] = [PFFileObject fileObjectWithData:pictureData];
+        
+    PFQuery *query = [PFQuery queryWithClassName:@"User"];
+    [query getObjectInBackgroundWithId:user.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        user[@"picture"] = [PFFileObject fileObjectWithData:pictureData];
+        [user saveInBackground];
+    }];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
