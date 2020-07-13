@@ -277,6 +277,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ageLabel" destination="cbr-a9-59b" id="1Oy-tG-NQY"/>
+                        <outlet property="contactNumLabel" destination="KTH-00-zWa" id="5qt-UU-hhC"/>
+                        <outlet property="genderLabel" destination="VGt-Hh-dpS" id="OIu-cl-nB4"/>
+                        <outlet property="nameLabel" destination="fzr-Lf-It0" id="w9G-Hu-pBd"/>
+                        <outlet property="pfpView" destination="cQX-6b-Vu8" id="7XX-YQ-4Fn"/>
+                        <outlet property="usernameLabel" destination="Mam-lL-bXg" id="eLm-o0-c5R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="87i-oD-Ojc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

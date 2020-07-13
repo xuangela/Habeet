@@ -13,6 +13,12 @@
 
 @interface ProfileViewController ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *pfpView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *genderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contactNumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 @end
 
 @implementation ProfileViewController

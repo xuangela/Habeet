@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIAlertController *badLoginAlert;
 @property (nonatomic, strong) UIAlertController *usernameTakenAlert;
 
+@property (nonatomic, assign) BOOL tappedButton;
+
 @end
 
 @implementation LoginViewController
@@ -59,62 +61,69 @@
 }
 
 - (IBAction)tapRegister:(id)sender {
-    if ([self.usernameField.text isEqual:@""]) {
-        [self presentViewController:self.emptyUsernameAlert animated:YES completion:^{  }];
-    } else if ([self.passwordField.text isEqual:@""]) {
-        [self presentViewController:self.emptyPWAlert animated:YES completion:^{  }];
-    } else {
-        PFUser *newUser = [PFUser user];
-        
-        newUser.username = self.usernameField.text;
-        newUser.password = self.passwordField.text;
-        
-        // call sign up function on the object
-        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-            if (error != nil) {
-                if (error.code == 202) {
-                    [self presentViewController:self.usernameTakenAlert animated:YES completion:^{  }];
+    if (!self.tappedButton) {
+        self.tappedButton = YES;
+        if ([self.usernameField.text isEqual:@""]) {
+            [self presentViewController:self.emptyUsernameAlert animated:YES completion:^{  }];
+        } else if ([self.passwordField.text isEqual:@""]) {
+            [self presentViewController:self.emptyPWAlert animated:YES completion:^{  }];
+        } else {
+            PFUser *newUser = [PFUser user];
+            
+            newUser.username = self.usernameField.text;
+            newUser.password = self.passwordField.text;
+            
+            // call sign up function on the object
+            [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+                if (error != nil) {
+                    if (error.code == 202) {
+                        [self presentViewController:self.usernameTakenAlert animated:YES completion:^{  }];
+                    } else {
+                         UIAlertController *tempAlert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                                             message:[error localizedDescription]
+                          preferredStyle:(UIAlertControllerStyleAlert)];
+                          UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+                          [tempAlert addAction:okAction];
+                         [self presentViewController:tempAlert animated:YES completion:^{  }];
+                    }
                 } else {
-                     UIAlertController *tempAlert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                                         message:[error localizedDescription]
+                    [self performSegueWithIdentifier:@"registerSegue" sender:nil];
+                }
+            }];
+        }
+        self.tappedButton = NO; 
+    }
+}
+
+- (IBAction)tapLogin:(id)sender {
+    if (!self.tappedButton) {
+        self.tappedButton = YES;
+        if ([self.usernameField.text isEqual:@""]) {
+            [self presentViewController:self.emptyUsernameAlert animated:YES completion:^{  }];
+        } else if ([self.passwordField.text isEqual:@""]) {
+            [self presentViewController:self.emptyPWAlert animated:YES completion:^{  }];
+        } else {
+         NSString *username = self.usernameField.text;
+         NSString *password = self.passwordField.text;
+         
+         [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
+             if (error != nil) {
+                 if (error.code == 101) {
+                     [self presentViewController:self.badLoginAlert animated:YES completion:^{  }];
+                 } else {
+                      UIAlertController *tempAlert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                                         message:error.localizedDescription
                       preferredStyle:(UIAlertControllerStyleAlert)];
                       UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
                       [tempAlert addAction:okAction];
                      [self presentViewController:tempAlert animated:YES completion:^{  }];
-                }
-            } else {
-                [self performSegueWithIdentifier:@"registerSegue" sender:nil];
-            }
-        }];
-    }
-    
-}
-
-- (IBAction)tapLogin:(id)sender {
-    if ([self.usernameField.text isEqual:@""]) {
-        [self presentViewController:self.emptyUsernameAlert animated:YES completion:^{  }];
-    } else if ([self.passwordField.text isEqual:@""]) {
-        [self presentViewController:self.emptyPWAlert animated:YES completion:^{  }];
-    } else {
-     NSString *username = self.usernameField.text;
-     NSString *password = self.passwordField.text;
-     
-     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
-         if (error != nil) {
-             if (error.code == 101) {
-                 [self presentViewController:self.badLoginAlert animated:YES completion:^{  }];
+                 }
              } else {
-                  UIAlertController *tempAlert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                                     message:error.localizedDescription
-                  preferredStyle:(UIAlertControllerStyleAlert)];
-                  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-                  [tempAlert addAction:okAction];
-                 [self presentViewController:tempAlert animated:YES completion:^{  }];
+                 [self performSegueWithIdentifier:@"loginSegue" sender:nil];
              }
-         } else {
-             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
-         }
-     }];
+         }];
+        }
+        self.tappedButton = NO;
     }
 }
 
