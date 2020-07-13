@@ -25,19 +25,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self setUpAlerts];
 }
 
 -(void)setUpAlerts {
-    self.emptyUsernameAlert = [UIAlertController alertControllerWithTitle:@"Missing username."
-              message:@"Please input your username."
+    self.emptyUsernameAlert = [UIAlertController alertControllerWithTitle:@"Missing name."
+              message:@"Please input your first name."
        preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [self.emptyUsernameAlert addAction:okAction];
 }
 
 - (IBAction)tapRegister:(id)sender {
-    
     if ([self.nameField.text isEqual:@""]) {
         [self presentViewController:self.emptyUsernameAlert animated:YES completion:^{  }];
     } else {
@@ -47,17 +47,21 @@
         user[@"gender"] = [NSNumber numberWithLong: self.genderSegControl.selectedSegmentIndex];
         user[@"contact"] =self.contactField.text;
         user[@"age"] = self.dateOfBirthPicker.date;
+        user[@"experience"] = [NSNumber numberWithLong: self.skillSegControl.selectedSegmentIndex];
         
         [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) { }];
         
         [self performSegueWithIdentifier:@"loginSegue" sender:nil];
     }
-    
 }
 
 - (IBAction)tapCancel:(id)sender {
     [[PFUser currentUser] delete];
     [self performSegueWithIdentifier:@"delSegue" sender:nil];
+}
+
+- (IBAction)tapOther:(id)sender {
+    [self.view endEditing:YES];
 }
 
 /*
