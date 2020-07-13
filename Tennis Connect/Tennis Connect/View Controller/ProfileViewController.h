@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ProfileViewController.h
 //  Tennis Connect
 //
 //  Created by Angela Xu on 7/13/20.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface ProfileViewController : UIViewController
 
 @end
 
+NS_ASSUME_NONNULL_END

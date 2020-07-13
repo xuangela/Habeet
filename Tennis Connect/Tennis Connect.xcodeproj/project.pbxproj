@@ -3,19 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3262A875E6217B8CCDF21F3D /* Pods_Tennis_Connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3253282C5981F1DA60A651DA /* Pods_Tennis_Connect.framework */; };
+		9143678081977CF6772FB8DF /* Pods_Tennis_ConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8062F7951C9CC35071001ACB /* Pods_Tennis_ConnectTests.framework */; };
+		B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */; };
+		B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F74124BCCFD900B2BAF8 /* RegisterViewController.m */; };
 		B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6813924BCC084005CCBB3 /* AppDelegate.m */; };
 		B9D6813D24BCC084005CCBB3 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6813C24BCC084005CCBB3 /* SceneDelegate.m */; };
-		B9D6814024BCC084005CCBB3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6813F24BCC084005CCBB3 /* ViewController.m */; };
 		B9D6814324BCC084005CCBB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6814124BCC084005CCBB3 /* Main.storyboard */; };
 		B9D6814524BCC085005CCBB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9D6814424BCC085005CCBB3 /* Assets.xcassets */; };
 		B9D6814824BCC085005CCBB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6814624BCC085005CCBB3 /* LaunchScreen.storyboard */; };
 		B9D6814B24BCC085005CCBB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6814A24BCC085005CCBB3 /* main.m */; };
 		B9D6815524BCC085005CCBB3 /* Tennis_ConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6815424BCC085005CCBB3 /* Tennis_ConnectTests.m */; };
 		B9D6816024BCC085005CCBB3 /* Tennis_ConnectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6815F24BCC085005CCBB3 /* Tennis_ConnectUITests.m */; };
+		B9D6817024BCC10A005CCBB3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6816F24BCC10A005CCBB3 /* LoginViewController.m */; };
+		DAA3B93ACE4D4AF70FE37E0C /* Pods_Tennis_Connect_Tennis_ConnectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C3E53ABEEA50B5BB066E92 /* Pods_Tennis_Connect_Tennis_ConnectUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,13 +41,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		258385AF69571FB6703D83E6 /* Pods-Tennis ConnectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis ConnectTests.debug.xcconfig"; path = "Target Support Files/Pods-Tennis ConnectTests/Pods-Tennis ConnectTests.debug.xcconfig"; sourceTree = "<group>"; };
+		25A0C0981AC4EACE5C6137D9 /* Pods-Tennis ConnectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis ConnectTests.release.xcconfig"; path = "Target Support Files/Pods-Tennis ConnectTests/Pods-Tennis ConnectTests.release.xcconfig"; sourceTree = "<group>"; };
+		3253282C5981F1DA60A651DA /* Pods_Tennis_Connect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tennis_Connect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D542E7E89146B9240C250BA /* Pods-Tennis Connect-Tennis ConnectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis Connect-Tennis ConnectUITests.release.xcconfig"; path = "Target Support Files/Pods-Tennis Connect-Tennis ConnectUITests/Pods-Tennis Connect-Tennis ConnectUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8062F7951C9CC35071001ACB /* Pods_Tennis_ConnectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tennis_ConnectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98282AA9CED8640FC591AE9D /* Pods-Tennis Connect-Tennis ConnectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis Connect-Tennis ConnectUITests.debug.xcconfig"; path = "Target Support Files/Pods-Tennis Connect-Tennis ConnectUITests/Pods-Tennis Connect-Tennis ConnectUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		9E56DC2D3A1557528FD84A23 /* Pods-Tennis Connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis Connect.debug.xcconfig"; path = "Target Support Files/Pods-Tennis Connect/Pods-Tennis Connect.debug.xcconfig"; sourceTree = "<group>"; };
+		B970F73D24BCCB9E00B2BAF8 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		B970F74024BCCFD900B2BAF8 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		B970F74124BCCFD900B2BAF8 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		B9D6813524BCC084005CCBB3 /* Tennis Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tennis Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D6813824BCC084005CCBB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B9D6813924BCC084005CCBB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B9D6813B24BCC084005CCBB3 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		B9D6813C24BCC084005CCBB3 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		B9D6813E24BCC084005CCBB3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B9D6813F24BCC084005CCBB3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		B9D6814224BCC084005CCBB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B9D6814424BCC085005CCBB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9D6814724BCC085005CCBB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +68,10 @@
 		B9D6815B24BCC085005CCBB3 /* Tennis ConnectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tennis ConnectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D6815F24BCC085005CCBB3 /* Tennis_ConnectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tennis_ConnectUITests.m; sourceTree = "<group>"; };
 		B9D6816124BCC085005CCBB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9D6816E24BCC10A005CCBB3 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		B9D6816F24BCC10A005CCBB3 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		C7C3E53ABEEA50B5BB066E92 /* Pods_Tennis_Connect_Tennis_ConnectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tennis_Connect_Tennis_ConnectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBF24FEA7D7C0B980AEC0E7E /* Pods-Tennis Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis Connect.release.xcconfig"; path = "Target Support Files/Pods-Tennis Connect/Pods-Tennis Connect.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3262A875E6217B8CCDF21F3D /* Pods_Tennis_Connect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9143678081977CF6772FB8DF /* Pods_Tennis_ConnectTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,12 +95,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAA3B93ACE4D4AF70FE37E0C /* Pods_Tennis_Connect_Tennis_ConnectUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B970F74324BCDC6300B2BAF8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B9D6812C24BCC084005CCBB3 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +116,8 @@
 				B9D6815324BCC085005CCBB3 /* Tennis ConnectTests */,
 				B9D6815E24BCC085005CCBB3 /* Tennis ConnectUITests */,
 				B9D6813624BCC084005CCBB3 /* Products */,
+				C9B8D2DA6F466E5EF3037109 /* Pods */,
+				DD874663496D7DA3E3F87173 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,12 +134,12 @@
 		B9D6813724BCC084005CCBB3 /* Tennis Connect */ = {
 			isa = PBXGroup;
 			children = (
+				B970F74324BCDC6300B2BAF8 /* Models */,
+				B9D6816D24BCC0F0005CCBB3 /* View Controller */,
 				B9D6813824BCC084005CCBB3 /* AppDelegate.h */,
 				B9D6813924BCC084005CCBB3 /* AppDelegate.m */,
 				B9D6813B24BCC084005CCBB3 /* SceneDelegate.h */,
 				B9D6813C24BCC084005CCBB3 /* SceneDelegate.m */,
-				B9D6813E24BCC084005CCBB3 /* ViewController.h */,
-				B9D6813F24BCC084005CCBB3 /* ViewController.m */,
 				B9D6814124BCC084005CCBB3 /* Main.storyboard */,
 				B9D6814424BCC085005CCBB3 /* Assets.xcassets */,
 				B9D6814624BCC085005CCBB3 /* LaunchScreen.storyboard */,
@@ -137,6 +167,42 @@
 			path = "Tennis ConnectUITests";
 			sourceTree = "<group>";
 		};
+		B9D6816D24BCC0F0005CCBB3 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B9D6816E24BCC10A005CCBB3 /* LoginViewController.h */,
+				B9D6816F24BCC10A005CCBB3 /* LoginViewController.m */,
+				B970F73D24BCCB9E00B2BAF8 /* ProfileViewController.h */,
+				B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */,
+				B970F74024BCCFD900B2BAF8 /* RegisterViewController.h */,
+				B970F74124BCCFD900B2BAF8 /* RegisterViewController.m */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		C9B8D2DA6F466E5EF3037109 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9E56DC2D3A1557528FD84A23 /* Pods-Tennis Connect.debug.xcconfig */,
+				FBF24FEA7D7C0B980AEC0E7E /* Pods-Tennis Connect.release.xcconfig */,
+				98282AA9CED8640FC591AE9D /* Pods-Tennis Connect-Tennis ConnectUITests.debug.xcconfig */,
+				5D542E7E89146B9240C250BA /* Pods-Tennis Connect-Tennis ConnectUITests.release.xcconfig */,
+				258385AF69571FB6703D83E6 /* Pods-Tennis ConnectTests.debug.xcconfig */,
+				25A0C0981AC4EACE5C6137D9 /* Pods-Tennis ConnectTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DD874663496D7DA3E3F87173 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3253282C5981F1DA60A651DA /* Pods_Tennis_Connect.framework */,
+				C7C3E53ABEEA50B5BB066E92 /* Pods_Tennis_Connect_Tennis_ConnectUITests.framework */,
+				8062F7951C9CC35071001ACB /* Pods_Tennis_ConnectTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,9 +210,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B9D6816424BCC085005CCBB3 /* Build configuration list for PBXNativeTarget "Tennis Connect" */;
 			buildPhases = (
+				B3EC3E372A75FA6EBCDEA02B /* [CP] Check Pods Manifest.lock */,
 				B9D6813124BCC084005CCBB3 /* Sources */,
 				B9D6813224BCC084005CCBB3 /* Frameworks */,
 				B9D6813324BCC084005CCBB3 /* Resources */,
+				A294A08A7A27363F885D8D14 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -161,6 +229,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B9D6816724BCC085005CCBB3 /* Build configuration list for PBXNativeTarget "Tennis ConnectTests" */;
 			buildPhases = (
+				8A47F493DE5D3969ECAADB94 /* [CP] Check Pods Manifest.lock */,
 				B9D6814C24BCC085005CCBB3 /* Sources */,
 				B9D6814D24BCC085005CCBB3 /* Frameworks */,
 				B9D6814E24BCC085005CCBB3 /* Resources */,
@@ -179,9 +248,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B9D6816A24BCC085005CCBB3 /* Build configuration list for PBXNativeTarget "Tennis ConnectUITests" */;
 			buildPhases = (
+				0F906C137F44F751EA811F92 /* [CP] Check Pods Manifest.lock */,
 				B9D6815724BCC085005CCBB3 /* Sources */,
 				B9D6815824BCC085005CCBB3 /* Frameworks */,
 				B9D6815924BCC085005CCBB3 /* Resources */,
+				2A028C069F10D00BD4555396 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -262,15 +333,120 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0F906C137F44F751EA811F92 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tennis Connect-Tennis ConnectUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2A028C069F10D00BD4555396 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tennis Connect-Tennis ConnectUITests/Pods-Tennis Connect-Tennis ConnectUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tennis Connect-Tennis ConnectUITests/Pods-Tennis Connect-Tennis ConnectUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tennis Connect-Tennis ConnectUITests/Pods-Tennis Connect-Tennis ConnectUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8A47F493DE5D3969ECAADB94 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tennis ConnectTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A294A08A7A27363F885D8D14 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tennis Connect/Pods-Tennis Connect-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tennis Connect/Pods-Tennis Connect-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tennis Connect/Pods-Tennis Connect-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3EC3E372A75FA6EBCDEA02B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tennis Connect-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B9D6813124BCC084005CCBB3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9D6814024BCC084005CCBB3 /* ViewController.m in Sources */,
+				B9D6817024BCC10A005CCBB3 /* LoginViewController.m in Sources */,
+				B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */,
 				B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */,
 				B9D6814B24BCC085005CCBB3 /* main.m in Sources */,
 				B9D6813D24BCC084005CCBB3 /* SceneDelegate.m in Sources */,
+				B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +613,7 @@
 		};
 		B9D6816524BCC085005CCBB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E56DC2D3A1557528FD84A23 /* Pods-Tennis Connect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -454,6 +631,7 @@
 		};
 		B9D6816624BCC085005CCBB3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBF24FEA7D7C0B980AEC0E7E /* Pods-Tennis Connect.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -471,6 +649,7 @@
 		};
 		B9D6816824BCC085005CCBB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 258385AF69571FB6703D83E6 /* Pods-Tennis ConnectTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -491,6 +670,7 @@
 		};
 		B9D6816924BCC085005CCBB3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25A0C0981AC4EACE5C6137D9 /* Pods-Tennis ConnectTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -511,6 +691,7 @@
 		};
 		B9D6816B24BCC085005CCBB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98282AA9CED8640FC591AE9D /* Pods-Tennis Connect-Tennis ConnectUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N2PD6963G8;
@@ -529,6 +710,7 @@
 		};
 		B9D6816C24BCC085005CCBB3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D542E7E89146B9240C250BA /* Pods-Tennis Connect-Tennis ConnectUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N2PD6963G8;
