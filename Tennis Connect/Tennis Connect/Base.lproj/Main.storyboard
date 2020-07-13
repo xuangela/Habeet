@@ -15,38 +15,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tennis Connect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPc-fD-ngj">
-                                <rect key="frame" x="109" y="208" width="197" height="72"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tennis Connect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPc-fD-ngj">
+                                <rect key="frame" x="112" y="280" width="190.5" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hoc-Dh-zuE">
-                                <rect key="frame" x="109" y="288" width="197" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hoc-Dh-zuE">
+                                <rect key="frame" x="112" y="331" width="190.5" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NhD-v2-2Ns">
-                                <rect key="frame" x="109" y="330" width="197" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NhD-v2-2Ns">
+                                <rect key="frame" x="112" y="377" width="190.5" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EaS-7F-Ae2">
-                                <rect key="frame" x="109" y="390" width="78" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Register">
-                                    <color key="titleColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <action selector="tapRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ONN-RE-vmG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldw-QA-eSH">
-                                <rect key="frame" x="264" y="390" width="38" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldw-QA-eSH">
+                                <rect key="frame" x="264.5" y="426" width="38" height="30"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
@@ -54,9 +40,34 @@
                                     <action selector="tapLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ebs-dy-t7Q"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EaS-7F-Ae2">
+                                <rect key="frame" x="112" y="426" width="57" height="30"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ONN-RE-vmG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="NhD-v2-2Ns" firstAttribute="top" secondItem="hoc-Dh-zuE" secondAttribute="bottom" constant="12" id="3pH-tD-ydy"/>
+                            <constraint firstItem="ldw-QA-eSH" firstAttribute="bottom" secondItem="EaS-7F-Ae2" secondAttribute="bottom" id="9tF-e9-elF"/>
+                            <constraint firstItem="hoc-Dh-zuE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-100" id="C0H-Ky-83G"/>
+                            <constraint firstItem="NhD-v2-2Ns" firstAttribute="centerX" secondItem="nPc-fD-ngj" secondAttribute="centerX" id="Fxl-g1-GFD"/>
+                            <constraint firstItem="ldw-QA-eSH" firstAttribute="trailing" secondItem="NhD-v2-2Ns" secondAttribute="trailing" id="Juu-Vd-uZS"/>
+                            <constraint firstItem="hoc-Dh-zuE" firstAttribute="top" secondItem="nPc-fD-ngj" secondAttribute="bottom" constant="15" id="LBS-vf-YWL"/>
+                            <constraint firstItem="EaS-7F-Ae2" firstAttribute="top" secondItem="NhD-v2-2Ns" secondAttribute="bottom" constant="15" id="MA5-N8-TgE"/>
+                            <constraint firstItem="hoc-Dh-zuE" firstAttribute="centerX" secondItem="nPc-fD-ngj" secondAttribute="centerX" id="Mk1-WZ-AJx"/>
+                            <constraint firstItem="nPc-fD-ngj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f9f-0a-cOq"/>
+                            <constraint firstItem="hoc-Dh-zuE" firstAttribute="width" secondItem="nPc-fD-ngj" secondAttribute="width" id="jjg-ES-2jm"/>
+                            <constraint firstItem="EaS-7F-Ae2" firstAttribute="leading" secondItem="NhD-v2-2Ns" secondAttribute="leading" id="k8p-AO-HIh"/>
+                            <constraint firstItem="NhD-v2-2Ns" firstAttribute="width" secondItem="nPc-fD-ngj" secondAttribute="width" id="tvB-VQ-dPY"/>
+                            <constraint firstItem="hoc-Dh-zuE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yCa-UG-3fq"/>
+                            <constraint firstItem="NhD-v2-2Ns" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yLf-MJ-tZh"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Aoa-QA-3hJ" appends="YES" id="Ldb-rU-rxq"/>
@@ -641,7 +652,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bNz-L8-dut"/>
+        <segue reference="yJg-LI-zZr"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>
