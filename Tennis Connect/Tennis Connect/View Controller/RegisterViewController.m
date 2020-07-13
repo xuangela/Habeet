@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *skillSegControl;
 
 @property (nonatomic, strong) UIAlertController *emptyUsernameAlert;
+@property (nonatomic, strong) UIAlertController *invalidContactAlert;
 
 @end
 
@@ -30,22 +31,36 @@
 }
 
 -(void)setUpAlerts {
-    self.emptyUsernameAlert = [UIAlertController alertControllerWithTitle:@"Missing name."
-              message:@"Please input your first name."
+    self.emptyUsernameAlert = [UIAlertController alertControllerWithTitle:@"Missing field."
+              message:@"Please fill in all fields."
        preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [self.emptyUsernameAlert addAction:okAction];
+    
+    self.invalidContactAlert = [UIAlertController alertControllerWithTitle:@"Invalid contact."
+              message:@"Please fill in a valid contact number."
+       preferredStyle:(UIAlertControllerStyleAlert)];
+    [self.invalidContactAlert addAction:okAction];
 }
 
 - (IBAction)tapRegister:(id)sender {
-    if ([self.nameField.text isEqual:@""]) {
+    if ([self.nameField.text isEqual:@""] ||[self.contactField.text isEqual:@""]) {
         [self presentViewController:self.emptyUsernameAlert animated:YES completion:^{  }];
+    } else if ([self.contactField.text length] != 10) {
+        [self presentViewController:self.invalidContactAlert animated:YES completion:^{  }];
     } else {
         PFUser *user = [PFUser currentUser];
         
         user[@"name"] = self.nameField.text;
-        user[@"gender"] = [NSNumber numberWithLong: self.genderSegControl.selectedSegmentIndex];
-        user[@"contact"] =self.contactField.text;
+        user[@"gender"] = [self.genderSegControl titleForSegmentAtIndex:self.genderSegControl.selectedSegmentIndex];
+        
+        NSString *unformatted = self.contactField.text;
+        NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 3)],
+                                     [unformatted substringWithRange:NSMakeRange(3, 3)],
+                                     [unformatted substringWithRange:NSMakeRange(6, [unformatted length]-6)], nil];
+
+        NSString *formattedString = [NSString stringWithFormat:@"(%@)%@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2]];
+        user[@"contact"] = formattedString;
         user[@"age"] = self.dateOfBirthPicker.date;
         user[@"experience"] = [NSNumber numberWithLong: self.skillSegControl.selectedSegmentIndex];
         

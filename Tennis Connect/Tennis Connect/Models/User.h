@@ -7,10 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+@import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface User : NSObject
+@interface User : PFObject<PFSubclassing>
+
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *gender;
+@property (nonatomic, strong) NSString *contact;
+@property (nonatomic, strong) NSDate *dob;
+@property (nonatomic, strong) NSNumber *experience;
+@property (nonatomic, strong) PFFileObject *profilePic;
+@property (nonatomic, strong) NSArray *settings;
+
 
 @end
 

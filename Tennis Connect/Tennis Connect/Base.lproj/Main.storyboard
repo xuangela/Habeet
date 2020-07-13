@@ -93,14 +93,12 @@
         <!--Tab Bar Controller-->
         <scene sceneID="i3b-TJ-OYc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bAf-zH-v7J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="TabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UGC-Bq-fxb" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Yh6-7U-Llb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <color key="selectedImageTintColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <segue destination="tCX-cK-LWU" kind="relationship" relationship="viewControllers" id="5YX-E3-SFw"/>
@@ -109,6 +107,7 @@
                         <segue destination="aft-pf-NAT" kind="relationship" relationship="viewControllers" id="YtH-tD-pAw"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bAf-zH-v7J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1613.0434782608697" y="-252.45535714285714"/>
         </scene>
@@ -220,9 +219,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQX-6b-Vu8">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQX-6b-Vu8" customClass="PFImageView">
                                 <rect key="frame" x="20" y="110" width="98" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.80819710320000004" blue="0.92544582559999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="gmc-CH-cVz" appends="YES" id="bIf-2M-gEc"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mam-lL-bXg">
                                 <rect key="frame" x="128" y="152" width="92" height="21"/>
@@ -287,6 +291,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="87i-oD-Ojc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="gmc-CH-cVz">
+                    <connections>
+                        <action selector="tapPic:" destination="Oec-4y-qE9" id="0ly-aR-n8x"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2329" y="1487"/>
         </scene>
@@ -478,14 +487,14 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zmo-Gj-nPd">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mws-LW-8wu">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mws-LW-8wu">
+                                        <rect key="frame" x="0.0" y="66" width="414" height="813"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="H7t-fG-H3Y">
                                                 <rect key="frame" x="202" y="66" width="200" height="32"/>
                                                 <segments>
-                                                    <segment title="M"/>
-                                                    <segment title="F"/>
+                                                    <segment title="Male"/>
+                                                    <segment title="Female"/>
                                                     <segment title="Other"/>
                                                 </segments>
                                                 <color key="selectedSegmentTintColor" red="1" green="0.80819710320000004" blue="0.92544582559999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -526,7 +535,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="08T-eH-INX">
                                                 <rect key="frame" x="202" y="109" width="200" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" textContentType="tel"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="tel"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yYe-5I-3xW">
                                                 <rect key="frame" x="202" y="16" width="200" height="35"/>
@@ -660,7 +669,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yJg-LI-zZr"/>
+        <segue reference="bNz-L8-dut"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>
