@@ -62,11 +62,12 @@
                             <outletCollection property="gestureRecognizers" destination="Aoa-QA-3hJ" appends="YES" id="Ldb-rU-rxq"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" id="9In-CF-vWD"/>
                     <connections>
                         <outlet property="passwordField" destination="NhD-v2-2Ns" id="hn7-3g-Gsh"/>
                         <outlet property="usernameField" destination="hoc-Dh-zuE" id="32p-Uu-cVx"/>
                         <segue destination="UGC-Bq-fxb" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="yJg-LI-zZr"/>
-                        <segue destination="tLI-wA-l4d" kind="presentation" identifier="registerSegue" id="E0n-KV-Fpy"/>
+                        <segue destination="zJJ-dH-Alx" kind="presentation" identifier="registerSegue" modalPresentationStyle="fullScreen" id="E0n-KV-Fpy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -76,7 +77,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-296" y="-252"/>
+            <point key="canvasLocation" x="613.04347826086962" y="-252.45535714285714"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="i3b-TJ-OYc">
@@ -98,7 +99,7 @@
                     </connections>
                 </tabBarController>
             </objects>
-            <point key="canvasLocation" x="704" y="-252"/>
+            <point key="canvasLocation" x="1613.0434782608697" y="-252.45535714285714"/>
         </scene>
         <!--Record-->
         <scene sceneID="3jJ-rm-fhg">
@@ -115,7 +116,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u5O-ee-ICm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-126" y="656"/>
+            <point key="canvasLocation" x="784.05797101449286" y="655.58035714285711"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="kXN-IY-h4w">
@@ -164,7 +165,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ord-At-K5O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1478" y="656"/>
+            <point key="canvasLocation" x="2386.9565217391305" y="655.58035714285711"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="0KE-ZA-bh0">
@@ -198,7 +199,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28v-yw-F7g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2277" y="656"/>
+            <point key="canvasLocation" x="3186.9565217391305" y="655.58035714285711"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="6kB-sQ-Kgn">
@@ -282,7 +283,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hbf-UF-oTo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="703" y="656"/>
+            <point key="canvasLocation" x="1613.0434782608697" y="655.58035714285711"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="07D-RZ-QdR">
@@ -449,7 +450,7 @@
             <objects>
                 <viewController id="tLI-wA-l4d" customClass="RegisterViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q52-ab-d4m">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rLz-0v-RbO">
@@ -528,14 +529,6 @@
                                             <segment title="Expert"/>
                                         </segments>
                                     </segmentedControl>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQs-7u-M1w">
-                                        <rect key="frame" x="91" y="430" width="233" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Register"/>
-                                        <connections>
-                                            <action selector="tapRegister:" destination="tLI-wA-l4d" eventType="touchUpInside" id="6kK-aF-GOK"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <viewLayoutGuide key="contentLayoutGuide" id="EIM-sH-G5T"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Wrq-c0-Mxd"/>
@@ -545,7 +538,18 @@
                         <viewLayoutGuide key="safeArea" id="dZS-Ul-MgS"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="JpO-eT-aTh"/>
+                    <navigationItem key="navigationItem" id="JpO-eT-aTh">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="6qE-pF-5Vy">
+                            <connections>
+                                <action selector="tapCancel:" destination="tLI-wA-l4d" id="wog-BN-UBd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Register" id="Okl-pE-ca9">
+                            <connections>
+                                <action selector="tapRegister:" destination="tLI-wA-l4d" id="BVt-uI-PRE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="contactField" destination="08T-eH-INX" id="cAE-xT-gkz"/>
@@ -554,9 +558,28 @@
                         <outlet property="nameField" destination="yYe-5I-3xW" id="1vM-2v-7pQ"/>
                         <outlet property="skillSegControl" destination="WIz-3I-eVH" id="PGj-kQ-fE8"/>
                         <segue destination="UGC-Bq-fxb" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="bNz-L8-dut"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="delSegue" modalPresentationStyle="fullScreen" id="o0Q-64-p98"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNP-Qe-Efx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-307.24637681159425" y="314.73214285714283"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Gtx-V4-Ay7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zJJ-dH-Alx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8E7-ZE-cmG">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tLI-wA-l4d" kind="relationship" relationship="rootViewController" id="SKP-yv-jef"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WM2-cb-PqI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1217.3913043478262" y="314.73214285714283"/>
         </scene>
