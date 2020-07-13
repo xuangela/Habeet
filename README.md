@@ -123,46 +123,34 @@ App that connects local tennis players for matches and practice. Accounts made b
 **Match**
 
 
-| Property | Type | Description |
-| -------- | -------- | -------- |
-| Sender     | pointer to PFUser     | unique id for player who sent the match request|
-| Receiver     | pointer to PFUser     | unique id for player who sent the match request|
-| Court     | pointer to Court     | court location, generated using foursquare api|
-| time     | DateTime     | what time the match is scheduled at|
-| confirmed     | Boolean   | is everything confirmed?|
-| completed     | Boolean    | did the players play?|
-| Score     | array of numbers      | set and match points|
-
-
-
+| Property   | Type              | Description                                   |
+| ---------- | ----------------- | --------------------------------------------- |
+| Sender     | pointer to PFUser | player who sent the match request             |
+| Receiver   | pointer to PFUser | player who sent the match request             |
+| Court      | pointer to Court  | court location, generated using foursquare api|
+| time       | DateTime          | what time the match is scheduled at           |
+| confirmed  | Boolean           | is everything confirmed?                      |
+| completed  | Boolean           | did the players play?                         |
+| Score      | array of numbers  | set and match points                          |
 
 **User**
 
-| Property | Type | Description |
-| -------- | -------- | -------- |
-| years played     | Number | used in match suggestion|
-| name     | String     | first or full depending on visibilty settings|
-| age     | Number     | visibility dependent on settings|
-| pfp     | File     | jpeg converted to binary|
-| caption     | String   | description of experience|
-| gender     | String    | visibility dependent on settings|
-| settings     | array of boolean       | visibility, suggestion filtering, court options|
-| confirmedRequests     | array of pointers to Matches    | confirmed by both players|
-|sentRequests     | array of pointers to Matches    | sent by this user|
-| receivedRequests    | array of pointers to Matches    | received by this user|
-| completedRequests     | array of pointers to Matches    | already played matches|
-| viable courts    | array of pointer to Court    | generated at registration (closest 10?)|
-| match suggestions    | array of Users    | [insert complex algorithm work]|
-| starredUsers | array of Users    | for future match recommendations|
-
+| Property     | Type             | Description                                    |
+| ------------ | ---------------- | ---------------------------------------------- |
+| years played | Number           | used in match suggestion                       |
+| name         | String           | first or full depending on visibilty settings  |
+| age          | Number           | visibility dependent on settings               |
+| pfp          | File             | jpeg converted to binary                       |
+| caption      | String           | description of experience                      |
+| gender       | String           | visibility dependent on settings               |
+| settings     | array of boolean | visibility, suggestion filtering, court options|
 
 **Court** 
 
-| Property | Type | Description |
-| -------- | -------- | -------- |
-| players     | array of pointers to Users | players who have this court in their viable courts list|
-| name     | String     | name of the court|
-| coordinates     | array of Number     | CLLocationCoordinate2D, lat and long using WGS 84 reference frame|
+| Property    | Type            | Description                         |
+| ----------- | --------------- | ----------------------------------- |
+| name        | String          | name of the court                   |
+| coordinates | array of Number | CLLocationCoordinate2D, lat and long|
 
 
 ### Networking
