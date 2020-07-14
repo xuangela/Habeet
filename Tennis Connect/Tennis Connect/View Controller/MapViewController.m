@@ -25,9 +25,6 @@
     [super viewDidLoad];
     
     [self showMyLocation];
-    
-    
-
 }
 
 -(void)showMyLocation {
