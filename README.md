@@ -109,7 +109,7 @@ App that connects local tennis players for matches and practice. Accounts made b
     * Login/Register
 
 ## Wireframes
-<img src="https://github.com/xuangela/Tennis-Connect/blob/master/wireframes.jpg" width=600>
+<img src="https://github.com/xuangela/Tennis-Connect/blob/master/Simplified%20Wireframes.JPG" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
@@ -138,11 +138,11 @@ App that connects local tennis players for matches and practice. Accounts made b
 | Property     | Type             | Description                                    |
 | ------------ | ---------------- | ---------------------------------------------- |
 | name         | String           | first name  |
-| gender       | String           | M,F,Other corresponing with 0,1,2               |
+| gender       | String           | M,F,Other               |
 | contact       | String           | formatted contact number               |
 | date of birth          | DateTime         | used to calculate age               |
 | experience | Number           | 0,1,2 increasing with more skill                       |
-| pfp          | File             | jpeg converted to binary                       |
+| picture          | File             | jpeg converted to binary                       |
 | settings     | array of boolean | visibility, suggestion filtering, court options|
 
 **Court** 
