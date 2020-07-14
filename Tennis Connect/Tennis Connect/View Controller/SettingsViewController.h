@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.h
+//  SettingsViewController.h
 //  Tennis Connect
 //
 //  Created by Angela Xu on 7/13/20.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProfileViewController : UIViewController
+@interface SettingsViewController : UIViewController
 
 @end
 

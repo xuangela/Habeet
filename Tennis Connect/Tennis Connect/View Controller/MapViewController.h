@@ -1,8 +1,8 @@
 //
-//  ProfileViewController.h
+//  MapViewController.h
 //  Tennis Connect
 //
-//  Created by Angela Xu on 7/13/20.
+//  Created by Angela Xu on 7/14/20.
 //  Copyright © 2020 Angela Xu. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProfileViewController : UIViewController
+@interface MapViewController : UIViewController
 
 @end
 
