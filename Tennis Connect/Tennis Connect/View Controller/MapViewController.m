@@ -27,10 +27,7 @@
     [self showMyLocation];
     
     
-//    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(self.myLocation.coordinate.latitude, self.myLocation.coordinate.longitude);
-//    MKCoordinateSpan span = MKCoordinateSpanMake(.003, .003);
-//    MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
-//    [self.mapview setRegion:region];
+
 }
 
 -(void)showMyLocation {
@@ -46,6 +43,10 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     self.myLocation = [locations lastObject];
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(self.myLocation.coordinate.latitude, self.myLocation.coordinate.longitude);
+    MKCoordinateSpan span = MKCoordinateSpanMake(.05, .05);
+    MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
+    [self.mapview setRegion:region];
 }
 
 
