@@ -65,7 +65,6 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
     
     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) { }];
     
-    [self performSegueWithIdentifier:@"loginSegue" sender:nil];
 }
 
 -(void)showMyLocation {

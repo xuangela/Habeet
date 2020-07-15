@@ -127,7 +127,6 @@
     }
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -136,11 +135,11 @@
     // Pass the selected object to the new view controller.
     
     if ([segue.identifier isEqualToString:@"loginSegue"]) {
-        UINavigationController *navigationController = [segue destinationViewController];
-        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    }
+        UITabBarController *tabController = [segue destinationViewController];
+        tabController.selectedIndex = 2;
+    } 
 }
-*/
+
 
 
 
