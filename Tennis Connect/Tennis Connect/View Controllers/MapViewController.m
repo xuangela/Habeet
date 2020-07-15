@@ -19,7 +19,9 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) CLLocation* myLocation;
+
+@property (nonatomic, assign) double lat;
+@property (nonatomic, assign) double lng;
 
 @end
 
@@ -28,13 +30,13 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self showMyLocation];
+    [self mapSetUp];
     [self fetchCourtsnear];
 }
 
 - (void)fetchCourtsnear {
     NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
-    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&ll=%f,%f&query=tennis", clientID, clientSecret, self.myLocation.coordinate.latitude, self.myLocation.coordinate.longitude];
+    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&ll=%f,%f&categoryId=4e39a956bd410d7aed40cbc3&limit=10", clientID, clientSecret, self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
     queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
@@ -47,7 +49,7 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
             NSLog(@"response: %@", responseDictionary);
             NSArray *venues= [responseDictionary valueForKeyPath:@"response.venues"];
             self.courts = [Court courtsWithDictionaries:venues];
-            [self updatePFUserWithCourts];
+            //[self updatePFUserWithCourts];
         } else {
             NSLog(@"%@", error);
         }
@@ -60,30 +62,36 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 
     for (Court* court in self.courts) {
         // check if already has a parse object for this
-        // if yes, add
+        // if yes, add relation
+        // if not,
     }
     
     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) { }];
     
 }
 
--(void)showMyLocation {
+#pragma mark - Viewing the map
+
+-(void)mapSetUp {
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
     
+    
+
     self.mapview.delegate = self;
     self.mapview.showsUserLocation = YES;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    self.myLocation = [locations lastObject];
-    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(self.myLocation.coordinate.latitude, self.myLocation.coordinate.longitude);
+    CLLocation *lastLocation = [locations lastObject];
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(lastLocation.coordinate.latitude, lastLocation.coordinate.longitude);
     MKCoordinateSpan span = MKCoordinateSpanMake(.05, .05);
     MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
     [self.mapview setRegion:region];
+    [self.locationManager stopUpdatingLocation];
 }
 
 

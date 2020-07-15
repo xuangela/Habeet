@@ -18,8 +18,9 @@
 @dynamic dob;
 @dynamic experience;
 @dynamic pfp;
-@dynamic courts;
 @dynamic username;
+
+@synthesize courts;
 
 + (NSString*)parseClassName {
     return @"User";

@@ -15,8 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Court : PFObject<PFSubclassing>
 
 @property (nonatomic, strong) NSString* name;
-@property (nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, assign) NSArray *locationArray;
 @property (nonatomic, strong) NSString *objectID;
+
+@property (nonatomic, assign) CLLocationCoordinate2D coordinates;
 
 + (NSMutableArray *)courtsWithDictionaries: (NSArray *)dictionaries;
 + (NSString *) parseClassName; 
