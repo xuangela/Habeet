@@ -35,9 +35,11 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
     [self fetchCourtsnear];
 }
 
+
+
 - (void)fetchCourtsnear {
     NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
-    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&ll=%f,%f&categoryId=4e39a956bd410d7aed40cbc3&limit=10", clientID, clientSecret, self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
+    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&ll=%f,%f&query=tennis&limit=10", clientID, clientSecret, self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
     queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
@@ -48,34 +50,73 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
         if (data) {
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSArray *venues= [responseDictionary valueForKeyPath:@"response.venues"];
-            self.courts = [Court courtsWithDictionaries:venues];
-            [self updateParseWithCourtRelations];
+            self.courts = [self courtsWithDictionaries:venues];
         }
     }];
     [task resume];
 }
 
--(void) updateParseWithCourtRelations {
-    PFUser *user = [PFUser currentUser];
-    PFRelation *relation = [user relationForKey:@"courts"];
+- (NSMutableArray *)courtsWithDictionaries: (NSArray<Court *> *)dictionaries {
+    NSMutableArray *courtArray = [[NSMutableArray alloc] init];
     
-    for (Court *court in self.courts) {
-        PFQuery *query = [Court query];
-        [query whereKey:@"lat" equalTo:court.lat];
-        [query whereKey:@"lng" equalTo:court.lng];
-        [query whereKey:@"name" equalTo:court.name];
-        
-        [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            PFObject  *courtInDatabase;
+    PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
+       PFQuery *query = [relation query];
+       [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+           for (Court *court in objects) {
+               [relation removeObject:court];
+           }
+           NSLog(@"deleted");
+           for (NSDictionary *court in dictionaries) {
+               Court *thiscourt = [[Court alloc] initWithDictionary:court];
+               [courtArray addObject:thiscourt];
+               [self checkCourtInParse:thiscourt];
+           }
+       }];
+    
+    return courtArray;
+}
+
+-(void) checkCourtInParse: (Court *) court {
+    //if court isn't in
+    PFQuery *query = [Court query];
+    [query whereKey:@"lat" equalTo:court.lat];
+    [query whereKey:@"lng" equalTo:court.lng];
+    [query whereKey:@"name" equalTo:court.name];
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (error) {
             if (error.code == 101) {
-                courtInDatabase = court;
+                PFObject *newCourt = [Court new];
+                newCourt = court;
+                [newCourt saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (succeeded) {
+                        PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
+                        
+                        [relation addObject:newCourt];
+                        
+                        [[PFUser currentUser] saveEventually];
+                    }
+                }];
             } else {
-                courtInDatabase = object;
+                NSLog (@"%@", error);
             }
+        } else {
+            PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
             
-            [relation addObject:courtInDatabase];
-            [user saveInBackground];
-        }];
+            [relation addObject:object];
+            
+            [[PFUser currentUser] saveEventually];
+        }
+        [self displayCourts];
+    }];
+}
+
+- (void)displayCourts {
+    for (Court* court in self.courts) {
+        MKPointAnnotation *annotation = [MKPointAnnotation new];
+        annotation.coordinate = court.coordinates;
+        annotation.title = court.name;
+        [self.mapview addAnnotation:annotation];
     }
 }
 

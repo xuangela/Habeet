@@ -19,29 +19,6 @@
 
 @synthesize coordinates;
 
-
-+ (NSMutableArray *)courtsWithDictionaries: (NSArray<Court *> *)dictionaries { 
-    NSMutableArray *courtArray = [[NSMutableArray alloc] init];
-    
-    for (NSDictionary *court in dictionaries) {
-        Court *thiscourt = [[Court alloc] initWithDictionary:court];
-        [courtArray addObject:thiscourt];
-    }
-    
-    return courtArray;
-}
-
-+ (NSMutableArray *)courtsWithRelation: (NSArray<PFObject *> *)relations {
-    NSMutableArray *courtArray = [[NSMutableArray alloc] init];
-    
-    for (PFObject *court in relations) {
-        Court *thiscourt = [[Court alloc] initWithPFObject:court];
-        [courtArray addObject:thiscourt];
-    }
-    
-    return courtArray;
-}
-
 + (NSString *) parseClassName{
     return @"Court";
 }
@@ -71,9 +48,9 @@
     self.coordinates = CLLocationCoordinate2DMake(latNum, lngNum);
     self.objectID = @"";
     
+    
     return self;
 }
-
 
 
 

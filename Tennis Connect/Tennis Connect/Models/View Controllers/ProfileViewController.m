@@ -50,7 +50,7 @@
 - (void) userInfoDisplay {
     PFUser *user = [PFUser currentUser];
     self.nameLabel.text = [user valueForKey:@"name"];
-    self.usernameLabel.text = [@"@" stringByAppendingString:[user valueForKey:@"username"]];
+    self.usernameLabel.text = [@"@" stringByAppendingString:user.username];
     self.genderLabel.text = [user valueForKey:@"gender"];
     self.contactNumLabel.text = [user valueForKey:@"contact"];
     NSInteger age =[[user valueForKey:@"age"] yearsAgo];

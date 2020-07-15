@@ -17,7 +17,7 @@
 @dynamic time;
 @dynamic confirmed;
 @dynamic completed;
-@dynamic score; //array of numbers
+@dynamic score;
 
 
 + (NSString*)parseClassName {

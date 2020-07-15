@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Court.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MapViewController : UIViewController
 
-@property (nonatomic, strong) NSMutableArray *courts;
+@property (nonatomic, strong) NSMutableArray<Court*> *courts;
 
 @end
 

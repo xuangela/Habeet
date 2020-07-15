@@ -21,8 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinates;
 
-+ (NSMutableArray *)courtsWithDictionaries: (NSArray *)dictionaries;
-+ (NSMutableArray *)courtsWithRelation: (NSArray *)relations;
 + (NSString *) parseClassName; 
 
 - (id)initWithPFObject:(PFObject *)postPF;

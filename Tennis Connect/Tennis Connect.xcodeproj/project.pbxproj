@@ -121,6 +121,7 @@
 				B9879B8224BE670E00EC2794 /* Court.m */,
 				B9879B8424BE69DF00EC2794 /* Match.h */,
 				B9879B8524BE69DF00EC2794 /* Match.m */,
+				B9D6816D24BCC0F0005CCBB3 /* View Controllers */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -151,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				B9879B7D24BE61EA00EC2794 /* Models */,
-				B9D6816D24BCC0F0005CCBB3 /* View Controllers */,
 				B9D6813824BCC084005CCBB3 /* AppDelegate.h */,
 				B9D6813924BCC084005CCBB3 /* AppDelegate.m */,
 				B9D6813B24BCC084005CCBB3 /* SceneDelegate.h */,
