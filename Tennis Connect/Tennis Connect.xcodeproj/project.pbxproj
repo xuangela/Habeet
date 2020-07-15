@@ -11,7 +11,6 @@
 		9143678081977CF6772FB8DF /* Pods_Tennis_ConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8062F7951C9CC35071001ACB /* Pods_Tennis_ConnectTests.framework */; };
 		B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */; };
 		B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F74124BCCFD900B2BAF8 /* RegisterViewController.m */; };
-		B9879B8024BE620900EC2794 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B9879B7F24BE620900EC2794 /* User.m */; };
 		B9879B8324BE670E00EC2794 /* Court.m in Sources */ = {isa = PBXBuildFile; fileRef = B9879B8224BE670E00EC2794 /* Court.m */; };
 		B9879B8624BE69DF00EC2794 /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = B9879B8524BE69DF00EC2794 /* Match.m */; };
 		B99E78F424BE0D19008D4C2F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99E78F324BE0D19008D4C2F /* MapKit.framework */; };
@@ -57,8 +56,6 @@
 		B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		B970F74024BCCFD900B2BAF8 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		B970F74124BCCFD900B2BAF8 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
-		B9879B7E24BE620900EC2794 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		B9879B7F24BE620900EC2794 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		B9879B8124BE670E00EC2794 /* Court.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Court.h; sourceTree = "<group>"; };
 		B9879B8224BE670E00EC2794 /* Court.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Court.m; sourceTree = "<group>"; };
 		B9879B8424BE69DF00EC2794 /* Match.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Match.h; sourceTree = "<group>"; };
@@ -120,8 +117,6 @@
 		B9879B7D24BE61EA00EC2794 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B9879B7E24BE620900EC2794 /* User.h */,
-				B9879B7F24BE620900EC2794 /* User.m */,
 				B9879B8124BE670E00EC2794 /* Court.h */,
 				B9879B8224BE670E00EC2794 /* Court.m */,
 				B9879B8424BE69DF00EC2794 /* Match.h */,
@@ -469,7 +464,6 @@
 				B9879B8324BE670E00EC2794 /* Court.m in Sources */,
 				B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */,
 				B9879B8624BE69DF00EC2794 /* Match.m in Sources */,
-				B9879B8024BE620900EC2794 /* User.m in Sources */,
 				B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */,
 				B99E78F724BE0D5F008D4C2F /* MapViewController.m in Sources */,
 				B9D6814B24BCC085005CCBB3 /* main.m in Sources */,
