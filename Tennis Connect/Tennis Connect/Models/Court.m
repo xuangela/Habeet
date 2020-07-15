@@ -13,18 +13,29 @@
 @implementation Court
 
 @dynamic name;
-@dynamic locationArray;
+@dynamic lat;
+@dynamic lng;
 @dynamic objectID;
 
 @synthesize coordinates;
 
 
-
-+ (NSMutableArray *)courtsWithDictionaries: (NSArray *)dictionaries { // each entry is a court
++ (NSMutableArray *)courtsWithDictionaries: (NSArray<Court *> *)dictionaries { 
     NSMutableArray *courtArray = [[NSMutableArray alloc] init];
     
     for (NSDictionary *court in dictionaries) {
         Court *thiscourt = [[Court alloc] initWithDictionary:court];
+        [courtArray addObject:thiscourt];
+    }
+    
+    return courtArray;
+}
+
++ (NSMutableArray *)courtsWithRelation: (NSArray<PFObject *> *)relations {
+    NSMutableArray *courtArray = [[NSMutableArray alloc] init];
+    
+    for (PFObject *court in relations) {
+        Court *thiscourt = [[Court alloc] initWithPFObject:court];
         [courtArray addObject:thiscourt];
     }
     
@@ -40,9 +51,9 @@
     self = [super init];
     
     self.name = [postPF objectForKey:@"name"];
-    self.locationArray =[postPF objectForKey:@"coordinates"];
-    // lat, long
-    self.coordinates = CLLocationCoordinate2DMake([self.locationArray[0] doubleValue], [self.locationArray[1] doubleValue]);
+    self.lat =[postPF objectForKey:@"lat"];
+    self.lng =[postPF objectForKey:@"lng"];
+    self.coordinates = CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
     self.objectID = postPF.objectId;
     
     return self;
@@ -53,10 +64,11 @@
     self = [super init];
     
     self.name = court[@"name"];
-    CLLocationDegrees lat = [court[@"location"][@"lat"] doubleValue];
-    CLLocationDegrees lng = [court[@"location"][@"lng"] doubleValue];
-    self.locationArray = @[[NSNumber numberWithDouble:lat], [NSNumber numberWithDouble:lng]];
-    self.coordinates = CLLocationCoordinate2DMake(lat, lng);
+    double latNum = [court[@"location"][@"lat"] doubleValue];
+    double lngNum = [court[@"location"][@"lng"] doubleValue];
+    self.lat = [NSNumber numberWithDouble:latNum];
+    self.lng = [NSNumber numberWithDouble:lngNum];
+    self.coordinates = CLLocationCoordinate2DMake(latNum, lngNum);
     self.objectID = @"";
     
     return self;

@@ -8,6 +8,7 @@
 
 #import "User.h"
 #import "PFObject+Subclass.h"
+@import Parse;
 
 @implementation User
 
@@ -22,8 +23,8 @@
 
 @synthesize courts;
 
-+ (NSString*)parseClassName {
-    return @"User";
++(User*)user {
+    return (User*)[PFUser user];
 }
 
 - (instancetype) initWithPF: (PFUser *) user {
@@ -37,6 +38,13 @@
     self.experience = [user objectForKey:@"experience"];
     self.pfp = [user objectForKey:@"picture"];
     self.username = [user objectForKey:@"username"];
+    
+    PFRelation *relation = [self relationForKey:@"courts"];
+    PFQuery *query = [relation query];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        self.courts = [Court courtsWithRelation:objects];
+    }];
     
     return self;
 }

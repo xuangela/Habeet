@@ -10,7 +10,6 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import <DateTools/DateTools.h>
-#import "User.h"
 @import Parse;
 
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -50,16 +49,15 @@
 
 - (void) userInfoDisplay {
     PFUser *user = [PFUser currentUser];
-    self.user = [[User alloc] initWithPF:user];
-    self.nameLabel.text = self.user.name;
-    self.usernameLabel.text = [@"@" stringByAppendingString:self.user.username];
-    self.genderLabel.text = self.user.gender;
-    self.contactNumLabel.text = self.user.contact;
-    NSInteger age =[self.user.dob yearsAgo];
+    self.nameLabel.text = [user valueForKey:@"name"];
+    self.usernameLabel.text = [@"@" stringByAppendingString:[user valueForKey:@"username"]];
+    self.genderLabel.text = [user valueForKey:@"gender"];
+    self.contactNumLabel.text = [user valueForKey:@"contact"];
+    NSInteger age =[[user valueForKey:@"age"] yearsAgo];
     self.ageLabel.text = [NSString stringWithFormat: @"%ld", (long)age];
     
-    if (self.user.pfp) {
-        self.pfpView.file = self.user.pfp;
+    if ([user valueForKey:@"picture"]) {
+        self.pfpView.file = [user valueForKey:@"picture"];
         [self.pfpView loadInBackground];
     }
 }

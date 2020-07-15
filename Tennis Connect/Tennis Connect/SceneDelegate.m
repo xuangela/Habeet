@@ -25,7 +25,7 @@
     if (myUser) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
-        
+
         UITabBarController *tabBarController = (UITabBarController*)self.window.rootViewController;
         tabBarController.selectedIndex = 2;
     }

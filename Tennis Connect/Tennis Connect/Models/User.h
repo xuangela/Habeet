@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Court.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface User : PFObject<PFSubclassing>
-
+@interface User:PFUser<PFSubclassing>
 
 @property (nonatomic, strong) NSString *objectID;
 @property (nonatomic, strong) NSString *name;
@@ -23,9 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFFileObject *pfp;
 @property (nonatomic, strong) NSString* username;
 
-@property (nonatomic, strong) NSMutableArray *courts; //array of courts
+@property (nonatomic, strong) NSMutableArray<Court*> *courts;
 
-+ (NSString*)parseClassName;
++ (User*)user;
 
 - (instancetype) initWithPF: (PFUser *) user;
 

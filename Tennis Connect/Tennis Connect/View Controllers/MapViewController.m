@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "Court.h"
+@import Parse;
 
 static NSString * const clientID = @"YQR5YWMSDL0VOFJKHK2CVOX5MVUGUFQ1FOPYNWUAHY4U3EPY";
 static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3FMH10KDFJ";
@@ -46,28 +47,36 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (data) {
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            NSLog(@"response: %@", responseDictionary);
             NSArray *venues= [responseDictionary valueForKeyPath:@"response.venues"];
             self.courts = [Court courtsWithDictionaries:venues];
-            //[self updatePFUserWithCourts];
-        } else {
-            NSLog(@"%@", error);
+            [self updateParseWithCourtRelations];
         }
     }];
     [task resume];
 }
 
-- (void)updatePFUserWithCourts {
+-(void) updateParseWithCourtRelations {
     PFUser *user = [PFUser currentUser];
-
-    for (Court* court in self.courts) {
-        // check if already has a parse object for this
-        // if yes, add relation
-        // if not,
+    PFRelation *relation = [user relationForKey:@"courts"];
+    
+    for (Court *court in self.courts) {
+        PFQuery *query = [Court query];
+        [query whereKey:@"lat" equalTo:court.lat];
+        [query whereKey:@"lng" equalTo:court.lng];
+        [query whereKey:@"name" equalTo:court.name];
+        
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            PFObject  *courtInDatabase;
+            if (error.code == 101) {
+                courtInDatabase = court;
+            } else {
+                courtInDatabase = object;
+            }
+            
+            [relation addObject:courtInDatabase];
+            [user saveInBackground];
+        }];
     }
-    
-    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) { }];
-    
 }
 
 #pragma mark - Viewing the map
@@ -79,8 +88,6 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
     
-    
-
     self.mapview.delegate = self;
     self.mapview.showsUserLocation = YES;
 }
