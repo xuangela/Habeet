@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MapViewController : UIViewController
 
+@property (nonatomic, strong) NSMutableArray *courts; 
+
 @end
 
 NS_ASSUME_NONNULL_END

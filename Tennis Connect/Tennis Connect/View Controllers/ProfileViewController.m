@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import <DateTools/DateTools.h>
+#import "User.h"
 @import Parse;
 
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -43,22 +44,22 @@
         self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
         self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
 }
 
 - (void) userInfoDisplay {
     PFUser *user = [PFUser currentUser];
-    self.nameLabel.text = [user valueForKey:@"name"];
-    self.usernameLabel.text = [@"@" stringByAppendingString:[user valueForKey:@"username"]];
-    self.genderLabel.text = [user valueForKey:@"gender"];
-    self.contactNumLabel.text = [user valueForKey:@"contact"];
-    NSInteger age =[[user valueForKey:@"age"] yearsAgo];
+    self.user = [[User alloc] initWithPF:user];
+    self.nameLabel.text = self.user.name;
+    self.usernameLabel.text = [@"@" stringByAppendingString:self.user.username];
+    self.genderLabel.text = self.user.gender;
+    self.contactNumLabel.text = self.user.contact;
+    NSInteger age =[self.user.dob yearsAgo];
     self.ageLabel.text = [NSString stringWithFormat: @"%ld", (long)age];
     
-    if ([user objectForKey:@"picture"]) {
-        self.pfpView.file = [user objectForKey:@"picture"];
+    if (self.user.pfp) {
+        self.pfpView.file = self.user.pfp;
         [self.pfpView loadInBackground];
     }
 }

@@ -1,0 +1,29 @@
+//
+//  Court.h
+//  Tennis Connect
+//
+//  Created by Angela Xu on 7/14/20.
+//  Copyright © 2020 Angela Xu. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+@import Parse;
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface Court : PFObject<PFSubclassing>
+
+@property (nonatomic, strong) NSString* name;
+@property (nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, strong) NSString *objectID;
+
++ (NSMutableArray *)courtsWithDictionaries: (NSArray *)dictionaries;
++ (NSString *) parseClassName; 
+
+- (id)initWithPFObject:(PFObject *)postPF;
+- (id)initWithDictionary:(NSDictionary*) court;
+
+@end
+
+NS_ASSUME_NONNULL_END

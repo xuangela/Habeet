@@ -11,7 +11,9 @@
 		9143678081977CF6772FB8DF /* Pods_Tennis_ConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8062F7951C9CC35071001ACB /* Pods_Tennis_ConnectTests.framework */; };
 		B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */; };
 		B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F74124BCCFD900B2BAF8 /* RegisterViewController.m */; };
-		B970F74924BD244900B2BAF8 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F74824BD244900B2BAF8 /* SettingsViewController.m */; };
+		B9879B8024BE620900EC2794 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B9879B7F24BE620900EC2794 /* User.m */; };
+		B9879B8324BE670E00EC2794 /* Court.m in Sources */ = {isa = PBXBuildFile; fileRef = B9879B8224BE670E00EC2794 /* Court.m */; };
+		B9879B8624BE69DF00EC2794 /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = B9879B8524BE69DF00EC2794 /* Match.m */; };
 		B99E78F424BE0D19008D4C2F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99E78F324BE0D19008D4C2F /* MapKit.framework */; };
 		B99E78F724BE0D5F008D4C2F /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99E78F624BE0D5F008D4C2F /* MapViewController.m */; };
 		B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6813924BCC084005CCBB3 /* AppDelegate.m */; };
@@ -55,8 +57,12 @@
 		B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		B970F74024BCCFD900B2BAF8 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		B970F74124BCCFD900B2BAF8 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
-		B970F74724BD244900B2BAF8 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		B970F74824BD244900B2BAF8 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		B9879B7E24BE620900EC2794 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		B9879B7F24BE620900EC2794 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		B9879B8124BE670E00EC2794 /* Court.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Court.h; sourceTree = "<group>"; };
+		B9879B8224BE670E00EC2794 /* Court.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Court.m; sourceTree = "<group>"; };
+		B9879B8424BE69DF00EC2794 /* Match.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Match.h; sourceTree = "<group>"; };
+		B9879B8524BE69DF00EC2794 /* Match.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Match.m; sourceTree = "<group>"; };
 		B99E78F324BE0D19008D4C2F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B99E78F524BE0D5F008D4C2F /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		B99E78F624BE0D5F008D4C2F /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
@@ -111,6 +117,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B9879B7D24BE61EA00EC2794 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B9879B7E24BE620900EC2794 /* User.h */,
+				B9879B7F24BE620900EC2794 /* User.m */,
+				B9879B8124BE670E00EC2794 /* Court.h */,
+				B9879B8224BE670E00EC2794 /* Court.m */,
+				B9879B8424BE69DF00EC2794 /* Match.h */,
+				B9879B8524BE69DF00EC2794 /* Match.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B9D6812C24BCC084005CCBB3 = {
 			isa = PBXGroup;
 			children = (
@@ -136,7 +155,8 @@
 		B9D6813724BCC084005CCBB3 /* Tennis Connect */ = {
 			isa = PBXGroup;
 			children = (
-				B9D6816D24BCC0F0005CCBB3 /* View Controller */,
+				B9879B7D24BE61EA00EC2794 /* Models */,
+				B9D6816D24BCC0F0005CCBB3 /* View Controllers */,
 				B9D6813824BCC084005CCBB3 /* AppDelegate.h */,
 				B9D6813924BCC084005CCBB3 /* AppDelegate.m */,
 				B9D6813B24BCC084005CCBB3 /* SceneDelegate.h */,
@@ -168,7 +188,7 @@
 			path = "Tennis ConnectUITests";
 			sourceTree = "<group>";
 		};
-		B9D6816D24BCC0F0005CCBB3 /* View Controller */ = {
+		B9D6816D24BCC0F0005CCBB3 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				B9D6816E24BCC10A005CCBB3 /* LoginViewController.h */,
@@ -177,12 +197,10 @@
 				B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */,
 				B970F74024BCCFD900B2BAF8 /* RegisterViewController.h */,
 				B970F74124BCCFD900B2BAF8 /* RegisterViewController.m */,
-				B970F74724BD244900B2BAF8 /* SettingsViewController.h */,
-				B970F74824BD244900B2BAF8 /* SettingsViewController.m */,
 				B99E78F524BE0D5F008D4C2F /* MapViewController.h */,
 				B99E78F624BE0D5F008D4C2F /* MapViewController.m */,
 			);
-			path = "View Controller";
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		C9B8D2DA6F466E5EF3037109 /* Pods */ = {
@@ -448,13 +466,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9D6817024BCC10A005CCBB3 /* LoginViewController.m in Sources */,
+				B9879B8324BE670E00EC2794 /* Court.m in Sources */,
 				B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */,
+				B9879B8624BE69DF00EC2794 /* Match.m in Sources */,
+				B9879B8024BE620900EC2794 /* User.m in Sources */,
 				B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */,
 				B99E78F724BE0D5F008D4C2F /* MapViewController.m in Sources */,
 				B9D6814B24BCC085005CCBB3 /* main.m in Sources */,
 				B9D6813D24BCC084005CCBB3 /* SceneDelegate.m in Sources */,
 				B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */,
-				B970F74924BD244900B2BAF8 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
