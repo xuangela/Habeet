@@ -20,7 +20,7 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
-
+@property (nonatomic, strong) NSMutableArray<Court*> *courts;
 @property (nonatomic, assign) double lat;
 @property (nonatomic, assign) double lng;
 
@@ -34,8 +34,6 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
     [self mapSetUp];
     [self fetchCourtsnear];
 }
-
-
 
 - (void)fetchCourtsnear {
     NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
@@ -51,6 +49,11 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSArray *venues= [responseDictionary valueForKeyPath:@"response.venues"];
             self.courts = [self courtsWithDictionaries:venues];
+            
+            //store in user defaults so can access in any view controller
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:self.courts forKey:@"courts"];
+            [defaults synchronize];
         }
     }];
     [task resume];
@@ -141,8 +144,6 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
     [self.mapview setRegion:region];
     [self.locationManager stopUpdatingLocation];
 }
-
-
 /*
 #pragma mark - Navigation
 
