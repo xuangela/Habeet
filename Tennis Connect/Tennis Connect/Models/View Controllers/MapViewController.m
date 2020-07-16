@@ -94,7 +94,7 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
                         
                         [relation addObject:newCourt];
                         
-                        [[PFUser currentUser] saveEventually];
+                        [[PFUser currentUser] saveInBackground];
                     }
                 }];
             } else {
@@ -105,7 +105,7 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
             
             [relation addObject:object];
             
-            [[PFUser currentUser] saveEventually];
+            [[PFUser currentUser] saveInBackground];
         }
         [self displayCourts];
     }];
