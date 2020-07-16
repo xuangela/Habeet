@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *genderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contactNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *skillLabel;
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerVC;
 
@@ -55,6 +56,8 @@
     self.contactNumLabel.text = [user valueForKey:@"contact"];
     NSInteger age =[[user valueForKey:@"age"] yearsAgo];
     self.ageLabel.text = [NSString stringWithFormat: @"%ld", (long)age];
+    NSInteger exp = [[user valueForKey:@"experience"] integerValue];
+    self.skillLabel.text = [NSString stringWithFormat: @"%ld", (long)exp];
     
     if ([user valueForKey:@"picture"]) {
         self.pfpView.file = [user valueForKey:@"picture"];
