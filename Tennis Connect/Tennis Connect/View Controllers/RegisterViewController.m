@@ -7,6 +7,7 @@
 //
 
 #import "RegisterViewController.h"
+#import "MapViewController.h"
 @import Parse;
 
 @interface RegisterViewController ()
@@ -87,6 +88,11 @@
     if ([segue.identifier isEqualToString:@"loginSegue"]) {
         UITabBarController *tabController = [segue destinationViewController];
         tabController.selectedIndex = 3;
+        
+        MapViewController *mapcontroller = tabController.viewControllers[2];
+        [mapcontroller mapSetUp];
+        [mapcontroller fetchCourtsnear];
+        
     }
 }
 

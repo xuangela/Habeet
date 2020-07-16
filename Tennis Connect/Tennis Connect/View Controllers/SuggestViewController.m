@@ -8,10 +8,12 @@
 
 #import "SuggestViewController.h"
 #import "Court.h"
+@import Parse;
 
 @interface SuggestViewController ()
 
-@property (nonatomic, strong) NSMutableArray<Court*> *courts;
+@property (nonatomic, strong) NSArray<Court*> *courts;
+@property (nonatomic, strong) NSArray<PFUser*> *players;
 
 @end
 
@@ -23,10 +25,30 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.courts = [defaults objectForKey:@"courts"];
     
-    
+    [self findUsers];
 }
 
--(void) findUsers
+-(void) findUsers {
+    NSMutableArray<PFQuery*> *queries = [[NSMutableArray alloc] init];
+    for (Court* court in self.courts) {
+        PFQuery *query = [PFQuery queryWithClassName:@"User"];
+        
+        //add other constraints if present in user settings
+        
+        [query whereKey:@"courts" equalTo:court];
+        [queries addObject:query];
+    }
+    
+    PFQuery *aggregatedQuery = [PFQuery orQueryWithSubqueries:queries];
+    
+    [aggregatedQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"%@", error.localizedDescription);
+        } else {
+            self.players = [NSArray arrayWithArray:objects];
+        }
+    }];
+}
 
 
 

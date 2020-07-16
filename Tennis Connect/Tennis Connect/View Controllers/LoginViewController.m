@@ -9,6 +9,7 @@
 // TODO: modally present registration screen
 
 #import "LoginViewController.h"
+#import "MapViewController.h"
 @import Parse;
 
 @interface LoginViewController ()
@@ -137,6 +138,9 @@
     if ([segue.identifier isEqualToString:@"loginSegue"]) {
         UITabBarController *tabController = [segue destinationViewController];
         tabController.selectedIndex = 2;
+        MapViewController *mapcontroller = tabController.viewControllers[2];
+        [mapcontroller mapSetUp];
+        [mapcontroller fetchCourtsnear];
     } 
 }
 

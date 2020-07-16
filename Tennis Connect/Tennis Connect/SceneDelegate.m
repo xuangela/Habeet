@@ -7,6 +7,7 @@
 //
 
 #import "SceneDelegate.h"
+#import "MapViewController.h"
 @import Parse;
 
 @interface SceneDelegate ()
@@ -28,6 +29,10 @@
 
         UITabBarController *tabBarController = (UITabBarController*)self.window.rootViewController;
         tabBarController.selectedIndex = 2;
+        
+        MapViewController *mapcontroller = tabBarController.viewControllers[2];
+        [mapcontroller mapSetUp];
+        [mapcontroller fetchCourtsnear];
     }
 }
 

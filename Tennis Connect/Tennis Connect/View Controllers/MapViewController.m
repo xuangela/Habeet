@@ -30,9 +30,6 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self mapSetUp];
-    [self fetchCourtsnear];
 }
 
 - (void)fetchCourtsnear {
