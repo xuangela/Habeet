@@ -8,6 +8,7 @@
 
 #import "Court.h"
 #import "PFObject+Subclass.h"
+
 @import Parse;
 
 @implementation Court
@@ -21,6 +22,52 @@
 
 + (NSString *) parseClassName{
     return @"Court";
+}
+
++ (NSMutableArray *)courtsWithDictionaries: (NSArray<Court *> *)dictionaries  {
+    NSMutableArray *courtArray = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *court in dictionaries) {
+        Court *thisCourt = [[Court alloc] initWithDictionary:court];
+        [courtArray addObject:thisCourt];
+    }
+    return courtArray;
+}
+
++ (void) courtInParseAndAddRelations: (NSArray<Court *> *)dictionaries withBlock: (void (^)(PFObject *))getUsers {
+    for (Court *court in dictionaries) {
+        PFQuery *query = [Court query];
+        [query whereKey:@"lat" equalTo:court.lat];
+        [query whereKey:@"lng" equalTo:court.lng];
+        [query whereKey:@"name" equalTo:court.name];
+        
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            if (error) {
+                if (error.code == 101) {
+                    PFObject *newCourt = [Court new];
+                    newCourt = court;
+                    [newCourt saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                        if (succeeded) {
+                            getUsers(newCourt);
+                            PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
+                            
+                            [relation addObject:newCourt];
+                            
+                            [[PFUser currentUser] saveInBackground];
+                        }
+                    }];
+                } else {
+                    NSLog (@"%@", error);
+                }
+            } else {
+                getUsers(object);
+                PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
+                [relation addObject:object];
+                
+                [[PFUser currentUser] saveInBackground];
+            }
+        }];
+    }
 }
 
 // after grabbing from parse server

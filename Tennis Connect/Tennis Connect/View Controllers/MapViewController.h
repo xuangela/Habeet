@@ -7,11 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SuggestViewController.h"
 #import "Court.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol MapViewControllerDelegate
+
+@property (nonatomic, strong) NSArray<Court *> *courts;
+@property (nonatomic, strong) NSMutableOrderedSet<PFUser*> *players;
+
+- (void) findUsers:(Court *) court;
+
+@end
+
+
 @interface MapViewController : UIViewController
+
+@property (nonatomic, weak) id<MapViewControllerDelegate> delegate;
 
 -(void)mapSetUp;
 - (void)fetchCourtsnear;

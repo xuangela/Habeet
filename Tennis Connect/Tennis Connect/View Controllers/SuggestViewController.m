@@ -7,47 +7,64 @@
 //
 
 #import "SuggestViewController.h"
+#import "MapViewController.h"
 #import "Court.h"
 @import Parse;
 
-@interface SuggestViewController ()
-
-@property (nonatomic, strong) NSArray<Court*> *courts;
-@property (nonatomic, strong) NSArray<PFUser*> *players;
+@interface SuggestViewController () <MapViewControllerDelegate>
 
 @end
 
 @implementation SuggestViewController
 
+@synthesize players;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.courts = [defaults objectForKey:@"courts"];
-    
-    [self findUsers];
 }
 
--(void) findUsers {
-    NSMutableArray<PFQuery*> *queries = [[NSMutableArray alloc] init];
-    for (Court* court in self.courts) {
-        PFQuery *query = [PFQuery queryWithClassName:@"User"];
-        
-        //add other constraints if present in user settings
-        
-        [query whereKey:@"courts" equalTo:court];
-        [queries addObject:query];
-    }
+- (void) findUsers:(PFObject *) court {
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
     
-    PFQuery *aggregatedQuery = [PFQuery orQueryWithSubqueries:queries];
+    //add other constraints if present in user settings
     
-    [aggregatedQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"%@", error.localizedDescription);
-        } else {
-            self.players = [NSArray arrayWithArray:objects];
-        }
+    [query whereKey:@"courts" equalTo:court];
+    
+//    if (court.objectId == nil) {
+//        [court saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+//            [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+//                NSLog(@"which path");
+//                if (error) {
+//                    NSLog(@"%@", error.localizedDescription);
+//                } else {
+//                    [self.players addObjectsFromArray:objects];
+//                }
+//            }];
+//        }];
+//    } else {
+//        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+//            NSLog(@"which path");
+//            if (error) {
+//                NSLog(@"%@", error.localizedDescription);
+//            } else {
+//                [self.players addObjectsFromArray:objects];
+//            }
+//        }];
+//    }
+    
+    [court saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            NSLog(@"which path");
+            if (error) {
+                NSLog(@"%@", error.localizedDescription);
+            } else {
+                [self.players addObjectsFromArray:objects];
+            }
+        }];
     }];
+
 }
 
 
@@ -62,4 +79,6 @@
 }
 */
 
+
 @end
+

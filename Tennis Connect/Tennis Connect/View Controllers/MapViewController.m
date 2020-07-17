@@ -7,6 +7,7 @@
 //
 
 #import "MapViewController.h"
+#import "SuggestViewController.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "Court.h"
@@ -28,6 +29,7 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 
 @implementation MapViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -45,70 +47,19 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
         if (data) {
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSArray *venues= [responseDictionary valueForKeyPath:@"response.venues"];
-            self.courts = [self courtsWithDictionaries:venues];
+            self.courts = [Court courtsWithDictionaries:venues];
             
-            //store in user defaults so can access in any view controller
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:self.courts forKey:@"courts"];
-            [defaults synchronize];
+            self.delegate.courts = self.courts;
+            self.delegate.players = [[NSMutableOrderedSet alloc] init];
+            
+            [Court courtInParseAndAddRelations: self.courts withBlock:^(PFObject * _Nonnull thisCourt) {
+                [self.delegate findUsers:thisCourt];
+            }];
+        
+            [self displayCourts];
         }
     }];
     [task resume];
-}
-
-- (NSMutableArray *)courtsWithDictionaries: (NSArray<Court *> *)dictionaries {
-    NSMutableArray *courtArray = [[NSMutableArray alloc] init];
-    
-    PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
-       PFQuery *query = [relation query];
-       [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-           for (Court *court in objects) {
-               [relation removeObject:court];
-           }
-           NSLog(@"deleted");
-           for (NSDictionary *court in dictionaries) {
-               Court *thiscourt = [[Court alloc] initWithDictionary:court];
-               [courtArray addObject:thiscourt];
-               [self checkCourtInParse:thiscourt];
-           }
-       }];
-    
-    return courtArray;
-}
-
--(void) checkCourtInParse: (Court *) court {
-    //if court isn't in
-    PFQuery *query = [Court query];
-    [query whereKey:@"lat" equalTo:court.lat];
-    [query whereKey:@"lng" equalTo:court.lng];
-    [query whereKey:@"name" equalTo:court.name];
-    
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (error) {
-            if (error.code == 101) {
-                PFObject *newCourt = [Court new];
-                newCourt = court;
-                [newCourt saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                    if (succeeded) {
-                        PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
-                        
-                        [relation addObject:newCourt];
-                        
-                        [[PFUser currentUser] saveInBackground];
-                    }
-                }];
-            } else {
-                NSLog (@"%@", error);
-            }
-        } else {
-            PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
-            
-            [relation addObject:object];
-            
-            [[PFUser currentUser] saveInBackground];
-        }
-        [self displayCourts];
-    }];
 }
 
 - (void)displayCourts {
@@ -118,6 +69,7 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
         annotation.title = court.name;
         [self.mapview addAnnotation:annotation];
     }
+    NSLog(@"added map annotations");
 }
 
 #pragma mark - Viewing the map

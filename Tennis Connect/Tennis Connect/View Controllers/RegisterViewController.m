@@ -8,6 +8,7 @@
 
 #import "RegisterViewController.h"
 #import "MapViewController.h"
+#import "SuggestViewController.h"
 @import Parse;
 
 @interface RegisterViewController ()
@@ -90,9 +91,22 @@
         tabController.selectedIndex = 3;
         
         MapViewController *mapcontroller = tabController.viewControllers[2];
+        SuggestViewController<MapViewControllerDelegate> *suggestcontroller = tabController.viewControllers[1];
         [mapcontroller mapSetUp];
-        [mapcontroller fetchCourtsnear];
         
+        mapcontroller.delegate = suggestcontroller;
+        
+        PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
+           PFQuery *query = [relation query];
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            for (Court *court in objects) {
+                [relation removeObject:court];
+            }
+            NSLog(@"deleted");
+            [mapcontroller fetchCourtsnear];
+        }];
+
+
     }
 }
 

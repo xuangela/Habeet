@@ -10,6 +10,8 @@
 
 #import "LoginViewController.h"
 #import "MapViewController.h"
+#import "SuggestViewController.h"
+#import "Court.h"
 @import Parse;
 
 @interface LoginViewController ()
@@ -135,12 +137,31 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
+    
+    
     if ([segue.identifier isEqualToString:@"loginSegue"]) {
         UITabBarController *tabController = [segue destinationViewController];
         tabController.selectedIndex = 2;
+        
         MapViewController *mapcontroller = tabController.viewControllers[2];
+        SuggestViewController<MapViewControllerDelegate> *suggestcontroller = tabController.viewControllers[1];
         [mapcontroller mapSetUp];
-        [mapcontroller fetchCourtsnear];
+        
+        mapcontroller.delegate = suggestcontroller;
+        
+        PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
+           PFQuery *query = [relation query];
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            for (Court *court in objects) {
+                [relation removeObject:court];
+            }
+            NSLog(@"deleted");
+            [mapcontroller fetchCourtsnear];
+        }];
+
+        
+        
+        
     } 
 }
 

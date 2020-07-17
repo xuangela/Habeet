@@ -21,7 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinates;
 
-+ (NSString *) parseClassName; 
++ (NSString *) parseClassName;
++ (NSMutableArray *)courtsWithDictionaries: (NSArray<Court *> *)dictionaries;
++ (void) courtInParseAndAddRelations: (NSArray<Court *> *)dictionaries withBlock: (void (^)(PFObject *))getUsers;
 
 - (id)initWithPFObject:(PFObject *)postPF;
 - (id)initWithDictionary:(NSDictionary*) court;

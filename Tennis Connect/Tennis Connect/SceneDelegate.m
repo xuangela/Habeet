@@ -8,6 +8,7 @@
 
 #import "SceneDelegate.h"
 #import "MapViewController.h"
+#import "SuggestViewController.h"
 @import Parse;
 
 @interface SceneDelegate ()
@@ -27,12 +28,25 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
 
-        UITabBarController *tabBarController = (UITabBarController*)self.window.rootViewController;
-        tabBarController.selectedIndex = 2;
+        UITabBarController *tabController = (UITabBarController*)self.window.rootViewController;
+        tabController.selectedIndex = 2;
         
-        MapViewController *mapcontroller = tabBarController.viewControllers[2];
+        MapViewController *mapcontroller = tabController.viewControllers[2];
+        SuggestViewController<MapViewControllerDelegate> *suggestcontroller = tabController.viewControllers[1];
         [mapcontroller mapSetUp];
-        [mapcontroller fetchCourtsnear];
+        
+        mapcontroller.delegate = suggestcontroller;
+        
+        PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
+           PFQuery *query = [relation query];
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            for (Court *court in objects) {
+                [relation removeObject:court];
+            }
+            NSLog(@"deleted");
+            [mapcontroller fetchCourtsnear];
+        }];
+
     }
 }
 

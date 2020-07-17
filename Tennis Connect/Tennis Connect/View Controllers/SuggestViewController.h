@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Court.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SuggestViewController : UIViewController
+
+@property (nonatomic, strong) NSArray<Court *> *courts;
+
+- (void) findUsers:(PFObject *) court;
 
 @end
 
