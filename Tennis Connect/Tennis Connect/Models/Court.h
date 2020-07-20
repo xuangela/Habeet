@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Player.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *) parseClassName;
 + (NSMutableArray *)courtsWithDictionaries: (NSArray<Court *> *)dictionaries;
-+ (void) courtInParseAndAddRelations: (NSArray<Court *> *)dictionaries withBlock: (void (^)(PFObject *))getUsers;
++ (void) courtInParseAndAddRelations: (NSArray<Court *> *)dictionaries withBlock: (void (^)(NSArray<PFQuery*>*))block;
 
 - (id)initWithPFObject:(PFObject *)postPF;
 - (id)initWithDictionary:(NSDictionary*) court;

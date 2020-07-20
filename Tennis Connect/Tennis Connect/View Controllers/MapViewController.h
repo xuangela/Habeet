@@ -15,12 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MapViewControllerDelegate
 
 @property (nonatomic, strong) NSArray<Court *> *courts;
-@property (nonatomic, strong) NSMutableOrderedSet<PFUser*> *players;
+@property (nonatomic, strong) NSArray<PFUser*> *players;
 
-- (void) findUsers:(Court *) court;
+- (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries;
 
 @end
-
 
 @interface MapViewController : UIViewController
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3262A875E6217B8CCDF21F3D /* Pods_Tennis_Connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3253282C5981F1DA60A651DA /* Pods_Tennis_Connect.framework */; };
 		9143678081977CF6772FB8DF /* Pods_Tennis_ConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8062F7951C9CC35071001ACB /* Pods_Tennis_ConnectTests.framework */; };
+		B9303DAD24C254DD002B875A /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B9303DAC24C254DD002B875A /* Player.m */; };
 		B935560624C0C0ED0040F7BC /* SuggestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B935560524C0C0ED0040F7BC /* SuggestViewController.m */; };
 		B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */; };
 		B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F74124BCCFD900B2BAF8 /* RegisterViewController.m */; };
@@ -53,6 +54,8 @@
 		8062F7951C9CC35071001ACB /* Pods_Tennis_ConnectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tennis_ConnectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98282AA9CED8640FC591AE9D /* Pods-Tennis Connect-Tennis ConnectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis Connect-Tennis ConnectUITests.debug.xcconfig"; path = "Target Support Files/Pods-Tennis Connect-Tennis ConnectUITests/Pods-Tennis Connect-Tennis ConnectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E56DC2D3A1557528FD84A23 /* Pods-Tennis Connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis Connect.debug.xcconfig"; path = "Target Support Files/Pods-Tennis Connect/Pods-Tennis Connect.debug.xcconfig"; sourceTree = "<group>"; };
+		B9303DAB24C254DD002B875A /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		B9303DAC24C254DD002B875A /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		B935560424C0C0ED0040F7BC /* SuggestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuggestViewController.h; sourceTree = "<group>"; };
 		B935560524C0C0ED0040F7BC /* SuggestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuggestViewController.m; sourceTree = "<group>"; };
 		B970F73D24BCCB9E00B2BAF8 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -124,6 +127,8 @@
 				B9879B8224BE670E00EC2794 /* Court.m */,
 				B9879B8424BE69DF00EC2794 /* Match.h */,
 				B9879B8524BE69DF00EC2794 /* Match.m */,
+				B9303DAB24C254DD002B875A /* Player.h */,
+				B9303DAC24C254DD002B875A /* Player.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 				B9879B8624BE69DF00EC2794 /* Match.m in Sources */,
 				B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */,
 				B99E78F724BE0D5F008D4C2F /* MapViewController.m in Sources */,
+				B9303DAD24C254DD002B875A /* Player.m in Sources */,
 				B9D6814B24BCC085005CCBB3 /* main.m in Sources */,
 				B9D6813D24BCC084005CCBB3 /* SceneDelegate.m in Sources */,
 				B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */,

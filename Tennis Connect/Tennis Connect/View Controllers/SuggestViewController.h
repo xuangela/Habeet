@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SuggestViewController : UIViewController
 
 @property (nonatomic, strong) NSArray<Court *> *courts;
+@property (nonatomic, strong) NSArray<PFUser*> *players;
 
-- (void) findUsers:(PFObject *) court;
+- (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries;
 
 @end
 

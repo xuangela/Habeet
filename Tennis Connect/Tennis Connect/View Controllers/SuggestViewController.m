@@ -9,6 +9,7 @@
 #import "SuggestViewController.h"
 #import "MapViewController.h"
 #import "Court.h"
+#import "Player.h"
 @import Parse;
 
 @interface SuggestViewController () <MapViewControllerDelegate>
@@ -24,47 +25,18 @@
     
 }
 
-- (void) findUsers:(PFObject *) court {
-    PFQuery *query = [PFUser query];
-    [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
+- (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries {
+    PFQuery *findingPlayers = [PFQuery orQueryWithSubqueries:playerQueries];
+    NSLog(@"have all the queries");
     
-    //add other constraints if present in user settings
-    
-    [query whereKey:@"courts" equalTo:court];
-    
-//    if (court.objectId == nil) {
-//        [court saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-//            [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-//                NSLog(@"which path");
-//                if (error) {
-//                    NSLog(@"%@", error.localizedDescription);
-//                } else {
-//                    [self.players addObjectsFromArray:objects];
-//                }
-//            }];
-//        }];
-//    } else {
-//        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-//            NSLog(@"which path");
-//            if (error) {
-//                NSLog(@"%@", error.localizedDescription);
-//            } else {
-//                [self.players addObjectsFromArray:objects];
-//            }
-//        }];
-//    }
-    
-    [court saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-            NSLog(@"which path");
-            if (error) {
-                NSLog(@"%@", error.localizedDescription);
-            } else {
-                [self.players addObjectsFromArray:objects];
-            }
-        }];
+    [findingPlayers findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"%@", error.localizedDescription);
+            
+        } else {
+            self.players = [Player playersWithPFUserObjects:objects];
+        }
     }];
-
 }
 
 

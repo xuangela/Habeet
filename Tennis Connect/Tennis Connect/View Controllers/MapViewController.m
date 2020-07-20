@@ -11,6 +11,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "Court.h"
+#import "Player.h"
 @import Parse;
 
 static NSString * const clientID = @"YQR5YWMSDL0VOFJKHK2CVOX5MVUGUFQ1FOPYNWUAHY4U3EPY";
@@ -50,10 +51,9 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
             self.courts = [Court courtsWithDictionaries:venues];
             
             self.delegate.courts = self.courts;
-            self.delegate.players = [[NSMutableOrderedSet alloc] init];
             
-            [Court courtInParseAndAddRelations: self.courts withBlock:^(PFObject * _Nonnull thisCourt) {
-                [self.delegate findUsers:thisCourt];
+            [Court courtInParseAndAddRelations:self.courts withBlock:^(NSArray<PFQuery *> *queries) {
+                [self.delegate findUsersWithQueries:queries];
             }];
         
             [self displayCourts];
