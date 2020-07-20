@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 }
 
 - (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries {

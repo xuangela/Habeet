@@ -48,7 +48,7 @@
                 if (error.code == 101) {
                     PFObject *newCourt = [Court new];
                     newCourt = court;
-                    [newCourt saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    [court saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                         if (succeeded) {
                             [allQueries addObject:[Player queryForFindingPlayersForCourt:newCourt]];
                             PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];

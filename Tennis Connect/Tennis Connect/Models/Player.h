@@ -15,15 +15,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *objectId;
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, assign) NSInteger age;
+@property (nonatomic, assign) long age;
 @property (nonatomic, strong) NSNumber *experience;
 @property (nonatomic, strong) NSString *gender;
 @property (nonatomic, strong) PFUser *user;
 @property (nonatomic, strong) PFFileObject *pfp;
 
+@property (nonatomic, assign) long compatibility;
+
 + (NSArray *)playersWithPFUserObjects: (NSArray<PFUser *> *)dictionaries;
 + (PFQuery*) queryForFindingPlayersForCourt:(PFObject *) court;
-
 
 - (id)initWithPFUser:(PFUser *)userPF;
 
