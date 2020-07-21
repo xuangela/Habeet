@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet SuggestedPlayerView *suggestedview;
 
 @property (nonatomic, assign) int currPlayer;
+@property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
+
 @end
 
 @implementation SuggestViewController
@@ -28,8 +30,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.suggestedview setPlayer:players[0]];
+    [self alertSetUp];
+    
     self.currPlayer = 0;
+    [self.suggestedview setPlayer:self.players[self.currPlayer]];
+}
+
+- (void) alertSetUp {
+    self.noMoreSuggestAlert = [UIAlertController alertControllerWithTitle:@"No more suggestions"
+           message:@"Suggestions will reset to top suggestion."
+    preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.currPlayer = 0;
+        [self.suggestedview setPlayer:self.players[self.currPlayer]];
+    }];
+    [self.noMoreSuggestAlert addAction:okAction];
 }
 
 - (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries {
@@ -48,10 +63,10 @@
 
 - (IBAction)swipeLeft:(id)sender {
     self.currPlayer += 1;
-    if (self.currPlayer == players.count) {
-        //present alert sayign out of match suggesstions, start from top?
+    if (self.currPlayer == self.players.count) {
+        [self presentViewController:self.noMoreSuggestAlert animated:YES completion:^{  }];
     } else {
-        [self.suggestedview setPlayer:players[self.currPlayer]];
+        [self.suggestedview setPlayer:self.players[self.currPlayer]];
     }
 }
 
