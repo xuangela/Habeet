@@ -139,6 +139,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZhF-j2-j4t" customClass="SuggestedPlayerView">
                                 <rect key="frame" x="0.0" y="44" width="414" height="569"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="pCC-LP-gWI" appends="YES" id="wav-Kz-n25"/>
+                                </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3S-cR-yUm">
                                 <rect key="frame" x="105.5" y="621" width="203" height="40"/>
@@ -164,6 +168,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oMc-8F-7Vw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="pCC-LP-gWI">
+                    <connections>
+                        <action selector="swipeLeft:" destination="Lt5-ms-lho" id="UDv-FW-Kt3"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1540.5797101449277" y="645.53571428571422"/>
         </scene>

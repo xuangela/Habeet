@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet SuggestedPlayerView *suggestedview;
 
+@property (nonatomic, assign) int currPlayer;
 @end
 
 @implementation SuggestViewController
@@ -28,6 +29,7 @@
     [super viewDidLoad];
     
     [self.suggestedview setPlayer:players[0]];
+    self.currPlayer = 0;
 }
 
 - (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries {
@@ -44,7 +46,14 @@
     }];
 }
 
-
+- (IBAction)swipeLeft:(id)sender {
+    self.currPlayer += 1;
+    if (self.currPlayer == players.count) {
+        //present alert sayign out of match suggesstions, start from top?
+    } else {
+        [self.suggestedview setPlayer:players[self.currPlayer]];
+    }
+}
 
 /*
 #pragma mark - Navigation
