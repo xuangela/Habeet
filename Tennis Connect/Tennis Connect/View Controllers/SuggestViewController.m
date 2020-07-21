@@ -10,9 +10,13 @@
 #import "MapViewController.h"
 #import "Court.h"
 #import "Player.h"
+#import "SuggestedPlayerView.h"
+
 @import Parse;
 
 @interface SuggestViewController () <MapViewControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet SuggestedPlayerView *suggestedview;
 
 @end
 
@@ -22,6 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.suggestedview setPlayer:players[0]];
 }
 
 - (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries {

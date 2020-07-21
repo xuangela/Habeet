@@ -11,12 +11,24 @@
 		9143678081977CF6772FB8DF /* Pods_Tennis_ConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8062F7951C9CC35071001ACB /* Pods_Tennis_ConnectTests.framework */; };
 		B9303DAD24C254DD002B875A /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B9303DAC24C254DD002B875A /* Player.m */; };
 		B935560624C0C0ED0040F7BC /* SuggestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B935560524C0C0ED0040F7BC /* SuggestViewController.m */; };
+		B9481F0C24C64B5A00F97E43 /* MDCGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = B9481EEF24C64B5A00F97E43 /* MDCGeometry.m */; };
+		B9481F0D24C64B5A00F97E43 /* UIColor+MDCRGB8Bit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9481EF024C64B5A00F97E43 /* UIColor+MDCRGB8Bit.m */; };
+		B9481F0E24C64B5A00F97E43 /* MDCViewState.m in Sources */ = {isa = PBXBuildFile; fileRef = B9481EF224C64B5A00F97E43 /* MDCViewState.m */; };
+		B9481F0F24C64B5A00F97E43 /* UIView+MDCBorderedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9481EF724C64B5A00F97E43 /* UIView+MDCBorderedLabel.m */; };
+		B9481F1024C64B5A00F97E43 /* MDCSwipeToChooseViewOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9481EFB24C64B5A00F97E43 /* MDCSwipeToChooseViewOptions.m */; };
+		B9481F1124C64B5A00F97E43 /* MDCSwipeOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9481EFC24C64B5A00F97E43 /* MDCSwipeOptions.m */; };
+		B9481F1224C64B5A00F97E43 /* MDCSwipeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B9481F0324C64B5A00F97E43 /* MDCSwipeResult.m */; };
+		B9481F1324C64B5A00F97E43 /* MDCPanState.m in Sources */ = {isa = PBXBuildFile; fileRef = B9481F0524C64B5A00F97E43 /* MDCPanState.m */; };
+		B9481F1424C64B5A00F97E43 /* MDCSwipeToChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9481F0924C64B5A00F97E43 /* MDCSwipeToChooseView.m */; };
+		B9481F1524C64B5A00F97E43 /* UIView+MDCSwipeToChoose.m in Sources */ = {isa = PBXBuildFile; fileRef = B9481F0A24C64B5A00F97E43 /* UIView+MDCSwipeToChoose.m */; };
 		B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */; };
 		B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F74124BCCFD900B2BAF8 /* RegisterViewController.m */; };
 		B9879B8324BE670E00EC2794 /* Court.m in Sources */ = {isa = PBXBuildFile; fileRef = B9879B8224BE670E00EC2794 /* Court.m */; };
 		B9879B8624BE69DF00EC2794 /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = B9879B8524BE69DF00EC2794 /* Match.m */; };
 		B99E78F424BE0D19008D4C2F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B99E78F324BE0D19008D4C2F /* MapKit.framework */; };
 		B99E78F724BE0D5F008D4C2F /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99E78F624BE0D5F008D4C2F /* MapViewController.m */; };
+		B9BB466024C754C400275A3F /* SuggestedPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9BB465F24C754C400275A3F /* SuggestedPlayer.xib */; };
+		B9BB466324C7550400275A3F /* SuggestedPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BB466224C7550400275A3F /* SuggestedPlayerView.m */; };
 		B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6813924BCC084005CCBB3 /* AppDelegate.m */; };
 		B9D6813D24BCC084005CCBB3 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6813C24BCC084005CCBB3 /* SceneDelegate.m */; };
 		B9D6814324BCC084005CCBB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6814124BCC084005CCBB3 /* Main.storyboard */; };
@@ -58,6 +70,30 @@
 		B9303DAC24C254DD002B875A /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		B935560424C0C0ED0040F7BC /* SuggestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuggestViewController.h; sourceTree = "<group>"; };
 		B935560524C0C0ED0040F7BC /* SuggestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuggestViewController.m; sourceTree = "<group>"; };
+		B9481EED24C64B5A00F97E43 /* MDCSwipeToChoose-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDCSwipeToChoose-Prefix.pch"; sourceTree = "<group>"; };
+		B9481EEF24C64B5A00F97E43 /* MDCGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCGeometry.m; sourceTree = "<group>"; };
+		B9481EF024C64B5A00F97E43 /* UIColor+MDCRGB8Bit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MDCRGB8Bit.m"; sourceTree = "<group>"; };
+		B9481EF224C64B5A00F97E43 /* MDCViewState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCViewState.m; sourceTree = "<group>"; };
+		B9481EF324C64B5A00F97E43 /* MDCViewState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCViewState.h; sourceTree = "<group>"; };
+		B9481EF424C64B5A00F97E43 /* MDCGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCGeometry.h; sourceTree = "<group>"; };
+		B9481EF624C64B5A00F97E43 /* UIView+MDCBorderedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MDCBorderedLabel.h"; sourceTree = "<group>"; };
+		B9481EF724C64B5A00F97E43 /* UIView+MDCBorderedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MDCBorderedLabel.m"; sourceTree = "<group>"; };
+		B9481EF824C64B5A00F97E43 /* UIColor+MDCRGB8Bit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MDCRGB8Bit.h"; sourceTree = "<group>"; };
+		B9481EFB24C64B5A00F97E43 /* MDCSwipeToChooseViewOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCSwipeToChooseViewOptions.m; sourceTree = "<group>"; };
+		B9481EFC24C64B5A00F97E43 /* MDCSwipeOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCSwipeOptions.m; sourceTree = "<group>"; };
+		B9481EFD24C64B5A00F97E43 /* MDCSwipeToChooseViewOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCSwipeToChooseViewOptions.h; sourceTree = "<group>"; };
+		B9481EFE24C64B5A00F97E43 /* MDCSwipeOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCSwipeOptions.h; sourceTree = "<group>"; };
+		B9481EFF24C64B5A00F97E43 /* MDCSwipeToChoose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCSwipeToChoose.h; sourceTree = "<group>"; };
+		B9481F0124C64B5A00F97E43 /* MDCSwipeResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCSwipeResult.h; sourceTree = "<group>"; };
+		B9481F0224C64B5A00F97E43 /* MDCPanState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCPanState.h; sourceTree = "<group>"; };
+		B9481F0324C64B5A00F97E43 /* MDCSwipeResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCSwipeResult.m; sourceTree = "<group>"; };
+		B9481F0424C64B5A00F97E43 /* MDCSwipeDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCSwipeDirection.h; sourceTree = "<group>"; };
+		B9481F0524C64B5A00F97E43 /* MDCPanState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCPanState.m; sourceTree = "<group>"; };
+		B9481F0724C64B5A00F97E43 /* UIView+MDCSwipeToChoose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MDCSwipeToChoose.h"; sourceTree = "<group>"; };
+		B9481F0824C64B5A00F97E43 /* MDCSwipeToChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCSwipeToChooseView.h; sourceTree = "<group>"; };
+		B9481F0924C64B5A00F97E43 /* MDCSwipeToChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCSwipeToChooseView.m; sourceTree = "<group>"; };
+		B9481F0A24C64B5A00F97E43 /* UIView+MDCSwipeToChoose.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MDCSwipeToChoose.m"; sourceTree = "<group>"; };
+		B9481F0B24C64B5A00F97E43 /* MDCSwipeToChooseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCSwipeToChooseDelegate.h; sourceTree = "<group>"; };
 		B970F73D24BCCB9E00B2BAF8 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		B970F74024BCCFD900B2BAF8 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -69,6 +105,9 @@
 		B99E78F324BE0D19008D4C2F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B99E78F524BE0D5F008D4C2F /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		B99E78F624BE0D5F008D4C2F /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		B9BB465F24C754C400275A3F /* SuggestedPlayer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestedPlayer.xib; sourceTree = "<group>"; };
+		B9BB466124C7550400275A3F /* SuggestedPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuggestedPlayerView.h; sourceTree = "<group>"; };
+		B9BB466224C7550400275A3F /* SuggestedPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuggestedPlayerView.m; sourceTree = "<group>"; };
 		B9D6813524BCC084005CCBB3 /* Tennis Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tennis Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D6813824BCC084005CCBB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B9D6813924BCC084005CCBB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -120,6 +159,103 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B9481EEC24C64B5A00F97E43 /* MDCSwipeToChoose */ = {
+			isa = PBXGroup;
+			children = (
+				B9481EED24C64B5A00F97E43 /* MDCSwipeToChoose-Prefix.pch */,
+				B9481EEE24C64B5A00F97E43 /* Internal */,
+				B9481EF924C64B5A00F97E43 /* Public */,
+			);
+			path = MDCSwipeToChoose;
+			sourceTree = "<group>";
+		};
+		B9481EEE24C64B5A00F97E43 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				B9481EEF24C64B5A00F97E43 /* MDCGeometry.m */,
+				B9481EF024C64B5A00F97E43 /* UIColor+MDCRGB8Bit.m */,
+				B9481EF124C64B5A00F97E43 /* State */,
+				B9481EF424C64B5A00F97E43 /* MDCGeometry.h */,
+				B9481EF524C64B5A00F97E43 /* Views */,
+				B9481EF824C64B5A00F97E43 /* UIColor+MDCRGB8Bit.h */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		B9481EF124C64B5A00F97E43 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				B9481EF224C64B5A00F97E43 /* MDCViewState.m */,
+				B9481EF324C64B5A00F97E43 /* MDCViewState.h */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		B9481EF524C64B5A00F97E43 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B9481EF624C64B5A00F97E43 /* UIView+MDCBorderedLabel.h */,
+				B9481EF724C64B5A00F97E43 /* UIView+MDCBorderedLabel.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B9481EF924C64B5A00F97E43 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				B9481EFA24C64B5A00F97E43 /* Options */,
+				B9481EFF24C64B5A00F97E43 /* MDCSwipeToChoose.h */,
+				B9481F0024C64B5A00F97E43 /* State */,
+				B9481F0624C64B5A00F97E43 /* Views */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		B9481EFA24C64B5A00F97E43 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				B9481EFB24C64B5A00F97E43 /* MDCSwipeToChooseViewOptions.m */,
+				B9481EFC24C64B5A00F97E43 /* MDCSwipeOptions.m */,
+				B9481EFD24C64B5A00F97E43 /* MDCSwipeToChooseViewOptions.h */,
+				B9481EFE24C64B5A00F97E43 /* MDCSwipeOptions.h */,
+			);
+			path = Options;
+			sourceTree = "<group>";
+		};
+		B9481F0024C64B5A00F97E43 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				B9481F0124C64B5A00F97E43 /* MDCSwipeResult.h */,
+				B9481F0224C64B5A00F97E43 /* MDCPanState.h */,
+				B9481F0324C64B5A00F97E43 /* MDCSwipeResult.m */,
+				B9481F0424C64B5A00F97E43 /* MDCSwipeDirection.h */,
+				B9481F0524C64B5A00F97E43 /* MDCPanState.m */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		B9481F0624C64B5A00F97E43 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B9481F0724C64B5A00F97E43 /* UIView+MDCSwipeToChoose.h */,
+				B9481F0824C64B5A00F97E43 /* MDCSwipeToChooseView.h */,
+				B9481F0924C64B5A00F97E43 /* MDCSwipeToChooseView.m */,
+				B9481F0A24C64B5A00F97E43 /* UIView+MDCSwipeToChoose.m */,
+				B9481F0B24C64B5A00F97E43 /* MDCSwipeToChooseDelegate.h */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B9481F1624C64EA500F97E43 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B9BB465F24C754C400275A3F /* SuggestedPlayer.xib */,
+				B9BB466124C7550400275A3F /* SuggestedPlayerView.h */,
+				B9BB466224C7550400275A3F /* SuggestedPlayerView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		B9879B7D24BE61EA00EC2794 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +294,8 @@
 		B9D6813724BCC084005CCBB3 /* Tennis Connect */ = {
 			isa = PBXGroup;
 			children = (
+				B9481EEC24C64B5A00F97E43 /* MDCSwipeToChoose */,
+				B9481F1624C64EA500F97E43 /* Views */,
 				B9879B7D24BE61EA00EC2794 /* Models */,
 				B9D6816D24BCC0F0005CCBB3 /* View Controllers */,
 				B9D6813824BCC084005CCBB3 /* AppDelegate.h */,
@@ -342,6 +480,7 @@
 			files = (
 				B9D6814824BCC085005CCBB3 /* LaunchScreen.storyboard in Resources */,
 				B9D6814524BCC085005CCBB3 /* Assets.xcassets in Resources */,
+				B9BB466024C754C400275A3F /* SuggestedPlayer.xib in Resources */,
 				B9D6814324BCC084005CCBB3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,16 +610,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9D6817024BCC10A005CCBB3 /* LoginViewController.m in Sources */,
+				B9481F0D24C64B5A00F97E43 /* UIColor+MDCRGB8Bit.m in Sources */,
+				B9BB466324C7550400275A3F /* SuggestedPlayerView.m in Sources */,
 				B9879B8324BE670E00EC2794 /* Court.m in Sources */,
+				B9481F1324C64B5A00F97E43 /* MDCPanState.m in Sources */,
 				B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */,
 				B9879B8624BE69DF00EC2794 /* Match.m in Sources */,
+				B9481F1524C64B5A00F97E43 /* UIView+MDCSwipeToChoose.m in Sources */,
 				B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */,
+				B9481F1124C64B5A00F97E43 /* MDCSwipeOptions.m in Sources */,
 				B99E78F724BE0D5F008D4C2F /* MapViewController.m in Sources */,
+				B9481F0F24C64B5A00F97E43 /* UIView+MDCBorderedLabel.m in Sources */,
 				B9303DAD24C254DD002B875A /* Player.m in Sources */,
+				B9481F1224C64B5A00F97E43 /* MDCSwipeResult.m in Sources */,
+				B9481F1424C64B5A00F97E43 /* MDCSwipeToChooseView.m in Sources */,
 				B9D6814B24BCC085005CCBB3 /* main.m in Sources */,
+				B9481F0C24C64B5A00F97E43 /* MDCGeometry.m in Sources */,
 				B9D6813D24BCC084005CCBB3 /* SceneDelegate.m in Sources */,
+				B9481F0E24C64B5A00F97E43 /* MDCViewState.m in Sources */,
 				B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */,
 				B935560624C0C0ED0040F7BC /* SuggestViewController.m in Sources */,
+				B9481F1024C64B5A00F97E43 /* MDCSwipeToChooseViewOptions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

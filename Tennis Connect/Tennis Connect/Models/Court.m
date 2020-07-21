@@ -66,7 +66,7 @@
                 
                 [[PFUser currentUser] saveInBackground];
             }
-            NSLog(@"%lu", (unsigned long)allQueries.count);
+            
             if (allQueries.count == dictionaries.count) {
                 block(allQueries);
             }
