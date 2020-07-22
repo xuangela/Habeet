@@ -59,7 +59,6 @@
                         [newCourts addObject:court];
                         continue;
                     }
-                    
                 }
             }
             
