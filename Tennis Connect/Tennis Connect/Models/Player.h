@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Court.h"
 @import Parse;
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) long compatibility;
 
-+ (NSArray *)playersWithPFUserObjects: (NSArray<PFUser *> *)dictionaries;
++ (NSMutableArray *)playersWithPFUserObjects: (NSArray<PFUser *> *)dictionaries;
 + (PFQuery*) queryForFindingPlayersForCourt:(PFObject *) court;
 
 - (id)initWithPFUser:(PFUser *)userPF;

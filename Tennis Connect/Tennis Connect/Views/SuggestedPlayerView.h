@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SuggestedPlayerView :UIView
+@interface SuggestedPlayerView:UIView
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet PFImageView *pfpView;

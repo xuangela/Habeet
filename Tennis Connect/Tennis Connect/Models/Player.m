@@ -11,7 +11,7 @@
 
 @implementation Player
 
-+ (NSArray<Player*> *)playersWithPFUserObjects: (NSArray<PFUser *> *)dictionaries  {
++ (NSMutableArray<Player*> *)playersWithPFUserObjects: (NSArray<PFUser *> *)dictionaries  {
     NSMutableArray *playerArray = [[NSMutableArray alloc] init];
     
     for (PFUser *player in dictionaries) {

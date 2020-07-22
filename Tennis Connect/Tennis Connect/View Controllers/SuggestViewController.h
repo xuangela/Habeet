@@ -11,10 +11,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol SuggestViewDelegate
+
+@property (nonatomic, strong) NSArray<Court *> *courts;
+@property (nonatomic, strong) Player *player;
+
+- (void) findSharedCourts;
+
+@end
+
 @interface SuggestViewController : UIViewController
 
 @property (nonatomic, strong) NSArray<Court *> *courts;
-@property (nonatomic, strong) NSArray<Player*> *players;
+@property (nonatomic, strong) NSMutableArray<Player*> *players;
+
+@property (nonatomic, weak) id<SuggestViewDelegate> delegate;
 
 - (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries;
 
