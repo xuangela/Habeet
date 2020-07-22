@@ -30,6 +30,7 @@
 		B9BB466024C754C400275A3F /* SuggestedPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9BB465F24C754C400275A3F /* SuggestedPlayer.xib */; };
 		B9BB466324C7550400275A3F /* SuggestedPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BB466224C7550400275A3F /* SuggestedPlayerView.m */; };
 		B9BB466624C79BEE00275A3F /* MatchRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BB466524C79BEE00275A3F /* MatchRequestViewController.m */; };
+		B9BB466924C8E2E600275A3F /* CourtDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BB466824C8E2E600275A3F /* CourtDetailViewController.m */; };
 		B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6813924BCC084005CCBB3 /* AppDelegate.m */; };
 		B9D6813D24BCC084005CCBB3 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6813C24BCC084005CCBB3 /* SceneDelegate.m */; };
 		B9D6814324BCC084005CCBB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6814124BCC084005CCBB3 /* Main.storyboard */; };
@@ -111,6 +112,8 @@
 		B9BB466224C7550400275A3F /* SuggestedPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuggestedPlayerView.m; sourceTree = "<group>"; };
 		B9BB466424C79BEE00275A3F /* MatchRequestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchRequestViewController.h; sourceTree = "<group>"; };
 		B9BB466524C79BEE00275A3F /* MatchRequestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchRequestViewController.m; sourceTree = "<group>"; };
+		B9BB466724C8E2E600275A3F /* CourtDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourtDetailViewController.h; sourceTree = "<group>"; };
+		B9BB466824C8E2E600275A3F /* CourtDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourtDetailViewController.m; sourceTree = "<group>"; };
 		B9D6813524BCC084005CCBB3 /* Tennis Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tennis Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D6813824BCC084005CCBB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B9D6813924BCC084005CCBB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -347,6 +350,8 @@
 				B935560524C0C0ED0040F7BC /* SuggestViewController.m */,
 				B9BB466424C79BEE00275A3F /* MatchRequestViewController.h */,
 				B9BB466524C79BEE00275A3F /* MatchRequestViewController.m */,
+				B9BB466724C8E2E600275A3F /* CourtDetailViewController.h */,
+				B9BB466824C8E2E600275A3F /* CourtDetailViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -635,6 +640,7 @@
 				B9D6813D24BCC084005CCBB3 /* SceneDelegate.m in Sources */,
 				B9481F0E24C64B5A00F97E43 /* MDCViewState.m in Sources */,
 				B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */,
+				B9BB466924C8E2E600275A3F /* CourtDetailViewController.m in Sources */,
 				B935560624C0C0ED0040F7BC /* SuggestViewController.m in Sources */,
 				B9481F1024C64B5A00F97E43 /* MDCSwipeToChooseViewOptions.m in Sources */,
 			);

@@ -132,7 +132,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     CLLocation *lastLocation = [locations lastObject];
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(lastLocation.coordinate.latitude, lastLocation.coordinate.longitude);
-    MKCoordinateSpan span = MKCoordinateSpanMake(.05, .05);
+    MKCoordinateSpan span = MKCoordinateSpanMake(.1, .1);
     MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
     [self.mapview setRegion:region];
     [self.locationManager stopUpdatingLocation];

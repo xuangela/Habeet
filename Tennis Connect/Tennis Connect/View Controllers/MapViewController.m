@@ -12,6 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "Court.h"
 #import "Player.h"
+#import "CourtDetailViewController.h"
 @import Parse;
 
 static NSString * const clientID = @"YQR5YWMSDL0VOFJKHK2CVOX5MVUGUFQ1FOPYNWUAHY4U3EPY";
@@ -25,6 +26,8 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 @property (nonatomic, strong) NSMutableArray<Court*> *courts;
 @property (nonatomic, assign) double lat;
 @property (nonatomic, assign) double lng;
+
+@property (nonatomic, strong) MKAnnotationView *selectedCourt;
 
 @end
 
@@ -88,19 +91,41 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     CLLocation *lastLocation = [locations lastObject];
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(lastLocation.coordinate.latitude, lastLocation.coordinate.longitude);
-    MKCoordinateSpan span = MKCoordinateSpanMake(.05, .05);
+    MKCoordinateSpan span = MKCoordinateSpanMake(.1, .1);
     MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
     [self.mapview setRegion:region];
     [self.locationManager stopUpdatingLocation];
 }
-/*
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    self.selectedCourt = view;
+    [self performSegueWithIdentifier:@"courtDetailSegue" sender:nil];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"courtDetailSegue"]) {
+        CourtDetailViewController *viewControl = [segue destinationViewController];
+        
+        PFQuery *findCourtRefQuery = [Court query];
+        [findCourtRefQuery whereKey: @"name" equalTo:self.selectedCourt.annotation.title];
+        [findCourtRefQuery whereKey:@"lat" equalTo:[NSNumber numberWithDouble:self.selectedCourt.annotation.coordinate.latitude]];
+        [findCourtRefQuery whereKey:@"lng" equalTo:[NSNumber numberWithDouble:self.selectedCourt.annotation.coordinate.longitude]];
+        
+        [findCourtRefQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            if (!error) {
+                viewControl.court = [[Court alloc] initWithPFObject:object];
+            }
+            [viewControl mapSetUp];
+        }];
+    }
+    
 }
-*/
+
 
 @end
