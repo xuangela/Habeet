@@ -7,27 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SuggestedPlayerView.h"
 #import "Court.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol SuggestViewDelegate
-
-@property (nonatomic, strong) NSArray<Court *> *courts;
-@property (nonatomic, strong) Player *player;
-
-- (void) findSharedCourts;
-
-@end
-
 @interface SuggestViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet SuggestedPlayerView *suggestedview;
 
 @property (nonatomic, strong) NSArray<Court *> *courts;
 @property (nonatomic, strong) NSMutableArray<Player*> *players;
 
-@property (nonatomic, weak) id<SuggestViewDelegate> delegate;
+@property (nonatomic, assign) int currPlayer;
+
 
 - (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries;
+- (IBAction)swipeLeft:(id)sender;
 
 @end
 

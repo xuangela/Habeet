@@ -7,6 +7,7 @@
 //
 
 #import "MatchRequestViewController.h"
+#import "SuggestViewController.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
@@ -30,6 +31,8 @@
     
     self.confirmButton.alpha = 0;
     self.courtNameLabel.alpha = 0;
+    
+    self.sentReq = NO;
 }
 
 - (void) findSharedCourts{
@@ -70,6 +73,17 @@
     }];
 }
 
+- (IBAction)tapConfirm:(id)sender {
+    self.sentReq = YES;
+    
+    if (self.sentReq) {
+        [self.delegate.players removeObject:self.player];
+    }
+    
+    [self.delegate.suggestedview setPlayer:self.delegate.players[self.delegate.currPlayer]];
+
+    [self dismissViewControllerAnimated:YES completion:^{}];
+}
 
 #pragma mark - Map Set up
 

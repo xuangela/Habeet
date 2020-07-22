@@ -10,15 +10,16 @@
 #import "MapViewController.h"
 #import "Court.h"
 #import "Player.h"
-#import "SuggestedPlayerView.h"
+
+#import "MatchRequestViewController.h"
 
 @import Parse;
 
-@interface SuggestViewController () <MapViewControllerDelegate>
+@interface SuggestViewController () <MapViewControllerDelegate, MatchRequestDelegate>
 
-@property (weak, nonatomic) IBOutlet SuggestedPlayerView *suggestedview;
 
-@property (nonatomic, assign) int currPlayer;
+
+
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
 
 @end
@@ -70,7 +71,6 @@
     }
 }
 
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -79,12 +79,13 @@
     // Pass the selected object to the new view controller.
     
     if ([segue.identifier isEqualToString:@"matchRequestSegue"]) {
-        self.delegate = [segue destinationViewController];
+        MatchRequestViewController *viewControl = [segue destinationViewController];
         
-        self.delegate.courts = self.courts;
-        self.delegate.player = self.players[self.currPlayer];
+        viewControl.courts = self.courts;
+        viewControl.player = self.players[self.currPlayer];
+        viewControl.delegate = self;
         
-        [self.delegate findSharedCourts];
+        [viewControl findSharedCourts];
     } 
 }
 
