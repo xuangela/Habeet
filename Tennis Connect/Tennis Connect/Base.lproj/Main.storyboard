@@ -188,19 +188,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Yb-LW-UFl">
-                                <rect key="frame" x="0.0" y="50" width="414" height="407"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="2Yb-LW-UFl" secondAttribute="height" multiplier="414:407" id="iA1-Fk-jUY"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="50" width="414" height="607.5"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Court " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWn-Ga-2vo">
-                                <rect key="frame" x="0.0" y="477" width="414" height="31.5"/>
+                                <rect key="frame" x="0.0" y="677.5" width="414" height="31.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u58-6w-bgT">
-                                <rect key="frame" x="109.5" y="548.5" width="195" height="39"/>
+                                <rect key="frame" x="109.5" y="749" width="195" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="195" id="5WI-TP-u0B"/>
                                     <constraint firstAttribute="height" constant="39" id="lh0-UU-ZYJ"/>
@@ -218,6 +215,7 @@
                             <constraint firstItem="u58-6w-bgT" firstAttribute="centerX" secondItem="aFv-BD-F4g" secondAttribute="centerX" id="Qcu-uh-r6z"/>
                             <constraint firstItem="nWn-Ga-2vo" firstAttribute="top" secondItem="2Yb-LW-UFl" secondAttribute="bottom" constant="20" id="Vsx-VP-M6v"/>
                             <constraint firstItem="nWn-Ga-2vo" firstAttribute="centerX" secondItem="aFv-BD-F4g" secondAttribute="centerX" id="cCI-cz-NHP"/>
+                            <constraint firstItem="Ymi-LP-PIu" firstAttribute="bottom" secondItem="u58-6w-bgT" secondAttribute="bottom" constant="20" id="gO6-zd-8JM"/>
                             <constraint firstItem="2Yb-LW-UFl" firstAttribute="leading" secondItem="Ymi-LP-PIu" secondAttribute="leading" id="hn4-RD-eKO"/>
                             <constraint firstItem="2Yb-LW-UFl" firstAttribute="trailing" secondItem="Ymi-LP-PIu" secondAttribute="trailing" id="jGB-XX-cZx"/>
                             <constraint firstItem="nWn-Ga-2vo" firstAttribute="leading" secondItem="Ymi-LP-PIu" secondAttribute="leading" id="yGi-1G-vhZ"/>
