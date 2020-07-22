@@ -10,12 +10,15 @@
 #import "SuggestViewController.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Match.h"
 
 @interface MatchRequestViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
 @property (weak, nonatomic) IBOutlet UILabel *courtNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+
+@property (nonatomic, strong) MKAnnotationView *selectedCourt;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
@@ -81,8 +84,26 @@
     }
     
     [self.delegate.suggestedview setPlayer:self.delegate.players[self.delegate.currPlayer]];
+    
+    Match *newMatch = [Match object];
+    newMatch.sender = [PFUser currentUser];
+    newMatch.receiver = self.player.user;
+    
+    PFQuery *findCourtRefQuery = [Court query];
+    [findCourtRefQuery whereKey: @"name" equalTo:self.selectedCourt.annotation.title];
+    [findCourtRefQuery whereKey:@"lat" equalTo:[NSNumber numberWithDouble:self.selectedCourt.annotation.coordinate.latitude]];
+    [findCourtRefQuery whereKey:@"lng" equalTo:[NSNumber numberWithDouble:self.selectedCourt.annotation.coordinate.longitude]];
+    
+    [findCourtRefQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (!error) {
+            newMatch.court = [[Court alloc] initWithPFObject:object];
+            [newMatch saveInBackground];
+        }
+    }];
 
     [self dismissViewControllerAnimated:YES completion:^{}];
+    
+    
 }
 
 #pragma mark - Map Set up
@@ -118,6 +139,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    self.selectedCourt = view;
     [UIView animateWithDuration:1 animations:^{
         self.courtNameLabel.text = view.annotation.title;
         self.courtNameLabel.alpha = 1;

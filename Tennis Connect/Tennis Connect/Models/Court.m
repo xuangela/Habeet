@@ -63,6 +63,7 @@
                 [allQueries addObject:[Player queryForFindingPlayersForCourt:object]];
                 PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
                 [relation addObject:object];
+                court.objectID = object.objectId;
                 
                 [[PFUser currentUser] saveInBackground];
             }
