@@ -25,12 +25,8 @@
     _match = match;
     int exp;
     if ([match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) { // if the receiver is me
-        if (match.confirmed) {
-            self.statusLabel.text = @"Upcoming match";
-        } else {
-            self.statusLabel.text = @"Incoming request";
-            self.confirmButton.alpha = 1;
-        }
+        self.statusLabel.text = @"Incoming request";
+        self.confirmButton.alpha = 1;
         
         self.contactLabel.text = [match.sender objectForKey:@"contact"];
         exp = [[match.sender objectForKey:@"experience"] intValue];
@@ -43,12 +39,7 @@
             [self.pfpView loadInBackground];
         }
     } else {
-        
-        if (match.confirmed) {
-            self.statusLabel.text = @"Upcoming match";
-        } else {
-            self.statusLabel.text = @"Outgoing request";
-        }
+        self.statusLabel.text = @"Outgoing request";
         self.contactLabel.text = [match.receiver objectForKey:@"contact"];
         exp = [[match.receiver objectForKey:@"experience"] intValue];
         
@@ -58,6 +49,12 @@
             self.pfpView.file = [match.receiver valueForKey:@"picture"];
             [self.pfpView loadInBackground];
         }
+    }
+    
+    if (match.confirmed) {
+        self.statusLabel.text = @"Upcoming match";
+        self.confirmButton.alpha = 0;
+        
     }
     
     if (exp == 0) {
@@ -70,6 +67,8 @@
     
     
 }
+
+
 
 - (IBAction)tapConfirm:(id)sender {
     self.statusLabel.text =@"Upcoming match";

@@ -419,7 +419,6 @@
                                             <outlet property="nameLabel" destination="3Pb-83-kTs" id="3qz-pa-uoK"/>
                                             <outlet property="pfpView" destination="WdJ-Fx-rA3" id="Ims-Rl-4Jw"/>
                                             <outlet property="statusLabel" destination="B8z-5z-P0H" id="yGU-QQ-6G1"/>
-                                            <outletCollection property="gestureRecognizers" destination="Oo5-jR-yld" appends="YES" id="57i-KM-4W0"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -453,11 +452,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Jp-S0-JP5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Oo5-jR-yld">
-                    <connections>
-                        <action selector="tapCell:" destination="6MA-g2-F1g" id="Wv2-cm-apD"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3304.347826086957" y="1433.7053571428571"/>
         </scene>

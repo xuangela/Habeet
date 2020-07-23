@@ -62,9 +62,11 @@
 
 }
 
-- (IBAction)tapCell:(id)sender {
-    
+- (void) onTapConfirmedCell {
+    NSLog(@"this method running");
+    [self performSegueWithIdentifier:@"logScoreSegue" sender:self];
 }
+
 
 #pragma mark - Table set up
 
@@ -79,6 +81,11 @@
     Match *match =self.matches[indexPath.row];
     
     [cell setMatch:match];
+    
+    if (cell.match.confirmed) {
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc ] initWithTarget:self action:@selector(onTapConfirmedCell)];
+        [cell addGestureRecognizer:tap];
+    }
     
     return cell;
 }
