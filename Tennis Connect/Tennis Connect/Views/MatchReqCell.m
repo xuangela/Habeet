@@ -22,6 +22,7 @@
 }
 
 - (void) setMatch:(Match *)match {
+    self.userInteractionEnabled = NO;
     _match = match;
     int exp;
     if ([match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) { // if the receiver is me
@@ -54,7 +55,7 @@
     if (match.confirmed) {
         self.statusLabel.text = @"Upcoming match";
         self.confirmButton.alpha = 0;
-        
+        self.userInteractionEnabled = YES;
     }
     
     if (exp == 0) {

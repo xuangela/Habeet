@@ -82,7 +82,7 @@
     
     [cell setMatch:match];
     
-    if (cell.match.confirmed) {
+    if ([cell.statusLabel.text isEqualToString:@"Upcoming match"]) {
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc ] initWithTarget:self action:@selector(onTapConfirmedCell)];
         [cell addGestureRecognizer:tap];
     }
