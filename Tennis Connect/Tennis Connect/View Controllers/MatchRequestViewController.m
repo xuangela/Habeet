@@ -82,7 +82,7 @@
     if (self.sentReq) {
         [self.delegate.players removeObject:self.player];
     }
-    
+    self.delegate.currPlayer =self.delegate.currPlayer % self.delegate.players.count;
     [self.delegate.suggestedview setPlayer:self.delegate.players[self.delegate.currPlayer]];
     
     Match *newMatch = [Match object];

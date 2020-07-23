@@ -36,7 +36,7 @@
     PFQuery *sentReq = [Match query];
     [sentReq whereKey:@"sender" equalTo:[PFUser currentUser]];
     [sentReq whereKey:@"court" equalTo:self.court];
-    [sentReq whereKey:@"completed" equalTo:[NSNumber numberWithBool:NO]];
+    //[sentReq whereKey:@"completed" equalTo:[NSNumber numberWithBool:NO]];
     [sentReq includeKey:@"receiver"];
     
     [sentReq findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {

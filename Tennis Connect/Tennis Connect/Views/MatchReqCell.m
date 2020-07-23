@@ -22,6 +22,8 @@
 }
 
 - (void) setMatch:(Match *)match {
+    _match = match;
+    
     if (match.confirmed) {
         self.statusLabel.text = @"Upcoming match";
         
@@ -79,7 +81,11 @@
     
     [query getObjectInBackgroundWithId:self.match.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
         object[@"confirmed"] = [NSNumber numberWithBool:YES];
-        [object saveInBackground];
+        NSLog(@"updating database");
+        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            NSLog(@"added to the database");
+        }];
+        
     }];
 }
 
