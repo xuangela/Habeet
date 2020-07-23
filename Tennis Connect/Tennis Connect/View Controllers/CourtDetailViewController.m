@@ -62,6 +62,10 @@
 
 }
 
+- (IBAction)tapCell:(id)sender {
+    
+}
+
 #pragma mark - Table set up
 
 -(void) tableSetUp {

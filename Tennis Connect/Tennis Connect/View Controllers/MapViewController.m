@@ -110,9 +110,8 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
     // Pass the selected object to the new view controller.
     
     if ([segue.identifier isEqualToString:@"courtDetailSegue"]) {
-        CourtDetailViewController *viewControl = [segue destinationViewController];
-        
-        
+        UINavigationController *navControl = [segue destinationViewController];
+        CourtDetailViewController *viewControl = (CourtDetailViewController*)navControl.topViewController;
         
         PFQuery *findCourtRefQuery = [Court query];
         [findCourtRefQuery whereKey: @"name" equalTo:self.selectedCourt.annotation.title];

@@ -260,7 +260,7 @@
                     <navigationItem key="navigationItem" id="tMW-ez-7LV"/>
                     <connections>
                         <outlet property="mapview" destination="cem-hS-jB2" id="sLQ-ow-yrq"/>
-                        <segue destination="6MA-g2-F1g" kind="presentation" identifier="courtDetailSegue" modalPresentationStyle="automatic" id="Jd9-yM-Bjv"/>
+                        <segue destination="Ydo-I3-uPE" kind="presentation" identifier="courtDetailSegue" modalPresentationStyle="automatic" id="Jd9-yM-Bjv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGT-Vg-KgT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -417,6 +417,7 @@
                                                                 <constraint firstItem="WdJ-Fx-rA3" firstAttribute="leading" secondItem="skr-5u-E72" secondAttribute="leading" constant="10" id="zaZ-Gc-PiB"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
+                                                        <gestureRecognizers/>
                                                         <connections>
                                                             <outlet property="confirmButton" destination="xun-VQ-xAV" id="pRW-sy-zyj"/>
                                                             <outlet property="contactLabel" destination="YZw-E1-thV" id="wt1-Zy-cXp"/>
@@ -424,6 +425,7 @@
                                                             <outlet property="nameLabel" destination="3Pb-83-kTs" id="3qz-pa-uoK"/>
                                                             <outlet property="pfpView" destination="WdJ-Fx-rA3" id="Ims-Rl-4Jw"/>
                                                             <outlet property="statusLabel" destination="B8z-5z-P0H" id="yGU-QQ-6G1"/>
+                                                            <outletCollection property="gestureRecognizers" destination="Oo5-jR-yld" appends="YES" id="57i-KM-4W0"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -474,11 +476,33 @@
                         <outlet property="etaLabel" destination="uvA-fr-eh6" id="Lgk-dz-5Tk"/>
                         <outlet property="mapview" destination="Vha-7g-tpp" id="PYm-e4-VTA"/>
                         <outlet property="tableview" destination="pkw-W2-jzq" id="7U1-x2-Kd9"/>
+                        <segue destination="4J0-oW-ENf" kind="show" identifier="logScoreSegue" id="pHq-O7-juj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Jp-S0-JP5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Oo5-jR-yld">
+                    <connections>
+                        <action selector="tapCell:" destination="6MA-g2-F1g" id="Wv2-cm-apD"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2394.202898550725" y="1433.7053571428571"/>
+            <point key="canvasLocation" x="3304.347826086957" y="1433.7053571428571"/>
+        </scene>
+        <!--Log Score View Controller-->
+        <scene sceneID="qJC-gM-nnI">
+            <objects>
+                <viewController id="4J0-oW-ENf" customClass="LogScoreViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z0T-1J-UMS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="hVe-01-ryL"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lRA-LC-aZn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Hh-ER-2wv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3304" y="2273"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="6kB-sQ-Kgn">
@@ -641,7 +665,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3187" y="1403"/>
+            <point key="canvasLocation" x="4209" y="1454"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="dcd-b4-m5D">
@@ -727,7 +751,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XhD-Gz-7hY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3942" y="1403"/>
+            <point key="canvasLocation" x="4338" y="2327"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="cbt-ay-Hog">
@@ -919,6 +943,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WM2-cb-PqI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1217.3913043478262" y="314.73214285714283"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5Tc-eW-gHs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ydo-I3-uPE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bS8-QR-YZm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6MA-g2-F1g" kind="relationship" relationship="rootViewController" id="dpX-Le-Ncd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="57J-y6-tQr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2394.202898550725" y="1433.7053571428571"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

@@ -37,14 +37,13 @@
 - (id)initWithPFObject:(PFObject *)matchPF {
     self = [super init];
     
-    
     self.sender = [matchPF objectForKey:@"sender"];
-    
     self.receiver = [matchPF objectForKey:@"receiver"];
     self.court = [matchPF objectForKey:@"court"];
     self.objectId = matchPF.objectId;
-    self.completed =[matchPF objectForKey:@"completed"];
-    self.confirmed =[matchPF objectForKey:@"confirmed"];
+    
+    self.completed = [[matchPF valueForKey:@"completed"] boolValue];
+    self.confirmed = [[matchPF valueForKey:@"confirmed"] boolValue];
     
     return self;
 }
