@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.confirmButton.alpha = 0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -23,6 +24,7 @@
 - (void) setMatch:(Match *)match {
     if (match.confirmed) {
         self.statusLabel.text = @"Upcoming match";
+        
     }
     
     if ([match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) { // if the receiver is me
@@ -44,8 +46,10 @@
             self.pfpView.file = [match.sender valueForKey:@"picture"];
             [self.pfpView loadInBackground];
         }
+        
+        self.confirmButton.alpha = 1; 
     } else {
-        self.statusLabel.text = @"Incoming request";
+        self.statusLabel.text = @"Outgoing request";
         self.contactLabel.text = [match.receiver objectForKey:@"contact"];
         int exp = [[match.receiver objectForKey:@"experience"] intValue];
         
@@ -65,6 +69,18 @@
         }
     }
     
+}
+
+- (IBAction)tapConfirm:(id)sender {
+    self.statusLabel.text =@"Upcoming match";
+    self.confirmButton.alpha = 0; 
+    
+    PFQuery *query = [Match query];
+    
+    [query getObjectInBackgroundWithId:self.match.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        object[@"confirmed"] = [NSNumber numberWithBool:YES];
+        [object saveInBackground];
+    }];
 }
 
 @end

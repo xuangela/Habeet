@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *expLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contactLabel;
+@property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 
 @property (nonatomic, strong) Match* match;
 
