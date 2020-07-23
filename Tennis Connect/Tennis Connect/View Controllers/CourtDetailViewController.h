@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "Court.h"
+#import "Match.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CourtDetailViewController : UIViewController
 
 @property (nonatomic, strong) Court* court;
+@property (nonatomic, strong) NSArray<Match *>* matches;
 
 -(void)mapSetUp;
+- (void)getMatches;
 
 @end
 

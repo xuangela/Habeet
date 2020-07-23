@@ -11,7 +11,7 @@
 
 @implementation Match
 
-@dynamic  sender;
+@dynamic sender;
 @dynamic receiver;
 @dynamic court;
 @dynamic time;
@@ -23,5 +23,29 @@
 + (NSString*)parseClassName {
     return @"Match";
 }
+
++ (NSMutableArray *)matchesWithArray: (NSArray<PFObject *> *)matches  {
+    NSMutableArray *matchArray = [[NSMutableArray alloc] init];
+    
+    for (PFObject *match in matches) {
+        Match *thisMatch = [[Match alloc] initWithPFObject:match];
+        [matchArray addObject:thisMatch];
+    }
+    return matchArray;
+}
+
+- (id)initWithPFObject:(PFObject *)matchPF {
+    self = [super init];
+    
+    
+    self.sender = [matchPF objectForKey:@"sender"];
+    
+    self.receiver = [matchPF objectForKey:@"receiver"];
+    self.court = [matchPF objectForKey:@"court"];
+    self.objectId = matchPF.objectId;
+    
+    return self;
+}
+
 
 @end

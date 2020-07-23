@@ -21,7 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL completed;
 @property (nonatomic, assign) NSArray<NSNumber *> *score;
 
+
 + (NSString*)parseClassName;
++ (NSMutableArray *)matchesWithArray: (NSArray<PFObject *> *)matches;
+
+- (id)initWithPFObject:(PFObject *)matchPF;
 
 @end
 

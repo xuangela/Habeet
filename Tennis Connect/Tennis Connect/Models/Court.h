@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, assign) NSNumber *lat;
 @property (nonatomic, assign) NSNumber *lng;
-@property (nonatomic, strong) NSString *objectID;
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinates;
 

@@ -112,6 +112,8 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
     if ([segue.identifier isEqualToString:@"courtDetailSegue"]) {
         CourtDetailViewController *viewControl = [segue destinationViewController];
         
+        
+        
         PFQuery *findCourtRefQuery = [Court query];
         [findCourtRefQuery whereKey: @"name" equalTo:self.selectedCourt.annotation.title];
         [findCourtRefQuery whereKey:@"lat" equalTo:[NSNumber numberWithDouble:self.selectedCourt.annotation.coordinate.latitude]];
@@ -121,7 +123,9 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
             if (!error) {
                 viewControl.court = [[Court alloc] initWithPFObject:object];
             }
+            
             [viewControl mapSetUp];
+            [viewControl getMatches];
         }];
     }
     

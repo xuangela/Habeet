@@ -9,14 +9,17 @@
 #import "CourtDetailViewController.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "MatchReqCell.h"
 
-@interface CourtDetailViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface CourtDetailViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
 @property (weak, nonatomic) IBOutlet UILabel *etaLabel;
 @property (weak, nonatomic) IBOutlet UILabel *courtnameLabel;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @end
 
@@ -26,6 +29,42 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    
+}
+
+#pragma mark - Table set up
+
+-(void) tableSetUp {
+    self.tableview.dataSource = self;
+    self.tableview.delegate = self;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MatchReqCell *cell = [[MatchReqCell alloc] init];
+    
+    return cell;
+    
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.matches.count;
+}
+
+- (void)getMatches {
+    PFQuery *sentReq = [Match query];
+    [sentReq whereKey:@"sender" equalTo:[PFUser currentUser]];
+    [sentReq whereKey:@"court" equalTo:self.court];
+    
+    PFQuery *receivedReq = [Match query];
+    [receivedReq whereKey:@"receiver" equalTo:[PFUser currentUser]];
+    [receivedReq whereKey:@"court" equalTo:self.court];
+
+    PFQuery *findReqQuery = [PFQuery orQueryWithSubqueries:@[sentReq, receivedReq]];
+
+    [findReqQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        self.matches = [Match matchesWithArray:objects];
+    }];
 }
 
 #pragma mark - Map set up 

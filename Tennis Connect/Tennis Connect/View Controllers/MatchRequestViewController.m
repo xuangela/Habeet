@@ -88,6 +88,8 @@
     Match *newMatch = [Match object];
     newMatch.sender = [PFUser currentUser];
     newMatch.receiver = self.player.user;
+    newMatch.confirmed = NO;
+    newMatch.completed = NO;
     
     PFQuery *findCourtRefQuery = [Court query];
     [findCourtRefQuery whereKey: @"name" equalTo:self.selectedCourt.annotation.title];

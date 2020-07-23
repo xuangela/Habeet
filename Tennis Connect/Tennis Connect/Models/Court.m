@@ -17,7 +17,6 @@
 @dynamic name;
 @dynamic lat;
 @dynamic lng;
-@dynamic objectID;
 
 @synthesize coordinates;
 
@@ -63,7 +62,7 @@
                 [allQueries addObject:[Player queryForFindingPlayersForCourt:object]];
                 PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
                 [relation addObject:object];
-                court.objectID = object.objectId;
+                court.objectId = object.objectId;
                 
                 [[PFUser currentUser] saveInBackground];
             }
@@ -84,7 +83,7 @@
     self.lat =[postPF objectForKey:@"lat"];
     self.lng =[postPF objectForKey:@"lng"];
     self.coordinates = CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
-    self.objectID = postPF.objectId;
+    self.objectId = postPF.objectId;
     
     return self;
 }
@@ -99,7 +98,7 @@
     self.lat = [NSNumber numberWithDouble:latNum];
     self.lng = [NSNumber numberWithDouble:lngNum];
     self.coordinates = CLLocationCoordinate2DMake(latNum, lngNum);
-    self.objectID = @"";
+    self.objectId = @"";
     
     
     return self;
