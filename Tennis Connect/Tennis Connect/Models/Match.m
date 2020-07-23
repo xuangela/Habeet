@@ -43,6 +43,8 @@
     self.receiver = [matchPF objectForKey:@"receiver"];
     self.court = [matchPF objectForKey:@"court"];
     self.objectId = matchPF.objectId;
+    self.completed =[matchPF objectForKey:@"completed"];
+    self.confirmed =[matchPF objectForKey:@"confirmed"];
     
     return self;
 }

@@ -97,9 +97,7 @@
     double lngNum = [court[@"location"][@"lng"] doubleValue];
     self.lat = [NSNumber numberWithDouble:latNum];
     self.lng = [NSNumber numberWithDouble:lngNum];
-    self.coordinates = CLLocationCoordinate2DMake(latNum, lngNum);
-    self.objectId = @"";
-    
+    self.coordinates = CLLocationCoordinate2DMake(latNum, lngNum);    
     
     return self;
 }

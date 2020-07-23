@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CourtDetailViewController : UIViewController
 
 @property (nonatomic, strong) Court* court;
-@property (nonatomic, strong) NSArray<Match *>* matches;
+@property (nonatomic, strong) NSMutableArray<Match *>* matches;
 
 -(void)mapSetUp;
 - (void)getMatches;

@@ -28,9 +28,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+
+
+- (void)getMatches {
+    PFQuery *sentReq = [Match query];
+    [sentReq whereKey:@"sender" equalTo:[PFUser currentUser]];
+    [sentReq whereKey:@"court" equalTo:self.court];
+    [sentReq whereKey:@"completed" equalTo:[NSNumber numberWithBool:NO]];
+    [sentReq includeKey:@"receiver"];
     
-    
-    
+    [sentReq findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error) {
+            self.matches = [Match matchesWithArray:objects];
+        }
+            PFQuery *receivedReq = [Match query];
+            [receivedReq whereKey:@"receiver" equalTo:[PFUser currentUser]];
+            [receivedReq whereKey:@"court" equalTo:self.court];
+            [receivedReq includeKey:@"sender"];
+            [receivedReq whereKey:@"completed" equalTo:[NSNumber numberWithBool:NO]];
+        
+        
+        [receivedReq findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            if (!error) {
+                NSArray* moreMatches = [Match matchesWithArray:objects];
+                [self.matches addObjectsFromArray:moreMatches];
+                [self tableSetUp];
+                [self.tableview reloadData];
+            }
+        }];
+    }];
+
 }
 
 #pragma mark - Table set up
@@ -41,30 +70,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MatchReqCell *cell = [[MatchReqCell alloc] init];
+    MatchReqCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"MatchReqCell"];
+    
+    Match *match =self.matches[indexPath.row];
+    
+    [cell setMatch:match];
     
     return cell;
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.matches.count;
-}
-
-- (void)getMatches {
-    PFQuery *sentReq = [Match query];
-    [sentReq whereKey:@"sender" equalTo:[PFUser currentUser]];
-    [sentReq whereKey:@"court" equalTo:self.court];
-    
-    PFQuery *receivedReq = [Match query];
-    [receivedReq whereKey:@"receiver" equalTo:[PFUser currentUser]];
-    [receivedReq whereKey:@"court" equalTo:self.court];
-
-    PFQuery *findReqQuery = [PFQuery orQueryWithSubqueries:@[sentReq, receivedReq]];
-
-    [findReqQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        self.matches = [Match matchesWithArray:objects];
-    }];
 }
 
 #pragma mark - Map set up 
