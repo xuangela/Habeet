@@ -37,7 +37,7 @@
     PFQuery *sentReq = [Match query];
     [sentReq whereKey:@"sender" equalTo:[PFUser currentUser]];
     [sentReq whereKey:@"court" equalTo:self.court];
-    //[sentReq whereKey:@"completed" equalTo:[NSNumber numberWithBool:NO]];
+    [sentReq whereKey:@"completed" equalTo:[NSNumber numberWithBool:NO]];
     [sentReq includeKey:@"receiver"];
     
     [sentReq findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -63,10 +63,6 @@
 
 }
 
-- (void) onTapConfirmedCell {
-    [self performSegueWithIdentifier:@"logScoreSegue" sender:self];
-}
-
 
 #pragma mark - Table set up
 
@@ -82,12 +78,13 @@
     
     [cell setMatch:match];
     
-    if ([cell.statusLabel.text isEqualToString:@"Upcoming match"]) {
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc ] initWithTarget:self action:@selector(onTapConfirmedCell)];
-        [cell addGestureRecognizer:tap];
-    }
-    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.matches[indexPath.row].confirmed) {
+        [self performSegueWithIdentifier:@"logScoreSegue" sender:self.matches[indexPath.row]];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

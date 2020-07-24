@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *expLabel;
 @property (weak, nonatomic) IBOutlet UILabel *setLabel;
+@property (weak, nonatomic) IBOutlet UILabel *gameLabel;
 
 @property (nonatomic, strong) Match *match;
 

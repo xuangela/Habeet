@@ -205,6 +205,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="z7Z-et-kyL" id="6qi-cm-7yc"/>
                                             <outlet property="expLabel" destination="lMm-jr-a0S" id="XHt-1h-J3N"/>
+                                            <outlet property="gameLabel" destination="jvB-Lx-THp" id="krH-MI-Ldg"/>
                                             <outlet property="nameLabel" destination="FoD-dF-ejo" id="W62-qH-kiP"/>
                                             <outlet property="pfpView" destination="8qO-Nr-9fF" id="zOL-RU-uGd"/>
                                             <outlet property="setLabel" destination="YtI-Bn-4XQ" id="EQ4-ip-q1b"/>

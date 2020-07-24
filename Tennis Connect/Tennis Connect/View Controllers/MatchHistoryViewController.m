@@ -14,6 +14,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
+@property (nonatomic, strong) NSMutableArray<Match* >* completedMatches;
+
 @end
 
 @implementation MatchHistoryViewController
@@ -24,12 +26,42 @@
     [self tableSetUp];
 }
 
+
+
+- (void)getMatches {
+    PFQuery *sentReq = [Match query];
+    [sentReq whereKey:@"sender" equalTo:[PFUser currentUser]];
+    [sentReq whereKey:@"completed" equalTo:[NSNumber numberWithBool:YES]];
+    [sentReq includeKey:@"receiver"];
+    
+    [sentReq findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error) {
+            self.completedMatches = [Match matchesWithArray:objects];
+        }
+            PFQuery *receivedReq = [Match query];
+            [receivedReq whereKey:@"receiver" equalTo:[PFUser currentUser]];
+            [receivedReq includeKey:@"sender"];
+            [receivedReq whereKey:@"completed" equalTo:[NSNumber numberWithBool:YES]];
+        
+        
+        [receivedReq findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            if (!error) {
+                NSArray* moreMatches = [Match matchesWithArray:objects];
+                [self.completedMatches addObjectsFromArray:moreMatches];
+                [self.tableview reloadData];
+            }
+        }];
+    }];
+
+}
+
+
+#pragma mark - Table
+
 - (void)tableSetUp {
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
 }
-
-#pragma mark - Table
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MatchHistoryCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"MatchHistoryCell"];
@@ -39,7 +71,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return self.completedMatches.count;
 }
 
 /*
