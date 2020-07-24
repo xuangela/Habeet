@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "MatchReqCell.h"
+#import "LogScoreViewController.h"
 
 @interface CourtDetailViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -63,7 +64,6 @@
 }
 
 - (void) onTapConfirmedCell {
-    NSLog(@"this method running");
     [self performSegueWithIdentifier:@"logScoreSegue" sender:self];
 }
 
@@ -162,14 +162,20 @@
     return renderer;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"logScoreSegue"]) {
+        LogScoreViewController *viewControl = [segue destinationViewController];
+        
+       
+    }
 }
-*/
+
 
 @end

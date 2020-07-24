@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Match.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LogScoreViewController : UIViewController
+
+@property (nonatomic, strong) Match* match;
 
 @end
 

@@ -33,6 +33,8 @@
 		B9BB466924C8E2E600275A3F /* CourtDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BB466824C8E2E600275A3F /* CourtDetailViewController.m */; };
 		B9BB466C24C9069D00275A3F /* MatchReqCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BB466B24C9069D00275A3F /* MatchReqCell.m */; };
 		B9BB466F24CA388C00275A3F /* LogScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BB466E24CA388C00275A3F /* LogScoreViewController.m */; };
+		B9BB467224CB4C4800275A3F /* MatchHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BB467124CB4C4800275A3F /* MatchHistoryViewController.m */; };
+		B9BB467624CB4DE400275A3F /* MatchHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9BB467524CB4DE400275A3F /* MatchHistoryCell.m */; };
 		B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6813924BCC084005CCBB3 /* AppDelegate.m */; };
 		B9D6813D24BCC084005CCBB3 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6813C24BCC084005CCBB3 /* SceneDelegate.m */; };
 		B9D6814324BCC084005CCBB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D6814124BCC084005CCBB3 /* Main.storyboard */; };
@@ -120,6 +122,10 @@
 		B9BB466B24C9069D00275A3F /* MatchReqCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchReqCell.m; sourceTree = "<group>"; };
 		B9BB466D24CA388C00275A3F /* LogScoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogScoreViewController.h; sourceTree = "<group>"; };
 		B9BB466E24CA388C00275A3F /* LogScoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogScoreViewController.m; sourceTree = "<group>"; };
+		B9BB467024CB4C4800275A3F /* MatchHistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchHistoryViewController.h; sourceTree = "<group>"; };
+		B9BB467124CB4C4800275A3F /* MatchHistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchHistoryViewController.m; sourceTree = "<group>"; };
+		B9BB467424CB4DE400275A3F /* MatchHistoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchHistoryCell.h; sourceTree = "<group>"; };
+		B9BB467524CB4DE400275A3F /* MatchHistoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchHistoryCell.m; sourceTree = "<group>"; };
 		B9D6813524BCC084005CCBB3 /* Tennis Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tennis Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D6813824BCC084005CCBB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B9D6813924BCC084005CCBB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -266,6 +272,8 @@
 				B9BB466224C7550400275A3F /* SuggestedPlayerView.m */,
 				B9BB466A24C9069D00275A3F /* MatchReqCell.h */,
 				B9BB466B24C9069D00275A3F /* MatchReqCell.m */,
+				B9BB467424CB4DE400275A3F /* MatchHistoryCell.h */,
+				B9BB467524CB4DE400275A3F /* MatchHistoryCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -362,6 +370,8 @@
 				B9BB466824C8E2E600275A3F /* CourtDetailViewController.m */,
 				B9BB466D24CA388C00275A3F /* LogScoreViewController.h */,
 				B9BB466E24CA388C00275A3F /* LogScoreViewController.m */,
+				B9BB467024CB4C4800275A3F /* MatchHistoryViewController.h */,
+				B9BB467124CB4C4800275A3F /* MatchHistoryViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -629,7 +639,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9BB467624CB4DE400275A3F /* MatchHistoryCell.m in Sources */,
 				B9D6817024BCC10A005CCBB3 /* LoginViewController.m in Sources */,
+				B9BB467224CB4C4800275A3F /* MatchHistoryViewController.m in Sources */,
 				B9481F0D24C64B5A00F97E43 /* UIColor+MDCRGB8Bit.m in Sources */,
 				B9BB466324C7550400275A3F /* SuggestedPlayerView.m in Sources */,
 				B9879B8324BE670E00EC2794 /* Court.m in Sources */,
