@@ -63,7 +63,7 @@
     } else if (exp == 2) {
         self.expLabel.text = @"experienced";
     }
-    
+    self.accessoryType = UITableViewCellAccessoryNone;
     
 }
 

@@ -12,7 +12,7 @@
 #import "MatchReqCell.h"
 #import "LogScoreViewController.h"
 
-@interface CourtDetailViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface CourtDetailViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, LogScoreDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
 @property (weak, nonatomic) IBOutlet UILabel *etaLabel;
@@ -78,14 +78,17 @@
     
     [cell setMatch:match];
     
+    if (self.matches[indexPath.row].confirmed) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.matches[indexPath.row].confirmed) {
-        [self performSegueWithIdentifier:@"logScoreSegue" sender:self.matches[indexPath.row]];
-    }
-}
+        [self performSegueWithIdentifier:@"logScoreSegue" sender: 0];
+    }}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.matches.count;
@@ -170,7 +173,8 @@
     if ([segue.identifier isEqualToString:@"logScoreSegue"]) {
         LogScoreViewController *viewControl = [segue destinationViewController];
         
-       
+        viewControl.match = sender;
+        viewControl.delegate = self;
     }
 }
 

@@ -11,9 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol LogScoreDelegate
+
+
+@end
+
 @interface LogScoreViewController : UIViewController
 
 @property (nonatomic, strong) Match* match;
+@property (nonatomic, weak) id<LogScoreDelegate> delegate;
 
 @end
 
