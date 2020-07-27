@@ -23,46 +23,42 @@
 
 - (void) setMatch:(Match *)match {
     _match = match;
-    int exp;
-    if ([match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) { // if the receiver is me
-        self.statusLabel.text = @"Incoming request";
-        self.confirmButton.alpha = 1;
-        
-        self.contactLabel.text = [match.sender objectForKey:@"contact"];
-        exp = [[match.sender objectForKey:@"experience"] intValue];
-        
-        
-        self.nameLabel.text = [match.sender objectForKey:@"name"];
-        
-        if ([match.sender valueForKey:@"picture"]) {
-            self.pfpView.file = [match.sender valueForKey:@"picture"];
-            [self.pfpView loadInBackground];
-        }
-    } else {
-        self.statusLabel.text = @"Outgoing request";
-        self.contactLabel.text = [match.receiver objectForKey:@"contact"];
-        exp = [[match.receiver objectForKey:@"experience"] intValue];
-        
-        self.nameLabel.text = [match.receiver objectForKey:@"name"];
-        
-        if ([match.receiver valueForKey:@"picture"]) {
-            self.pfpView.file = [match.receiver valueForKey:@"picture"];
-            [self.pfpView loadInBackground];
-        }
+    
+    PFUser *opponent;
+     if ([match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) {
+         opponent = match.sender;
+         self.statusLabel.text = @"Incoming request";
+         self.confirmButton.alpha = 1;
+     } else {
+         opponent = match.receiver;
+         self.statusLabel.text = @"Outgoing request";
+     }
+    
+    self.contactLabel.text = [opponent objectForKey:@"contact"];
+    
+    int exp = [[opponent objectForKey:@"experience"] intValue];
+    if (exp == 0) {
+           self.expLabel.text = @"beginner";
+       }else if (exp == 1) {
+           self.expLabel.text = @"intermediate";
+       } else if (exp == 2) {
+           self.expLabel.text = @"experienced";
+       }
+    
+    self.nameLabel.text = [opponent objectForKey:@"name"];
+    
+    if ([opponent valueForKey:@"picture"]) {
+        self.pfpView.file = [opponent valueForKey:@"picture"];
+        [self.pfpView loadInBackground];
     }
+
     
     if (match.confirmed) {
         self.statusLabel.text = @"Upcoming match";
         self.confirmButton.alpha = 0;
     }
     
-    if (exp == 0) {
-        self.expLabel.text = @"beginner";
-    }else if (exp == 1) {
-        self.expLabel.text = @"intermediate";
-    } else if (exp == 2) {
-        self.expLabel.text = @"experienced";
-    }
+   
     self.accessoryType = UITableViewCellAccessoryNone;
     
 }
