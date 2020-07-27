@@ -56,48 +56,40 @@
 - (IBAction)tapSave:(id)sender {
     PFQuery *query = [PFUser query];
     
+    self.delegate.wasUpdated = YES;
+    
     [query getObjectInBackgroundWithId:[PFUser currentUser].objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        
         if (![self.nameField.text isEqualToString:@""]) {
             object[@"name"] = self.nameField.text;
-            self.delegate.nameLabel.text = self.nameField.text;
         }
+        
         object[@"gender"] = [self.genderControl titleForSegmentAtIndex:self.genderControl.selectedSegmentIndex];
-        self.delegate.genderLabel.text = [self.genderControl titleForSegmentAtIndex:self.genderControl.selectedSegmentIndex];
         
         if (![self.contactfield.text isEqualToString:@""]) {
         
             NSString *unformatted = self.contactfield.text;
-                   NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 3)],
-                                                [unformatted substringWithRange:NSMakeRange(3, 3)],
-                                                [unformatted substringWithRange:NSMakeRange(6, [unformatted length]-6)], nil];
+            NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 3)],
+                                        [unformatted substringWithRange:NSMakeRange(3, 3)],
+                                        [unformatted substringWithRange:NSMakeRange(6, [unformatted length]-6)], nil];
 
-                   NSString *formattedString = [NSString stringWithFormat:@"(%@)%@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2]];
+            NSString *formattedString = [NSString stringWithFormat:@"(%@)%@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2]];
                    
-                   
-                   object[@"contact"] = formattedString;
-            self.delegate.contactNumLabel.text = formattedString;
+            object[@"contact"] = formattedString;
         }
-        
-       
         object[@"age"] = self.dobPicker.date;
-        
-        NSInteger age =[self.dobPicker.date yearsAgo];
-         self.delegate.ageLabel.text = [NSString stringWithFormat: @"%ld", (long)age];
-        
         
         object[@"genderImport"] = [NSNumber numberWithFloat:self.genderSlider.value];
         object[@"ageImport"] = [NSNumber numberWithFloat:self.ageSlider.value];
         object[@"expImport"] = [NSNumber numberWithFloat:self.experienceSlider.value];
         object[@"randImport"] = [NSNumber numberWithFloat:self.randSlider.value];
         
-        
-        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) { }];
+        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            [[PFUser currentUser] fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }];
+        }];
     }];
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-- (IBAction)changeExp:(id)sender {
-    NSLog(@"%f", self.experienceSlider.value);
 }
 
 /*

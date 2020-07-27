@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *contactNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 
+@property (nonatomic, assign) BOOL wasUpdated; 
+
 
 @end
 

@@ -10,15 +10,12 @@
 #import "MapViewController.h"
 #import "Court.h"
 #import "Player.h"
-
+#import <DateTools/DateTools.h>
 #import "MatchRequestViewController.h"
 
 @import Parse;
 
 @interface SuggestViewController () <MapViewControllerDelegate, MatchRequestDelegate>
-
-
-
 
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
 
@@ -35,6 +32,22 @@
     
     self.currPlayer = 0;
     [self.suggestedview setPlayer:self.players[self.currPlayer]];
+}
+
+- (void) updatePlayerOrder {
+    for (Player* player in self.players) {
+        PFUser *me = [PFUser currentUser];
+        int randFactor = arc4random() % 50 * [me[@"randImport"] floatValue];
+        long myAge =[[me valueForKey:@"age"] yearsAgo];
+        long ageFactor =  -50 * labs(player.age - myAge) * [me[@"ageImport"] floatValue];
+        long myExp = [[[PFUser currentUser] valueForKey:@"experience"] intValue];
+        long experienceFactor = -50 * labs([player.experience intValue] - myExp) * [me[@"expImport"] floatValue];
+        NSString *myGender = [me valueForKey:@"gender"];
+        int genderFactor = [myGender isEqualToString:player.gender] ? 50*[me[@"genderImport"] floatValue] : 0;
+        
+        player.compatibility = randFactor + ageFactor + experienceFactor + genderFactor;
+    }
+    
 }
 
 - (void) alertSetUp {
@@ -60,6 +73,8 @@
             self.players = [Player playersWithPFUserObjects:objects];
         }
     }];
+    NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"compatibility" ascending:NO];
+    [self.players sortUsingDescriptors:@[sd]];
 }
 
 - (IBAction)swipeLeft:(id)sender {

@@ -9,6 +9,7 @@
 #import "ProfileViewController.h"
 #import "LoginViewController.h"
 #import "SettingsViewController.h"
+#import "SuggestViewController.h"
 #import "SceneDelegate.h"
 #import <DateTools/DateTools.h>
 @import Parse;
@@ -33,6 +34,14 @@
     [self userInfoDisplay];
     [self cameraSetup];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    if (self.wasUpdated) {
+        [self userInfoDisplay];
+        SuggestViewController *suggestcontrol = self.tabBarController.viewControllers[1];
+        [suggestcontrol updatePlayerOrder];
+    }
 }
 
 - (void) cameraSetup {

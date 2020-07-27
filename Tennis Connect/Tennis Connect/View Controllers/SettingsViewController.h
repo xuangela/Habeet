@@ -12,10 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol SettingsViewDelegate
 
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *genderLabel;
-@property (weak, nonatomic) IBOutlet UILabel *contactNumLabel;
-@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
+@property (nonatomic, assign) BOOL wasUpdated;
+
 
 @end
 
