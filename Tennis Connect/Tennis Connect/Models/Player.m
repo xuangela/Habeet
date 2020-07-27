@@ -50,13 +50,14 @@
     self.pfp = [userPF objectForKey:@"picture"];
     
     // complex algorithm, what do I want to include
-    int randFactor = arc4random() % 50;
+    PFUser *me = [PFUser currentUser];
+    int randFactor = arc4random() % 50 * [me[@"randImport"] floatValue];
     long myAge =[[[PFUser currentUser] valueForKey:@"age"] yearsAgo];
-    long ageFactor = 25 - labs(self.age - myAge);
+    long ageFactor =  -50 * labs(self.age - myAge) * [me[@"ageImport"] floatValue];
     long myExp = [[[PFUser currentUser] valueForKey:@"experience"] intValue];
-    long experienceFactor = 20 - 10 * labs([self.experience intValue] - myExp);
+    long experienceFactor = -50 * labs([self.experience intValue] - myExp) * [me[@"expImport"] floatValue];
     NSString *myGender = [[PFUser currentUser] valueForKey:@"gender"];
-    int genderFactor = [myGender isEqualToString:self.gender] ? 12 : -10;
+    int genderFactor = [myGender isEqualToString:self.gender] ? 50*[me[@"genderImport"] floatValue] : 0;
     
     self.compatibility = randFactor + ageFactor + experienceFactor + genderFactor;
     
