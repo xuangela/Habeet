@@ -87,7 +87,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.matches[indexPath.row].confirmed) {
-        [self performSegueWithIdentifier:@"logScoreSegue" sender: 0];
+        [self performSegueWithIdentifier:@"logScoreSegue" sender: self.matches[indexPath.row]];
     }}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
