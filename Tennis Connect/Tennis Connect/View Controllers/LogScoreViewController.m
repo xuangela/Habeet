@@ -12,6 +12,17 @@
 @property (weak, nonatomic) IBOutlet PFImageView *mypfpView;
 @property (weak, nonatomic) IBOutlet PFImageView *otherpfpView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentcontrol;
+@property (weak, nonatomic) IBOutlet UIView *set1View;
+@property (weak, nonatomic) IBOutlet UIView *set2View;
+@property (weak, nonatomic) IBOutlet UIView *set3View;
+@property (weak, nonatomic) IBOutlet UITextField *mySet1Games;
+@property (weak, nonatomic) IBOutlet UITextField *theirSet1Games;
+@property (weak, nonatomic) IBOutlet UITextField *mySet2Games;
+@property (weak, nonatomic) IBOutlet UITextField *theirSet2Games;
+@property (weak, nonatomic) IBOutlet UITextField *mySet3Games;
+@property (weak, nonatomic) IBOutlet UITextField *theirSet3Games;
+
+@property (nonatomic, strong) UIAlertController *emptyScoreAlert;
 
 @end
 
@@ -22,6 +33,18 @@
     // Do any additional setup after loading the view.
     
     [self pfpSetUp];
+    [self visibilitySetUp];
+    [self alertSetUp];
+    
+}
+
+- (void) alertSetUp {
+    self.emptyScoreAlert = [UIAlertController alertControllerWithTitle:@"Missing game score."
+           message:@"Please games won for both you and your opponent."
+    preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    [self.emptyScoreAlert addAction:okAction];
+    
 }
 
 - (void) pfpSetUp {
@@ -43,8 +66,69 @@
     }
 }
 
+- (void)visibilitySetUp {
+    self.set1View.alpha = 1;
+    self.set2View.alpha = 0;
+    self.set3View.alpha = 0;
+}
+
 - (IBAction)tapOther:(id)sender {
     [self.view endEditing:YES];
+}
+
+- (IBAction)tapConfirm:(id)sender {
+    BOOL set1Good = ![self.mySet1Games.text isEqualToString:@""] && ![self.theirSet1Games.text isEqualToString:@""];
+    
+    BOOL playingbo3 = self.segmentcontrol.selectedSegmentIndex == 1;
+    BOOL set2Good = playingbo3 ? ![self.mySet2Games.text isEqualToString:@""] && ![self.theirSet2Games.text isEqualToString:@""]:YES;
+    
+    BOOL dispSet3 = self.set3View.alpha == 1;
+    BOOL set3Good = dispSet3 ? ![self.mySet1Games.text isEqualToString:@""] && ![self.theirSet1Games.text isEqualToString:@""]:YES;
+    
+    
+    
+    if (set1Good && set2Good &&set3Good ) {
+        
+        [self sendScoresToParse];
+    } else {
+        [self presentViewController:self.emptyScoreAlert animated:YES completion:^{  }];
+    }
+    
+}
+- (IBAction)doDisplaySet3:(id)sender {
+    if (self.segmentcontrol.selectedSegmentIndex == 1) {
+         BOOL set1Good = ![self.mySet1Games.text isEqualToString:@""] && ![self.theirSet1Games.text isEqualToString:@""];
+         BOOL set2Good = ![self.mySet2Games.text isEqualToString:@""] && ![self.theirSet2Games.text isEqualToString:@""];
+        
+        if (set1Good && set2Good) {
+            BOOL iwin1 = [self.mySet1Games.text intValue] > [self.theirSet1Games.text intValue];
+            BOOL iwin2 = [self.mySet2Games.text intValue] > [self.theirSet2Games.text intValue];
+            if (iwin1 != iwin2) {
+                [UIView animateWithDuration:1 animations:^{
+                    self.set3View.alpha = 1;
+                }];
+            }
+        } else {
+            self.set3View.alpha = 0; 
+        }
+        
+        
+        
+        
+    }
+}
+- (IBAction)changeBO:(id)sender {
+    if (self.segmentcontrol.selectedSegmentIndex == 1) {
+        self.set2View.alpha = 1;
+        
+    } else {
+        self.set2View.alpha = 0;
+        self.set3View.alpha = 0;
+    }
+}
+
+- (void) sendScoresToParse {
+    NSLog(@"wow i will send scores to parse");
 }
 
 /*
