@@ -46,6 +46,8 @@
     self.completed = [[matchPF valueForKey:@"completed"] boolValue];
     self.confirmed = [[matchPF valueForKey:@"confirmed"] boolValue];
     
+    self.score = [matchPF objectForKey:@"scores"];
+    
     return self;
 }
 
