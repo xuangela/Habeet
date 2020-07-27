@@ -926,7 +926,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="rKF-oY-ugV">
                             <color key="tintColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <segue destination="ebR-lc-fKe" kind="show" id="ZuB-ox-sDU"/>
+                                <segue destination="ebR-lc-fKe" kind="show" identifier="settingSegue" id="ZuB-ox-sDU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

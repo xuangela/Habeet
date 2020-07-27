@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import <DateTools/DateTools.h>
 @import Parse;
 
 @interface SettingsViewController ()
@@ -58,8 +59,10 @@
     [query getObjectInBackgroundWithId:[PFUser currentUser].objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (![self.nameField.text isEqualToString:@""]) {
             object[@"name"] = self.nameField.text;
+            self.delegate.nameLabel.text = self.nameField.text;
         }
         object[@"gender"] = [self.genderControl titleForSegmentAtIndex:self.genderControl.selectedSegmentIndex];
+        self.delegate.genderLabel.text = [self.genderControl titleForSegmentAtIndex:self.genderControl.selectedSegmentIndex];
         
         if (![self.contactfield.text isEqualToString:@""]) {
         
@@ -72,10 +75,15 @@
                    
                    
                    object[@"contact"] = formattedString;
+            self.delegate.contactNumLabel.text = formattedString;
         }
         
        
         object[@"age"] = self.dobPicker.date;
+        
+        NSInteger age =[self.dobPicker.date yearsAgo];
+         self.delegate.ageLabel.text = [NSString stringWithFormat: @"%ld", (long)age];
+        
         
         object[@"genderImport"] = [NSNumber numberWithFloat:self.genderSlider.value];
         object[@"ageImport"] = [NSNumber numberWithFloat:self.ageSlider.value];

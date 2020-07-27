@@ -8,18 +8,17 @@
 
 #import "ProfileViewController.h"
 #import "LoginViewController.h"
+#import "SettingsViewController.h"
 #import "SceneDelegate.h"
 #import <DateTools/DateTools.h>
 @import Parse;
 
-@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate,SettingsViewDelegate>
 
 @property (weak, nonatomic) IBOutlet PFImageView *pfpView;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *genderLabel;
-@property (weak, nonatomic) IBOutlet UILabel *contactNumLabel;
-@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *skillLabel;
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerVC;
@@ -113,14 +112,20 @@
     return newImage;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"settingSegue"]) {
+        SettingsViewController *settingsController = [segue destinationViewController];
+        
+        settingsController.delegate = self;
+    }
 }
-*/
+
 
 @end
