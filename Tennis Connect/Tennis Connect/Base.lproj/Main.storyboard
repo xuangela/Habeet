@@ -964,7 +964,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="IiH-Mx-pcY">
-                                                <rect key="frame" x="202" y="66" width="200" height="32"/>
+                                                <rect key="frame" x="202" y="71" width="200" height="32"/>
                                                 <segments>
                                                     <segment title="Male"/>
                                                     <segment title="Female"/>
@@ -1006,12 +1006,12 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nha-ve-929">
-                                                <rect key="frame" x="202" y="109" width="200" height="34"/>
+                                                <rect key="frame" x="202" y="115.5" width="200" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" smartDashesType="yes" smartInsertDeleteType="yes" textContentType="tel"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qbK-js-4vO">
-                                                <rect key="frame" x="202" y="16" width="200" height="35"/>
+                                                <rect key="frame" x="202" y="23" width="200" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="fHJ-VC-72p"/>
                                                     <constraint firstAttribute="width" constant="200" id="yAB-Bp-Lnx"/>
@@ -1022,7 +1022,9 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
+                                            <constraint firstItem="qbK-js-4vO" firstAttribute="centerY" secondItem="TMj-hl-wLT" secondAttribute="centerY" id="53m-Eb-Wcw"/>
                                             <constraint firstItem="TMj-hl-wLT" firstAttribute="leading" secondItem="J28-rf-3Ju" secondAttribute="leading" constant="12" id="7GJ-Ka-HAw"/>
+                                            <constraint firstItem="Nha-ve-929" firstAttribute="centerY" secondItem="kDv-FM-smr" secondAttribute="centerY" id="8EH-Fh-dQb"/>
                                             <constraint firstItem="i8g-53-dOU" firstAttribute="centerX" secondItem="J28-rf-3Ju" secondAttribute="centerX" id="C4r-pl-lVb"/>
                                             <constraint firstItem="TMj-hl-wLT" firstAttribute="top" secondItem="J28-rf-3Ju" secondAttribute="top" constant="30" id="CMB-22-fFA"/>
                                             <constraint firstAttribute="trailing" secondItem="qbK-js-4vO" secondAttribute="trailing" constant="12" id="DSj-7R-8EV"/>
@@ -1030,14 +1032,12 @@
                                             <constraint firstItem="i8g-53-dOU" firstAttribute="top" secondItem="WyY-0f-TNh" secondAttribute="bottom" constant="8" id="G8k-Aj-aJL"/>
                                             <constraint firstItem="ViM-vS-MCc" firstAttribute="top" secondItem="TMj-hl-wLT" secondAttribute="bottom" constant="25" id="GCk-02-p8C"/>
                                             <constraint firstItem="Nha-ve-929" firstAttribute="trailing" secondItem="qbK-js-4vO" secondAttribute="trailing" id="N7b-Cb-exQ"/>
-                                            <constraint firstItem="Nha-ve-929" firstAttribute="bottom" secondItem="kDv-FM-smr" secondAttribute="bottom" id="OgN-Ib-haQ"/>
                                             <constraint firstItem="IiH-Mx-pcY" firstAttribute="trailing" secondItem="qbK-js-4vO" secondAttribute="trailing" id="alk-dz-YzT"/>
-                                            <constraint firstItem="IiH-Mx-pcY" firstAttribute="bottom" secondItem="ViM-vS-MCc" secondAttribute="bottom" id="cJo-gg-xuN"/>
                                             <constraint firstItem="WyY-0f-TNh" firstAttribute="top" secondItem="kDv-FM-smr" secondAttribute="bottom" constant="25" id="cow-py-eKN"/>
                                             <constraint firstItem="Nha-ve-929" firstAttribute="width" secondItem="qbK-js-4vO" secondAttribute="width" id="g7k-a5-Zz4"/>
-                                            <constraint firstItem="qbK-js-4vO" firstAttribute="bottom" secondItem="TMj-hl-wLT" secondAttribute="bottom" id="hq8-OQ-hb6"/>
                                             <constraint firstItem="kDv-FM-smr" firstAttribute="leading" secondItem="TMj-hl-wLT" secondAttribute="leading" id="hxm-iZ-azJ"/>
                                             <constraint firstItem="ViM-vS-MCc" firstAttribute="leading" secondItem="TMj-hl-wLT" secondAttribute="leading" id="kUJ-5D-F6m"/>
+                                            <constraint firstItem="IiH-Mx-pcY" firstAttribute="centerY" secondItem="ViM-vS-MCc" secondAttribute="centerY" id="kay-NK-sBd"/>
                                             <constraint firstItem="kDv-FM-smr" firstAttribute="top" secondItem="ViM-vS-MCc" secondAttribute="bottom" constant="25" id="qRi-Sn-KSW"/>
                                             <constraint firstItem="WyY-0f-TNh" firstAttribute="leading" secondItem="TMj-hl-wLT" secondAttribute="leading" id="rin-1B-JJW"/>
                                         </constraints>
@@ -1093,11 +1093,11 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zmo-Gj-nPd">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mws-LW-8wu">
-                                        <rect key="frame" x="0.0" y="66" width="414" height="813"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mws-LW-8wu">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="H7t-fG-H3Y">
-                                                <rect key="frame" x="202" y="66" width="200" height="32"/>
+                                                <rect key="frame" x="202" y="71" width="200" height="32"/>
                                                 <segments>
                                                     <segment title="Male"/>
                                                     <segment title="Female"/>
@@ -1139,12 +1139,12 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="08T-eH-INX">
-                                                <rect key="frame" x="202" y="109" width="200" height="34"/>
+                                                <rect key="frame" x="202" y="115.5" width="200" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" smartDashesType="yes" smartInsertDeleteType="yes" textContentType="tel"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yYe-5I-3xW">
-                                                <rect key="frame" x="202" y="16" width="200" height="35"/>
+                                                <rect key="frame" x="202" y="23" width="200" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="Jbx-up-cm9"/>
                                                     <constraint firstAttribute="width" constant="200" id="Uyn-q6-xLc"/>
@@ -1174,10 +1174,11 @@
                                             <constraint firstItem="VI2-fc-Wuv" firstAttribute="top" secondItem="mws-LW-8wu" secondAttribute="top" constant="30" id="64A-kb-18h"/>
                                             <constraint firstItem="8lf-8Z-XqC" firstAttribute="leading" secondItem="VI2-fc-Wuv" secondAttribute="leading" id="6Pb-u1-Akg"/>
                                             <constraint firstItem="H7t-fG-H3Y" firstAttribute="trailing" secondItem="yYe-5I-3xW" secondAttribute="trailing" id="7Oi-I2-pqi"/>
-                                            <constraint firstItem="H7t-fG-H3Y" firstAttribute="bottom" secondItem="WL3-pC-gP8" secondAttribute="bottom" id="Av1-QK-3Fw"/>
                                             <constraint firstAttribute="trailing" secondItem="yYe-5I-3xW" secondAttribute="trailing" constant="12" id="DEJ-OO-X8v"/>
                                             <constraint firstItem="VRd-6w-Nh2" firstAttribute="leading" secondItem="VI2-fc-Wuv" secondAttribute="leading" id="NTj-8g-Kqy"/>
                                             <constraint firstItem="yV5-jh-g6Z" firstAttribute="leading" secondItem="VI2-fc-Wuv" secondAttribute="leading" id="Pcs-JB-Svs"/>
+                                            <constraint firstItem="yYe-5I-3xW" firstAttribute="centerY" secondItem="VI2-fc-Wuv" secondAttribute="centerY" id="Poo-dW-CrQ"/>
+                                            <constraint firstItem="08T-eH-INX" firstAttribute="centerY" secondItem="VRd-6w-Nh2" secondAttribute="centerY" id="QXM-TJ-CYt"/>
                                             <constraint firstItem="WL3-pC-gP8" firstAttribute="leading" secondItem="VI2-fc-Wuv" secondAttribute="leading" id="SOD-PF-Kad"/>
                                             <constraint firstItem="QHh-15-lIz" firstAttribute="top" secondItem="yV5-jh-g6Z" secondAttribute="bottom" constant="8" id="WHA-MU-hr2"/>
                                             <constraint firstItem="VRd-6w-Nh2" firstAttribute="top" secondItem="WL3-pC-gP8" secondAttribute="bottom" constant="25" id="Wp4-pC-LtH"/>
@@ -1186,12 +1187,11 @@
                                             <constraint firstItem="08T-eH-INX" firstAttribute="trailing" secondItem="yYe-5I-3xW" secondAttribute="trailing" id="eUP-ib-OLG"/>
                                             <constraint firstItem="VI2-fc-Wuv" firstAttribute="leading" secondItem="mws-LW-8wu" secondAttribute="leading" constant="12" id="eyO-py-2cA"/>
                                             <constraint firstItem="H7t-fG-H3Y" firstAttribute="width" secondItem="yYe-5I-3xW" secondAttribute="width" id="f6y-0g-we9"/>
-                                            <constraint firstItem="yYe-5I-3xW" firstAttribute="bottom" secondItem="VI2-fc-Wuv" secondAttribute="bottom" id="ngX-16-YEh"/>
                                             <constraint firstItem="WIz-3I-eVH" firstAttribute="centerX" secondItem="QHh-15-lIz" secondAttribute="centerX" id="nws-g9-L3b"/>
-                                            <constraint firstItem="08T-eH-INX" firstAttribute="bottom" secondItem="VRd-6w-Nh2" secondAttribute="bottom" id="oIf-2P-26u"/>
                                             <constraint firstItem="QHh-15-lIz" firstAttribute="centerX" secondItem="mws-LW-8wu" secondAttribute="centerX" id="vac-E2-upB"/>
                                             <constraint firstItem="WIz-3I-eVH" firstAttribute="centerX" secondItem="mws-LW-8wu" secondAttribute="centerX" id="vq7-0q-LmB"/>
                                             <constraint firstItem="WL3-pC-gP8" firstAttribute="top" secondItem="VI2-fc-Wuv" secondAttribute="bottom" constant="25" id="wHK-7I-WnH"/>
+                                            <constraint firstItem="H7t-fG-H3Y" firstAttribute="centerY" secondItem="WL3-pC-gP8" secondAttribute="centerY" id="xQ8-Ra-EUN"/>
                                             <constraint firstItem="WIz-3I-eVH" firstAttribute="top" secondItem="8lf-8Z-XqC" secondAttribute="bottom" constant="12" id="xt8-vN-bNo"/>
                                         </constraints>
                                     </view>
