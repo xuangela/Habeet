@@ -44,6 +44,7 @@
 		B9D6815524BCC085005CCBB3 /* Tennis_ConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6815424BCC085005CCBB3 /* Tennis_ConnectTests.m */; };
 		B9D6816024BCC085005CCBB3 /* Tennis_ConnectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6815F24BCC085005CCBB3 /* Tennis_ConnectUITests.m */; };
 		B9D6817024BCC10A005CCBB3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D6816F24BCC10A005CCBB3 /* LoginViewController.m */; };
+		B9F8336624CF4E93002FE119 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F8336524CF4E93002FE119 /* SettingsViewController.m */; };
 		DAA3B93ACE4D4AF70FE37E0C /* Pods_Tennis_Connect_Tennis_ConnectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C3E53ABEEA50B5BB066E92 /* Pods_Tennis_Connect_Tennis_ConnectUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +145,8 @@
 		B9D6816124BCC085005CCBB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9D6816E24BCC10A005CCBB3 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B9D6816F24BCC10A005CCBB3 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		B9F8336424CF4E93002FE119 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		B9F8336524CF4E93002FE119 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		C7C3E53ABEEA50B5BB066E92 /* Pods_Tennis_Connect_Tennis_ConnectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tennis_Connect_Tennis_ConnectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBF24FEA7D7C0B980AEC0E7E /* Pods-Tennis Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis Connect.release.xcconfig"; path = "Target Support Files/Pods-Tennis Connect/Pods-Tennis Connect.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -372,6 +375,8 @@
 				B9BB466E24CA388C00275A3F /* LogScoreViewController.m */,
 				B9BB467024CB4C4800275A3F /* MatchHistoryViewController.h */,
 				B9BB467124CB4C4800275A3F /* MatchHistoryViewController.m */,
+				B9F8336424CF4E93002FE119 /* SettingsViewController.h */,
+				B9F8336524CF4E93002FE119 /* SettingsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -649,6 +654,7 @@
 				B9BB466C24C9069D00275A3F /* MatchReqCell.m in Sources */,
 				B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */,
 				B9BB466624C79BEE00275A3F /* MatchRequestViewController.m in Sources */,
+				B9F8336624CF4E93002FE119 /* SettingsViewController.m in Sources */,
 				B9879B8624BE69DF00EC2794 /* Match.m in Sources */,
 				B9481F1524C64B5A00F97E43 /* UIView+MDCSwipeToChoose.m in Sources */,
 				B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */,

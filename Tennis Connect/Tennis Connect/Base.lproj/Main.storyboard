@@ -1028,8 +1028,18 @@
                         <viewLayoutGuide key="safeArea" id="BIe-gK-XRb"/>
                     </view>
                     <navigationItem key="navigationItem" id="PxH-Eu-YVX">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="06r-xr-7Wj"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="06r-xr-7Wj">
+                            <connections>
+                                <action selector="tapSave:" destination="ebR-lc-fKe" id="b7I-me-ODA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="contactfield" destination="Fp8-JR-2sL" id="908-aT-t2I"/>
+                        <outlet property="dobPicker" destination="Mbj-YT-eyw" id="rhq-Y6-FFQ"/>
+                        <outlet property="genderControl" destination="gnV-u0-L2V" id="R1W-sN-FFS"/>
+                        <outlet property="nameField" destination="8oQ-xz-x5c" id="0UI-C9-fHw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XhD-Gz-7hY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
