@@ -14,6 +14,10 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *genderControl;
 @property (weak, nonatomic) IBOutlet UITextField *contactfield;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dobPicker;
+@property (weak, nonatomic) IBOutlet UISlider *genderSlider;
+@property (weak, nonatomic) IBOutlet UISlider *ageSlider;
+@property (weak, nonatomic) IBOutlet UISlider *experienceSlider;
+@property (weak, nonatomic) IBOutlet UISlider *randSlider;
 
 @end
 
@@ -41,6 +45,11 @@
     
     self.contactfield.placeholder = [user valueForKey:@"contact"];
     self.dobPicker.date = [user valueForKey:@"age"];
+    
+    self.genderSlider.value = [[user valueForKey:@"genderImport"] floatValue];
+    self.ageSlider.value = [[user valueForKey:@"ageImport"] floatValue];
+    self.experienceSlider.value = [[user valueForKey:@"expImport"] floatValue];
+    self.randSlider.value = [[user valueForKey:@"randImport"] floatValue];
 }
 
 - (IBAction)tapSave:(id)sender {
@@ -68,10 +77,19 @@
        
         object[@"age"] = self.dobPicker.date;
         
+        object[@"genderImport"] = [NSNumber numberWithFloat:self.genderSlider.value];
+        object[@"ageImport"] = [NSNumber numberWithFloat:self.ageSlider.value];
+        object[@"expImport"] = [NSNumber numberWithFloat:self.experienceSlider.value];
+        object[@"randImport"] = [NSNumber numberWithFloat:self.randSlider.value];
+        
+        
         [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) { }];
     }];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+- (IBAction)changeExp:(id)sender {
+    NSLog(@"%f", self.experienceSlider.value);
 }
 
 /*
