@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFUser *sender;
 @property (nonatomic, strong) PFUser *receiver;
 @property (nonatomic, strong) Court *court;
-@property (nonatomic, strong) NSDate *time;
+@property (nonatomic, strong) NSDate *updatedAt;
 @property (nonatomic, assign) BOOL confirmed;
 @property (nonatomic, assign) BOOL completed;
 @property (nonatomic, assign) NSArray<NSNumber *> *score;

@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) Match *match;
 
+- (void) setMatch:(Match *)match;
+
 @end
 
 NS_ASSUME_NONNULL_END

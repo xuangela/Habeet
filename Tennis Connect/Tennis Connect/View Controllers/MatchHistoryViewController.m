@@ -24,6 +24,7 @@
     [super viewDidLoad];
     
     [self tableSetUp];
+    [self getMatches];
 }
 
 
@@ -31,8 +32,9 @@
 - (void)getMatches {
     PFQuery *sentReq = [Match query];
     [sentReq whereKey:@"sender" equalTo:[PFUser currentUser]];
-    [sentReq whereKey:@"completed" equalTo:[NSNumber numberWithBool:YES]];
+    [sentReq whereKey:@"completed" equalTo:@YES];
     [sentReq includeKey:@"receiver"];
+    [sentReq orderByDescending:@"updatedAt"];
     
     [sentReq findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
@@ -41,15 +43,22 @@
             PFQuery *receivedReq = [Match query];
             [receivedReq whereKey:@"receiver" equalTo:[PFUser currentUser]];
             [receivedReq includeKey:@"sender"];
-            [receivedReq whereKey:@"completed" equalTo:[NSNumber numberWithBool:YES]];
+            [receivedReq whereKey:@"completed" equalTo:@YES];
+            [receivedReq orderByDescending:@"updatedAt"];
+        
         
         
         [receivedReq findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
                 NSArray* moreMatches = [Match matchesWithArray:objects];
                 [self.completedMatches addObjectsFromArray:moreMatches];
-                [self.tableview reloadData];
+                
+                NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"updatedAt" ascending:NO];
+                [self.completedMatches sortUsingDescriptors:@[sd]];
+                
+                
             }
+            [self.tableview reloadData];
         }];
     }];
 
@@ -66,6 +75,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MatchHistoryCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"MatchHistoryCell"];
     
+    Match *match = self.completedMatches[indexPath.row];
+    
+    [cell setMatch:match];
 
     return cell;
 }
