@@ -28,7 +28,7 @@
 
 - (void)setToCurrent {
     PFUser *user = [PFUser currentUser];
-    self.nameField.text = [user valueForKey:@"name"];
+    self.nameField.placeholder = [user valueForKey:@"name"];
     
     NSString *gender = [user valueForKey:@"gender"];
     if ([gender isEqualToString:@"Male"]) {
@@ -39,7 +39,7 @@
         self.genderControl.selectedSegmentIndex = 2;
     }
     
-    self.contactfield.text = [user valueForKey:@"contact"];
+    self.contactfield.placeholder = [user valueForKey:@"contact"];
     self.dobPicker.date = [user valueForKey:@"age"];
 }
 
@@ -47,16 +47,25 @@
     PFQuery *query = [PFUser query];
     
     [query getObjectInBackgroundWithId:[PFUser currentUser].objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        object[@"name"] = self.nameField.text;
+        if (![self.nameField.text isEqualToString:@""]) {
+            object[@"name"] = self.nameField.text;
+        }
         object[@"gender"] = [self.genderControl titleForSegmentAtIndex:self.genderControl.selectedSegmentIndex];
         
-        NSString *unformatted = self.contactfield.text;
-        NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 3)],
-                                     [unformatted substringWithRange:NSMakeRange(3, 3)],
-                                     [unformatted substringWithRange:NSMakeRange(6, [unformatted length]-6)], nil];
+        if (![self.contactfield.text isEqualToString:@""]) {
+        
+            NSString *unformatted = self.contactfield.text;
+                   NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 3)],
+                                                [unformatted substringWithRange:NSMakeRange(3, 3)],
+                                                [unformatted substringWithRange:NSMakeRange(6, [unformatted length]-6)], nil];
 
-        NSString *formattedString = [NSString stringWithFormat:@"(%@)%@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2]];
-        object[@"contact"] = formattedString;
+                   NSString *formattedString = [NSString stringWithFormat:@"(%@)%@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2]];
+                   
+                   
+                   object[@"contact"] = formattedString;
+        }
+        
+       
         object[@"age"] = self.dobPicker.date;
         
         [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) { }];
