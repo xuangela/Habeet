@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LogScoreDelegate
 
+@property (nonatomic, strong) NSMutableArray<Match *>* matches;
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @end
 

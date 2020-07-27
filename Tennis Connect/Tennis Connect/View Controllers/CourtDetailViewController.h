@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) Court* court;
 @property (nonatomic, strong) NSMutableArray<Match *>* matches;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
+
 -(void)mapSetUp;
 - (void)getMatches;
 

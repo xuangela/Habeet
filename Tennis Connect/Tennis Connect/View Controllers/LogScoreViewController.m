@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *theirSet3Games;
 
 @property (nonatomic, strong) UIAlertController *emptyScoreAlert;
+@property (nonatomic, assign) BOOL isSender;
 
 @end
 
@@ -51,8 +52,10 @@
     PFUser *opponent;
     if ([self.match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) {
         opponent = self.match.sender;
+        self.isSender = NO;
     } else {
         opponent = self.match.receiver;
+        self.isSender = YES;
     }
     
     if ([[PFUser currentUser] valueForKey:@"picture"]) {
@@ -85,11 +88,11 @@
     BOOL dispSet3 = self.set3View.alpha == 1;
     BOOL set3Good = dispSet3 ? ![self.mySet1Games.text isEqualToString:@""] && ![self.theirSet1Games.text isEqualToString:@""]:YES;
     
-    
-    
     if (set1Good && set2Good &&set3Good ) {
-        
         [self sendScoresToParse];
+        [self.delegate.matches removeObject:self.match];
+        [self.delegate.tableview reloadData];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     } else {
         [self presentViewController:self.emptyScoreAlert animated:YES completion:^{  }];
     }
@@ -111,10 +114,6 @@
         } else {
             self.set3View.alpha = 0; 
         }
-        
-        
-        
-        
     }
 }
 - (IBAction)changeBO:(id)sender {
@@ -128,7 +127,24 @@
 }
 
 - (void) sendScoresToParse {
-    NSLog(@"wow i will send scores to parse");
+    NSArray *scores;
+    
+    if (self.isSender) {
+        scores = @[self.mySet1Games.text, self.theirSet1Games.text,self.mySet2Games.text, self.theirSet2Games.text,self.mySet3Games.text, self.theirSet3Games.text,];
+    } else {
+        scores = @[self.theirSet1Games.text, self.mySet1Games.text,self.theirSet2Games.text, self.mySet2Games.text,self.theirSet3Games.text, self.mySet3Games.text,];
+    }
+    
+    PFQuery *query = [Match query];
+    
+    [query getObjectInBackgroundWithId:self.match.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        object[@"scores"] = scores;
+        object[@"completed"] = @YES;
+        
+        NSLog(@"match logged and updated:");
+        
+        [object saveInBackground];
+    }];
 }
 
 /*

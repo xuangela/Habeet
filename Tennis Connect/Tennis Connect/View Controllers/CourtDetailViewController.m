@@ -20,7 +20,7 @@
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
+
 
 @end
 
