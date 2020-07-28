@@ -23,10 +23,6 @@
 }
 
 - (void) setMatch:(Match *)match {
-
-//    @property (weak, nonatomic) IBOutlet UILabel *setLabel;
-//    @property (weak, nonatomic) IBOutlet UILabel *gameLabel;
-    
     
     _match = match;
     
@@ -38,14 +34,14 @@
          int myScore = [scores[1] intValue] > [scores[0] intValue] ? 1:0;
          int theirScore = 1-myScore;
          NSString *gameScore = [scores[1] stringByAppendingFormat:@" - %@", scores[0]];
-         if (scores[2] && scores[3]) {
+         if ([scores[2] boolValue]) {
              NSString *secondSetScores = [scores[3] stringByAppendingFormat:@" - %@", scores[2]];
              gameScore = [gameScore stringByAppendingFormat:@"    %@", secondSetScores];
              int addToMyScore =[scores[3] intValue] > [scores[2] intValue] ? 1:0;
              myScore += addToMyScore;
              theirScore += 1-addToMyScore;
          }
-         if (scores[4] && scores[5]) {
+         if ([scores[4] boolValue]) {
              NSString *thirdSetScores = [scores[5] stringByAppendingFormat:@" - %@", scores[4]];
              gameScore = [gameScore stringByAppendingFormat:@"    %@", thirdSetScores];
              int addToMyScore =[scores[5] intValue] > [scores[4] intValue] ? 1:0;
@@ -60,14 +56,14 @@
          int myScore = [scores[0] intValue] > [scores[1] intValue] ? 1:0;
          int theirScore = 1-myScore;
          NSString *gameScore = [scores[0] stringByAppendingFormat:@" - %@", scores[1]];
-         if (scores[2] && scores[3]) {
+         if ([scores[2] boolValue]) {
              NSString *secondSetScores = [scores[2] stringByAppendingFormat:@" - %@", scores[3]];
              gameScore = [gameScore stringByAppendingFormat:@"    %@", secondSetScores];
              int addToMyScore =[scores[2] intValue] > [scores[3] intValue] ? 1:0;
              myScore += addToMyScore;
              theirScore += 1-addToMyScore;
          }
-         if (scores[4] && scores[5]) {
+         if ([scores[4] boolValue]) {
              NSString *thirdSetScores = [scores[4] stringByAppendingFormat:@" - %@", scores[5]];
              gameScore = [gameScore stringByAppendingFormat:@"    %@", thirdSetScores];
              int addToMyScore =[scores[4] intValue] > [scores[5] intValue] ? 1:0;
