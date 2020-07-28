@@ -585,6 +585,9 @@
                                     <action selector="changeBO:" destination="4J0-oW-ENf" eventType="valueChanged" id="KeJ-JZ-0O6"/>
                                 </connections>
                             </segmentedControl>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7v2-m7-Fw1" customClass="PFImageView">
+                                <rect key="frame" x="232" y="66" width="162" height="162"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fnU-t6-8DQ">
                                 <rect key="frame" x="78" y="349" width="258" height="76"/>
                                 <subviews>
@@ -685,9 +688,6 @@
                                     <constraint firstItem="kIp-Nu-gyM" firstAttribute="centerX" secondItem="lnb-5P-HQ1" secondAttribute="centerX" id="uYH-pd-dFm"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7v2-m7-Fw1" customClass="PFImageView">
-                                <rect key="frame" x="232" y="66" width="162" height="162"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Mv-4k-NV5">
                                 <rect key="frame" x="78" y="501" width="258" height="76"/>
                                 <subviews>
@@ -1069,9 +1069,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="bjQ-b0-Drx"/>
                                                 </constraints>
-                                                <connections>
-                                                    <action selector="changeExp:" destination="ebR-lc-fKe" eventType="valueChanged" id="uYt-Lg-lDZ"/>
-                                                </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Random" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dI3-6P-TC6">
                                                 <rect key="frame" x="12" y="596" width="63" height="21"/>
@@ -1085,12 +1082,10 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="St2-b5-uNT"/>
                                                 </constraints>
-                                                <connections>
-                                                    <action selector="changeExp:" destination="ebR-lc-fKe" eventType="valueChanged" id="J3A-XG-Ija"/>
-                                                </connections>
                                             </slider>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="eq7-pu-4Ds" firstAttribute="centerY" secondItem="74d-Qk-Zke" secondAttribute="centerY" id="0oV-vD-aUy"/>
                                             <constraint firstItem="qbK-js-4vO" firstAttribute="centerY" secondItem="TMj-hl-wLT" secondAttribute="centerY" id="53m-Eb-Wcw"/>
@@ -1131,6 +1126,9 @@
                                             <constraint firstItem="WyY-0f-TNh" firstAttribute="leading" secondItem="TMj-hl-wLT" secondAttribute="leading" id="rin-1B-JJW"/>
                                             <constraint firstItem="yx7-s8-Wxx" firstAttribute="top" secondItem="fud-oL-uyG" secondAttribute="bottom" constant="20" id="sVX-VQ-Ut0"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="c2G-Mc-Pl5" appends="YES" id="7fx-5B-Gcy"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -1173,6 +1171,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XhD-Gz-7hY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="c2G-Mc-Pl5">
+                    <connections>
+                        <action selector="tapOther:" destination="ebR-lc-fKe" id="ype-Oy-bsq"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4337.68115942029" y="2326.3392857142858"/>
         </scene>

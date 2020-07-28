@@ -53,6 +53,10 @@
     self.randSlider.value = [[user valueForKey:@"randImport"] floatValue];
 }
 
+- (IBAction)tapOther:(id)sender {
+    [self.view endEditing:YES];
+}
+
 - (IBAction)tapSave:(id)sender {
     PFQuery *query = [PFUser query];
     
