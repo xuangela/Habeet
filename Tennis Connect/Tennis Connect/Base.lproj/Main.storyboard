@@ -605,8 +605,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
-                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="editingDidEnd" id="NVi-H5-q7l"/>
-                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="valueChanged" id="hl8-Rp-q3g"/>
+                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="editingChanged" id="rmv-QB-IgT"/>
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rUE-o0-W4o">
@@ -617,8 +616,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
-                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="editingDidEnd" id="Ash-ev-nXm"/>
-                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="valueChanged" id="eL4-7Q-zqo"/>
+                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="editingChanged" id="Jye-VA-9T3"/>
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIB-ud-iNL">
@@ -655,8 +653,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
-                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="editingDidEnd" id="dyX-mg-NYu"/>
-                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="valueChanged" id="qv7-cf-7WA"/>
+                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="editingChanged" id="KQy-m7-Yh7"/>
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wBr-8B-4tl">
@@ -667,8 +664,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
-                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="valueChanged" id="DHT-Zh-oHF"/>
-                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="editingDidEnd" id="bHF-RS-B1V"/>
+                                                            <action selector="doDisplaySet3:" destination="4J0-oW-ENf" eventType="editingChanged" id="ZUg-fa-ib5"/>
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kIp-Nu-gyM">

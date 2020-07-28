@@ -26,6 +26,7 @@
 
 @property (nonatomic, strong) UIAlertController *emptyScoreAlert;
 @property (nonatomic, assign) BOOL isSender;
+@property (nonatomic, assign) BOOL set3shown;
 
 @end
 
@@ -114,16 +115,22 @@
                 [UIView animateWithDuration:1 animations:^{
                     self.set3View.alpha = 1;
                 }];
+                self.set3shown = YES;
             }
         } else {
-            self.set3View.alpha = 0; 
+            [UIView animateWithDuration:1 animations:^{
+                self.set3View.alpha = 0;
+            }];
+            self.set3shown = NO;
         }
     }
 }
 - (IBAction)changeBO:(id)sender {
     if (self.segmentcontrol.selectedSegmentIndex == 1) {
         self.set2View.alpha = 1;
-        
+        if (self.set3shown) {
+            self.set3View.alpha = 1;
+        }
     } else {
         self.set2View.alpha = 0;
         self.set3View.alpha = 0;
