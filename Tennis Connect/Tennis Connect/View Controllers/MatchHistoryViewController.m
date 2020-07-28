@@ -12,9 +12,9 @@
 
 @interface MatchHistoryViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
 
-@property (nonatomic, strong) NSMutableArray<Match* >* completedMatches;
+
+
 
 @end
 
@@ -26,8 +26,6 @@
     [self tableSetUp];
     [self getMatches];
 }
-
-
 
 - (void)getMatches {
     PFQuery *sentReq = [Match query];

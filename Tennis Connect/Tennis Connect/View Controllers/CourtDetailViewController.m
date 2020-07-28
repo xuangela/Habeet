@@ -11,6 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "MatchReqCell.h"
 #import "LogScoreViewController.h"
+#import "MatchHistoryViewController.h"
 
 @interface CourtDetailViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, LogScoreDelegate>
 
@@ -31,7 +32,16 @@
     // Do any additional setup after loading the view.
 }
 
-
+-(void) viewWillAppear:(BOOL)animated {
+    if (self.loggedMatch) {
+        MatchHistoryViewController *historycontroller = self.tabBarController.viewControllers[0];
+        NSMutableArray *justCompletedMatch = [[NSMutableArray alloc] initWithArray:@[self.loggedMatch]];
+        [justCompletedMatch addObjectsFromArray:historycontroller.completedMatches];
+        
+        historycontroller.completedMatches = justCompletedMatch;
+        [historycontroller.tableview reloadData];
+    }
+}
 
 - (void)getMatches {
     PFQuery *sentReq = [Match query];

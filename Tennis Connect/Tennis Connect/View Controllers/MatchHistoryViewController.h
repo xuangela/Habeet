@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Match.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MatchHistoryViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
 
+@property (nonatomic, strong) NSMutableArray<Match* >* completedMatches;
 
 @end
 

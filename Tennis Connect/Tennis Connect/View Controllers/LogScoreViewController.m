@@ -95,6 +95,7 @@
     
     if (set1Good && set2Good &&set3Good ) {
         [self sendScoresToParse];
+        self.delegate.loggedMatch = self.match;
         [self.delegate.matches removeObject:self.match];
         [self.delegate.tableview reloadData];
         [self.navigationController popToRootViewControllerAnimated:YES];
