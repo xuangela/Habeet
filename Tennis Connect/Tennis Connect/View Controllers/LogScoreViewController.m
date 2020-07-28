@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *mySet3Games;
 @property (weak, nonatomic) IBOutlet UITextField *theirSet3Games;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
+
 @property (nonatomic, strong) UIAlertController *emptyScoreAlert;
 @property (nonatomic, assign) BOOL isSender;
 
@@ -36,8 +38,10 @@
     [self pfpSetUp];
     [self visibilitySetUp];
     [self alertSetUp];
+    [self registerNotifications];
     
 }
+
 
 - (void) alertSetUp {
     self.emptyScoreAlert = [UIAlertController alertControllerWithTitle:@"Missing game score."
@@ -145,6 +149,28 @@
         
         [object saveInBackground];
     }];
+}
+
+#pragma mark - Keyboard
+
+- (void) registerNotifications {
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) keyboardWillShow:(NSNotification *) notif {
+    NSDictionary* userInfo = notif.userInfo;
+    CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    keyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
+    
+    UIEdgeInsets contentInset = self.scrollview.contentInset;
+    contentInset.bottom = keyboardFrame.size.height + 20;
+    self.scrollview.contentInset = contentInset;
+}
+
+- (void) keyboardWillHide:(NSNotification *) notif {
+    UIEdgeInsets contentInset = UIEdgeInsetsZero;
+    self.scrollview.contentInset = contentInset;
 }
 
 /*
