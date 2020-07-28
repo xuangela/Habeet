@@ -47,7 +47,8 @@
         
         player.compatibility = randFactor + ageFactor + experienceFactor + genderFactor;
     }
-    
+    NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"compatibility" ascending:NO];
+    [self.players sortUsingDescriptors:@[sd]];
 }
 
 - (void) alertSetUp {
@@ -73,8 +74,6 @@
             self.players = [Player playersWithPFUserObjects:objects];
         }
     }];
-    NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"compatibility" ascending:NO];
-    [self.players sortUsingDescriptors:@[sd]];
 }
 
 - (IBAction)swipeLeft:(id)sender {
