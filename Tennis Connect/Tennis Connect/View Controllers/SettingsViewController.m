@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UISlider *experienceSlider;
 @property (weak, nonatomic) IBOutlet UISlider *randSlider;
 
+@property (nonatomic, strong) UIAlertController *saveChangesAlert;
+
 @end
 
 @implementation SettingsViewController
@@ -29,6 +31,7 @@
     // Do any additional setup after loading the view.
     
     [self setToCurrent];
+    [self alertSetUp];
 }
 
 - (void)setToCurrent {
@@ -53,11 +56,27 @@
     self.randSlider.value = [[user valueForKey:@"randImport"] floatValue];
 }
 
+- (void) alertSetUp {
+    self.saveChangesAlert = [UIAlertController alertControllerWithTitle:@"Save changes?"
+           message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self saveSettings];
+    }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [self.saveChangesAlert addAction:yesAction];
+    [self.saveChangesAlert addAction:noAction];
+    [self.saveChangesAlert.view setTintColor:UIColor.blackColor];
+}
+
 - (IBAction)tapOther:(id)sender {
     [self.view endEditing:YES];
 }
 
 - (IBAction)tapSave:(id)sender {
+    [self presentViewController:self.saveChangesAlert animated:YES completion:^{  }];
+}
+
+- (void) saveSettings {
     PFQuery *query = [PFUser query];
     
     self.delegate.wasUpdated = YES;
