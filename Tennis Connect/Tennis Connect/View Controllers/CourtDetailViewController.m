@@ -94,6 +94,10 @@
     return self.matches.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 180;
+}
+
 #pragma mark - Map set up 
 
 -(void)mapSetUp {

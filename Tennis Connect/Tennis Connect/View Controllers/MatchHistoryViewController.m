@@ -86,6 +86,10 @@
     return self.completedMatches.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 191;
+}
+
 /*
 #pragma mark - Navigation
 
