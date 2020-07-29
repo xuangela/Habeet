@@ -65,10 +65,10 @@
         user[@"contact"] = formattedString;
         user[@"age"] = self.dateOfBirthPicker.date;
         user[@"experience"] = [NSNumber numberWithLong: self.skillSegControl.selectedSegmentIndex];
-        user[@"genderImport"] = @0.5;
-        user[@"ageImport"] = @0.5;
-        user[@"expImport"] = @0.5;
-        user[@"randImport"] = @0.5;
+        user[@"genderSearch"] = @YES;
+        user[@"ageDiffSearch"] = @9;
+        user[@"ratingDiffSearch"] = @400;
+        user[@"random"] = @0.25;
         
         [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) { }];
         

@@ -54,10 +54,10 @@
     self.contactfield.placeholder = [user valueForKey:@"contact"];
     self.dobPicker.date = [user valueForKey:@"age"];
     
-    //self.genderSlider.value = [[user valueForKey:@"genderImport"] floatValue];
-    self.ageSlider.value = [[user valueForKey:@"ageImport"] floatValue];
-    //self.experienceSlider.value = [[user valueForKey:@"expImport"] floatValue];
-    self.randSlider.value = [[user valueForKey:@"randImport"] floatValue];
+    self.genderMatchSwitch.on =[[user valueForKey:@"genderSearch"] boolValue];
+    self.ageSlider.value = [[user valueForKey:@"ageDiffSearch"] floatValue];
+    self.ratingSlider.value = [[user valueForKey:@"ratingDiffSearch"] floatValue];
+    self.randSlider.value = [[user valueForKey:@"random"] floatValue];
 }
 
 - (void) alertSetUp {
@@ -94,36 +94,39 @@
         object[@"gender"] = [self.genderControl titleForSegmentAtIndex:self.genderControl.selectedSegmentIndex];
         
         if (![self.contactfield.text isEqualToString:@""]) {
-        
-            NSString *unformatted = self.contactfield.text;
-            NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 3)],
-                                        [unformatted substringWithRange:NSMakeRange(3, 3)],
-                                        [unformatted substringWithRange:NSMakeRange(6, [unformatted length]-6)], nil];
-
-            NSString *formattedString = [NSString stringWithFormat:@"(%@)%@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2]];
-                   
-            object[@"contact"] = formattedString;
+            object[@"contact"] = [self formatContactNum];
         }
+        
         object[@"age"] = self.dobPicker.date;
         
-        //object[@"genderImport"] = [NSNumber numberWithFloat:self.genderSlider.value];
-        object[@"ageImport"] = [NSNumber numberWithFloat:self.ageSlider.value];
-        //object[@"expImport"] = [NSNumber numberWithFloat:self.experienceSlider.value];
-        object[@"randImport"] = [NSNumber numberWithFloat:self.randSlider.value];
+        object[@"genderSearch"] = @(self.genderMatchSwitch.on);
+        object[@"ageDiffSearch"] = [NSNumber numberWithFloat:self.ageSlider.value];
+        object[@"ratingDiffSearch"] = [NSNumber numberWithFloat:self.ratingSlider.value];
+        object[@"random"] = [NSNumber numberWithFloat:self.randSlider.value];
         
         [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             [[PFUser currentUser] fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                 [self.navigationController popToRootViewControllerAnimated:YES];
+                NSLog(@"settings saved");
             }];
         }];
     }];
 }
 
+- (NSString*) formatContactNum {
+    NSString *unformatted = self.contactfield.text;
+    NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 3)],
+                                [unformatted substringWithRange:NSMakeRange(3, 3)],
+                                [unformatted substringWithRange:NSMakeRange(6, [unformatted length]-6)], nil];
+
+    NSString *formattedString = [NSString stringWithFormat:@"(%@)%@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2]];
+    
+    return formattedString;
+}
+
 #pragma mark - Slider set up
 
-
 - (IBAction)slideAge:(id)sender {
-    NSLog([NSString stringWithFormat:@"%f", self.ageSlider.value]);
     int value = self.ageSlider.value;
     if (value < 1.5) {
         [self.ageSlider setValue:0 animated:YES];
