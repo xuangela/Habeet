@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet SuggestedPlayerView *suggestedview;
 
 @property (nonatomic, strong) NSArray<Court *> *courts;
+
 @property (nonatomic, strong) NSMutableArray<Player*> *players;
 @property (nonatomic, assign) int currPlayer;
 
@@ -24,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)swipeLeft:(id)sender;
 
 - (void) fetchPlayers;
-- (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries;
 
 @end
 

@@ -54,16 +54,14 @@
 - (IBAction)tapConfirm:(id)sender {
     self.statusLabel.text =@"Upcoming match";
     self.match.confirmed = YES;
-    self.confirmButton.alpha = 0; 
+    self.confirmButton.alpha = 0;
+    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     PFQuery *query = [Match query];
     
     [query getObjectInBackgroundWithId:self.match.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
         object[@"confirmed"] = @YES;
-        NSLog(@"updating database");
-        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            NSLog(@"added to the database");
-        }];
+        [object saveInBackground];
         
     }];
 }

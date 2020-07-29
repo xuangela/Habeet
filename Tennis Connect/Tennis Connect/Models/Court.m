@@ -45,12 +45,15 @@
         [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
             if (error) {
                 if (error.code == 101) {
-                    PFObject *newCourt = [Court new];
-                    newCourt = court;
                     [court saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                         if (succeeded) {
                             PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
-                            [relation addObject:newCourt];
+                            [relation addObject:court];
+                            
+                            if (i == 0) {
+                                [PFUser currentUser][@"homeCourt"] = court;
+                            }
+                            
                             [[PFUser currentUser] saveInBackground];
                         }
                     }];
@@ -62,6 +65,10 @@
                 [relation addObject:object];
                 court.objectId = object.objectId;
                 
+                if (i == 0) {
+                    [PFUser currentUser][@"homeCourt"] = object;
+                }
+                
                 [[PFUser currentUser] saveInBackground];
             }
             
@@ -70,7 +77,6 @@
             }
         }];
     }
-    
 }
 
 // after grabbing from parse server

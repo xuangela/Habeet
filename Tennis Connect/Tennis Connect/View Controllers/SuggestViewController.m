@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
-@property (nonatomic, strong) NSMutableArray<NSArray *> *suggestedPlayerBuckets; // mutable array of arrays containing players with diffferent proximities
+@property (nonatomic, strong) NSMutableArray<NSMutableArray *> *suggestedPlayerBuckets; // mutable array of arrays containing players with diffferent proximities
 
 @end
 
@@ -49,6 +49,7 @@
 }
 
 - (void) fetchPlayers {
+    self.suggestedPlayerBuckets = [[NSMutableArray alloc] init];
     // make queries
     // execute queries
     // store results of each query in suggestedPlayerBuckets

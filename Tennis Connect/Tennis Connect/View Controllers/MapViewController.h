@@ -17,8 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray<Court *> *courts;
 @property (nonatomic, strong) NSArray<PFUser*> *players;
 
-- (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries;
-
 @end
 
 @interface MapViewController : UIViewController

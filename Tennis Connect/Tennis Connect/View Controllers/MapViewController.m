@@ -83,9 +83,11 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
             self.delegate.courts = self.courts;
             
             [Court courtInParseAndAddRelations:self.courts withBlock:^(void) {
-                [self.activityIndicator stopAnimating];
-                self.view.userInteractionEnabled = YES;
-                self.tabBarController.tabBar.userInteractionEnabled = YES;
+                [[PFUser currentUser] fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                    [self.activityIndicator stopAnimating];
+                    self.view.userInteractionEnabled = YES;
+                    self.tabBarController.tabBar.userInteractionEnabled = YES;
+                }];
             }];
         
             [self displayCourts];
