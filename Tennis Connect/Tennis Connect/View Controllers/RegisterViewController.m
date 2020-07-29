@@ -110,13 +110,6 @@
     if ([segue.identifier isEqualToString:@"loginSegue"]) {
         UITabBarController *tabController = [segue destinationViewController];
         tabController.selectedIndex = 2;
-        
-        MapViewController *mapcontroller = tabController.viewControllers[2];
-        SuggestViewController<MapViewControllerDelegate> *suggestcontroller = tabController.viewControllers[1];
-        [mapcontroller mapSetUp];
-        
-        mapcontroller.delegate = suggestcontroller;
-        [mapcontroller fetchCourtsnear];
     }
 }
 

@@ -34,9 +34,9 @@
          self.statusLabel.text = @"Outgoing request";
      }
     
-    self.contactLabel.text = [opponent objectForKey:@"contact"];
-    self.expLabel.text = [opponent objectForKey:@"rating"];
-    self.nameLabel.text = [opponent objectForKey:@"name"];
+    self.contactLabel.text = [opponent valueForKey:@"contact"];
+    self.expLabel.text = [[opponent valueForKey:@"rating"] stringValue];
+    self.nameLabel.text = [opponent valueForKey:@"name"];
     
     if ([opponent valueForKey:@"picture"]) {
         self.pfpView.file = [opponent valueForKey:@"picture"];

@@ -29,14 +29,10 @@
     PFQuery *query = [PFUser query];
     [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
     
-    //add other constraints if present in user settings
-//    if ([[me valueForKey:@"genderImport"] floatValue]== 1) {
-//        [query whereKey:@"gender" equalTo:[me valueForKey:@"gender"]];
-//    }
-//    
-//    if ([[me valueForKey:@"expImport"] floatValue]== 1) {
-//        [query whereKey:@"experience" equalTo:[me valueForKey:@"experience"]];
-//    }
+    if ([[[PFUser currentUser] valueForKey:@"genderImport"] boolValue]== YES) {
+        [query whereKey:@"gender" equalTo:[[PFUser currentUser] valueForKey:@"gender"]];
+    }
+    
     
     
     [query whereKey:@"courts" equalTo:court];

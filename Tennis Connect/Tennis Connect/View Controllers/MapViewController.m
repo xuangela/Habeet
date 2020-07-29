@@ -21,6 +21,7 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 @interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray<Court*> *courts;
@@ -36,6 +37,31 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.delegate = self.tabBarController.viewControllers[1];
+    
+    [self loadingIndicatorSetUp];
+    [self mapSetUp];
+    [self clearExistingCourt];
+}
+
+- (void)clearExistingCourt {
+    PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
+    PFQuery *query = [relation query];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        for (Court *court in objects) {
+            [relation removeObject:court];
+        }
+        NSLog(@"deleted");
+        [self fetchCourtsnear];
+    }];
+}
+
+- (void)loadingIndicatorSetUp {
+    self.activityIndicator.hidesWhenStopped = YES;
+    self.view.userInteractionEnabled = NO;
+    [self.activityIndicator startAnimating];
 }
 
 - (void)fetchCourtsnear {
@@ -60,6 +86,8 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
             }];
         
             [self displayCourts];
+            [self.activityIndicator stopAnimating];
+            self.view.userInteractionEnabled = YES; 
         }
     }];
     [task resume];

@@ -351,19 +351,26 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cem-hS-jB2">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="AEa-Zw-Ezo">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="AEa-Zw-Ezo" firstAttribute="centerX" secondItem="Pui-D9-uLi" secondAttribute="centerX" id="NZJ-Mh-Brr"/>
                             <constraint firstItem="cem-hS-jB2" firstAttribute="leading" secondItem="kT1-zf-MhK" secondAttribute="leading" id="SUA-QG-Xf9"/>
                             <constraint firstItem="kT1-zf-MhK" firstAttribute="trailing" secondItem="cem-hS-jB2" secondAttribute="trailing" id="Tds-xY-stS"/>
                             <constraint firstItem="cem-hS-jB2" firstAttribute="top" secondItem="kT1-zf-MhK" secondAttribute="top" constant="-44" id="US2-U7-UiO"/>
                             <constraint firstItem="kT1-zf-MhK" firstAttribute="bottom" secondItem="cem-hS-jB2" secondAttribute="bottom" constant="-83" id="o4J-jD-eMb"/>
+                            <constraint firstItem="AEa-Zw-Ezo" firstAttribute="centerY" secondItem="Pui-D9-uLi" secondAttribute="centerY" id="vzs-ef-ABq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kT1-zf-MhK"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="mappin.circle" catalog="system" id="oco-EW-XRq"/>
                     <navigationItem key="navigationItem" id="tMW-ez-7LV"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="AEa-Zw-Ezo" id="41O-Qc-wqE"/>
                         <outlet property="mapview" destination="cem-hS-jB2" id="sLQ-ow-yrq"/>
                         <segue destination="Ydo-I3-uPE" kind="presentation" identifier="courtDetailSegue" modalPresentationStyle="automatic" id="Jd9-yM-Bjv"/>
                     </connections>

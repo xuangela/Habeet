@@ -18,6 +18,7 @@
 @interface SuggestViewController () <MapViewControllerDelegate, MatchRequestDelegate>
 
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
+@property (nonatomic, strong) NSMutableArray<NSArray *> *suggestedPlayerBuckets; // mutable array of arrays containing players with diffferent proximities
 
 @end
 
