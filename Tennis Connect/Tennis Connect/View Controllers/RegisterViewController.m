@@ -109,7 +109,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"loginSegue"]) {
         UITabBarController *tabController = [segue destinationViewController];
-        tabController.selectedIndex = 3;
+        tabController.selectedIndex = 2;
         
         MapViewController *mapcontroller = tabController.viewControllers[2];
         SuggestViewController<MapViewControllerDelegate> *suggestcontroller = tabController.viewControllers[1];
