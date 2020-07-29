@@ -27,53 +27,22 @@
     _match = match;
     
     PFUser *opponent;
-    NSArray *scores = match.score; //sender, receiver
+    BOOL isReceiver;
+    
+    
     
      if ([match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) {
          opponent = match.sender;
-         int myScore = [scores[1] intValue] > [scores[0] intValue] ? 1:0;
-         int theirScore = 1-myScore;
-         NSString *gameScore = [scores[1] stringByAppendingFormat:@" - %@", scores[0]];
-         if ([scores[2] boolValue]) {
-             NSString *secondSetScores = [scores[3] stringByAppendingFormat:@" - %@", scores[2]];
-             gameScore = [gameScore stringByAppendingFormat:@"    %@", secondSetScores];
-             int addToMyScore =[scores[3] intValue] > [scores[2] intValue] ? 1:0;
-             myScore += addToMyScore;
-             theirScore += 1-addToMyScore;
-         }
-         if ([scores[4] boolValue]) {
-             NSString *thirdSetScores = [scores[5] stringByAppendingFormat:@" - %@", scores[4]];
-             gameScore = [gameScore stringByAppendingFormat:@"    %@", thirdSetScores];
-             int addToMyScore =[scores[5] intValue] > [scores[4] intValue] ? 1:0;
-             myScore += addToMyScore;
-             theirScore += 1-addToMyScore;
-         }
-         self.gameLabel.text = gameScore;
-         self.setLabel.text = [[NSString stringWithFormat:@"%d", myScore] stringByAppendingFormat:@" - %d", theirScore];
+         isReceiver = YES;
+         
      } else {
          opponent = match.receiver;
-         
-         int myScore = [scores[0] intValue] > [scores[1] intValue] ? 1:0;
-         int theirScore = 1-myScore;
-         NSString *gameScore = [scores[0] stringByAppendingFormat:@" - %@", scores[1]];
-         if ([scores[2] boolValue]) {
-             NSString *secondSetScores = [scores[2] stringByAppendingFormat:@" - %@", scores[3]];
-             gameScore = [gameScore stringByAppendingFormat:@"    %@", secondSetScores];
-             int addToMyScore =[scores[2] intValue] > [scores[3] intValue] ? 1:0;
-             myScore += addToMyScore;
-             theirScore += 1-addToMyScore;
-         }
-         if ([scores[4] boolValue]) {
-             NSString *thirdSetScores = [scores[4] stringByAppendingFormat:@" - %@", scores[5]];
-             gameScore = [gameScore stringByAppendingFormat:@"    %@", thirdSetScores];
-             int addToMyScore =[scores[4] intValue] > [scores[5] intValue] ? 1:0;
-             myScore += addToMyScore;
-             theirScore += 1-addToMyScore;
-         }
-         self.gameLabel.text = gameScore;
-         self.setLabel.text = [[NSString stringWithFormat:@"%d", myScore] stringByAppendingFormat:@" - %d", theirScore];
+         isReceiver = NO;
          
      }
+    
+    NSArray<NSString *> *formattedString = [self getScore:match.score];
+    [self setScores:formattedString receiving:isReceiver];
     
     if ([opponent valueForKey:@"picture"]) {
         self.pfpView.file = [opponent valueForKey:@"picture"];
@@ -85,6 +54,59 @@
     NSDate *playedDate = match[@"updatedAt"];
     self.dateLabel.text = [playedDate formattedDateWithStyle:NSDateFormatterFullStyle];
     
+    [self displayExp:opponent];
+    
+}
+
+- (NSArray<NSString *> *) getScore:(NSArray *) scores { //sender, receiver
+    int myScore = [scores[1] intValue] > [scores[0] intValue] ? 1:0;
+    int theirScore = 1-myScore;
+    
+    NSString *set1Score = [scores[1] stringByAppendingFormat:@" - %@", scores[0]];
+    NSString *set2Score = @"";
+    NSString *set3Score = @"";
+    
+    if ([scores[2] boolValue]) {
+        set2Score = [scores[3] stringByAppendingFormat:@" - %@", scores[2]];
+        int addToMyScore =[scores[3] intValue] > [scores[2] intValue] ? 1:0;
+        myScore += addToMyScore;
+        theirScore += 1-addToMyScore;
+    }
+    
+    if ([scores[4] boolValue]) {
+        NSString *set3Score = [scores[5] stringByAppendingFormat:@" - %@", scores[4]];
+        int addToMyScore =[scores[5] intValue] > [scores[4] intValue] ? 1:0;
+        myScore += addToMyScore;
+        theirScore += 1-addToMyScore;
+    }
+    //returns format as if I was receiver
+    
+    NSString *matchScore =[NSString stringWithFormat:@"@d - %d", myScore,theirScore];
+    return @[matchScore, set1Score, set2Score, set3Score];
+}
+
+- (void) setScores:(NSArray<NSString *> *) scores receiving: (BOOL) receiver {
+    if (receiver) {
+        self.setLabel.text = scores[0];
+        NSString* gameScores = [NSString stringWithFormat:@"%@    %@    %@", scores[1], scores[2], scores[3]];
+        self.gameLabel.text = [gameScores stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    } else {
+        for (NSString *score in scores) {
+            [self reverseGameString:score];
+        }
+        self.setLabel.text = scores[0];
+        NSString* gameScores = [NSString stringWithFormat:@"%@    %@    %@", scores[1], scores[2], scores[3]];
+        self.gameLabel.text = [gameScores stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    }
+}
+
+- (void) reverseGameString:(NSString *)gameScore {
+    char first = [gameScore characterAtIndex:0];
+    char last = [gameScore characterAtIndex:gameScore.length - 1];
+    gameScore = [NSString stringWithFormat:@"%@ - %@", last, first];
+}
+
+- (void) displayExp:(PFUser *) opponent {
     int exp = [[opponent objectForKey:@"experience"] intValue];
     if (exp == 0) {
         self.expLabel.text = @"beginner";
@@ -94,5 +116,4 @@
         self.expLabel.text = @"experienced";
     }
 }
-
 @end

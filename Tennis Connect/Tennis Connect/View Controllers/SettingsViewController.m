@@ -15,10 +15,14 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *genderControl;
 @property (weak, nonatomic) IBOutlet UITextField *contactfield;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dobPicker;
-@property (weak, nonatomic) IBOutlet UISlider *genderSlider;
+
+@property (weak, nonatomic) IBOutlet UISwitch *genderMatchSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 @property (weak, nonatomic) IBOutlet UISlider *ageSlider;
-@property (weak, nonatomic) IBOutlet UISlider *experienceSlider;
+@property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
 @property (weak, nonatomic) IBOutlet UISlider *randSlider;
+@property (weak, nonatomic) IBOutlet UILabel *randomLabel;
+@property (weak, nonatomic) IBOutlet UISlider *ratingSlider;
 
 @property (nonatomic, strong) UIAlertController *saveChangesAlert;
 
@@ -50,9 +54,9 @@
     self.contactfield.placeholder = [user valueForKey:@"contact"];
     self.dobPicker.date = [user valueForKey:@"age"];
     
-    self.genderSlider.value = [[user valueForKey:@"genderImport"] floatValue];
+    //self.genderSlider.value = [[user valueForKey:@"genderImport"] floatValue];
     self.ageSlider.value = [[user valueForKey:@"ageImport"] floatValue];
-    self.experienceSlider.value = [[user valueForKey:@"expImport"] floatValue];
+    //self.experienceSlider.value = [[user valueForKey:@"expImport"] floatValue];
     self.randSlider.value = [[user valueForKey:@"randImport"] floatValue];
 }
 
@@ -102,9 +106,9 @@
         }
         object[@"age"] = self.dobPicker.date;
         
-        object[@"genderImport"] = [NSNumber numberWithFloat:self.genderSlider.value];
+        //object[@"genderImport"] = [NSNumber numberWithFloat:self.genderSlider.value];
         object[@"ageImport"] = [NSNumber numberWithFloat:self.ageSlider.value];
-        object[@"expImport"] = [NSNumber numberWithFloat:self.experienceSlider.value];
+        //object[@"expImport"] = [NSNumber numberWithFloat:self.experienceSlider.value];
         object[@"randImport"] = [NSNumber numberWithFloat:self.randSlider.value];
         
         [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -113,6 +117,61 @@
             }];
         }];
     }];
+}
+
+#pragma mark - Slider set up
+
+
+- (IBAction)slideAge:(id)sender {
+    NSLog([NSString stringWithFormat:@"%f", self.ageSlider.value]);
+    int value = self.ageSlider.value;
+    if (value < 1.5) {
+        [self.ageSlider setValue:0 animated:YES];
+    } else if (value < 4.5) {
+        [self.ageSlider setValue:3 animated:YES];
+    } else if (value <7.5) {
+        [self.ageSlider setValue:6 animated:YES];
+    } else if (value < 10.5) {
+        [self.ageSlider setValue:9 animated:YES];
+    } else if (value < 13.5) {
+        [self.ageSlider setValue:12 animated:YES];
+    } else {
+        [self.ageSlider setValue:15 animated:YES];
+    }
+    
+    self.ageLabel.text = [NSString stringWithFormat:@"%.0f years", self.ageSlider.value];
+    
+    if (self.ageSlider.value == 15) {
+        self.ageLabel.text = @"15+ years";
+    }
+}
+
+- (IBAction)slideRating:(id)sender {
+    int value = self.ratingSlider.value;
+    if (value < 100) {
+        [self.ratingSlider setValue:0 animated:YES];
+    } else if (value < 300) {
+        [self.ratingSlider setValue:200 animated:YES];
+    } else if (value < 500) {
+        [self.ratingSlider setValue:400 animated:YES];
+    } else if (value < 700) {
+        [self.ratingSlider setValue:600 animated:YES];
+    } else if (value < 900) {
+        [self.ratingSlider setValue:800 animated:YES];
+    } else {
+        [self.ratingSlider setValue:1000 animated:YES];
+    }
+    
+    self.ratingLabel.text = [NSString stringWithFormat:@"+- %.0f", self.ratingSlider.value];
+    
+    if (self.ratingSlider.value == 1000) {
+        self.ratingLabel.text = @"+- 1000+";
+    }
+}
+
+- (IBAction)slideRand:(id)sender {
+    float roundedPerc =roundf(self.randSlider.value * 100);
+    self.randomLabel.text = [NSString stringWithFormat:@"%.0f%%", roundedPerc];
 }
 
 /*
