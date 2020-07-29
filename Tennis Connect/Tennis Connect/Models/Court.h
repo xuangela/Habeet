@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *) parseClassName;
 + (NSMutableArray *)courtsWithDictionaries: (NSArray<Court *> *)dictionaries;
-+ (void) courtInParseAndAddRelations: (NSArray<Court *> *)dictionaries withBlock: (void (^)(NSArray<PFQuery*>*))block;
++ (void) courtInParseAndAddRelations: (NSArray<Court *> *)dictionaries withBlock:(void (^)(void))block;
 
 - (id)initWithPFObject:(PFObject *)postPF;
 - (id)initWithDictionary:(NSDictionary*) court;

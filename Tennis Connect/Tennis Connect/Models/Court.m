@@ -34,9 +34,9 @@
     return courtArray;
 }
 
-+ (void) courtInParseAndAddRelations: (NSArray<Court *> *)dictionaries withBlock: (void (^)(NSArray<PFQuery*>*))block {
-    NSMutableArray<PFQuery*> *allQueries = [[NSMutableArray alloc] init];
-    for (Court *court in dictionaries) {
++ (void) courtInParseAndAddRelations: (NSArray<Court *> *)dictionaries withBlock:(void (^)(void))block {
+    for (int i = 0; i < dictionaries.count; i++) {
+        Court *court = dictionaries[i];
         PFQuery *query = [Court query];
         [query whereKey:@"lat" equalTo:court.lat];
         [query whereKey:@"lng" equalTo:court.lng];
@@ -49,7 +49,6 @@
                     newCourt = court;
                     [court saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                         if (succeeded) {
-                            [allQueries addObject:[Player queryForFindingPlayersForCourt:newCourt]];
                             PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
                             [relation addObject:newCourt];
                             [[PFUser currentUser] saveInBackground];
@@ -59,7 +58,6 @@
                     NSLog (@"%@", error);
                 }
             } else {
-                [allQueries addObject:[Player queryForFindingPlayersForCourt:object]];
                 PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
                 [relation addObject:object];
                 court.objectId = object.objectId;
@@ -67,8 +65,8 @@
                 [[PFUser currentUser] saveInBackground];
             }
             
-            if (allQueries.count == dictionaries.count) {
-                block(allQueries);
+            if (i == dictionaries.count - 1) {
+                block();
             }
         }];
     }

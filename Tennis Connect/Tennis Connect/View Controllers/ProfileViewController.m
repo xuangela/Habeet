@@ -37,7 +37,7 @@
     if (self.wasUpdated) {
         [self userInfoDisplay];
         SuggestViewController *suggestcontrol = self.tabBarController.viewControllers[1];
-        [suggestcontrol updatePlayerOrder];
+        [suggestcontrol fetchPlayers];
     }
 }
 

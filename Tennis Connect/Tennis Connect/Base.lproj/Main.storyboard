@@ -243,8 +243,17 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZhF-j2-j4t" customClass="SuggestedPlayerView">
                                 <rect key="frame" x="0.0" y="44" width="414" height="569"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="oFt-Sy-jZd">
+                                        <rect key="frame" x="188.5" y="266" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="oFt-Sy-jZd" firstAttribute="centerY" secondItem="ZhF-j2-j4t" secondAttribute="centerY" id="6vQ-ec-448"/>
+                                    <constraint firstItem="oFt-Sy-jZd" firstAttribute="centerX" secondItem="ZhF-j2-j4t" secondAttribute="centerX" id="YyP-bS-y1G"/>
+                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="pCC-LP-gWI" appends="YES" id="wav-Kz-n25"/>
                                 </connections>
@@ -272,6 +281,7 @@
                     <tabBarItem key="tabBarItem" title="" image="rectangle.stack.person.crop" catalog="system" id="90o-j4-erx"/>
                     <navigationItem key="navigationItem" id="spV-Gi-fRA"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="oFt-Sy-jZd" id="JQq-SL-plR"/>
                         <outlet property="suggestedview" destination="ZhF-j2-j4t" id="POO-TR-A1k"/>
                     </connections>
                 </viewController>

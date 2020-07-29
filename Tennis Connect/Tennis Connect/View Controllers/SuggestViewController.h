@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (IBAction)swipeLeft:(id)sender;
 
-- (void) updatePlayerOrder;
+- (void) fetchPlayers;
 - (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries;
 
 @end

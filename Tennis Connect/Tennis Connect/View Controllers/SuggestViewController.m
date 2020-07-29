@@ -17,6 +17,8 @@
 
 @interface SuggestViewController () <MapViewControllerDelegate, MatchRequestDelegate>
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
 @property (nonatomic, strong) NSMutableArray<NSArray *> *suggestedPlayerBuckets; // mutable array of arrays containing players with diffferent proximities
 
@@ -30,27 +32,50 @@
     [super viewDidLoad];
     
     [self alertSetUp];
+    [self activityIndicatorSetUp];
     
-    self.currPlayer = 0;
-    [self.suggestedview setPlayer:self.players[self.currPlayer]];
+    [self fetchPlayers];
+    
+//    self.currPlayer = 0;
+//    [self.suggestedview setPlayer:self.players[self.currPlayer]];
+    
+    
 }
 
-- (void) updatePlayerOrder {
-    for (Player* player in self.players) {
-        PFUser *me = [PFUser currentUser];
-        int randFactor = arc4random() % 50 * [me[@"randImport"] floatValue];
-        long myAge =[[me valueForKey:@"age"] yearsAgo];
-        long ageFactor =  -50 * labs(player.age - myAge) * [me[@"ageImport"] floatValue];
-        long myExp = [[[PFUser currentUser] valueForKey:@"rating"] intValue];
-        long experienceFactor = -50 * labs([player.rating intValue] - myExp) * [me[@"expImport"] floatValue];
-        NSString *myGender = [me valueForKey:@"gender"];
-        int genderFactor = [myGender isEqualToString:player.gender] ? 50*[me[@"genderImport"] floatValue] : 0;
-        
-        player.compatibility = randFactor + ageFactor + experienceFactor + genderFactor;
-    }
-    NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"compatibility" ascending:NO];
-    [self.players sortUsingDescriptors:@[sd]];
+- (void) activityIndicatorSetUp {
+    self.activityIndicator.hidesWhenStopped = YES;
+    self.view.userInteractionEnabled = NO;
+    [self.activityIndicator startAnimating];
 }
+
+- (void) fetchPlayers {
+    // make queries
+    // execute queries
+    // store results of each query in suggestedPlayerBuckets
+    // query for more in suggestedPlayerbucket when 
+    
+    
+    
+    
+    
+    
+    [self.activityIndicator stopAnimating];
+    self.view.userInteractionEnabled = YES;
+}
+
+- (PFQuery*) queryForFindingPlayersForCourt:(PFObject *) court {
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
+    
+    if ([[[PFUser currentUser] valueForKey:@"genderImport"] boolValue]== YES) {
+        [query whereKey:@"gender" equalTo:[[PFUser currentUser] valueForKey:@"gender"]];
+    }
+    
+    [query whereKey:@"courts" equalTo:court];
+    
+    return query;
+}
+
 
 - (void) alertSetUp {
     self.noMoreSuggestAlert = [UIAlertController alertControllerWithTitle:@"No more suggestions"
@@ -61,21 +86,6 @@
         [self.suggestedview setPlayer:self.players[self.currPlayer]];
     }];
     [self.noMoreSuggestAlert addAction:okAction];
-}
-
-- (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries {
-    PFQuery *findingPlayers = [PFQuery orQueryWithSubqueries:playerQueries];
-    NSLog(@"have all the queries");
-    
-    [findingPlayers findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"%@", error.localizedDescription);
-            
-        } else {
-            self.players = [Player playersWithPFUserObjects:objects];
-            NSLog(@"have the associated players");
-        }
-    }];
 }
 
 - (IBAction)swipeLeft:(id)sender {

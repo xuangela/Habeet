@@ -61,6 +61,7 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 - (void)loadingIndicatorSetUp {
     self.activityIndicator.hidesWhenStopped = YES;
     self.view.userInteractionEnabled = NO;
+    self.tabBarController.tabBar.userInteractionEnabled = NO;
     [self.activityIndicator startAnimating];
 }
 
@@ -81,13 +82,13 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
             
             self.delegate.courts = self.courts;
             
-            [Court courtInParseAndAddRelations:self.courts withBlock:^(NSArray<PFQuery *> *queries) {
-                [self.delegate findUsersWithQueries:queries];
+            [Court courtInParseAndAddRelations:self.courts withBlock:^(void) {
+                [self.activityIndicator stopAnimating];
+                self.view.userInteractionEnabled = YES;
+                self.tabBarController.tabBar.userInteractionEnabled = YES;
             }];
         
             [self displayCourts];
-            [self.activityIndicator stopAnimating];
-            self.view.userInteractionEnabled = YES; 
         }
     }];
     [task resume];

@@ -25,20 +25,7 @@
     return playerArray;
 }
 
-+ (PFQuery*) queryForFindingPlayersForCourt:(PFObject *) court {
-    PFQuery *query = [PFUser query];
-    [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
-    
-    if ([[[PFUser currentUser] valueForKey:@"genderImport"] boolValue]== YES) {
-        [query whereKey:@"gender" equalTo:[[PFUser currentUser] valueForKey:@"gender"]];
-    }
-    
-    
-    
-    [query whereKey:@"courts" equalTo:court];
-    
-    return query;
-}
+
 
 - (id)initWithPFUser:(PFUser *)userPF {
     self = [super init];
