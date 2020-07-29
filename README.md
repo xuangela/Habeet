@@ -1,6 +1,3 @@
-Original App Design Project 
-===
-
 # Tennis Connect
 
 ## Table of Contents
@@ -131,26 +128,30 @@ App that connects local tennis players for matches and practice. Accounts made b
 | time       | DateTime          | what time the match is scheduled at           |
 | confirmed  | Boolean           | is everything confirmed?                      |
 | completed  | Boolean           | did the players play?                         |
-| Score      | array of numbers  | set and match points                          |
+| Score      | array of string  | match points, sender,receiver,sender,receiver                          |
 
 **User**
 
 | Property     | Type             | Description                                    |
 | ------------ | ---------------- | ---------------------------------------------- |
 | name         | String           | first name  |
-| gender       | String           | M,F,Other               |
+| gender       | String           | M,F, Other               |
 | contact       | String           | formatted contact number               |
 | date of birth          | DateTime         | used to calculate age               |
 | experience | Number           | 0,1,2 increasing with more skill                       |
 | picture          | File             | jpeg converted to binary                       |
-| settings     | array of boolean | visibility, suggestion filtering, court options|
+| genderSearch     | BOOL | 0 - all players, 1 - only same gender |
+| ageDiffSearch     | NSNumber | how many years apart to search |
+| ratingDiffSearch    | NSNumber | how different rating players wants to play |
+| random     | NSNumber | percentage of suggestion results that are random |
 
 **Court** 
 
 | Property    | Type            | Description                         |
 | ----------- | --------------- | ----------------------------------- |
 | name        | String          | name of the court                   |
-| coordinates | array of Number | CLLocationCoordinate2D, lat and long|
+| lat | Number | CLLocationCoordinate2D, latitude|
+| lng | Number | CLLocationCoordinate2D, longitude|
 
 
 ### Networking
@@ -158,19 +159,7 @@ App that connects local tennis players for matches and practice. Accounts made b
 * Login/Register
     * (Create/POST) make a new user 
 * Map View
-    * (Read/GET) view all match requests 
-        * example of just getting the confirmed matches
-
-                PFQuery *query = PFQuery(className:"User")
-                query.order(byDescending: "createdAt")
-                query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-                   if let error = error {
-                      print(error.localizedDescription)
-                   } else if let posts = posts {
-                      print("Successfully retrieved \(posts.count) posts.")
-                      // TODO: Do something with posts...
-                   }
-                }
+    * (Read/GET) view all match requests
     * (Read/GET) view all courts 
 * Detail: match request (present modally)
     * (Update/PUT) confirm/reject received match requests 
