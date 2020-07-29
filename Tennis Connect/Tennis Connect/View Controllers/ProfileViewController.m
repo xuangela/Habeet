@@ -17,9 +17,7 @@
 @interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate,SettingsViewDelegate>
 
 @property (weak, nonatomic) IBOutlet PFImageView *pfpView;
-
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *skillLabel;
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerVC;
@@ -33,7 +31,6 @@
 
     [self userInfoDisplay];
     [self cameraSetup];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,7 +61,7 @@
     self.contactNumLabel.text = [user valueForKey:@"contact"];
     NSInteger age =[[user valueForKey:@"age"] yearsAgo];
     self.ageLabel.text = [NSString stringWithFormat: @"%ld", (long)age];
-    NSInteger exp = [[user valueForKey:@"experience"] integerValue];
+    NSInteger exp = [[user valueForKey:@"rating"] integerValue];
     self.skillLabel.text = [NSString stringWithFormat: @"%ld", (long)exp];
     
     if ([user valueForKey:@"picture"]) {
@@ -98,10 +95,13 @@
     [self.pfpView setImage:resizedImage];
     NSData *pictureData = UIImagePNGRepresentation(self.pfpView.image);
         
-    PFQuery *query = [PFQuery queryWithClassName:@"User"];
+    PFQuery *query = [PFUser query];
     [query getObjectInBackgroundWithId:user.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        user[@"picture"] = [PFFileObject fileObjectWithData:pictureData];
-        [user saveInBackground];
+        if (!error) {
+            object[@"picture"] = [PFFileObject fileObjectWithData:pictureData];
+            [object saveInBackground];
+            NSLog(@"picture saved");
+        }
     }];
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -121,7 +121,6 @@
     return newImage;
 }
 
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -135,6 +134,5 @@
         settingsController.delegate = self;
     }
 }
-
 
 @end

@@ -25,7 +25,6 @@
     
     [Parse initializeWithConfiguration:config];
     
-    
     return YES;
 }
 
@@ -38,7 +37,6 @@
     // Use this method to select a configuration to create the new scene with.
     return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
 }
-
 
 - (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
     // Called when the user discards a scene session.

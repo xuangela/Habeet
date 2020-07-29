@@ -34,15 +34,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     [self pfpSetUp];
     [self visibilitySetUp];
     [self alertSetUp];
     [self registerNotifications];
-    
 }
-
 
 - (void) alertSetUp {
     self.emptyScoreAlert = [UIAlertController alertControllerWithTitle:@"Missing game score."

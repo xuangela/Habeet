@@ -54,8 +54,7 @@
     NSDate *playedDate = match[@"updatedAt"];
     self.dateLabel.text = [playedDate formattedDateWithStyle:NSDateFormatterFullStyle];
     
-    [self displayExp:opponent];
-    
+    self.expLabel.text = [opponent valueForKey:@"rating"];
 }
 
 - (NSArray<NSString *> *) getScore:(NSArray *) scores { //sender, receiver
@@ -74,14 +73,14 @@
     }
     
     if ([scores[4] boolValue]) {
-        NSString *set3Score = [scores[5] stringByAppendingFormat:@" - %@", scores[4]];
+        set3Score = [scores[5] stringByAppendingFormat:@" - %@", scores[4]];
         int addToMyScore =[scores[5] intValue] > [scores[4] intValue] ? 1:0;
         myScore += addToMyScore;
         theirScore += 1-addToMyScore;
     }
     //returns format as if I was receiver
     
-    NSString *matchScore =[NSString stringWithFormat:@"@d - %d", myScore,theirScore];
+    NSString *matchScore =[NSString stringWithFormat:@"%d - %d", myScore,theirScore];
     return @[matchScore, set1Score, set2Score, set3Score];
 }
 
@@ -91,8 +90,11 @@
         NSString* gameScores = [NSString stringWithFormat:@"%@    %@    %@", scores[1], scores[2], scores[3]];
         self.gameLabel.text = [gameScores stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     } else {
-        for (NSString *score in scores) {
-            [self reverseGameString:score];
+        for (int i = 0; i < scores.count; i++) {
+            NSString *score = scores[i];
+            if (![score isEqualToString:@""]) {
+                score = [self reverseGameString:score];
+            }
         }
         self.setLabel.text = scores[0];
         NSString* gameScores = [NSString stringWithFormat:@"%@    %@    %@", scores[1], scores[2], scores[3]];
@@ -100,20 +102,10 @@
     }
 }
 
-- (void) reverseGameString:(NSString *)gameScore {
+- (NSString*) reverseGameString:(NSString *)gameScore {
     char first = [gameScore characterAtIndex:0];
     char last = [gameScore characterAtIndex:gameScore.length - 1];
-    gameScore = [NSString stringWithFormat:@"%@ - %@", last, first];
-}
-
-- (void) displayExp:(PFUser *) opponent {
-    int exp = [[opponent objectForKey:@"experience"] intValue];
-    if (exp == 0) {
-        self.expLabel.text = @"beginner";
-    }else if (exp == 1) {
-        self.expLabel.text = @"intermediate";
-    } else if (exp == 2) {
-        self.expLabel.text = @"experienced";
-    }
+    gameScore = [NSString stringWithFormat:@"%c - %c", last, first];
+    return gameScore;
 }
 @end

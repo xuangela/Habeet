@@ -12,10 +12,6 @@
 
 @interface MatchHistoryViewController () <UITableViewDelegate, UITableViewDataSource>
 
-
-
-
-
 @end
 
 @implementation MatchHistoryViewController
@@ -53,15 +49,12 @@
                 
                 NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"updatedAt" ascending:NO];
                 [self.completedMatches sortUsingDescriptors:@[sd]];
-                
-                
             }
+            
             [self.tableview reloadData];
         }];
     }];
-
 }
-
 
 #pragma mark - Table
 
@@ -72,9 +65,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MatchHistoryCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"MatchHistoryCell"];
-    
+
     Match *match = self.completedMatches[indexPath.row];
-    
     [cell setMatch:match];
 
     return cell;

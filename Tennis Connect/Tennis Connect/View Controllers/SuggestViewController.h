@@ -18,13 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSArray<Court *> *courts;
 @property (nonatomic, strong) NSMutableArray<Player*> *players;
-
 @property (nonatomic, assign) int currPlayer;
 
 
-- (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries;
 - (IBAction)swipeLeft:(id)sender;
+
 - (void) updatePlayerOrder;
+- (void) findUsersWithQueries:(NSArray<PFQuery*> *) playerQueries;
 
 @end
 

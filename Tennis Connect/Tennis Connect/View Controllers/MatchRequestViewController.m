@@ -19,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 
 @property (nonatomic, strong) MKAnnotationView *selectedCourt;
-
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end
@@ -67,7 +66,6 @@
                     }
                 }
             }
-            
             self.courts = newCourts;
             
             [self mapSetUp];
@@ -82,6 +80,7 @@
     if (self.sentReq) {
         [self.delegate.players removeObject:self.player];
     }
+    
     self.delegate.currPlayer =self.delegate.currPlayer % self.delegate.players.count;
     [self.delegate.suggestedview setPlayer:self.delegate.players[self.delegate.currPlayer]];
     
@@ -102,10 +101,7 @@
             [newMatch saveInBackground];
         }
     }];
-
     [self dismissViewControllerAnimated:YES completion:^{}];
-    
-    
 }
 
 #pragma mark - Map Set up
@@ -155,6 +151,7 @@
         self.confirmButton.alpha = 0;
     }];
 }
+
 /*
 #pragma mark - Navigation
 

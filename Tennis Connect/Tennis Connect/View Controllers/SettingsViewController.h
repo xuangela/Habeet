@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL wasUpdated;
 
-
 @end
 
 @interface SettingsViewController : UIViewController

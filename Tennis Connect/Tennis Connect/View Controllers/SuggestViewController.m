@@ -40,8 +40,8 @@
         int randFactor = arc4random() % 50 * [me[@"randImport"] floatValue];
         long myAge =[[me valueForKey:@"age"] yearsAgo];
         long ageFactor =  -50 * labs(player.age - myAge) * [me[@"ageImport"] floatValue];
-        long myExp = [[[PFUser currentUser] valueForKey:@"experience"] intValue];
-        long experienceFactor = -50 * labs([player.experience intValue] - myExp) * [me[@"expImport"] floatValue];
+        long myExp = [[[PFUser currentUser] valueForKey:@"rating"] intValue];
+        long experienceFactor = -50 * labs([player.rating intValue] - myExp) * [me[@"expImport"] floatValue];
         NSString *myGender = [me valueForKey:@"gender"];
         int genderFactor = [myGender isEqualToString:player.gender] ? 50*[me[@"genderImport"] floatValue] : 0;
         
@@ -72,6 +72,7 @@
             
         } else {
             self.players = [Player playersWithPFUserObjects:objects];
+            NSLog(@"have the associated players");
         }
     }];
 }
@@ -87,10 +88,7 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     
     if ([segue.identifier isEqualToString:@"matchRequestSegue"]) {
         MatchRequestViewController *viewControl = [segue destinationViewController];
@@ -102,8 +100,6 @@
         [viewControl findSharedCourts];
     } 
 }
-
-
 
 @end
 

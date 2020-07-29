@@ -35,16 +35,7 @@
      }
     
     self.contactLabel.text = [opponent objectForKey:@"contact"];
-    
-    int exp = [[opponent objectForKey:@"experience"] intValue];
-    if (exp == 0) {
-           self.expLabel.text = @"beginner";
-       }else if (exp == 1) {
-           self.expLabel.text = @"intermediate";
-       } else if (exp == 2) {
-           self.expLabel.text = @"experienced";
-       }
-    
+    self.expLabel.text = [opponent objectForKey:@"rating"];
     self.nameLabel.text = [opponent objectForKey:@"name"];
     
     if ([opponent valueForKey:@"picture"]) {
@@ -52,18 +43,13 @@
         [self.pfpView loadInBackground];
     }
 
-    
     if (match.confirmed) {
         self.statusLabel.text = @"Upcoming match";
         self.confirmButton.alpha = 0;
     }
     
-   
     self.accessoryType = UITableViewCellAccessoryNone;
-    
 }
-
-
 
 - (IBAction)tapConfirm:(id)sender {
     self.statusLabel.text =@"Upcoming match";

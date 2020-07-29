@@ -46,7 +46,6 @@
             NSLog(@"deleted");
             [mapcontroller fetchCourtsnear];
         }];
-
     }
 }
 

@@ -104,12 +104,10 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     
     if ([segue.identifier isEqualToString:@"courtDetailSegue"]) {
+        
         UINavigationController *navControl = [segue destinationViewController];
         CourtDetailViewController *viewControl = (CourtDetailViewController*)navControl.topViewController;
         
@@ -119,16 +117,15 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
         [findCourtRefQuery whereKey:@"lng" equalTo:[NSNumber numberWithDouble:self.selectedCourt.annotation.coordinate.longitude]];
         
         [findCourtRefQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            
             if (!error) {
                 viewControl.court = [[Court alloc] initWithPFObject:object];
             }
-            
+        
             [viewControl mapSetUp];
             [viewControl getMatches];
         }];
     }
-    
 }
-
 
 @end

@@ -21,15 +21,12 @@
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
-
-
 @end
 
 @implementation CourtDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -70,9 +67,7 @@
             }
         }];
     }];
-
 }
-
 
 #pragma mark - Table set up
 
@@ -176,13 +171,9 @@
     return renderer;
 }
 
-
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     
     if ([segue.identifier isEqualToString:@"logScoreSegue"]) {
         LogScoreViewController *viewControl = [segue destinationViewController];

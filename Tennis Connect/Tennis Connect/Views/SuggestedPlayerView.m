@@ -8,26 +8,25 @@
 
 #import "SuggestedPlayerView.h"
 
-
-
 @implementation SuggestedPlayerView
 
-
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
+- (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
+    
     if (self) {
         [self customInit];
     }
+    
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
+    
     if (self) {
         [self customInit];
     }
+    
     return self;
 }
 
@@ -41,14 +40,7 @@
     _player = player;
     
     self.nameLabel.text = player.name;
-    
-    if ([player.experience intValue]== 0) {
-        self.experienceLevel.text = @"beginner";
-    }else if ([player.experience intValue]== 1) {
-        self.experienceLevel.text = @"intermediate";
-    } else if ([player.experience intValue]== 2) {
-        self.experienceLevel.text = @"experienced";
-    }
+    self.experienceLevel.text = [NSString stringWithFormat:@"%@", player.rating];
     
     if (player.pfp) {
         self.pfpView.file = player.pfp;

@@ -56,15 +56,10 @@
         user[@"name"] = self.nameField.text;
         user[@"gender"] = [self.genderSegControl titleForSegmentAtIndex:self.genderSegControl.selectedSegmentIndex];
         
-        NSString *unformatted = self.contactField.text;
-        NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 3)],
-                                     [unformatted substringWithRange:NSMakeRange(3, 3)],
-                                     [unformatted substringWithRange:NSMakeRange(6, [unformatted length]-6)], nil];
-
-        NSString *formattedString = [NSString stringWithFormat:@"(%@)%@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2]];
-        user[@"contact"] = formattedString;
+        user[@"contact"] = [self formatContactNum];
         user[@"age"] = self.dateOfBirthPicker.date;
-        user[@"experience"] = [NSNumber numberWithLong: self.skillSegControl.selectedSegmentIndex];
+        user[@"rating"] = [self determineRating];
+        
         user[@"genderSearch"] = @YES;
         user[@"ageDiffSearch"] = @9;
         user[@"ratingDiffSearch"] = @400;
@@ -76,6 +71,29 @@
     }
 }
 
+- (NSNumber *) determineRating {
+    long seg = self.skillSegControl.selectedSegmentIndex;
+    
+    if (seg == 0) {
+        return @500;
+    } else if (seg == 1) {
+        return @1000;
+    } else {
+        return @1500;
+    }
+}
+
+- (NSString* )formatContactNum {
+    NSString *unformatted = self.contactField.text;
+    NSArray *stringComponents = [NSArray arrayWithObjects:[unformatted substringWithRange:NSMakeRange(0, 3)],
+                                 [unformatted substringWithRange:NSMakeRange(3, 3)],
+                                 [unformatted substringWithRange:NSMakeRange(6, [unformatted length]-6)], nil];
+
+    NSString *formattedString = [NSString stringWithFormat:@"(%@)%@-%@", [stringComponents objectAtIndex:0], [stringComponents objectAtIndex:1], [stringComponents objectAtIndex:2]];
+    
+    return formattedString;
+}
+
 - (IBAction)tapCancel:(id)sender {
     [[PFUser currentUser] delete];
     [self performSegueWithIdentifier:@"delSegue" sender:nil];
@@ -84,7 +102,6 @@
 - (IBAction)tapOther:(id)sender {
     [self.view endEditing:YES];
 }
-
 
 #pragma mark - Navigation
 
@@ -99,20 +116,8 @@
         [mapcontroller mapSetUp];
         
         mapcontroller.delegate = suggestcontroller;
-        
-        PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
-           PFQuery *query = [relation query];
-        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-            for (Court *court in objects) {
-                [relation removeObject:court];
-            }
-            NSLog(@"deleted");
-            [mapcontroller fetchCourtsnear];
-        }];
-
-
+        [mapcontroller fetchCourtsnear];
     }
 }
-
 
 @end

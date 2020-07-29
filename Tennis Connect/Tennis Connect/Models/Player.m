@@ -25,7 +25,6 @@
     return playerArray;
 }
 
-
 + (PFQuery*) queryForFindingPlayersForCourt:(PFObject *) court {
     PFQuery *query = [PFUser query];
     [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
@@ -45,14 +44,13 @@
     return query;
 }
 
-
 - (id)initWithPFUser:(PFUser *)userPF {
     self = [super init];
     
     self.objectId = userPF.objectId;
     self.name = [userPF valueForKey:@"name"];
     self.age =[[userPF valueForKey:@"age"] yearsAgo];
-    self.experience = [userPF valueForKey:@"experience"];
+    self.rating = [userPF valueForKey:@"rating"];
     self.gender = [userPF valueForKey:@"gender"];
     self.user = userPF;
     self.pfp = [userPF objectForKey:@"picture"];
@@ -62,8 +60,8 @@
     int randFactor = arc4random() % 50 * [me[@"randImport"] floatValue];
     long myAge =[[[PFUser currentUser] valueForKey:@"age"] yearsAgo];
     long ageFactor =  -50 * labs(self.age - myAge) * [me[@"ageImport"] floatValue];
-    long myExp = [[[PFUser currentUser] valueForKey:@"experience"] intValue];
-    long experienceFactor = -50 * labs([self.experience intValue] - myExp) * [me[@"expImport"] floatValue];
+    long myExp = [[[PFUser currentUser] valueForKey:@"rating"] intValue];
+    long experienceFactor = -50 * labs([self.rating intValue] - myExp) * [me[@"expImport"] floatValue];
     NSString *myGender = [[PFUser currentUser] valueForKey:@"gender"];
     int genderFactor = [myGender isEqualToString:self.gender] ? 50*[me[@"genderImport"] floatValue] : 0;
     
@@ -72,9 +70,5 @@
     
     return self;
 }
-
-
-
-
 
 @end

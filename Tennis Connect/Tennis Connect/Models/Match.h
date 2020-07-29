@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL completed;
 @property (nonatomic, assign) NSArray<NSString *> *score;
 
-
 + (NSString*)parseClassName;
 + (NSMutableArray *)matchesWithArray: (NSArray<PFObject *> *)matches;
 
