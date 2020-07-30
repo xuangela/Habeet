@@ -21,6 +21,8 @@
 
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
 @property (nonatomic, strong) NSMutableArray<NSMutableArray *> *suggestedPlayerBuckets; // mutable array of arrays containing players with diffferent proximities
+@property (nonatomic, assign) int bestBucket;
+@property (nonatomic, strong) NSMutableArray<NSNumber *>* bucketDump;
 @property (nonatomic, strong) NSArray *fetchOccurences;
 
 @end
@@ -38,11 +40,6 @@
     [self initializeArrays];
     
     [self fetchPlayers];
-    
-//    self.currPlayer = 0;
-//    [self.suggestedview setPlayer:self.players[self.currPlayer]];
-    
-    
 }
 
 - (void) activityIndicatorSetUp {
@@ -54,11 +51,26 @@
 
 - (void)initializeArrays {
     self.suggestedPlayerBuckets = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 8; i++) {
+    
+    int myageDiffPref = [[[PFUser currentUser] valueForKey:@"ageDiffSearch"] intValue];
+    int myratingDiffPref = [[[PFUser currentUser] valueForKey:@"ratingDiffSearch"] intValue];
+    int numBuckets = ((15 - myageDiffPref) / 3) + ((1000 - myratingDiffPref) / 200) + 1;
+    
+    for (int i = 0; i < numBuckets; i++) {
         NSMutableArray *newBucket = [[NSMutableArray alloc] init];
         [self.suggestedPlayerBuckets addObject:newBucket];
     }
     
+    self.players = [[NSMutableArray alloc] init];
+    self.currPlayer = -1;
+    
+    self.fetchOccurences = [[NSMutableArray alloc] initWithCapacity:numBuckets];
+    
+    self.bucketDump =[[NSMutableArray alloc] init];
+    for (int i = 0; i < numBuckets; i++) {
+        [self.bucketDump addObject:@0];
+    }
+    self.bestBucket = 0;
 }
 
 - (void) fetchPlayers {
@@ -69,7 +81,6 @@
     
     for (int ageDiff = myageDiffPref; ageDiff <= 15; ageDiff+= 3) {
         for (int ratingDiff = myratingDiffPref; ratingDiff <= 1000; ratingDiff+= 200) {
-            
             [self allQueriesForAgeDiff:ageDiff andRatingDiff:ratingDiff];
         }
     }
@@ -148,17 +159,43 @@
                     NSMutableArray *resultingPlayer = [Player playersWithPFUserObjects:objects];
                     [thisBucket addObjectsFromArray:resultingPlayer];
                     
-                    NSLog(@"done with queries for age: %d and rating: %d", ageDiff, ratingDiff);
-                    NSLog (@"Your Array elements are = %@", self.suggestedPlayerBuckets[index]);
+                    self.bucketDump[index] = [NSNumber numberWithInt:[self.bucketDump[index] intValue] + 1];
                     
-                    if (ageDiff == 15 && ratingDiff == 1000) {
-                        [self.activityIndicator stopAnimating];
-                        self.view.userInteractionEnabled = YES;
+                    if ([self.bucketDump[index] intValue] == [self numOfQuadQueriesForThisBucket:index]) {
+                        if (resultingPlayer.count == 0) {
+                            self.bestBucket++;
+                        } else if (index == self.bestBucket) {
+                            [self bucketReady:index];
+                        }
                     }
                 }];
             }];
         }];
     }];
+}
+
+- (int)numOfQuadQueriesForThisBucket:(int) index {
+    int numQuadQueries = 0;
+    for (int i = 0; i <= index; i++) {
+        for (int j = 0; j <= index; j++) {
+            if (i + j == index) {
+                numQuadQueries++;
+            }
+        }
+    }
+    return numQuadQueries;
+}
+
+-(void)bucketReady:(int)index {
+    [self.activityIndicator stopAnimating];
+    self.view.userInteractionEnabled = YES;
+    
+    [self.players addObjectsFromArray:self.suggestedPlayerBuckets[self.bestBucket]];
+    [self.suggestedPlayerBuckets[self.bestBucket] removeAllObjects];
+    
+    self.currPlayer++;
+    [self.suggestedview setPlayer:self.players[self.currPlayer]];
+    
 }
 
 - (int)calculateIndexwithAgeDiff: (int)ageDiff andRatingDiff: (int)ratingDiff {

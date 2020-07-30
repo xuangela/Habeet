@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray<Player*> *players;
 @property (nonatomic, assign) int currPlayer;
 
-
 - (IBAction)swipeLeft:(id)sender;
 
 - (void) fetchPlayers;
