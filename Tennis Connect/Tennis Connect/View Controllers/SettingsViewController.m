@@ -128,9 +128,7 @@
 
 - (IBAction)slideAge:(id)sender {
     int value = self.ageSlider.value;
-    if (value < 1.5) {
-        [self.ageSlider setValue:0 animated:YES];
-    } else if (value < 4.5) {
+    if (value < 4.5) {
         [self.ageSlider setValue:3 animated:YES];
     } else if (value <7.5) {
         [self.ageSlider setValue:6 animated:YES];
@@ -151,9 +149,7 @@
 
 - (IBAction)slideRating:(id)sender {
     int value = self.ratingSlider.value;
-    if (value < 100) {
-        [self.ratingSlider setValue:0 animated:YES];
-    } else if (value < 300) {
+     if (value < 300) {
         [self.ratingSlider setValue:200 animated:YES];
     } else if (value < 500) {
         [self.ratingSlider setValue:400 animated:YES];

@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
 @property (nonatomic, strong) NSMutableArray<NSMutableArray *> *suggestedPlayerBuckets; // mutable array of arrays containing players with diffferent proximities
+@property (nonatomic, strong) NSArray *fetchOccurences;
 
 @end
 
@@ -34,6 +35,8 @@
     [self alertSetUp];
     [self activityIndicatorSetUp];
     
+    [self initializeArrays];
+    
     [self fetchPlayers];
     
 //    self.currPlayer = 0;
@@ -43,36 +46,146 @@
 }
 
 - (void) activityIndicatorSetUp {
+    [self.view bringSubviewToFront:self.activityIndicator];
     self.activityIndicator.hidesWhenStopped = YES;
     self.view.userInteractionEnabled = NO;
     [self.activityIndicator startAnimating];
 }
 
-- (void) fetchPlayers {
+- (void)initializeArrays {
     self.suggestedPlayerBuckets = [[NSMutableArray alloc] init];
-    // make queries
-    // execute queries
-    // store results of each query in suggestedPlayerBuckets
-    // query for more in suggestedPlayerbucket when 
+    for (int i = 0; i < 8; i++) {
+        NSMutableArray *newBucket = [[NSMutableArray alloc] init];
+        [self.suggestedPlayerBuckets addObject:newBucket];
+    }
     
-    
-    
-    
-    
-    
-    [self.activityIndicator stopAnimating];
-    self.view.userInteractionEnabled = YES;
 }
 
-- (PFQuery*) queryForFindingPlayersForCourt:(PFObject *) court {
+- (void) fetchPlayers {
+    PFUser *me = [PFUser currentUser];
+    
+    int myageDiffPref = [[me valueForKey:@"ageDiffSearch"] intValue];
+    int myratingDiffPref = [[me valueForKey:@"ratingDiffSearch"] intValue];
+    
+    for (int ageDiff = myageDiffPref; ageDiff <= 15; ageDiff+= 3) {
+        for (int ratingDiff = myratingDiffPref; ratingDiff <= 1000; ratingDiff+= 200) {
+            
+            [self allQueriesForAgeDiff:ageDiff andRatingDiff:ratingDiff];
+        }
+    }
+}
+
+- (void)allQueriesForAgeDiff: (int)ageDiff andRatingDiff: (int)ratingDiff {
+    PFUser *me = [PFUser currentUser];
+    
+    NSDate* mydob = [me valueForKey:@"age"];
+    int myageDiffPref = [[me valueForKey:@"ageDiffSearch"] intValue];
+    int myratingDiffPref = [[me valueForKey:@"ratingDiffSearch"] intValue];
+    
+    NSDate* earliestdobQuery = [mydob dateBySubtractingYears:(NSInteger)(ageDiff)];
+    NSDate* latestdobQuery = [mydob dateByAddingYears:(NSInteger)(ageDiff)];
+    
+    NSInteger prevAgeDiff = (ageDiff - myageDiffPref) > 0 ? (ageDiff - 3): 0;
+    NSDate* prevEarliestdobQuery= [mydob dateBySubtractingYears:prevAgeDiff];
+    NSDate* prevLatestdobQuery= [mydob dateBySubtractingYears:prevAgeDiff];
+    
+    int myRating = [[me valueForKey:@"rating"] intValue];
+    
+    int smallestRating = (myRating - ratingDiff);
+    int largestRating = (myRating + ratingDiff);
+    
+    int prevRatingDiff = (ratingDiff - myratingDiffPref) > 0 ? (ratingDiff - 200)  : 0;
+    int prevSmallestRating = (myRating - prevRatingDiff);
+    int prevLargestRating = (myRating + prevRatingDiff);
+    
+    PFQuery *query1 = [self baseQueryWithOccNum:1]; // age+ rating+
+    PFQuery *query2 = [self baseQueryWithOccNum:1]; // age+ rating-
+    PFQuery *query3 = [self baseQueryWithOccNum:1]; // age- rating+
+    PFQuery *query4 = [self baseQueryWithOccNum:1]; // age- rating-
+    
+    [query1 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:prevLargestRating]];
+    [query1 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:largestRating]];
+    [query1 whereKey:@"age" greaterThan:prevLatestdobQuery];
+    [query1 whereKey:@"age" lessThanOrEqualTo:latestdobQuery];
+    
+    [query2 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:smallestRating]];
+    [query2 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:prevSmallestRating]];
+    [query2 whereKey:@"age" greaterThan:prevLatestdobQuery];
+    [query2 whereKey:@"age" lessThanOrEqualTo:latestdobQuery];
+    
+    [query3 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:prevLargestRating]];
+    [query3 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:largestRating]];
+    [query3 whereKey:@"age" greaterThan:earliestdobQuery];
+    [query3 whereKey:@"age" lessThanOrEqualTo:prevEarliestdobQuery];
+    
+    [query4 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:smallestRating]];
+    [query4 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:prevSmallestRating]];
+    [query4 whereKey:@"age" greaterThan:earliestdobQuery];
+    [query4 whereKey:@"age" lessThanOrEqualTo:prevEarliestdobQuery];
+    
+    [self performQueries:@[query1, query2, query3, query4] withAgeDiff:ageDiff andRatingDiff:ratingDiff];
+    
+}
+
+- (void)performQueries:(NSArray<PFQuery*>*) queries withAgeDiff: (int)ageDiff andRatingDiff: (int)ratingDiff {
+    
+    int index = [self calculateIndexwithAgeDiff:ageDiff andRatingDiff:ratingDiff];
+    NSMutableArray *thisBucket = self.suggestedPlayerBuckets[index];
+    
+    [queries[0] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        NSMutableArray *resultingPlayer = [Player playersWithPFUserObjects:objects];
+        [thisBucket addObjectsFromArray:resultingPlayer];
+        
+        [queries[1] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            NSMutableArray *resultingPlayer = [Player playersWithPFUserObjects:objects];
+            [thisBucket addObjectsFromArray:resultingPlayer];
+            
+            [queries[2] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                NSMutableArray *resultingPlayer = [Player playersWithPFUserObjects:objects];
+                [thisBucket addObjectsFromArray:resultingPlayer];
+                
+                [queries[3] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                    NSMutableArray *resultingPlayer = [Player playersWithPFUserObjects:objects];
+                    [thisBucket addObjectsFromArray:resultingPlayer];
+                    
+                    NSLog(@"done with queries for age: %d and rating: %d", ageDiff, ratingDiff);
+                    NSLog (@"Your Array elements are = %@", self.suggestedPlayerBuckets[index]);
+                    
+                    if (ageDiff == 15 && ratingDiff == 1000) {
+                        [self.activityIndicator stopAnimating];
+                        self.view.userInteractionEnabled = YES;
+                    }
+                }];
+            }];
+        }];
+    }];
+}
+
+- (int)calculateIndexwithAgeDiff: (int)ageDiff andRatingDiff: (int)ratingDiff {
+    PFUser *me = [PFUser currentUser];
+    
+    int myageDiffPref = [[me valueForKey:@"ageDiffSearch"] intValue];
+    int myratingDiffPref = [[me valueForKey:@"ratingDiffSearch"] intValue];
+    
+    int ageDev = (ageDiff - myageDiffPref) / 3;
+    int ratingDev = (ratingDiff - myratingDiffPref) / 200;
+    
+    return ageDev + ratingDev;
+}
+
+- (PFQuery*) baseQueryWithOccNum: (int)occurence {
     PFQuery *query = [PFUser query];
+    
     [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
+    Court *court =[[PFUser currentUser] valueForKey:@"homeCourt"];
+    [query whereKey:@"courts" equalTo:court];
     
     if ([[[PFUser currentUser] valueForKey:@"genderImport"] boolValue]== YES) {
         [query whereKey:@"gender" equalTo:[[PFUser currentUser] valueForKey:@"gender"]];
     }
     
-    [query whereKey:@"courts" equalTo:court];
+    query.limit = 5;
+    query.skip = 5 * (occurence - 1);
     
     return query;
 }
