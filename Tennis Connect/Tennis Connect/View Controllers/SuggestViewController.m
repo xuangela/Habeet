@@ -190,8 +190,10 @@
                             [self findNextBucket];
                             
                             [self bucketReady:self.bestBucket];
-                            self.currPlayer++;
-                            [self.suggestedview setPlayer:self.players[self.currPlayer]];
+                            if (!self.specializedRefilling) {
+                                self.currPlayer++;
+                                [self.suggestedview setPlayer:self.players[self.currPlayer]];
+                            }
                             
                             self.completedBuckets = 0;
                         }
@@ -203,7 +205,7 @@
 }
 
 - (void)findNextBucket {
-    while (self.suggestedPlayerBuckets[self.bestBucket].count == 0) {
+    while (self.bestBucket < self.suggestedPlayerBuckets.count && self.suggestedPlayerBuckets[self.bestBucket].count == 0) {
         self.bestBucket++;
     }
 }
@@ -230,6 +232,12 @@
 -(void)bucketReady:(int)index {
     [self.activityIndicator stopAnimating];
     self.view.userInteractionEnabled = YES;
+    
+    if (self.suggestedPlayerBuckets[self.bestBucket].count >= 5) {
+        [self.players addObjectsFromArray:self.suggestedPlayerBuckets[self.bestBucket]];
+        [self.suggestedPlayerBuckets[self.bestBucket] removeAllObjects];
+    }
+    
     while (self.bestBucket < self.suggestedPlayerBuckets.count && self.suggestedPlayerBuckets[self.bestBucket].count < 5) {
         [self.players addObjectsFromArray:self.suggestedPlayerBuckets[self.bestBucket]];
         [self.suggestedPlayerBuckets[self.bestBucket] removeAllObjects];
