@@ -18,14 +18,9 @@
         Player *thisPlayer = [[Player alloc] initWithPFUser:player];
         [playerArray addObject:thisPlayer];
     }
-    
-    NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"compatibility" ascending:NO];
-    [playerArray sortUsingDescriptors:@[sd]];
-    
+
     return playerArray;
 }
-
-
 
 - (id)initWithPFUser:(PFUser *)userPF {
     self = [super init];
@@ -37,19 +32,6 @@
     self.gender = [userPF valueForKey:@"gender"];
     self.user = userPF;
     self.pfp = [userPF objectForKey:@"picture"];
-    
-    // complex algorithm, what do I want to include
-    PFUser *me = [PFUser currentUser];
-    int randFactor = arc4random() % 50 * [me[@"randImport"] floatValue];
-    long myAge =[[[PFUser currentUser] valueForKey:@"age"] yearsAgo];
-    long ageFactor =  -50 * labs(self.age - myAge) * [me[@"ageImport"] floatValue];
-    long myExp = [[[PFUser currentUser] valueForKey:@"rating"] intValue];
-    long experienceFactor = -50 * labs([self.rating intValue] - myExp) * [me[@"expImport"] floatValue];
-    NSString *myGender = [[PFUser currentUser] valueForKey:@"gender"];
-    int genderFactor = [myGender isEqualToString:self.gender] ? 50*[me[@"genderImport"] floatValue] : 0;
-    
-    self.compatibility = randFactor + ageFactor + experienceFactor + genderFactor;
-    
     
     return self;
 }

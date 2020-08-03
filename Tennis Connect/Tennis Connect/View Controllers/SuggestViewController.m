@@ -124,6 +124,16 @@
 }
 
 - (void)allQueriesForAgeDiff: (int)ageDiff andRatingDiff: (int)ratingDiff {
+    BOOL boundAge = YES;
+    if (ageDiff == 15) {
+        boundAge = NO;
+    }
+    
+    BOOL boundRating = YES;
+    if (ratingDiff == 1000) {
+        boundRating = NO;
+    }
+    
     PFUser *me = [PFUser currentUser];
     
     NSDate* mydob = [me valueForKey:@"age"];
@@ -155,24 +165,30 @@
     PFQuery *query4 = [self baseQueryWithOccNum:numOcc]; // age- rating-
     
     [query1 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:prevLargestRating]];
-    [query1 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:largestRating]];
     [query1 whereKey:@"age" greaterThan:prevLatestdobQuery];
-    [query1 whereKey:@"age" lessThanOrEqualTo:latestdobQuery];
     
-    [query2 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:smallestRating]];
     [query2 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:prevSmallestRating]];
     [query2 whereKey:@"age" greaterThan:prevLatestdobQuery];
-    [query2 whereKey:@"age" lessThanOrEqualTo:latestdobQuery];
     
     [query3 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:prevLargestRating]];
-    [query3 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:largestRating]];
-    [query3 whereKey:@"age" greaterThan:earliestdobQuery];
     [query3 whereKey:@"age" lessThanOrEqualTo:prevEarliestdobQuery];
     
-    [query4 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:smallestRating]];
     [query4 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:prevSmallestRating]];
-    [query4 whereKey:@"age" greaterThan:earliestdobQuery];
     [query4 whereKey:@"age" lessThanOrEqualTo:prevEarliestdobQuery];
+    
+    if (!boundAge) {
+        [query1 whereKey:@"age" lessThanOrEqualTo:latestdobQuery];
+        [query2 whereKey:@"age" lessThanOrEqualTo:latestdobQuery];
+        [query3 whereKey:@"age" greaterThan:earliestdobQuery];
+        [query4 whereKey:@"age" greaterThan:earliestdobQuery];
+    }
+    
+    if (!boundRating) {
+        [query1 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:largestRating]];
+        [query2 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:smallestRating]];
+        [query3 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:largestRating]];
+        [query4 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:smallestRating]];
+    }
     
     [self performQueries:@[query1, query2, query3, query4] withAgeDiff:ageDiff andRatingDiff:ratingDiff];
     
@@ -295,8 +311,9 @@
     [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
     Court *court =[[PFUser currentUser] valueForKey:@"homeCourt"];
     [query whereKey:@"courts" equalTo:court];
+    [query orderByDescending:@"createdAt"];
     
-    if ([[[PFUser currentUser] valueForKey:@"genderImport"] boolValue]== YES) {
+    if ([[[PFUser currentUser] valueForKey:@"genderSearch"] boolValue]== YES) {
         [query whereKey:@"gender" equalTo:[[PFUser currentUser] valueForKey:@"gender"]];
     }
     

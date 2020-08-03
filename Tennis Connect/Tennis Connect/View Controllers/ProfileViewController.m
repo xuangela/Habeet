@@ -41,6 +41,8 @@
 
         [suggestcontrol fetchPlayers];
         [suggestcontrol fetchRandomPlayers];
+        
+        self.wasUpdated = NO; 
     }
 }
 
