@@ -49,8 +49,6 @@
     [self fetchPlayers];
 }
 
-
-
 - (void) activityIndicatorSetUp {
     [self.view bringSubviewToFront:self.activityIndicator];
     self.activityIndicator.hidesWhenStopped = YES;
@@ -69,7 +67,7 @@
     int numBuckets = ((15 - myageDiffPref) / 3) + ((1000 - myratingDiffPref) / 200) + 1;
     
     for (int i = 0; i < numBuckets; i++) {
-        NSMutableArray *newBucket = [[NSMutableArray alloc] init];
+        NSMutableArray<Player*> *newBucket = [[NSMutableArray alloc] init];
         [self.suggestedPlayerBuckets addObject:newBucket];
         [self.fetchOccurences addObject:@0];
         [self.bucketDump addObject:@0];
@@ -107,7 +105,7 @@
     
     NSInteger prevAgeDiff = (ageDiff - myageDiffPref) > 0 ? (ageDiff - 3): 0;
     NSDate* prevEarliestdobQuery= [mydob dateBySubtractingYears:prevAgeDiff];
-    NSDate* prevLatestdobQuery= [mydob dateBySubtractingYears:prevAgeDiff];
+    NSDate* prevLatestdobQuery= [mydob dateByAddingYears:prevAgeDiff];
     
     int myRating = [[me valueForKey:@"rating"] intValue];
     
@@ -155,6 +153,7 @@
     int index = [self calculateIndexwithAgeDiff:ageDiff andRatingDiff:ratingDiff];
     NSMutableArray *thisBucket = self.suggestedPlayerBuckets[index];
     
+    
     [queries[0] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         NSMutableArray *resultingPlayer = [Player playersWithPFUserObjects:objects];
         [thisBucket addObjectsFromArray:resultingPlayer];
@@ -187,17 +186,28 @@
                         int myratingDiffPref = [[[PFUser currentUser] valueForKey:@"ratingDiffSearch"] intValue];
                         int numBuckets = ((15 - myageDiffPref) / 3) + ((1000 - myratingDiffPref) / 200) + 1;
                         
-                        if (index == self.bestBucket && thisBucket.count == 0) {
-                            self.bestBucket++;
-                        } else if (index == self.bestBucket || self.specializedRefilling || self.completedBuckets == numBuckets) {
+                        if (self.specializedRefilling || self.completedBuckets == numBuckets) {
                             [self findNextBucket];
-                        
-                            [self bucketReady:index];
-                            self.currPlayer++;
-                            [self.suggestedview setPlayer:self.players[self.currPlayer]];
                             
-                            self.completedBuckets = 0;
+                                [self bucketReady:index];
+                                self.currPlayer++;
+                                [self.suggestedview setPlayer:self.players[self.currPlayer]];
+                                
+                                self.completedBuckets = 0;
                         }
+                        
+//                        if (index == self.bestBucket && thisBucket.count == 0) {
+//                            self.bestBucket++;
+//                            NSLog(@"failed %d", index);
+//                        } else if (index == self.bestBucket || self.specializedRefilling || self.completedBuckets == numBuckets) {
+//                            [self findNextBucket];
+//                        
+//                            [self bucketReady:index];
+//                            self.currPlayer++;
+//                            [self.suggestedview setPlayer:self.players[self.currPlayer]];
+//                            
+//                            self.completedBuckets = 0;
+//                        }
                     }
                 }];
             }];
@@ -276,6 +286,13 @@
 - (IBAction)swipeLeft:(id)sender {
     self.currPlayer += 1;
     
+    for (int i = 0; i < self.suggestedPlayerBuckets.count; i++) {
+        for (int j = 0; j < self.suggestedPlayerBuckets[i].count; j++) {
+            Player *thisPlayer =self.suggestedPlayerBuckets[i][j];
+            NSLog(@"bucket %d player %d: %@",i,  j, thisPlayer.name);
+        }
+    }
+    
     if (self.players.count - self.currPlayer < 5) {
         self.specializedRefilling = YES;
         [self fetchPlayers];
@@ -301,7 +318,7 @@
         viewControl.delegate = self;
         
         [viewControl findSharedCourts];
-    } 
+    }
 }
 
 @end
