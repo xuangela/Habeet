@@ -167,6 +167,8 @@
                 [thisBucket addObjectsFromArray:resultingPlayer];
                 
                 [queries[3] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                    
+                    NSLog(@"a quad query done for /n ageDiff: %d/n ratingDiff: %d",ageDiff,  ratingDiff);
                     NSMutableArray *resultingPlayer = [Player playersWithPFUserObjects:objects];
                     [thisBucket addObjectsFromArray:resultingPlayer];
                     
@@ -189,25 +191,12 @@
                         if (self.specializedRefilling || self.completedBuckets == numBuckets) {
                             [self findNextBucket];
                             
-                                [self bucketReady:index];
-                                self.currPlayer++;
-                                [self.suggestedview setPlayer:self.players[self.currPlayer]];
-                                
-                                self.completedBuckets = 0;
+                            [self bucketReady:index];
+                            self.currPlayer++;
+                            [self.suggestedview setPlayer:self.players[self.currPlayer]];
+                            
+                            self.completedBuckets = 0;
                         }
-                        
-//                        if (index == self.bestBucket && thisBucket.count == 0) {
-//                            self.bestBucket++;
-//                            NSLog(@"failed %d", index);
-//                        } else if (index == self.bestBucket || self.specializedRefilling || self.completedBuckets == numBuckets) {
-//                            [self findNextBucket];
-//                        
-//                            [self bucketReady:index];
-//                            self.currPlayer++;
-//                            [self.suggestedview setPlayer:self.players[self.currPlayer]];
-//                            
-//                            self.completedBuckets = 0;
-//                        }
                     }
                 }];
             }];
@@ -223,14 +212,21 @@
 }
 
 - (int)numOfQuadQueriesForThisBucket:(int) index {
+    
+    PFUser *me = [PFUser currentUser];
+    
+    int myageDiffPref = [[me valueForKey:@"ageDiffSearch"] intValue];
+    int myratingDiffPref = [[me valueForKey:@"ratingDiffSearch"] intValue];
+    
     int numQuadQueries = 0;
-    for (int i = 0; i <= index; i++) {
-        for (int j = 0; j <= index; j++) {
-            if (i + j == index) {
+    for (int ageDiff = myageDiffPref; ageDiff <= 15; ageDiff+= 3) {
+        for (int ratingDiff = myratingDiffPref; ratingDiff <= 1000; ratingDiff+= 200) {
+            if ([self calculateIndexwithAgeDiff:ageDiff andRatingDiff:ratingDiff] == self.bestBucket) {
                 numQuadQueries++;
             }
         }
     }
+    
     return numQuadQueries;
 }
 
