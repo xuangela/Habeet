@@ -167,8 +167,6 @@
                 [thisBucket addObjectsFromArray:resultingPlayer];
                 
                 [queries[3] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-                    
-                    NSLog(@"a quad query done for /n ageDiff: %d/n ratingDiff: %d",ageDiff,  ratingDiff);
                     NSMutableArray *resultingPlayer = [Player playersWithPFUserObjects:objects];
                     [thisBucket addObjectsFromArray:resultingPlayer];
                     
@@ -191,7 +189,7 @@
                         if (self.specializedRefilling || self.completedBuckets == numBuckets) {
                             [self findNextBucket];
                             
-                            [self bucketReady:index];
+                            [self bucketReady:self.bestBucket];
                             self.currPlayer++;
                             [self.suggestedview setPlayer:self.players[self.currPlayer]];
                             
@@ -208,7 +206,6 @@
     while (self.suggestedPlayerBuckets[self.bestBucket].count == 0) {
         self.bestBucket++;
     }
-    [self bucketReady:self.bestBucket];
 }
 
 - (int)numOfQuadQueriesForThisBucket:(int) index {
@@ -221,7 +218,7 @@
     int numQuadQueries = 0;
     for (int ageDiff = myageDiffPref; ageDiff <= 15; ageDiff+= 3) {
         for (int ratingDiff = myratingDiffPref; ratingDiff <= 1000; ratingDiff+= 200) {
-            if ([self calculateIndexwithAgeDiff:ageDiff andRatingDiff:ratingDiff] == self.bestBucket) {
+            if ([self calculateIndexwithAgeDiff:ageDiff andRatingDiff:ratingDiff] == index) {
                 numQuadQueries++;
             }
         }
@@ -233,9 +230,11 @@
 -(void)bucketReady:(int)index {
     [self.activityIndicator stopAnimating];
     self.view.userInteractionEnabled = YES;
-    
-    [self.players addObjectsFromArray:self.suggestedPlayerBuckets[self.bestBucket]];
-    [self.suggestedPlayerBuckets[self.bestBucket] removeAllObjects];
+    while (self.bestBucket < self.suggestedPlayerBuckets.count && self.suggestedPlayerBuckets[self.bestBucket].count < 5) {
+        [self.players addObjectsFromArray:self.suggestedPlayerBuckets[self.bestBucket]];
+        [self.suggestedPlayerBuckets[self.bestBucket] removeAllObjects];
+        self.bestBucket++;
+    }
 }
 
 - (int)calculateIndexwithAgeDiff: (int)ageDiff andRatingDiff: (int)ratingDiff {
@@ -282,14 +281,7 @@
 - (IBAction)swipeLeft:(id)sender {
     self.currPlayer += 1;
     
-    for (int i = 0; i < self.suggestedPlayerBuckets.count; i++) {
-        for (int j = 0; j < self.suggestedPlayerBuckets[i].count; j++) {
-            Player *thisPlayer =self.suggestedPlayerBuckets[i][j];
-            NSLog(@"bucket %d player %d: %@",i,  j, thisPlayer.name);
-        }
-    }
-    
-    if (self.players.count - self.currPlayer < 5) {
+    if (self.players.count - self.currPlayer < 5 && self.bestBucket < self.suggestedPlayerBuckets.count) {
         self.specializedRefilling = YES;
         [self fetchPlayers];
     }
