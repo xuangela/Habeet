@@ -99,8 +99,9 @@
     [query getObjectInBackgroundWithId:user.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (!error) {
             object[@"picture"] = [PFFileObject fileObjectWithData:pictureData];
-            [object saveInBackground];
-            NSLog(@"picture saved");
+            [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                NSLog(@"picture saved");
+            }];
         }
     }];
     

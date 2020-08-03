@@ -21,11 +21,14 @@
 
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
 @property (nonatomic, strong) NSMutableArray<NSMutableArray *> *suggestedPlayerBuckets; // mutable array of arrays containing players with diffferent proximities
+@property (nonatomic, strong) NSMutableArray<Player *> *randomPlayers;
 @property (nonatomic, assign) int bestBucket;
 @property (nonatomic, assign) int completedBuckets;
 @property (nonatomic, assign) BOOL specializedRefilling;
+@property (nonatomic, assign) BOOL randomDone;
 @property (nonatomic, strong) NSMutableArray<NSNumber *>* bucketDump;
 @property (nonatomic, strong) NSMutableArray *fetchOccurences;
+
 
 @end
 
@@ -37,6 +40,7 @@
     [super viewDidLoad];
     
     self.specializedRefilling = NO;
+    self.randomDone = NO;
     self.currPlayer = -1;
     self.bestBucket = 0;
     self.completedBuckets = 0;
@@ -47,6 +51,7 @@
     [self initializeArrays];
 
     [self fetchPlayers];
+    [self fetchRandomPlayers];
 }
 
 - (void) activityIndicatorSetUp {
@@ -61,6 +66,7 @@
     self.fetchOccurences = [[NSMutableArray alloc] init];
     self.bucketDump = [[NSMutableArray alloc] init];
     self.players =[[NSMutableArray alloc] init];
+    self.randomPlayers = [[NSMutableArray alloc] init];
     
     int myageDiffPref = [[[PFUser currentUser] valueForKey:@"ageDiffSearch"] intValue];
     int myratingDiffPref = [[[PFUser currentUser] valueForKey:@"ratingDiffSearch"] intValue];
@@ -72,6 +78,29 @@
         [self.fetchOccurences addObject:@0];
         [self.bucketDump addObject:@0];
     }
+    [self.fetchOccurences addObject:@0];
+}
+
+- (void) fetchRandomPlayers {
+    PFQuery *query = [PFUser query];
+    
+    [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
+    Court *court =[[PFUser currentUser] valueForKey:@"homeCourt"];
+    [query whereKey:@"courts" equalTo:court];
+    
+    query.limit = 5;
+    int numOccurrences =[self.fetchOccurences[self.fetchOccurences.count - 1] intValue];
+    query.skip = 5 * numOccurrences;
+    
+    int newFetchOccurences =[self.fetchOccurences[self.fetchOccurences.count - 1] intValue] + 1;
+    self.fetchOccurences[self.fetchOccurences.count - 1] =  [NSNumber numberWithInt:newFetchOccurences];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        NSMutableArray *resultingPlayer = [Player playersWithPFUserObjects:objects];
+        [self.randomPlayers addObjectsFromArray:resultingPlayer];
+        self.randomDone = YES;
+    }];
+    
 }
 
 - (void) fetchPlayers {
@@ -292,6 +321,22 @@
     if (self.players.count - self.currPlayer < 5 && self.bestBucket < self.suggestedPlayerBuckets.count) {
         self.specializedRefilling = YES;
         [self fetchPlayers];
+    }
+    
+    if (self.randomDone && self.randomPlayers.count > 0) {
+        float randomPerc = [[[PFUser currentUser] valueForKey:@"random"] floatValue];
+        
+        float randomNum = (float) (arc4random() % 101) / 100;
+        
+        if (randomNum <= randomPerc) {
+            [self.players insertObject:self.randomPlayers[self.randomPlayers.count - 1] atIndex:self.currPlayer];
+            [self.randomPlayers removeLastObject];
+        }
+    }
+    
+    if (self.randomPlayers.count < 5) {
+        self.randomDone = NO;
+        [self fetchRandomPlayers];
     }
     
     if (self.currPlayer == self.players.count) {
