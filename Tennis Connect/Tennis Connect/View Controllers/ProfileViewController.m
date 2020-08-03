@@ -37,7 +37,10 @@
     if (self.wasUpdated) {
         [self userInfoDisplay];
         SuggestViewController *suggestcontrol = self.tabBarController.viewControllers[1];
+        [suggestcontrol initialize];
+
         [suggestcontrol fetchPlayers];
+        [suggestcontrol fetchRandomPlayers];
     }
 }
 

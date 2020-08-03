@@ -23,7 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (IBAction)swipeLeft:(id)sender;
 
+- (void)initialize;
 - (void) fetchPlayers;
+- (void) fetchRandomPlayers;
 
 @end
 

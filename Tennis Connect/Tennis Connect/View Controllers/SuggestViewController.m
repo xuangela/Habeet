@@ -39,16 +39,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.specializedRefilling = NO;
-    self.randomDone = NO;
-    self.currPlayer = -1;
-    self.bestBucket = 0;
-    self.completedBuckets = 0;
-
     [self alertSetUp];
     [self activityIndicatorSetUp];
 
-    [self initializeArrays];
+    [self initialize];
 
     [self fetchPlayers];
     [self fetchRandomPlayers];
@@ -61,7 +55,14 @@
     [self.activityIndicator startAnimating];
 }
 
-- (void)initializeArrays {
+- (void)initialize {
+    
+    self.specializedRefilling = NO;
+    self.randomDone = NO;
+    self.currPlayer = -1;
+    self.bestBucket = 0;
+    self.completedBuckets = 0;
+    
     self.suggestedPlayerBuckets = [[NSMutableArray alloc] init];
     self.fetchOccurences = [[NSMutableArray alloc] init];
     self.bucketDump = [[NSMutableArray alloc] init];
@@ -221,7 +222,9 @@
                             [self bucketReady:self.bestBucket];
                             if (!self.specializedRefilling) {
                                 self.currPlayer++;
-                                [self.suggestedview setPlayer:self.players[self.currPlayer]];
+                                if (self.players) {
+                                    [self.suggestedview setPlayer:self.players[self.currPlayer]];
+                                }
                             }
                             
                             self.completedBuckets = 0;
@@ -262,7 +265,7 @@
     [self.activityIndicator stopAnimating];
     self.view.userInteractionEnabled = YES;
     
-    if (self.suggestedPlayerBuckets[self.bestBucket].count >= 5) {
+    if (self.bestBucket < self.suggestedPlayerBuckets.count && self.suggestedPlayerBuckets[self.bestBucket].count >= 5) {
         [self.players addObjectsFromArray:self.suggestedPlayerBuckets[self.bestBucket]];
         [self.suggestedPlayerBuckets[self.bestBucket] removeAllObjects];
     }
