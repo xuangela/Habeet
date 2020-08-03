@@ -22,8 +22,10 @@
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
 @property (nonatomic, strong) NSMutableArray<NSMutableArray *> *suggestedPlayerBuckets; // mutable array of arrays containing players with diffferent proximities
 @property (nonatomic, assign) int bestBucket;
+@property (nonatomic, assign) int completedBuckets;
+@property (nonatomic, assign) BOOL specializedRefilling;
 @property (nonatomic, strong) NSMutableArray<NSNumber *>* bucketDump;
-@property (nonatomic, strong) NSArray *fetchOccurences;
+@property (nonatomic, strong) NSMutableArray *fetchOccurences;
 
 @end
 
@@ -34,13 +36,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.specializedRefilling = NO;
+    self.currPlayer = -1;
+    self.bestBucket = 0;
+    self.completedBuckets = 0;
+
     [self alertSetUp];
     [self activityIndicatorSetUp];
-    
+
     [self initializeArrays];
-    
+
     [self fetchPlayers];
 }
+
+
 
 - (void) activityIndicatorSetUp {
     [self.view bringSubviewToFront:self.activityIndicator];
@@ -51,6 +60,9 @@
 
 - (void)initializeArrays {
     self.suggestedPlayerBuckets = [[NSMutableArray alloc] init];
+    self.fetchOccurences = [[NSMutableArray alloc] init];
+    self.bucketDump = [[NSMutableArray alloc] init];
+    self.players =[[NSMutableArray alloc] init];
     
     int myageDiffPref = [[[PFUser currentUser] valueForKey:@"ageDiffSearch"] intValue];
     int myratingDiffPref = [[[PFUser currentUser] valueForKey:@"ratingDiffSearch"] intValue];
@@ -59,18 +71,9 @@
     for (int i = 0; i < numBuckets; i++) {
         NSMutableArray *newBucket = [[NSMutableArray alloc] init];
         [self.suggestedPlayerBuckets addObject:newBucket];
-    }
-    
-    self.players = [[NSMutableArray alloc] init];
-    self.currPlayer = -1;
-    
-    self.fetchOccurences = [[NSMutableArray alloc] initWithCapacity:numBuckets];
-    
-    self.bucketDump =[[NSMutableArray alloc] init];
-    for (int i = 0; i < numBuckets; i++) {
+        [self.fetchOccurences addObject:@0];
         [self.bucketDump addObject:@0];
     }
-    self.bestBucket = 0;
 }
 
 - (void) fetchPlayers {
@@ -81,7 +84,13 @@
     
     for (int ageDiff = myageDiffPref; ageDiff <= 15; ageDiff+= 3) {
         for (int ratingDiff = myratingDiffPref; ratingDiff <= 1000; ratingDiff+= 200) {
-            [self allQueriesForAgeDiff:ageDiff andRatingDiff:ratingDiff];
+            if (self.specializedRefilling) {
+                if ([self calculateIndexwithAgeDiff:ageDiff andRatingDiff:ratingDiff] == self.bestBucket) {
+                    [self allQueriesForAgeDiff:ageDiff andRatingDiff:ratingDiff];
+                }
+            } else {
+                [self allQueriesForAgeDiff:ageDiff andRatingDiff:ratingDiff];
+            }
         }
     }
 }
@@ -109,10 +118,13 @@
     int prevSmallestRating = (myRating - prevRatingDiff);
     int prevLargestRating = (myRating + prevRatingDiff);
     
-    PFQuery *query1 = [self baseQueryWithOccNum:1]; // age+ rating+
-    PFQuery *query2 = [self baseQueryWithOccNum:1]; // age+ rating-
-    PFQuery *query3 = [self baseQueryWithOccNum:1]; // age- rating+
-    PFQuery *query4 = [self baseQueryWithOccNum:1]; // age- rating-
+    int index = [self calculateIndexwithAgeDiff:ageDiff andRatingDiff:ratingDiff];
+    int numOcc = [self.fetchOccurences[index] intValue];
+    
+    PFQuery *query1 = [self baseQueryWithOccNum:numOcc]; // age+ rating+
+    PFQuery *query2 = [self baseQueryWithOccNum:numOcc]; // age+ rating-
+    PFQuery *query3 = [self baseQueryWithOccNum:numOcc]; // age- rating+
+    PFQuery *query4 = [self baseQueryWithOccNum:numOcc]; // age- rating-
     
     [query1 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:prevLargestRating]];
     [query1 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:largestRating]];
@@ -159,19 +171,45 @@
                     NSMutableArray *resultingPlayer = [Player playersWithPFUserObjects:objects];
                     [thisBucket addObjectsFromArray:resultingPlayer];
                     
-                    self.bucketDump[index] = [NSNumber numberWithInt:[self.bucketDump[index] intValue] + 1];
+                    int newBucketDumpVal =([self.bucketDump[index] intValue] + 1);
+                    self.bucketDump[index] = [NSNumber numberWithInt:newBucketDumpVal];
+                    NSLog(@"bucket %d in process", index);
                     
-                    if ([self.bucketDump[index] intValue] == [self numOfQuadQueriesForThisBucket:index]) {
-                        if (resultingPlayer.count == 0) {
+                    if (newBucketDumpVal == [self numOfQuadQueriesForThisBucket:index]) {
+                        NSLog(@"bucket %d done", index);
+                        self.completedBuckets++;
+                        
+                        int newFetchOccurences =[self.fetchOccurences[index] intValue] + 1;
+                        self.fetchOccurences[index] =  [NSNumber numberWithInt:newFetchOccurences];
+                        self.bucketDump[index] = @0;
+                        
+                        int myageDiffPref = [[[PFUser currentUser] valueForKey:@"ageDiffSearch"] intValue];
+                        int myratingDiffPref = [[[PFUser currentUser] valueForKey:@"ratingDiffSearch"] intValue];
+                        int numBuckets = ((15 - myageDiffPref) / 3) + ((1000 - myratingDiffPref) / 200) + 1;
+                        
+                        if (index == self.bestBucket && thisBucket.count == 0) {
                             self.bestBucket++;
-                        } else if (index == self.bestBucket) {
+                        } else if (index == self.bestBucket || self.specializedRefilling || self.completedBuckets == numBuckets) {
+                            [self findNextBucket];
+                        
                             [self bucketReady:index];
+                            self.currPlayer++;
+                            [self.suggestedview setPlayer:self.players[self.currPlayer]];
+                            
+                            self.completedBuckets = 0;
                         }
                     }
                 }];
             }];
         }];
     }];
+}
+
+- (void)findNextBucket {
+    while (self.suggestedPlayerBuckets[self.bestBucket].count == 0) {
+        self.bestBucket++;
+    }
+    [self bucketReady:self.bestBucket];
 }
 
 - (int)numOfQuadQueriesForThisBucket:(int) index {
@@ -192,10 +230,6 @@
     
     [self.players addObjectsFromArray:self.suggestedPlayerBuckets[self.bestBucket]];
     [self.suggestedPlayerBuckets[self.bestBucket] removeAllObjects];
-    
-    self.currPlayer++;
-    [self.suggestedview setPlayer:self.players[self.currPlayer]];
-    
 }
 
 - (int)calculateIndexwithAgeDiff: (int)ageDiff andRatingDiff: (int)ratingDiff {
@@ -222,7 +256,7 @@
     }
     
     query.limit = 5;
-    query.skip = 5 * (occurence - 1);
+    query.skip = 5 * (occurence);
     
     return query;
 }
@@ -241,12 +275,19 @@
 
 - (IBAction)swipeLeft:(id)sender {
     self.currPlayer += 1;
+    
+    if (self.players.count - self.currPlayer < 5) {
+        self.specializedRefilling = YES;
+        [self fetchPlayers];
+    }
+    
     if (self.currPlayer == self.players.count) {
         [self presentViewController:self.noMoreSuggestAlert animated:YES completion:^{  }];
     } else {
         [self.suggestedview setPlayer:self.players[self.currPlayer]];
     }
 }
+
 
 #pragma mark - Navigation
 

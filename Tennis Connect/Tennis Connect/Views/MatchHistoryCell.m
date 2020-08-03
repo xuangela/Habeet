@@ -54,7 +54,7 @@
     NSDate *playedDate = match[@"updatedAt"];
     self.dateLabel.text = [playedDate formattedDateWithStyle:NSDateFormatterFullStyle];
     
-    self.expLabel.text = [opponent valueForKey:@"rating"];
+    self.expLabel.text = [[opponent valueForKey:@"rating"] stringValue];
 }
 
 - (NSArray<NSString *> *) getScore:(NSArray *) scores { //sender, receiver
