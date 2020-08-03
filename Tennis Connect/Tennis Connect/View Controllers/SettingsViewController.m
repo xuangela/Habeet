@@ -58,6 +58,21 @@
     self.ageSlider.value = [[user valueForKey:@"ageDiffSearch"] floatValue];
     self.ratingSlider.value = [[user valueForKey:@"ratingDiffSearch"] floatValue];
     self.randSlider.value = [[user valueForKey:@"random"] floatValue];
+    
+    self.ageLabel.text = [NSString stringWithFormat:@"%.0f years", self.ageSlider.value];
+    
+    if (self.ageSlider.value == 15) {
+        self.ageLabel.text = @"15+ years";
+    }
+    
+    self.ratingLabel.text = [NSString stringWithFormat:@"+- %.0f", self.ratingSlider.value];
+    
+    if (self.ratingSlider.value == 1000) {
+        self.ratingLabel.text = @"+- 1000+";
+    }
+    
+    float roundedPerc =roundf(self.randSlider.value * 100);
+    self.randomLabel.text = [NSString stringWithFormat:@"%.0f%%", roundedPerc];
 }
 
 - (void) alertSetUp {
