@@ -11,12 +11,13 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "Match.h"
+@import MaterialComponents;
 
 @interface MatchRequestViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
 @property (weak, nonatomic) IBOutlet UILabel *courtNameLabel;
-@property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+@property (weak, nonatomic) IBOutlet MDCButton *confirmButton;
 
 @property (nonatomic, strong) MKAnnotationView *selectedCourt;
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -31,10 +32,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.confirmButton.alpha = 0;
+    [self buttonSetUp];
+
     self.courtNameLabel.alpha = 0;
-    
     self.sentReq = NO;
+}
+
+- (void)buttonSetUp {
+    
+    self.confirmButton.enabled = NO;
+    
+    MDCContainerScheme *containerScheme = [[MDCContainerScheme alloc] init];
+    containerScheme.colorScheme.primaryColor = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+    
+    [self.confirmButton applyTextThemeWithScheme:containerScheme];
+    
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+    
+    [self.confirmButton setTitleFont:font forState:UIControlStateSelected];
+    [self.confirmButton setTitleFont:font forState:UIControlStateNormal];
+    
+    
+    self.confirmButton.minimumSize = CGSizeMake(64, 36);
+    
+    CGFloat verticalInset = MIN(0, -(48 - CGRectGetHeight(self.confirmButton.bounds)) / 2);
+    CGFloat horizontalInset = MIN(0, -(48 - CGRectGetWidth(self.confirmButton.bounds)) / 2);
+    self.confirmButton.hitAreaInsets = UIEdgeInsetsMake(verticalInset, horizontalInset, verticalInset, horizontalInset);
 }
 
 - (void) findSharedCourts{
@@ -141,14 +164,14 @@
     [UIView animateWithDuration:1 animations:^{
         self.courtNameLabel.text = view.annotation.title;
         self.courtNameLabel.alpha = 1;
-        self.confirmButton.alpha = 1;
+        self.confirmButton.enabled = YES;
     }];
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     [UIView animateWithDuration:1 animations:^{
         self.courtNameLabel.alpha = 0;
-        self.confirmButton.alpha = 0;
+        self.confirmButton.enabled = NO;
     }];
 }
 

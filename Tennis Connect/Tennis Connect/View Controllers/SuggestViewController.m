@@ -12,12 +12,13 @@
 #import "Player.h"
 #import <DateTools/DateTools.h>
 #import "MatchRequestViewController.h"
+#import "MaterialActivityIndicator.h"
 @import MaterialComponents;
 @import Parse;
 
 @interface SuggestViewController () <MapViewControllerDelegate, MatchRequestDelegate>
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 @property (weak, nonatomic) IBOutlet MDCButton *requestbutton;
 
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
@@ -29,7 +30,7 @@
 @property (nonatomic, assign) BOOL randomDone;
 @property (nonatomic, strong) NSMutableArray<NSNumber *>* bucketDump;
 @property (nonatomic, strong) NSMutableArray *fetchOccurences;
-
+@property (strong, nonatomic) IBOutlet MDCActivityIndicator *activityIndicator;
 
 @end
 
@@ -42,7 +43,7 @@
     
     [self alertSetUp];
     [self buttonSetup];
-    [self activityIndicatorSetUp];
+    [self loadingIndicatorSetUp];
 
     [self initialize];
 
@@ -55,18 +56,39 @@
     MDCContainerScheme *containerScheme = [[MDCContainerScheme alloc] init];
     containerScheme.colorScheme.primaryColor = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
     
-    [self.requestbutton applyContainedThemeWithScheme:containerScheme];
+    [self.requestbutton applyTextThemeWithScheme:containerScheme];
     
-    UIFont *font = [UIFont fontWithName:@"AppleSDGothicNeo-UltraLight " size:23];
-    [self.requestbutton.titleLabel setFont:font];
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Light" size:25];
+    
+    [self.requestbutton setTitleFont:font forState:UIControlStateSelected];
+    [self.requestbutton setTitleFont:font forState:UIControlStateNormal];
+
+    self.requestbutton.minimumSize = CGSizeMake(64, 36);
+    
+    CGFloat verticalInset = MIN(0, -(48 - CGRectGetHeight(self.requestbutton.bounds)) / 2);
+    CGFloat horizontalInset = MIN(0, -(48 - CGRectGetWidth(self.requestbutton.bounds)) / 2);
+    self.requestbutton.hitAreaInsets = UIEdgeInsetsMake(verticalInset, horizontalInset, verticalInset, horizontalInset);
 }
 
-- (void) activityIndicatorSetUp {
-    [self.view bringSubviewToFront:self.activityIndicator];
-    self.activityIndicator.hidesWhenStopped = YES;
+- (void)loadingIndicatorSetUp {
+    self.activityIndicator = [[MDCActivityIndicator alloc] init];
+    
+    UIColor *myPink = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+    UIColor *myLightPink = [[UIColor alloc] initWithRed:255.0/255.0 green:204.0/255.0 blue:238.0/255.0 alpha:1];
+    
+    self.activityIndicator.cycleColors =  @[myPink,
+    myLightPink];
+    
+    [self.activityIndicator sizeToFit];
+
+    [self.view addSubview:self.activityIndicator];
+    
+    self.activityIndicator.center = CGPointMake(self.view.frame.size.width  / 2, self.view.frame.size.height / 2);
+
     self.view.userInteractionEnabled = NO;
     [self.activityIndicator startAnimating];
 }
+
 
 - (void)initialize {
     

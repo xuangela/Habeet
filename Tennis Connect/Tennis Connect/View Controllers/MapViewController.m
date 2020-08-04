@@ -13,6 +13,7 @@
 #import "Court.h"
 #import "Player.h"
 #import "CourtDetailViewController.h"
+#import "MaterialActivityIndicator.h"
 @import Parse;
 
 static NSString * const clientID = @"YQR5YWMSDL0VOFJKHK2CVOX5MVUGUFQ1FOPYNWUAHY4U3EPY";
@@ -21,12 +22,13 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 @interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray<Court*> *courts;
 @property (nonatomic, assign) double lat;
 @property (nonatomic, assign) double lng;
+@property (strong, nonatomic) IBOutlet MDCActivityIndicator *activityIndicator;
 
 @property (nonatomic, strong) MKAnnotationView *selectedCourt;
 
@@ -45,6 +47,8 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
     [self clearExistingCourt];
 }
 
+
+
 - (void)clearExistingCourt {
     PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
     PFQuery *query = [relation query];
@@ -59,7 +63,20 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 }
 
 - (void)loadingIndicatorSetUp {
-    self.activityIndicator.hidesWhenStopped = YES;
+    self.activityIndicator = [[MDCActivityIndicator alloc] init];
+    
+    UIColor *myPink = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+    UIColor *myLightPink = [[UIColor alloc] initWithRed:255.0/255.0 green:204.0/255.0 blue:238.0/255.0 alpha:1];
+    
+    self.activityIndicator.cycleColors =  @[myPink,
+    myLightPink];
+    
+    [self.activityIndicator sizeToFit];
+
+    [self.view addSubview:self.activityIndicator];
+    
+    self.activityIndicator.center = CGPointMake(self.view.frame.size.width  / 2, self.view.frame.size.height / 2);
+
     self.view.userInteractionEnabled = NO;
     self.tabBarController.tabBar.userInteractionEnabled = NO;
     [self.activityIndicator startAnimating];

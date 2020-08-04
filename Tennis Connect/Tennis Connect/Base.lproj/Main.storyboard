@@ -244,12 +244,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="oFt-Sy-jZd">
-                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZhF-j2-j4t" customClass="SuggestedPlayerView">
-                                <rect key="frame" x="0.0" y="44" width="414" height="569"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="619"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -257,8 +253,8 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3S-cR-yUm" customClass="MDCButton">
-                                <rect key="frame" x="105.5" y="621" width="203" height="40"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
+                                <rect key="frame" x="75.5" y="702" width="263" height="48"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                 <state key="normal" title="Send Match Request"/>
                                 <connections>
                                     <segue destination="JDH-gC-ZmR" kind="presentation" identifier="matchRequestSegue" id="5Km-OZ-z42"/>
@@ -267,21 +263,18 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="G3S-cR-yUm" firstAttribute="centerX" secondItem="26Y-rN-5SS" secondAttribute="centerX" id="2KV-Rt-yhT"/>
                             <constraint firstItem="ZhF-j2-j4t" firstAttribute="top" secondItem="rtn-lC-tgP" secondAttribute="top" id="Ab8-6b-cLN"/>
-                            <constraint firstItem="oFt-Sy-jZd" firstAttribute="centerX" secondItem="26Y-rN-5SS" secondAttribute="centerX" id="O62-UX-YH1"/>
-                            <constraint firstItem="G3S-cR-yUm" firstAttribute="top" secondItem="ZhF-j2-j4t" secondAttribute="bottom" constant="8" id="RUm-X1-TRx"/>
-                            <constraint firstItem="rtn-lC-tgP" firstAttribute="bottom" secondItem="ZhF-j2-j4t" secondAttribute="bottom" constant="200" id="SnY-z1-vtb"/>
+                            <constraint firstItem="rtn-lC-tgP" firstAttribute="bottom" secondItem="ZhF-j2-j4t" secondAttribute="bottom" constant="150" id="SnY-z1-vtb"/>
                             <constraint firstItem="ZhF-j2-j4t" firstAttribute="leading" secondItem="rtn-lC-tgP" secondAttribute="leading" id="Yt4-g8-U0c"/>
+                            <constraint firstItem="G3S-cR-yUm" firstAttribute="centerX" secondItem="26Y-rN-5SS" secondAttribute="centerX" id="fdq-ZD-pze"/>
                             <constraint firstItem="rtn-lC-tgP" firstAttribute="trailing" secondItem="ZhF-j2-j4t" secondAttribute="trailing" id="g6k-fZ-Hv9"/>
-                            <constraint firstItem="oFt-Sy-jZd" firstAttribute="centerY" secondItem="26Y-rN-5SS" secondAttribute="centerY" id="iH7-eu-0LP"/>
+                            <constraint firstItem="G3S-cR-yUm" firstAttribute="top" secondItem="26Y-rN-5SS" secondAttribute="bottom" constant="-194" id="gWC-Fz-vjy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rtn-lC-tgP"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="rectangle.stack.person.crop" catalog="system" id="90o-j4-erx"/>
                     <navigationItem key="navigationItem" id="spV-Gi-fRA"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="oFt-Sy-jZd" id="JQq-SL-plR"/>
                         <outlet property="requestbutton" destination="G3S-cR-yUm" id="Psh-2Q-dnF"/>
                         <outlet property="suggestedview" destination="ZhF-j2-j4t" id="POO-TR-A1k"/>
                     </connections>
@@ -304,21 +297,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Yb-LW-UFl">
-                                <rect key="frame" x="0.0" y="50" width="414" height="607.5"/>
+                                <rect key="frame" x="0.0" y="50" width="414" height="612.5"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Court " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWn-Ga-2vo">
-                                <rect key="frame" x="0.0" y="677.5" width="414" height="31.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
+                                <rect key="frame" x="0.0" y="682.5" width="414" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u58-6w-bgT">
-                                <rect key="frame" x="109.5" y="749" width="195" height="39"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="195" id="5WI-TP-u0B"/>
-                                    <constraint firstAttribute="height" constant="39" id="lh0-UU-ZYJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u58-6w-bgT" customClass="MDCButton">
+                                <rect key="frame" x="100.5" y="749" width="213" height="39"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                 <state key="normal" title="Confirm match request"/>
                                 <connections>
                                     <action selector="tapConfirm:" destination="JDH-gC-ZmR" eventType="touchUpInside" id="gfv-eQ-Zs1"/>
@@ -362,26 +351,19 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cem-hS-jB2">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="AEa-Zw-Ezo">
-                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="AEa-Zw-Ezo" firstAttribute="centerX" secondItem="Pui-D9-uLi" secondAttribute="centerX" id="NZJ-Mh-Brr"/>
                             <constraint firstItem="cem-hS-jB2" firstAttribute="leading" secondItem="kT1-zf-MhK" secondAttribute="leading" id="SUA-QG-Xf9"/>
                             <constraint firstItem="kT1-zf-MhK" firstAttribute="trailing" secondItem="cem-hS-jB2" secondAttribute="trailing" id="Tds-xY-stS"/>
                             <constraint firstItem="cem-hS-jB2" firstAttribute="top" secondItem="kT1-zf-MhK" secondAttribute="top" constant="-44" id="US2-U7-UiO"/>
                             <constraint firstItem="kT1-zf-MhK" firstAttribute="bottom" secondItem="cem-hS-jB2" secondAttribute="bottom" constant="-83" id="o4J-jD-eMb"/>
-                            <constraint firstItem="AEa-Zw-Ezo" firstAttribute="centerY" secondItem="Pui-D9-uLi" secondAttribute="centerY" id="vzs-ef-ABq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kT1-zf-MhK"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="mappin.circle" catalog="system" id="oco-EW-XRq"/>
                     <navigationItem key="navigationItem" id="tMW-ez-7LV"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="AEa-Zw-Ezo" id="41O-Qc-wqE"/>
                         <outlet property="mapview" destination="cem-hS-jB2" id="sLQ-ow-yrq"/>
                         <segue destination="Ydo-I3-uPE" kind="presentation" identifier="courtDetailSegue" modalPresentationStyle="automatic" id="Jd9-yM-Bjv"/>
                     </connections>

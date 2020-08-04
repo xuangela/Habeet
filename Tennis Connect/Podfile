@@ -11,6 +11,7 @@ target 'Tennis Connect' do
     pod 'DateTools'
     pod 'MaterialComponents/Buttons'
     pod 'MaterialComponents/Buttons+Theming'
+    pod 'MaterialComponents/ActivityIndicator'
 
 
   target 'Tennis ConnectTests' do
