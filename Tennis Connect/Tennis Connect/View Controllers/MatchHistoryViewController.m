@@ -9,8 +9,11 @@
 #import "MatchHistoryViewController.h"
 #import "MatchHistoryCell.h"
 @import Parse;
+@import MaterialComponents;
 
 @interface MatchHistoryViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) IBOutlet MDCActivityIndicator *activityIndicator;
 
 @end
 
@@ -19,8 +22,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self loadingIndicatorSetUp];
     [self tableSetUp];
     [self getMatches];
+}
+
+- (void)loadingIndicatorSetUp {
+    self.activityIndicator = [[MDCActivityIndicator alloc] init];
+    
+    UIColor *myPink = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+    UIColor *myLightPink = [[UIColor alloc] initWithRed:255.0/255.0 green:204.0/255.0 blue:238.0/255.0 alpha:1];
+    self.activityIndicator.cycleColors =  @[myPink,myLightPink];
+    
+    [self.activityIndicator sizeToFit];
+    [self.view addSubview:self.activityIndicator];
+    self.activityIndicator.center = CGPointMake(self.view.frame.size.width  / 2, self.view.frame.size.height / 2);
+
+    [self.activityIndicator startAnimating];
 }
 
 - (void)getMatches {
@@ -40,8 +58,6 @@
             [receivedReq whereKey:@"completed" equalTo:@YES];
             [receivedReq orderByDescending:@"updatedAt"];
         
-        
-        
         [receivedReq findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
                 NSArray* moreMatches = [Match matchesWithArray:objects];
@@ -51,6 +67,7 @@
                 [self.completedMatches sortUsingDescriptors:@[sd]];
             }
             
+            [self.activityIndicator stopAnimating];
             [self.tableview reloadData];
         }];
     }];

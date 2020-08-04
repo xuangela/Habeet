@@ -23,7 +23,6 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
 
-
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSMutableArray<Court*> *courts;
 @property (nonatomic, assign) double lat;
@@ -47,8 +46,6 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
     [self clearExistingCourt];
 }
 
-
-
 - (void)clearExistingCourt {
     PFRelation *relation = [[PFUser currentUser] relationForKey:@"courts"];
     PFQuery *query = [relation query];
@@ -68,13 +65,10 @@ static NSString * const clientSecret = @"DEIPIBDNNY5IH5D5T4I35GORXFJ3VIBVR3LSIU3
     UIColor *myPink = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
     UIColor *myLightPink = [[UIColor alloc] initWithRed:255.0/255.0 green:204.0/255.0 blue:238.0/255.0 alpha:1];
     
-    self.activityIndicator.cycleColors =  @[myPink,
-    myLightPink];
+    self.activityIndicator.cycleColors =  @[myPink, myLightPink];
     
     [self.activityIndicator sizeToFit];
-
     [self.view addSubview:self.activityIndicator];
-    
     self.activityIndicator.center = CGPointMake(self.view.frame.size.width  / 2, self.view.frame.size.height / 2);
 
     self.view.userInteractionEnabled = NO;

@@ -19,7 +19,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *etaLabel;
 @property (weak, nonatomic) IBOutlet UILabel *courtnameLabel;
 
+@property (strong, nonatomic) IBOutlet MDCActivityIndicator *activityIndicator;
 @property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, assign) BOOL oneFinishedLoading;
 
 @end
 
@@ -27,6 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self loadingIndicatorSetUp];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -38,6 +42,21 @@
         historycontroller.completedMatches = justCompletedMatch;
         [historycontroller.tableview reloadData];
     }
+}
+
+- (void)loadingIndicatorSetUp {
+    self.activityIndicator = [[MDCActivityIndicator alloc] init];
+    
+    UIColor *myPink = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+    UIColor *myLightPink = [[UIColor alloc] initWithRed:255.0/255.0 green:204.0/255.0 blue:238.0/255.0 alpha:1];
+    
+    self.activityIndicator.cycleColors =  @[myPink, myLightPink];
+    
+    [self.activityIndicator sizeToFit];
+    [self.view addSubview:self.activityIndicator];
+    self.activityIndicator.center = CGPointMake(self.view.frame.size.width  / 2, self.view.frame.size.height / 2);
+
+    [self.activityIndicator startAnimating];
 }
 
 - (void)getMatches {
@@ -63,6 +82,13 @@
                 NSArray* moreMatches = [Match matchesWithArray:objects];
                 [self.matches addObjectsFromArray:moreMatches];
                 [self tableSetUp];
+                
+                if (self.oneFinishedLoading) {
+                    [self.activityIndicator stopAnimating];
+                } else {
+                    self.oneFinishedLoading = YES;
+                }
+                
                 [self.tableview reloadData];
             }
         }];
@@ -151,6 +177,11 @@
             travelTimeString = [travelTimeString stringByAppendingString:[NSString stringWithFormat:@"%.0f min", travelTimeMin]];
             
             self.etaLabel.text = travelTimeString;
+            if (self.oneFinishedLoading) {
+                [self.activityIndicator stopAnimating];
+            } else {
+                self.oneFinishedLoading = YES;
+            }
         }
     }];
 }

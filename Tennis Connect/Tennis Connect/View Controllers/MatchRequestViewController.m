@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) MKAnnotationView *selectedCourt;
 @property (nonatomic, strong) CLLocationManager *locationManager;
+@property (strong, nonatomic) IBOutlet MDCActivityIndicator *activityIndicator;
 
 @end
 
@@ -33,9 +34,24 @@
     [super viewDidLoad];
     
     [self buttonSetUp];
+    [self loadingIndicatorSetUp];
 
     self.courtNameLabel.alpha = 0;
     self.sentReq = NO;
+}
+
+- (void)loadingIndicatorSetUp {
+    self.activityIndicator = [[MDCActivityIndicator alloc] init];
+    
+    UIColor *myPink = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+    UIColor *myLightPink = [[UIColor alloc] initWithRed:255.0/255.0 green:204.0/255.0 blue:238.0/255.0 alpha:1];
+    self.activityIndicator.cycleColors =  @[myPink,myLightPink];
+    
+    [self.activityIndicator sizeToFit];
+    [self.view addSubview:self.activityIndicator];
+    self.activityIndicator.center = CGPointMake(self.view.frame.size.width  / 2, self.view.frame.size.height / 2);
+
+    [self.activityIndicator startAnimating];
 }
 
 - (void)buttonSetUp {
@@ -51,7 +67,6 @@
     
     [self.confirmButton setTitleFont:font forState:UIControlStateSelected];
     [self.confirmButton setTitleFont:font forState:UIControlStateNormal];
-    
     
     self.confirmButton.minimumSize = CGSizeMake(64, 36);
     
@@ -147,7 +162,7 @@
         annotation.title = court.name;
         [self.mapview addAnnotation:annotation];
     }
-    NSLog(@"added map annotations");
+    [self.activityIndicator stopAnimating];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
