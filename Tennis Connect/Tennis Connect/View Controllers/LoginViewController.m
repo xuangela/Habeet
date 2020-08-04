@@ -12,12 +12,17 @@
 #import "MapViewController.h"
 #import "SuggestViewController.h"
 #import "Court.h"
+#import "MaterialButtons.h"
+@import MaterialComponents;
 @import Parse;
 
 @interface LoginViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet MDCButton *registerButton;
+@property (weak, nonatomic) IBOutlet MDCButton *loginButton;
+
 
 @property (nonatomic, strong) UIAlertController *emptyUsernameAlert;
 @property (nonatomic, strong) UIAlertController *emptyPWAlert;
@@ -34,6 +39,20 @@
     [super viewDidLoad];
     
     [self alertSetUp];
+    [self buttonSetup];
+}
+
+- (void)buttonSetup {
+    
+    MDCContainerScheme *containerScheme = [[MDCContainerScheme alloc] init];
+    containerScheme.colorScheme.primaryColor = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+    
+    [self.registerButton applyTextThemeWithScheme:containerScheme];
+    [self.loginButton applyTextThemeWithScheme:containerScheme];
+    
+    UIFont *font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular " size:15];
+    [self.registerButton.titleLabel setFont:font];
+    [self.loginButton.titleLabel setFont:font];
 }
 
 - (void) alertSetUp {

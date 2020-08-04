@@ -9,6 +9,9 @@ target 'Tennis Connect' do
     pod 'Parse'
     pod 'Parse/UI'
     pod 'DateTools'
+    pod 'MaterialComponents/Buttons'
+    pod 'MaterialComponents/Buttons+Theming'
+
 
   target 'Tennis ConnectTests' do
     inherit! :search_paths

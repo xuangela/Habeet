@@ -31,7 +31,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldw-QA-eSH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldw-QA-eSH" customClass="MDCButton">
                                 <rect key="frame" x="264.5" y="426" width="38" height="30"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -40,8 +40,9 @@
                                     <action selector="tapLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ebs-dy-t7Q"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EaS-7F-Ae2">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EaS-7F-Ae2" customClass="MDCButton">
                                 <rect key="frame" x="112" y="426" width="57" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Register">
                                     <color key="titleColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
@@ -75,7 +76,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="9In-CF-vWD"/>
                     <connections>
+                        <outlet property="loginButton" destination="ldw-QA-eSH" id="mPI-qR-ewx"/>
                         <outlet property="passwordField" destination="NhD-v2-2Ns" id="hn7-3g-Gsh"/>
+                        <outlet property="registerButton" destination="EaS-7F-Ae2" id="FL7-jN-Iji"/>
                         <outlet property="usernameField" destination="hoc-Dh-zuE" id="32p-Uu-cVx"/>
                         <segue destination="UGC-Bq-fxb" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="yJg-LI-zZr"/>
                         <segue destination="zJJ-dH-Alx" kind="presentation" identifier="registerSegue" modalPresentationStyle="fullScreen" id="E0n-KV-Fpy"/>
@@ -1466,7 +1469,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bNz-L8-dut"/>
+        <segue reference="yJg-LI-zZr"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>

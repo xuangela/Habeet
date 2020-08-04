@@ -1,6 +1,85 @@
 PODS:
   - Bolts/Tasks (1.9.1)
   - DateTools (2.0.0)
+  - MaterialComponents/AnimationTiming (111.0.0)
+  - MaterialComponents/Availability (111.0.0)
+  - MaterialComponents/Buttons (111.0.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - "MaterialComponents/Buttons+ColorThemer (111.0.0)":
+    - MaterialComponents/Buttons
+    - MaterialComponents/schemes/Color
+  - "MaterialComponents/Buttons+ShapeThemer (111.0.0)":
+    - MaterialComponents/Buttons
+    - MaterialComponents/schemes/Shape
+  - "MaterialComponents/Buttons+Theming (111.0.0)":
+    - MaterialComponents/Buttons
+    - "MaterialComponents/Buttons+ColorThemer"
+    - "MaterialComponents/Buttons+ShapeThemer"
+    - "MaterialComponents/Buttons+TypographyThemer"
+    - MaterialComponents/schemes/Container
+    - MaterialComponents/ShadowElevations
+  - "MaterialComponents/Buttons+TypographyThemer (111.0.0)":
+    - MaterialComponents/Buttons
+    - MaterialComponents/schemes/Typography
+  - MaterialComponents/Elevation (111.0.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Ink (111.0.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Application (111.0.0)
+  - MaterialComponents/private/Color (111.0.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/Math (111.0.0)
+  - MaterialComponents/Ripple (111.0.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/schemes/Color (111.0.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+  - MaterialComponents/schemes/Container (111.0.0):
+    - MaterialComponents/schemes/Color
+    - MaterialComponents/schemes/Shape
+    - MaterialComponents/schemes/Typography
+  - MaterialComponents/schemes/Shape (111.0.0):
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+  - MaterialComponents/schemes/Typography (111.0.0):
+    - "MaterialComponents/schemes/Typography+BasicFontScheme"
+    - "MaterialComponents/schemes/Typography+Scheming"
+    - MaterialComponents/Typography
+  - "MaterialComponents/schemes/Typography+BasicFontScheme (111.0.0)"
+  - "MaterialComponents/schemes/Typography+Scheming (111.0.0)"
+  - MaterialComponents/ShadowElevations (111.0.0)
+  - MaterialComponents/ShadowLayer (111.0.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (111.0.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (111.0.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/Typography (111.0.0):
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
+    - MDFTextAccessibility
+  - MDFInternationalization (2.0.0)
+  - MDFTextAccessibility (2.0.0)
   - Parse (1.18.0):
     - Parse/Core (= 1.18.0)
   - Parse/Core (1.18.0):
@@ -10,6 +89,8 @@ PODS:
 
 DEPENDENCIES:
   - DateTools
+  - MaterialComponents/Buttons
+  - "MaterialComponents/Buttons+Theming"
   - Parse
   - Parse/UI
 
@@ -17,13 +98,19 @@ SPEC REPOS:
   trunk:
     - Bolts
     - DateTools
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
     - Parse
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
+  MaterialComponents: 533042da998b97ad13a6f544268f8026e8161cc5
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
 
-PODFILE CHECKSUM: 69ac27743350d572e87a4b513cef98cb20dcea2d
+PODFILE CHECKSUM: fea66e0d11a5053aeabb61f86522d767741950ff
 
 COCOAPODS: 1.9.3
