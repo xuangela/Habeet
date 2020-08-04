@@ -12,12 +12,13 @@
 #import "Player.h"
 #import <DateTools/DateTools.h>
 #import "MatchRequestViewController.h"
-
+@import MaterialComponents;
 @import Parse;
 
 @interface SuggestViewController () <MapViewControllerDelegate, MatchRequestDelegate>
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet MDCButton *requestbutton;
 
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
 @property (nonatomic, strong) NSMutableArray<NSMutableArray *> *suggestedPlayerBuckets; // mutable array of arrays containing players with diffferent proximities
@@ -40,12 +41,24 @@
     [super viewDidLoad];
     
     [self alertSetUp];
+    [self buttonSetup];
     [self activityIndicatorSetUp];
 
     [self initialize];
 
     [self fetchPlayers];
     [self fetchRandomPlayers];
+}
+
+- (void)buttonSetup {
+    
+    MDCContainerScheme *containerScheme = [[MDCContainerScheme alloc] init];
+    containerScheme.colorScheme.primaryColor = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+    
+    [self.requestbutton applyContainedThemeWithScheme:containerScheme];
+    
+    UIFont *font = [UIFont fontWithName:@"AppleSDGothicNeo-UltraLight " size:23];
+    [self.requestbutton.titleLabel setFont:font];
 }
 
 - (void) activityIndicatorSetUp {

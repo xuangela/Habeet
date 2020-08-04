@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Match.h"
+@import MaterialComponents;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *expLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contactLabel;
-@property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+@property (weak, nonatomic) IBOutlet MDCButton *confirmButton;
 
 @property (nonatomic, strong) Match* match;
 

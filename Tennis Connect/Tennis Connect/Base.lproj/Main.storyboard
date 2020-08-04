@@ -256,7 +256,7 @@
                                     <outletCollection property="gestureRecognizers" destination="pCC-LP-gWI" appends="YES" id="wav-Kz-n25"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3S-cR-yUm">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3S-cR-yUm" customClass="MDCButton">
                                 <rect key="frame" x="105.5" y="621" width="203" height="40"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
                                 <state key="normal" title="Send Match Request"/>
@@ -282,6 +282,7 @@
                     <navigationItem key="navigationItem" id="spV-Gi-fRA"/>
                     <connections>
                         <outlet property="activityIndicator" destination="oFt-Sy-jZd" id="JQq-SL-plR"/>
+                        <outlet property="requestbutton" destination="G3S-cR-yUm" id="Psh-2Q-dnF"/>
                         <outlet property="suggestedview" destination="ZhF-j2-j4t" id="POO-TR-A1k"/>
                     </connections>
                 </viewController>
@@ -499,7 +500,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xun-VQ-xAV">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xun-VQ-xAV" customClass="MDCButton">
                                                     <rect key="frame" x="211" y="136" width="55" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="or0-dK-GTj"/>
@@ -1281,15 +1282,6 @@
                                                 </segments>
                                                 <color key="selectedSegmentTintColor" red="1" green="0.80819710320000004" blue="0.92544582559999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </segmentedControl>
-                                            <datePicker contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="top" datePickerMode="date" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHh-15-lIz">
-                                                <rect key="frame" x="47" y="197" width="320" height="200"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="CNw-Ln-IJY"/>
-                                                </constraints>
-                                                <date key="date" timeIntervalSinceReferenceDate="-31555551.960631967">
-                                                    <!--2000-01-01 18:34:08 +0000-->
-                                                </date>
-                                            </datePicker>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="First Name " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VI2-fc-Wuv">
                                                 <rect key="frame" x="12" y="30" width="86" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
@@ -1343,6 +1335,15 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <datePicker contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="top" datePickerMode="date" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHh-15-lIz">
+                                                <rect key="frame" x="47" y="197" width="320" height="200"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="CNw-Ln-IJY"/>
+                                                </constraints>
+                                                <date key="date" timeIntervalSinceReferenceDate="-31555551.960631967">
+                                                    <!--2000-01-01 18:34:08 +0000-->
+                                                </date>
+                                            </datePicker>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -1404,7 +1405,7 @@
                                 <action selector="tapCancel:" destination="tLI-wA-l4d" id="wog-BN-UBd"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Register" id="Okl-pE-ca9">
+                        <barButtonItem key="rightBarButtonItem" title="Register" id="Okl-pE-ca9" customClass="MDC">
                             <connections>
                                 <action selector="tapRegister:" destination="tLI-wA-l4d" id="BVt-uI-PRE"/>
                             </connections>
@@ -1412,10 +1413,12 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cancelButton" destination="6qE-pF-5Vy" id="2CL-M2-tuN"/>
                         <outlet property="contactField" destination="08T-eH-INX" id="cAE-xT-gkz"/>
                         <outlet property="dateOfBirthPicker" destination="QHh-15-lIz" id="CFN-0X-L4m"/>
                         <outlet property="genderSegControl" destination="H7t-fG-H3Y" id="2Gl-Np-J6H"/>
                         <outlet property="nameField" destination="yYe-5I-3xW" id="1vM-2v-7pQ"/>
+                        <outlet property="registerButon" destination="Okl-pE-ca9" id="CEj-DD-WK0"/>
                         <outlet property="skillSegControl" destination="WIz-3I-eVH" id="PGj-kQ-fE8"/>
                         <segue destination="UGC-Bq-fxb" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="bNz-L8-dut"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="delSegue" modalPresentationStyle="fullScreen" id="o0Q-64-p98"/>

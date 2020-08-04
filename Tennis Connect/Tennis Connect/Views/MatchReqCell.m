@@ -14,11 +14,23 @@
     [super awakeFromNib];
     // Initialization code
     self.confirmButton.alpha = 0;
+    [self buttonSetup];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
+}
+
+- (void)buttonSetup {
+    
+    MDCContainerScheme *containerScheme = [[MDCContainerScheme alloc] init];
+    containerScheme.colorScheme.primaryColor = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+    
+    [self.confirmButton applyTextThemeWithScheme:containerScheme];
+    
+    UIFont *font = [UIFont fontWithName:@"AppleSDGothicNeo-UltraLight " size:15];
+    [self.confirmButton.titleLabel setFont:font];
 }
 
 - (void) setMatch:(Match *)match {
