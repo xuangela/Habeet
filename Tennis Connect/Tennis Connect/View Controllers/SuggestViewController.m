@@ -61,8 +61,8 @@
     CGPoint oldPoint = CGPointMake(self.suggestedview.bounds.size.width * self.suggestedview.layer.anchorPoint.x, self.suggestedview.layer.bounds.size.height * self.suggestedview.layer.anchorPoint.y);
 
     
-    newPoint = CGPointApplyAffineTransform(newPoint, self.suggestedview.transform);
-    oldPoint = CGPointApplyAffineTransform(oldPoint, self.suggestedview.transform);
+//    newPoint = CGPointApplyAffineTransform(newPoint, self.suggestedview.transform);
+//    oldPoint = CGPointApplyAffineTransform(oldPoint, self.suggestedview.transform);
     
     CGPoint position = self.suggestedview.layer.position;
 
