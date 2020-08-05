@@ -68,11 +68,11 @@
 //    self.suggestedview.layer.anchorPoint = CGPointMake(0,1);
     
 //    CGPoint oldPoint = CGPointMake(.5 * self.suggestedview.bounds.size.width, .5 * self.suggestedview.bounds.size.height);
-//    
+//
 //    self.leadingConstraint.constant -= oldPoint.x;
 //    self.topConstraint.constant += oldPoint.y;
     
-//    self.suggestedview.layer.anchorPoint = CGPointMake(0,1);
+    self.suggestedview.layer.anchorPoint = CGPointMake(0,1);
 }
 
 - (void)buttonSetup {
