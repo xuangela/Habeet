@@ -46,6 +46,18 @@
         self.pfpView.file = player.pfp;
         [self.pfpView loadInBackground];
     }
+    
+    self.nameLabel.alpha = 0;
+    self.experienceLevel.alpha = 0;
+    self.pfpView.alpha = 0;
+    
+    [UIView animateWithDuration:.5 animations:^{
+        self.nameLabel.alpha = 1;
+        self.experienceLevel.alpha = 1;
+        self.pfpView.alpha = 1;
+    }];
+    
+    
 }
 
 /*
