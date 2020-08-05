@@ -249,7 +249,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="pCC-LP-gWI" appends="YES" id="wav-Kz-n25"/>
+                                    <outletCollection property="gestureRecognizers" destination="5qV-GR-NSk" appends="YES" id="GFA-RC-S7H"/>
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3S-cR-yUm" customClass="MDCButton">
@@ -275,16 +275,18 @@
                     <tabBarItem key="tabBarItem" title="" image="rectangle.stack.person.crop" catalog="system" id="90o-j4-erx"/>
                     <navigationItem key="navigationItem" id="spV-Gi-fRA"/>
                     <connections>
+                        <outlet property="leadingConstraint" destination="Yt4-g8-U0c" id="mei-Re-qYp"/>
                         <outlet property="requestbutton" destination="G3S-cR-yUm" id="Psh-2Q-dnF"/>
                         <outlet property="suggestedview" destination="ZhF-j2-j4t" id="POO-TR-A1k"/>
+                        <outlet property="topConstraint" destination="Ab8-6b-cLN" id="jut-Ef-8oL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oMc-8F-7Vw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="pCC-LP-gWI">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="5qV-GR-NSk">
                     <connections>
-                        <action selector="swipeLeft:" destination="Lt5-ms-lho" id="UDv-FW-Kt3"/>
+                        <action selector="onPan:" destination="Lt5-ms-lho" id="xMh-BH-BH5"/>
                     </connections>
-                </swipeGestureRecognizer>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1540.5797101449277" y="645.53571428571422"/>
         </scene>

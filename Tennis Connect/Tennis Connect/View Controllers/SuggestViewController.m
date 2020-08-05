@@ -18,7 +18,8 @@
 
 @interface SuggestViewController () <MapViewControllerDelegate, MatchRequestDelegate>
 
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadingConstraint;
 @property (weak, nonatomic) IBOutlet MDCButton *requestbutton;
 
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
@@ -31,6 +32,7 @@
 @property (nonatomic, strong) NSMutableArray<NSNumber *>* bucketDump;
 @property (nonatomic, strong) NSMutableArray *fetchOccurences;
 @property (strong, nonatomic) IBOutlet MDCActivityIndicator *activityIndicator;
+@property (nonatomic, assign) CGPoint initialPan;
 
 @end
 
@@ -44,11 +46,33 @@
     [self alertSetUp];
     [self buttonSetup];
     [self loadingIndicatorSetUp];
+    
+    [self setAnchorPointforSuggestedView];
 
     [self initialize];
 
     [self fetchPlayers];
     [self fetchRandomPlayers];
+}
+
+-(void)setAnchorPointforSuggestedView {
+    // just need to get rid of constraints
+//    CGPoint oldPoint = CGPointMake(.5 * self.suggestedview.bounds.size.width, .5 * self.suggestedview.bounds.size.height);
+//
+//    CGPoint position = self.suggestedview.layer.position;
+//
+//    position.x -= oldPoint.x;
+//    position.y += oldPoint.y;
+//
+//    self.suggestedview.layer.position = position;
+//    self.suggestedview.layer.anchorPoint = CGPointMake(0,1);
+    
+//    CGPoint oldPoint = CGPointMake(.5 * self.suggestedview.bounds.size.width, .5 * self.suggestedview.bounds.size.height);
+//    
+//    self.leadingConstraint.constant -= oldPoint.x;
+//    self.topConstraint.constant += oldPoint.y;
+    
+//    self.suggestedview.layer.anchorPoint = CGPointMake(0,1);
 }
 
 - (void)buttonSetup {
@@ -370,7 +394,34 @@
     [self.noMoreSuggestAlert addAction:okAction];
 }
 
-- (IBAction)swipeLeft:(id)sender {
+- (IBAction)onPan:(UIPanGestureRecognizer *)panGesture {
+    CGPoint location = [panGesture locationInView:self.view];
+    
+    // want view to follow finger
+    
+    CGAffineTransform rotate = CGAffineTransformMakeRotation( -45.0 * M_PI/180);
+    self.suggestedview.transform = rotate;
+    
+    if (panGesture.state == UIGestureRecognizerStateBegan) {
+        self.initialPan = location;
+    } else if (panGesture.state == UIGestureRecognizerStateEnded) {
+        CGPoint currPoint = location;
+        double xDiff = self.initialPan.x - currPoint.x;
+        
+        if (xDiff > 100) {
+            [self dispNext];
+            CGAffineTransform rotate = CGAffineTransformMakeRotation(0);
+            self.suggestedview.transform = rotate;
+        } else {
+            [UIView animateWithDuration:1 animations:^{
+                CGAffineTransform rotate = CGAffineTransformMakeRotation(0);
+                self.suggestedview.transform = rotate;
+            }];
+        }
+    }
+}
+
+- (void)dispNext {
     self.currPlayer += 1;
     
     if (self.players.count - self.currPlayer < 5 && self.bestBucket < self.suggestedPlayerBuckets.count) {
