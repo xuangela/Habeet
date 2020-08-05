@@ -29,17 +29,13 @@
     PFUser *opponent;
     BOOL isReceiver;
     
-    
-    
-     if ([match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) {
-         opponent = match.sender;
-         isReceiver = YES;
-         
-     } else {
-         opponent = match.receiver;
-         isReceiver = NO;
-         
-     }
+    if ([match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) {
+        opponent = match.sender;
+        isReceiver = YES;
+    } else {
+        opponent = match.receiver;
+        isReceiver = NO;
+    }
     
     NSArray<NSString *> *formattedString = [self getScore:match.score];
     [self setScores:formattedString receiving:isReceiver];
@@ -55,6 +51,24 @@
     self.dateLabel.text = [playedDate formattedDateWithStyle:NSDateFormatterFullStyle];
     
     self.expLabel.text = [[opponent valueForKey:@"rating"] stringValue];
+    
+    
+    if ([match[@"scoreValidated"] boolValue]) {
+        self.validationButton.alpha = 0;
+    } else {
+        self.validationButton.alpha = 1;
+        if (isReceiver) {
+            [self.validationButton setTitle:@"Validate score" forState:UIControlStateNormal];
+            UIColor *myPink = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+            [self.validationButton setTitleColor:myPink forState:UIControlStateNormal];
+            self.validationButton.userInteractionEnabled = YES;
+        } else {
+            [self.validationButton setTitle:@"Awaiting validation" forState:UIControlStateNormal];
+            [self.validationButton setTitleColor:UIColor.grayColor forState:UIControlStateNormal];
+            self.validationButton.userInteractionEnabled = NO;
+            
+        }
+    }
 }
 
 - (NSArray<NSString *> *) getScore:(NSArray *) scores { //sender, receiver

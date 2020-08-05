@@ -136,17 +136,15 @@
 }
 
 - (void) sendScoresToParse {
-    NSArray *scores;
-    
-    if (self.isSender) {
-        scores = @[self.mySet1Games.text, self.theirSet1Games.text,self.mySet2Games.text, self.theirSet2Games.text,self.mySet3Games.text, self.theirSet3Games.text];
-    } else {
-        scores = @[self.theirSet1Games.text, self.mySet1Games.text,self.theirSet2Games.text, self.mySet2Games.text,self.theirSet3Games.text, self.mySet3Games.text];
-    }
+    NSArray *scores = @[self.mySet1Games.text, self.theirSet1Games.text,self.mySet2Games.text, self.theirSet2Games.text,self.mySet3Games.text, self.theirSet3Games.text];
     
     PFQuery *query = [Match query];
     
     [query getObjectInBackgroundWithId:self.match.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (!self.isSender) {
+            object[@"receiver"] = self.match.sender;
+            object[@"sender"] = self.match.receiver;
+        }
         object[@"scores"] = scores;
         object[@"completed"] = @YES;
         
