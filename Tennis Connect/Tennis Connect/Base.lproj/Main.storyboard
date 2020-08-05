@@ -173,7 +173,7 @@
                                                         <constraint firstAttribute="height" constant="40" id="96I-B3-Alw"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.42422814049510255" green="0.73998651649746194" blue="0.23745487901867857" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0-6 0-6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvB-Lx-THp">

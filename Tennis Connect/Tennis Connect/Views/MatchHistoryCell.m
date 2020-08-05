@@ -85,6 +85,7 @@
 }
 
 - (void) setScores:(NSArray<NSString *> *) scores receiving: (BOOL) receiver {
+    NSArray *bits = [scores[0] componentsSeparatedByString: @" - "];
     if (receiver) {
         self.setLabel.text = scores[0];
         NSString* gameScores = [NSString stringWithFormat:@"%@    %@    %@", scores[1], scores[2], scores[3]];
@@ -100,6 +101,14 @@
         NSString* gameScores = [NSString stringWithFormat:@"%@    %@    %@", scores[1], scores[2], scores[3]];
         self.gameLabel.text = [gameScores stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     }
+    
+    UIColor *color;
+    if ([bits[0] intValue]< [bits[1] intValue]) {
+        color = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+    } else {
+        color = [[UIColor alloc] initWithRed:111.0/255.0 green:179.0/255.0 blue:70.0/255.0 alpha:1];
+    }
+    self.setLabel.textColor = color;
 }
 
 - (NSString*) reverseGameString:(NSString *)gameScore {
