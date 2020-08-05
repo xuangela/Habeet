@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet PFImageView *pfpView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *skillLabel;
+@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerVC;
 
@@ -66,13 +67,23 @@
     self.contactNumLabel.text = [user valueForKey:@"contact"];
     NSInteger age =[[user valueForKey:@"age"] yearsAgo];
     self.ageLabel.text = [NSString stringWithFormat: @"%ld", (long)age];
-    NSInteger exp = [[user valueForKey:@"rating"] integerValue];
-    self.skillLabel.text = [NSString stringWithFormat: @"%ld", (long)exp];
-    
+
     if ([user valueForKey:@"picture"]) {
         self.pfpView.file = [user valueForKey:@"picture"];
         [self.pfpView loadInBackground];
     }
+    
+    int exp = [[user valueForKey:@"rating"] intValue];
+    self.skillLabel.text = [NSString stringWithFormat: @"%d", exp];
+    
+    if (exp <= 500) {
+        self.levelLabel.text = @"Beginner";
+    } else if (exp <= 1000) {
+        self.levelLabel.text = @"Intermediate";
+    } else {
+        self.levelLabel.text = @"Expert";    }
+    
+    
 }
 
 - (IBAction)tapLogout:(id)sender {

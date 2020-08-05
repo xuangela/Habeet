@@ -48,7 +48,20 @@
      }
     
     self.contactLabel.text = [opponent valueForKey:@"contact"];
-    self.expLabel.text = [[opponent valueForKey:@"rating"] stringValue];
+    
+    int exp = [[opponent valueForKey:@"rating"] intValue];
+    NSString *rating =[NSString stringWithFormat: @"%d", exp];
+    
+    if (exp <= 500) {
+        rating = [rating stringByAppendingString:@"   beginner"];
+    } else if (exp <= 1000) {
+        rating = [rating stringByAppendingString:@"   intermediate"];
+    } else {
+        rating = [rating stringByAppendingString:@"   experienced"];
+    }
+    
+    self.expLabel.text = rating;
+    
     self.nameLabel.text = [opponent valueForKey:@"name"];
     
     if ([opponent valueForKey:@"picture"]) {

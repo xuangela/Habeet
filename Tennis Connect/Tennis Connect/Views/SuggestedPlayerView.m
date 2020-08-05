@@ -42,7 +42,19 @@
     _player = player;
     
     self.nameLabel.text = player.name;
-    self.experienceLevel.text = [NSString stringWithFormat:@"%@", player.rating];
+    
+    int exp = [player.rating intValue];
+    NSString *rating =[NSString stringWithFormat: @"%d", exp];
+    
+    if (exp <= 500) {
+        rating = [rating stringByAppendingString:@"   beginner"];
+    } else if (exp <= 1000) {
+        rating = [rating stringByAppendingString:@"   intermediate"];
+    } else {
+        rating = [rating stringByAppendingString:@"   experienced"];
+    }
+    
+    self.experienceLevel.text = rating;
     
     if (player.pfp) {
         self.pfpView.file = player.pfp;

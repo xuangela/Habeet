@@ -50,8 +50,15 @@
     NSDate *playedDate = match[@"updatedAt"];
     self.dateLabel.text = [playedDate formattedDateWithStyle:NSDateFormatterFullStyle];
     
-    self.expLabel.text = [[opponent valueForKey:@"rating"] stringValue];
+    int exp = [[opponent valueForKey:@"rating"] intValue];
     
+    if (exp <= 500) {
+        self.expLabel.text = @"Beginner";
+    } else if (exp <= 1000) {
+        self.expLabel.text = @"Intermediate";
+    } else {
+        self.expLabel.text = @"Experienced";
+    }
     
     if ([match[@"scoreValidated"] boolValue]) {
         self.validationButton.alpha = 0;
