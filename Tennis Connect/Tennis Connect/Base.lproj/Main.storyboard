@@ -184,6 +184,9 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9N7-zr-MSF">
                                                     <rect key="frame" x="156" y="149.66666666666666" width="196" height="30"/>
+                                                    <connections>
+                                                        <action selector="onTapValidate:" destination="AGr-go-Y5a" eventType="touchUpInside" id="D1U-2O-puK"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

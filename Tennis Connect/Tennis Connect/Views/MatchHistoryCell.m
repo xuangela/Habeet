@@ -131,4 +131,17 @@
     gameScore = [NSString stringWithFormat:@"%c - %c", last, first];
     return gameScore;
 }
+
+- (IBAction)onTapValidate:(id)sender {
+    [UIView animateWithDuration:.2 animations:^{
+        self.validationButton.alpha = 0;
+    }];
+    
+    PFQuery *query = [Match query];
+    [query getObjectInBackgroundWithId:self.match.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        object[@"scoreValidated"] = @YES;
+        
+        [object saveInBackground];
+    }];
+}
 @end
