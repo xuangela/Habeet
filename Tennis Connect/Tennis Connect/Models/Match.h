@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) Court *court;
 @property (nonatomic, strong) NSDate *updatedAt;
 @property (nonatomic, assign) BOOL confirmed;
+@property (nonatomic, assign) BOOL scoreValidated;
 @property (nonatomic, assign) BOOL completed;
 @property (nonatomic, assign) NSArray<NSString *> *score;
 

@@ -127,6 +127,7 @@
     newMatch.receiver = self.player.user;
     newMatch.confirmed = NO;
     newMatch.completed = NO;
+    newMatch.scoreValidated = NO;
     
     PFQuery *findCourtRefQuery = [Court query];
     [findCourtRefQuery whereKey: @"name" equalTo:self.selectedCourt.annotation.title];

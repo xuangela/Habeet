@@ -16,6 +16,7 @@
 @dynamic court;
 @dynamic updatedAt;
 @dynamic confirmed;
+@dynamic scoreValidated;
 @dynamic completed;
 @dynamic score;
 
@@ -45,6 +46,7 @@
     
     self.completed = [[matchPF valueForKey:@"completed"] boolValue];
     self.confirmed = [[matchPF valueForKey:@"confirmed"] boolValue];
+    self.scoreValidated = [[matchPF valueForKey:@"scoreValidated"] boolValue];
     
     self.score = [matchPF objectForKey:@"scores"];
     
