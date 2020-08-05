@@ -22,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet MDCButton *registerButton;
 @property (weak, nonatomic) IBOutlet MDCButton *loginButton;
 
-
 @property (nonatomic, strong) UIAlertController *emptyUsernameAlert;
 @property (nonatomic, strong) UIAlertController *emptyPWAlert;
 @property (nonatomic, strong) UIAlertController *badLoginAlert;

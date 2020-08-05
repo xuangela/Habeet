@@ -11,9 +11,13 @@
 @import Parse;
 @import MaterialComponents;
 
-@interface MatchHistoryViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface MatchHistoryViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet MDCActivityIndicator *activityIndicator;
+
+@property (nonatomic, assign) BOOL isMoreDataLoading;
+@property (nonatomic, assign) int numFetch;
+@property (nonatomic, strong) UIAlertController *noMoreMatchAlert;
 
 @end
 
@@ -22,9 +26,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.completedMatches = [[NSMutableArray alloc] init];
+    
+    [self alertSetUp];
     [self loadingIndicatorSetUp];
     [self tableSetUp];
     [self getMatches];
+}
+
+- (void) alertSetUp {
+    self.noMoreMatchAlert = [UIAlertController alertControllerWithTitle:@"No more matches to display"
+           message:@"Play more matches to see your progress :)"
+    preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    [self.noMoreMatchAlert addAction:okAction];
+    
 }
 
 - (void)loadingIndicatorSetUp {
@@ -47,30 +63,59 @@
     [sentReq whereKey:@"completed" equalTo:@YES];
     [sentReq includeKey:@"receiver"];
     [sentReq orderByDescending:@"updatedAt"];
+    sentReq.limit = 5;
+    sentReq.skip = 5 * self.numFetch;
     
+    NSMutableArray *newlyFetchedMatches = [[NSMutableArray alloc] init];
     [sentReq findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
-            self.completedMatches = [Match matchesWithArray:objects];
+            [newlyFetchedMatches addObjectsFromArray:[Match matchesWithArray:objects]];
         }
-            PFQuery *receivedReq = [Match query];
-            [receivedReq whereKey:@"receiver" equalTo:[PFUser currentUser]];
-            [receivedReq includeKey:@"sender"];
-            [receivedReq whereKey:@"completed" equalTo:@YES];
-            [receivedReq orderByDescending:@"updatedAt"];
+        
+        PFQuery *receivedReq = [Match query];
+        [receivedReq whereKey:@"receiver" equalTo:[PFUser currentUser]];
+        [receivedReq includeKey:@"sender"];
+        [receivedReq whereKey:@"completed" equalTo:@YES];
+        [receivedReq orderByDescending:@"updatedAt"];
+        receivedReq.limit = 5;
+        receivedReq.skip = 5 * self.numFetch;
+        self.numFetch++;
         
         [receivedReq findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
                 NSArray* moreMatches = [Match matchesWithArray:objects];
-                [self.completedMatches addObjectsFromArray:moreMatches];
+                [newlyFetchedMatches addObjectsFromArray:moreMatches];
                 
                 NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"updatedAt" ascending:NO];
                 [self.completedMatches sortUsingDescriptors:@[sd]];
+            }
+            
+            if (newlyFetchedMatches.count == 0) {
+                [self presentViewController:self.noMoreMatchAlert animated:YES completion:^{  }];
+            } else {
+                [self.completedMatches addObjectsFromArray:newlyFetchedMatches];
             }
             
             [self.activityIndicator stopAnimating];
             [self.tableview reloadData];
         }];
     }];
+}
+#pragma mark - Infinite scrolling
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+   if(!self.isMoreDataLoading){
+        int scrollViewContentHeight = self.tableview.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableview.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableview.isDragging) {
+            self.isMoreDataLoading = YES;
+            
+            [self getMatches];
+            [self.activityIndicator startAnimating];
+        }
+    }
 }
 
 #pragma mark - Table
