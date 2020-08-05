@@ -31,6 +31,7 @@
     
     UIFont *font = [UIFont fontWithName:@"AppleSDGothicNeo-UltraLight " size:15];
     [self.confirmButton.titleLabel setFont:font];
+    self.confirmButton.titleLabel.text = @"Confirm";
 }
 
 - (void) setMatch:(Match *)match {

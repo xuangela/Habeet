@@ -133,6 +133,7 @@
 }
 
 - (IBAction)onTapValidate:(id)sender {
+    NSLog(@"tappedTheValidateButton");
     [UIView animateWithDuration:.2 animations:^{
         self.validationButton.alpha = 0;
     }];

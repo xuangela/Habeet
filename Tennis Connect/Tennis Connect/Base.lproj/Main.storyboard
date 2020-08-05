@@ -460,8 +460,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmed/Received/Sent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8z-5z-P0H">
-                                                    <rect key="frame" x="148" y="20" width="197" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmed/Received/Sent" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8z-5z-P0H">
+                                                    <rect key="frame" x="148" y="20" width="203" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -485,10 +485,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xun-VQ-xAV" customClass="MDCButton">
-                                                    <rect key="frame" x="211" y="136" width="55" height="30"/>
+                                                    <rect key="frame" x="222" y="136" width="55" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="or0-dK-GTj"/>
-                                                        <constraint firstAttribute="width" constant="55" id="xF1-8Y-thg"/>
                                                     </constraints>
                                                     <state key="normal" title="Confirm"/>
                                                     <connections>
@@ -503,10 +502,11 @@
                                                 <constraint firstItem="B8z-5z-P0H" firstAttribute="leading" secondItem="WdJ-Fx-rA3" secondAttribute="trailing" constant="8" id="OiJ-cP-jfb"/>
                                                 <constraint firstItem="YZw-E1-thV" firstAttribute="bottom" secondItem="cqc-8p-UHZ" secondAttribute="bottom" id="RRG-IO-hqe"/>
                                                 <constraint firstItem="yv2-wr-Jnu" firstAttribute="bottom" secondItem="pkK-2D-1Oz" secondAttribute="bottom" id="SPx-SI-1Ha"/>
-                                                <constraint firstItem="xun-VQ-xAV" firstAttribute="leading" secondItem="WdJ-Fx-rA3" secondAttribute="trailing" constant="71" id="Y4E-A3-DKy"/>
                                                 <constraint firstItem="WdJ-Fx-rA3" firstAttribute="top" secondItem="skr-5u-E72" secondAttribute="top" constant="20" id="ZdK-f4-Msx"/>
                                                 <constraint firstItem="3Pb-83-kTs" firstAttribute="leading" secondItem="Kfz-34-oPD" secondAttribute="trailing" constant="8" id="aar-TY-Zw6"/>
+                                                <constraint firstItem="xun-VQ-xAV" firstAttribute="centerX" secondItem="B8z-5z-P0H" secondAttribute="centerX" id="ckR-uF-gUO"/>
                                                 <constraint firstItem="YZw-E1-thV" firstAttribute="leading" secondItem="cqc-8p-UHZ" secondAttribute="trailing" constant="8" id="eoj-6F-Cbg"/>
+                                                <constraint firstAttribute="trailing" secondItem="B8z-5z-P0H" secondAttribute="trailing" constant="8" id="esv-Nl-bYz"/>
                                                 <constraint firstAttribute="bottom" secondItem="WdJ-Fx-rA3" secondAttribute="bottom" constant="30" id="gsh-Bt-ilC"/>
                                                 <constraint firstItem="3Pb-83-kTs" firstAttribute="bottom" secondItem="Kfz-34-oPD" secondAttribute="bottom" id="hbC-Xf-voE"/>
                                                 <constraint firstItem="Kfz-34-oPD" firstAttribute="top" secondItem="B8z-5z-P0H" secondAttribute="bottom" constant="8" id="iiw-b2-VDG"/>
