@@ -56,6 +56,24 @@
 }
 
 -(void)setAnchorPointforSuggestedView {
+    
+    CGPoint newPoint = CGPointMake(0, self.suggestedview.bounds.size.height);
+    CGPoint oldPoint = CGPointMake(self.suggestedview.bounds.size.width * self.suggestedview.layer.anchorPoint.x, self.suggestedview.layer.bounds.size.height * self.suggestedview.layer.anchorPoint.y);
+
+    
+    newPoint = CGPointApplyAffineTransform(newPoint, self.suggestedview.transform);
+    oldPoint = CGPointApplyAffineTransform(oldPoint, self.suggestedview.transform);
+    
+    CGPoint position = self.suggestedview.layer.position;
+
+    position.x -= oldPoint.x;
+    position.x += newPoint.x;
+
+    position.y -= oldPoint.y;
+    position.y += newPoint.y;
+
+    self.suggestedview.layer.position = position;
+    self.suggestedview.layer.anchorPoint = CGPointMake(0, 1);
     // just need to get rid of constraints
 //    CGPoint oldPoint = CGPointMake(.5 * self.suggestedview.bounds.size.width, .5 * self.suggestedview.bounds.size.height);
 //
@@ -69,10 +87,14 @@
     
 //    CGPoint oldPoint = CGPointMake(.5 * self.suggestedview.bounds.size.width, .5 * self.suggestedview.bounds.size.height);
 //
-//    self.leadingConstraint.constant -= oldPoint.x;
-//    self.topConstraint.constant += oldPoint.y;
+//    self.leadingConstraint.constant -= self.suggestedview.bounds.size.width;
+//    self.topConstraint.constant += self.suggestedview.bounds.size.height - 100;
     
-    self.suggestedview.layer.anchorPoint = CGPointMake(0,1);
+//    self.suggestedview.layer.anchorPoint = CGPointMake(0,1);
+//
+//    [self.view layoutIfNeeded];
+    
+    
 }
 
 - (void)buttonSetup {
