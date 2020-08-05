@@ -34,6 +34,8 @@
     [[NSBundle mainBundle] loadNibNamed:@"SuggestedPlayer" owner:self options:nil];
     [self addSubview:self.contentView];
     self.contentView.frame = self.bounds;
+    self.contentView.layer.cornerRadius = 10;
+    self.contentView.layer.masksToBounds = YES;
 }
 
 - (void) setPlayer:(Player *)player {
