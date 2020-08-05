@@ -18,8 +18,6 @@
 
 @interface SuggestViewController () <MapViewControllerDelegate, MatchRequestDelegate>
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadingConstraint;
 @property (weak, nonatomic) IBOutlet MDCButton *requestbutton;
 
 @property (nonatomic, strong) UIAlertController *noMoreSuggestAlert;
@@ -59,10 +57,6 @@
     
     CGPoint newPoint = CGPointMake(0, self.suggestedview.bounds.size.height);
     CGPoint oldPoint = CGPointMake(self.suggestedview.bounds.size.width * self.suggestedview.layer.anchorPoint.x, self.suggestedview.layer.bounds.size.height * self.suggestedview.layer.anchorPoint.y);
-
-    
-//    newPoint = CGPointApplyAffineTransform(newPoint, self.suggestedview.transform);
-//    oldPoint = CGPointApplyAffineTransform(oldPoint, self.suggestedview.transform);
     
     CGPoint position = self.suggestedview.layer.position;
 
@@ -74,27 +68,6 @@
 
     self.suggestedview.layer.position = position;
     self.suggestedview.layer.anchorPoint = CGPointMake(0, 1);
-    // just need to get rid of constraints
-//    CGPoint oldPoint = CGPointMake(.5 * self.suggestedview.bounds.size.width, .5 * self.suggestedview.bounds.size.height);
-//
-//    CGPoint position = self.suggestedview.layer.position;
-//
-//    position.x -= oldPoint.x;
-//    position.y += oldPoint.y;
-//
-//    self.suggestedview.layer.position = position;
-//    self.suggestedview.layer.anchorPoint = CGPointMake(0,1);
-    
-//    CGPoint oldPoint = CGPointMake(.5 * self.suggestedview.bounds.size.width, .5 * self.suggestedview.bounds.size.height);
-//
-//    self.leadingConstraint.constant -= self.suggestedview.bounds.size.width;
-//    self.topConstraint.constant += self.suggestedview.bounds.size.height - 100;
-    
-//    self.suggestedview.layer.anchorPoint = CGPointMake(0,1);
-//
-//    [self.view layoutIfNeeded];
-    
-    
 }
 
 - (void)buttonSetup {
@@ -417,12 +390,9 @@
 }
 
 - (IBAction)onPan:(UIPanGestureRecognizer *)panGesture {
-    CGPoint location = [panGesture locationInView:self.view];
-    
-    // want view to follow finger
-    
-    CGAffineTransform rotate = CGAffineTransformMakeRotation( -45.0 * M_PI/180);
-    self.suggestedview.transform = rotate;
+    CGPoint location = [panGesture locationInView:self.suggestedview];
+
+    [self rotateWithFinger:location];
     
     if (panGesture.state == UIGestureRecognizerStateBegan) {
         self.initialPan = location;
@@ -442,6 +412,21 @@
         }
     }
 }
+
+- (void)rotateWithFinger:(CGPoint) location {
+    double height = (double)self.suggestedview.bounds.size.height;
+    
+    double adjacentEdge = height - location.y;
+    double oppositeEdgeLength = self.initialPan.x - location.x;
+    CGFloat radians= tan(oppositeEdgeLength/adjacentEdge);
+    
+    if (radians < M_PI/4 && radians > 0) {
+        CGAffineTransform rotate = CGAffineTransformMakeRotation(-radians);
+        self.suggestedview.transform = rotate;
+    }
+}
+
+
 
 - (void)dispNext {
     self.currPlayer += 1;
