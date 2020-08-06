@@ -81,6 +81,9 @@
 		B92070FE24DCA7C5009ACC46 /* NewMsgViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMsgViewController.m; sourceTree = "<group>"; };
 		B920710024DCAADB009ACC46 /* PossibleChatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PossibleChatCell.h; sourceTree = "<group>"; };
 		B920710124DCAADB009ACC46 /* PossibleChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PossibleChatCell.m; sourceTree = "<group>"; };
+		B920714D24DCC0A4009ACC46 /* AGChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGChatViewController.h; sourceTree = "<group>"; };
+		B920714E24DCC0AC009ACC46 /* AGChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AGChatViewController.m; sourceTree = "<group>"; };
+		B920714F24DCC0AF009ACC46 /* AGChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AGChatViewController.xib; sourceTree = "<group>"; };
 		B9303DAB24C254DD002B875A /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		B9303DAC24C254DD002B875A /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		B935560424C0C0ED0040F7BC /* SuggestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuggestViewController.h; sourceTree = "<group>"; };
@@ -164,6 +167,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B920714C24DCC08F009ACC46 /* AGChat */ = {
+			isa = PBXGroup;
+			children = (
+				B920714D24DCC0A4009ACC46 /* AGChatViewController.h */,
+				B920714F24DCC0AF009ACC46 /* AGChatViewController.xib */,
+				B920714E24DCC0AC009ACC46 /* AGChatViewController.m */,
+			);
+			path = AGChat;
+			sourceTree = "<group>";
+		};
 		B9481F1624C64EA500F97E43 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +237,7 @@
 		B9D6813724BCC084005CCBB3 /* Tennis Connect */ = {
 			isa = PBXGroup;
 			children = (
+				B920714C24DCC08F009ACC46 /* AGChat */,
 				B9481F1624C64EA500F97E43 /* Views */,
 				B9879B7D24BE61EA00EC2794 /* Models */,
 				B9D6816D24BCC0F0005CCBB3 /* View Controllers */,
