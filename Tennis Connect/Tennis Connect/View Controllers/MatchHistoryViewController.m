@@ -8,6 +8,7 @@
 
 #import "MatchHistoryViewController.h"
 #import "MatchHistoryCell.h"
+#import "EmptyCell.h"
 @import Parse;
 @import MaterialComponents;
 
@@ -126,16 +127,28 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MatchHistoryCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"MatchHistoryCell"];
+    if (self.completedMatches.count > 0) {
+        MatchHistoryCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"MatchHistoryCell"];
 
-    Match *match = self.completedMatches[indexPath.row];
-    [cell setMatch:match];
+        Match *match = self.completedMatches[indexPath.row];
+        [cell setMatch:match];
 
-    return cell;
+        return cell;
+    } else {
+        EmptyCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"EmptyCell"];
+
+        cell.messageLabel.text = @"No matches to display";
+
+        return cell;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.completedMatches.count;
+    if (self.completedMatches.count > 0) {
+        return self.completedMatches.count;
+    } else {
+        return 1;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

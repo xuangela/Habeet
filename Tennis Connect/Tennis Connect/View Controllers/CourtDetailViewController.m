@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "MatchReqCell.h"
+#import "EmptyCell.h"
 #import "LogScoreViewController.h"
 #import "MatchHistoryViewController.h"
 
@@ -89,6 +90,9 @@
                     self.oneFinishedLoading = YES;
                 }
                 
+                if (self.matches.count == 0) {
+                    self.tableview.userInteractionEnabled = NO;
+                }
                 [self.tableview reloadData];
             }
         }];
@@ -103,26 +107,39 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MatchReqCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"MatchReqCell"];
-    
-    Match *match =self.matches[indexPath.row];
-    
-    [cell setMatch:match];
-    
-    if (self.matches[indexPath.row].confirmed) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (self.matches.count > 0) {
+        MatchReqCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"MatchReqCell"];
+        
+        Match *match =self.matches[indexPath.row];
+        [cell setMatch:match];
+        
+        if (self.matches[indexPath.row].confirmed) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
+        return cell;
+        
+    } else {
+        
+        EmptyCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"EmptyCell"];
+        cell.messageLabel.text = @"No match requests. Send some to play!";
+        return cell;
+        
     }
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.matches[indexPath.row].confirmed) {
+    if (self.matches.count > 0 && self.matches[indexPath.row].confirmed) {
         [self performSegueWithIdentifier:@"logScoreSegue" sender: self.matches[indexPath.row]];
-    }}
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.matches.count;
+    if (self.matches.count >= 1) {
+        return self.matches.count;
+    } else {
+        return 1;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

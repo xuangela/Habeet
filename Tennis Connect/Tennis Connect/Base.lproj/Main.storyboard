@@ -222,6 +222,29 @@
                                             <outlet property="validationButton" destination="9N7-zr-MSF" id="pHZ-Mc-UBR"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmptyCell" rowHeight="106" id="lfT-u3-5iD" customClass="EmptyCell">
+                                        <rect key="frame" x="0.0" y="219" width="375" height="106"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lfT-u3-5iD" id="e49-XR-eQ0">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="106"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pui-vC-3p5">
+                                                    <rect key="frame" x="187.66666666666666" y="53" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pui-vC-3p5" firstAttribute="centerX" secondItem="e49-XR-eQ0" secondAttribute="centerX" id="kCD-AA-1Pu"/>
+                                                <constraint firstItem="pui-vC-3p5" firstAttribute="centerY" secondItem="e49-XR-eQ0" secondAttribute="centerY" id="mrg-HE-qm0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageLabel" destination="pui-vC-3p5" id="vad-BQ-Ghn"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -527,6 +550,29 @@
                                             <outlet property="statusLabel" destination="B8z-5z-P0H" id="yGU-QQ-6G1"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmptyCell" rowHeight="106" id="pcV-iF-NrF" customClass="EmptyCell">
+                                        <rect key="frame" x="0.0" y="208" width="359" height="106"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pcV-iF-NrF" id="loo-av-Tml">
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="106"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No match requests. Send some to play!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4d7-oM-xYh">
+                                                    <rect key="frame" x="31.666666666666657" y="42.666666666666664" width="296" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="4d7-oM-xYh" firstAttribute="centerY" secondItem="loo-av-Tml" secondAttribute="centerY" id="2Lk-Ve-0Jv"/>
+                                                <constraint firstItem="4d7-oM-xYh" firstAttribute="centerX" secondItem="loo-av-Tml" secondAttribute="centerX" id="uuU-Po-KLf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageLabel" destination="4d7-oM-xYh" id="dea-MO-YhD"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -559,7 +605,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Jp-S0-JP5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3304.347826086957" y="1433.7053571428571"/>
+            <point key="canvasLocation" x="3303.1999999999998" y="1433.497536945813"/>
         </scene>
         <!--Log Score View Controller-->
         <scene sceneID="qJC-gM-nnI">

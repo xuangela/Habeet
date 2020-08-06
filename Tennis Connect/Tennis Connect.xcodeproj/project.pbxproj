@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3262A875E6217B8CCDF21F3D /* Pods_Tennis_Connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3253282C5981F1DA60A651DA /* Pods_Tennis_Connect.framework */; };
 		9143678081977CF6772FB8DF /* Pods_Tennis_ConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8062F7951C9CC35071001ACB /* Pods_Tennis_ConnectTests.framework */; };
+		B92070F324DB8829009ACC46 /* EmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B92070F224DB8829009ACC46 /* EmptyCell.m */; };
 		B9303DAD24C254DD002B875A /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B9303DAC24C254DD002B875A /* Player.m */; };
 		B935560624C0C0ED0040F7BC /* SuggestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B935560524C0C0ED0040F7BC /* SuggestViewController.m */; };
 		B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */; };
@@ -63,6 +64,8 @@
 		8062F7951C9CC35071001ACB /* Pods_Tennis_ConnectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tennis_ConnectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98282AA9CED8640FC591AE9D /* Pods-Tennis Connect-Tennis ConnectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis Connect-Tennis ConnectUITests.debug.xcconfig"; path = "Target Support Files/Pods-Tennis Connect-Tennis ConnectUITests/Pods-Tennis Connect-Tennis ConnectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E56DC2D3A1557528FD84A23 /* Pods-Tennis Connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis Connect.debug.xcconfig"; path = "Target Support Files/Pods-Tennis Connect/Pods-Tennis Connect.debug.xcconfig"; sourceTree = "<group>"; };
+		B92070F124DB8829009ACC46 /* EmptyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptyCell.h; sourceTree = "<group>"; };
+		B92070F224DB8829009ACC46 /* EmptyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptyCell.m; sourceTree = "<group>"; };
 		B9303DAB24C254DD002B875A /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		B9303DAC24C254DD002B875A /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		B935560424C0C0ED0040F7BC /* SuggestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuggestViewController.h; sourceTree = "<group>"; };
@@ -156,6 +159,8 @@
 				B9BB466B24C9069D00275A3F /* MatchReqCell.m */,
 				B9BB467424CB4DE400275A3F /* MatchHistoryCell.h */,
 				B9BB467524CB4DE400275A3F /* MatchHistoryCell.m */,
+				B92070F124DB8829009ACC46 /* EmptyCell.h */,
+				B92070F224DB8829009ACC46 /* EmptyCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -531,6 +536,7 @@
 				B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */,
 				B9BB466624C79BEE00275A3F /* MatchRequestViewController.m in Sources */,
 				B9F8336624CF4E93002FE119 /* SettingsViewController.m in Sources */,
+				B92070F324DB8829009ACC46 /* EmptyCell.m in Sources */,
 				B9879B8624BE69DF00EC2794 /* Match.m in Sources */,
 				B9D6813A24BCC084005CCBB3 /* AppDelegate.m in Sources */,
 				B99E78F724BE0D5F008D4C2F /* MapViewController.m in Sources */,
