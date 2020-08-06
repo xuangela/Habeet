@@ -12,6 +12,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ReqCellDelegate
+
+@property (nonatomic, strong) NSMutableArray<Match *>* matches;
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
+
+@end
+
 @interface MatchReqCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet PFImageView *pfpView;
@@ -20,8 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *expLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contactLabel;
 @property (weak, nonatomic) IBOutlet MDCButton *confirmButton;
+@property (weak, nonatomic) IBOutlet MDCButton *deleteButton;
 
 @property (nonatomic, strong) Match* match;
+@property (nonatomic, weak) id<ReqCellDelegate> delegate;
 
 @end
 

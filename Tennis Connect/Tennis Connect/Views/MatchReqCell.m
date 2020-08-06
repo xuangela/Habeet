@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.deleteButton.alpha = 0;
     self.confirmButton.alpha = 0;
     [self buttonSetup];
 }
@@ -28,10 +29,14 @@
     containerScheme.colorScheme.primaryColor = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
     
     [self.confirmButton applyTextThemeWithScheme:containerScheme];
+    [self.deleteButton applyTextThemeWithScheme:containerScheme];
     
     UIFont *font = [UIFont fontWithName:@"AppleSDGothicNeo-UltraLight " size:15];
+    
     [self.confirmButton.titleLabel setFont:font];
     self.confirmButton.titleLabel.text = @"Confirm";
+    [self.deleteButton.titleLabel setFont:font];
+    self.deleteButton.titleLabel.text = @"Delete";
 }
 
 - (void) setMatch:(Match *)match {
@@ -42,9 +47,11 @@
          opponent = match.sender;
          self.statusLabel.text = @"Incoming request";
          self.confirmButton.alpha = 1;
+         self.deleteButton.alpha = 1;
      } else {
          opponent = match.receiver;
          self.statusLabel.text = @"Outgoing request";
+         self.deleteButton.alpha = 1; 
      }
     
     self.contactLabel.text = [opponent valueForKey:@"contact"];
@@ -72,6 +79,7 @@
     if (match.confirmed) {
         self.statusLabel.text = @"Upcoming match";
         self.confirmButton.alpha = 0;
+        self.deleteButton.alpha = 0;
     }
     
     self.accessoryType = UITableViewCellAccessoryNone;
@@ -81,6 +89,7 @@
     self.statusLabel.text =@"Upcoming match";
     self.match.confirmed = YES;
     self.confirmButton.alpha = 0;
+    self.deleteButton.alpha = 0;
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     PFQuery *query = [Match query];
@@ -89,6 +98,18 @@
         object[@"confirmed"] = @YES;
         [object saveInBackground];
         
+    }];
+}
+
+- (IBAction)tapDelete:(id)sender {
+    
+    PFQuery *query = [Match query];
+    
+    [self.delegate.matches removeObject:self.match];
+    [self.delegate.tableview reloadData];
+    
+    [query getObjectInBackgroundWithId:self.match.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        [object deleteInBackground];
     }];
 }
 

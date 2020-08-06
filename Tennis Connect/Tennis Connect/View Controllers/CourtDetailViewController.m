@@ -14,7 +14,7 @@
 #import "LogScoreViewController.h"
 #import "MatchHistoryViewController.h"
 
-@interface CourtDetailViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, LogScoreDelegate>
+@interface CourtDetailViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, LogScoreDelegate, ReqCellDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
 @property (weak, nonatomic) IBOutlet UILabel *etaLabel;
@@ -112,6 +112,7 @@
         
         Match *match =self.matches[indexPath.row];
         [cell setMatch:match];
+        cell.delegate = self;
         
         if (self.matches[indexPath.row].confirmed) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
