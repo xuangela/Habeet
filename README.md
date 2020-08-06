@@ -128,6 +128,7 @@ App that connects local tennis players for matches and practice. Accounts made b
 | time       | DateTime          | what time the match is scheduled at           |
 | confirmed  | Boolean           | is everything confirmed?                      |
 | completed  | Boolean           | did the players play?                         |
+| scoreValidated  | Boolean           | score logged and both in agreement?                         |
 | Score      | array of string  | match points, sender,receiver,sender,receiver                          |
 
 **User**
@@ -138,12 +139,14 @@ App that connects local tennis players for matches and practice. Accounts made b
 | gender       | String           | M,F, Other               |
 | contact       | String           | formatted contact number               |
 | date of birth          | DateTime         | used to calculate age               |
-| experience | Number           | 0,1,2 increasing with more skill                       |
+| rating | NSNumber           | 500, 1000, 1500 for new users choosing beginner, intermediate, advanced                       |
 | picture          | File             | jpeg converted to binary                       |
 | genderSearch     | BOOL | 0 - all players, 1 - only same gender |
 | ageDiffSearch     | NSNumber | how many years apart to search |
 | ratingDiffSearch    | NSNumber | how different rating players wants to play |
 | random     | NSNumber | percentage of suggestion results that are random |
+| homeCourt     | pointer to Court | closest court, used to filter for suggested users |
+
 
 **Court** 
 
