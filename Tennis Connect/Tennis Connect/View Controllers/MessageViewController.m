@@ -7,6 +7,7 @@
 //
 
 #import "MessageViewController.h"
+#import "NewMsgViewController.h"
 #import "Player.h"
 #import "ChatRoomCell.h"
 #import "EmptyCell.h"
@@ -16,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
+@property (nonatomic, strong) NSMutableSet *messageRoomsPF;
 @property (nonatomic, strong) NSMutableArray<Player*> *messageRooms;
 
 @property (nonatomic, assign) int fetchOcc;
@@ -33,7 +35,7 @@
 
 - (void)getExistingMsgs {
     
-    NSMutableSet *messageRoomsPF = [[NSMutableSet alloc] init];
+    self.messageRoomsPF = [[NSMutableSet alloc] init];
     
     PFUser *me = [PFUser currentUser];
     PFRelation *relation = [me relationForKey:@"messaging"];
@@ -41,7 +43,7 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
-            [messageRoomsPF addObjectsFromArray:objects];
+            [self.messageRoomsPF addObjectsFromArray:objects];
         }
         
         PFQuery *query = [PFQuery queryWithClassName:@"User"];
@@ -49,9 +51,10 @@
         
         [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
-                [messageRoomsPF addObjectsFromArray:objects];
+                [self.messageRoomsPF addObjectsFromArray:objects];
                 
-                self.messageRooms = [Player playersWithPFUserFromSet:messageRoomsPF];
+                self.messageRooms = [Player playersWithPFUserFromSet:self.messageRoomsPF];
+                NSLog(@"got all existing chat rooms");
                 
                 [self.tableview reloadData];
             }
@@ -93,14 +96,18 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+    if ([segue.identifier isEqualToString:@"newMsgSegue"]) {
+        NewMsgViewController *viewController = [segue destinationViewController];
+            
+        viewController.possibleChatsPF = self.messageRoomsPF;
+    }
 }
-*/
+
 
 @end

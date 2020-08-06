@@ -13,7 +13,6 @@ target 'Tennis Connect' do
     pod 'MaterialComponents/Buttons+Theming'
     pod 'MaterialComponents/ActivityIndicator'
 
-
   target 'Tennis ConnectTests' do
     inherit! :search_paths
     # Pods for testing
