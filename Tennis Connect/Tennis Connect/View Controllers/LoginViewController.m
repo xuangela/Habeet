@@ -48,7 +48,7 @@
     [self.registerButton applyTextThemeWithScheme:containerScheme];
     [self.loginButton applyTextThemeWithScheme:containerScheme];
     
-    UIFont *font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular " size:15];
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
     [self.registerButton.titleLabel setFont:font];
     [self.loginButton.titleLabel setFont:font];
 }

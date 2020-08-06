@@ -31,11 +31,14 @@
     [self.confirmButton applyTextThemeWithScheme:containerScheme];
     [self.deleteButton applyTextThemeWithScheme:containerScheme];
     
-    UIFont *font = [UIFont fontWithName:@"AppleSDGothicNeo-UltraLight " size:15];
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
     
-    [self.confirmButton.titleLabel setFont:font];
+    [self.confirmButton setTitleFont:font forState:UIControlStateNormal];
+    [self.confirmButton setTitleFont:font forState:UIControlStateSelected];
+    [self.deleteButton setTitleFont:font forState:UIControlStateNormal];
+    [self.deleteButton setTitleFont:font forState:UIControlStateSelected];
+    
     self.confirmButton.titleLabel.text = @"Confirm";
-    [self.deleteButton.titleLabel setFont:font];
     self.deleteButton.titleLabel.text = @"Delete";
 }
 
