@@ -105,7 +105,7 @@
     if ([segue.identifier isEqualToString:@"newMsgSegue"]) {
         NewMsgViewController *viewController = [segue destinationViewController];
             
-        viewController.possibleChatsPF = self.messageRoomsPF;
+        viewController.possibleChatsPF = [NSMutableSet setWithSet:self.messageRoomsPF];
     }
 }
 
