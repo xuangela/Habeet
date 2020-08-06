@@ -9,6 +9,7 @@
 #import "NewMsgViewController.h"
 #import "Match.h"
 #import "PossibleChatCell.h"
+#import "EmptyCell.h"
 #import "Player.h"
 
 @interface NewMsgViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -71,15 +72,31 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PossibleChatCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"PossibleChatCell"];
+    if (self.possibleChats.count > 0) {
+        PossibleChatCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"PossibleChatCell"];
+        
+        [cell setPlayer:self.possibleChats[indexPath.row]];
+        
+        return cell;
+    } else {
+        EmptyCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"EmptyCell"];
+        cell.messageLabel.text = @"Send match requests to chat with other players!";
+        return cell;
+    }
     
-    [cell setPlayer:self.possibleChats[indexPath.row]];
-    
-    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.possibleChats.count;
+    if (self.possibleChats.count > 0) {
+        return self.possibleChats.count;
+    } else {
+        return 1;
+    }
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 150; 
 }
 
 /*
