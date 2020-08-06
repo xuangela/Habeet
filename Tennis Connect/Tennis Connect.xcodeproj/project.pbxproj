@@ -15,6 +15,7 @@
 		B92070FC24DC875B009ACC46 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = B92070FB24DC875B009ACC46 /* Message.m */; };
 		B92070FF24DCA7C5009ACC46 /* NewMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B92070FE24DCA7C5009ACC46 /* NewMsgViewController.m */; };
 		B920710224DCAADB009ACC46 /* PossibleChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B920710124DCAADB009ACC46 /* PossibleChatCell.m */; };
+		B920715324DCC205009ACC46 /* AGChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B920714E24DCC0AC009ACC46 /* AGChatViewController.m */; };
 		B9303DAD24C254DD002B875A /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B9303DAC24C254DD002B875A /* Player.m */; };
 		B935560624C0C0ED0040F7BC /* SuggestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B935560524C0C0ED0040F7BC /* SuggestViewController.m */; };
 		B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */; };
@@ -83,7 +84,6 @@
 		B920710124DCAADB009ACC46 /* PossibleChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PossibleChatCell.m; sourceTree = "<group>"; };
 		B920714D24DCC0A4009ACC46 /* AGChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGChatViewController.h; sourceTree = "<group>"; };
 		B920714E24DCC0AC009ACC46 /* AGChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AGChatViewController.m; sourceTree = "<group>"; };
-		B920714F24DCC0AF009ACC46 /* AGChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AGChatViewController.xib; sourceTree = "<group>"; };
 		B9303DAB24C254DD002B875A /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		B9303DAC24C254DD002B875A /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		B935560424C0C0ED0040F7BC /* SuggestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuggestViewController.h; sourceTree = "<group>"; };
@@ -167,16 +167,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B920714C24DCC08F009ACC46 /* AGChat */ = {
-			isa = PBXGroup;
-			children = (
-				B920714D24DCC0A4009ACC46 /* AGChatViewController.h */,
-				B920714F24DCC0AF009ACC46 /* AGChatViewController.xib */,
-				B920714E24DCC0AC009ACC46 /* AGChatViewController.m */,
-			);
-			path = AGChat;
-			sourceTree = "<group>";
-		};
 		B9481F1624C64EA500F97E43 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,7 +227,6 @@
 		B9D6813724BCC084005CCBB3 /* Tennis Connect */ = {
 			isa = PBXGroup;
 			children = (
-				B920714C24DCC08F009ACC46 /* AGChat */,
 				B9481F1624C64EA500F97E43 /* Views */,
 				B9879B7D24BE61EA00EC2794 /* Models */,
 				B9D6816D24BCC0F0005CCBB3 /* View Controllers */,
@@ -299,6 +288,8 @@
 				B92070F524DC8172009ACC46 /* MessageViewController.m */,
 				B92070FD24DCA7C5009ACC46 /* NewMsgViewController.h */,
 				B92070FE24DCA7C5009ACC46 /* NewMsgViewController.m */,
+				B920714D24DCC0A4009ACC46 /* AGChatViewController.h */,
+				B920714E24DCC0AC009ACC46 /* AGChatViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -576,6 +567,7 @@
 				B92070FC24DC875B009ACC46 /* Message.m in Sources */,
 				B92070F624DC8172009ACC46 /* MessageViewController.m in Sources */,
 				B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */,
+				B920715324DCC205009ACC46 /* AGChatViewController.m in Sources */,
 				B92070FF24DCA7C5009ACC46 /* NewMsgViewController.m in Sources */,
 				B9BB466624C79BEE00275A3F /* MatchRequestViewController.m in Sources */,
 				B9F8336624CF4E93002FE119 /* SettingsViewController.m in Sources */,

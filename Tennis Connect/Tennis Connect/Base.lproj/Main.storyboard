@@ -532,82 +532,32 @@
             </objects>
             <point key="canvasLocation" x="5172" y="670.93596059113304"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="KYf-lR-YtC">
             <objects>
-                <viewController id="TqI-81-vI6" sceneMemberID="viewController">
+                <viewController id="TqI-81-vI6" customClass="AGChatViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sZK-hO-rgL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vsz-RP-AEE">
-                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4E-uo-jQB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="636"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONr-Oh-zgb">
-                                                <rect key="frame" x="0.0" y="562" width="375" height="74"/>
-                                                <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t4f-TM-osv">
-                                                        <rect key="frame" x="20" y="20" width="293" height="34"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KiN-oR-9sb">
-                                                        <rect key="frame" x="331" y="20" width="36" height="30"/>
-                                                        <state key="normal" title="Send"/>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <constraints>
-                                                    <constraint firstItem="KiN-oR-9sb" firstAttribute="leading" secondItem="t4f-TM-osv" secondAttribute="trailing" constant="8" id="82I-bg-Tz3"/>
-                                                    <constraint firstItem="KiN-oR-9sb" firstAttribute="centerY" secondItem="ONr-Oh-zgb" secondAttribute="centerY" id="97k-Ee-51e"/>
-                                                    <constraint firstItem="t4f-TM-osv" firstAttribute="centerY" secondItem="ONr-Oh-zgb" secondAttribute="centerY" id="UPf-xd-0mi"/>
-                                                    <constraint firstItem="t4f-TM-osv" firstAttribute="leading" secondItem="ONr-Oh-zgb" secondAttribute="leading" constant="8" id="YNF-hZ-9f9"/>
-                                                    <constraint firstAttribute="trailing" secondItem="KiN-oR-9sb" secondAttribute="trailing" constant="8" id="duN-Kf-1fM"/>
-                                                </constraints>
-                                            </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oFY-qq-hfQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="459"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                            </tableView>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstItem="oFY-qq-hfQ" firstAttribute="top" secondItem="ONr-Oh-zgb" secondAttribute="top" constant="-562" id="4Im-2K-PKR"/>
-                                            <constraint firstAttribute="trailing" secondItem="ONr-Oh-zgb" secondAttribute="trailing" id="AOn-KO-Eut"/>
-                                            <constraint firstAttribute="bottom" secondItem="ONr-Oh-zgb" secondAttribute="bottom" id="Cg3-Pl-kpv"/>
-                                            <constraint firstAttribute="trailing" secondItem="oFY-qq-hfQ" secondAttribute="trailing" id="Nfr-Ab-qwU"/>
-                                            <constraint firstItem="ONr-Oh-zgb" firstAttribute="top" secondItem="oFY-qq-hfQ" secondAttribute="bottom" id="YQ7-pt-Frm"/>
-                                            <constraint firstItem="oFY-qq-hfQ" firstAttribute="leading" secondItem="Z4E-uo-jQB" secondAttribute="leading" id="tJf-QQ-jy1"/>
-                                            <constraint firstItem="ONr-Oh-zgb" firstAttribute="leading" secondItem="Z4E-uo-jQB" secondAttribute="leading" id="uf9-pr-3Za"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Z4E-uo-jQB" secondAttribute="bottom" id="2Ow-ak-H3n"/>
-                                    <constraint firstItem="Z4E-uo-jQB" firstAttribute="leading" secondItem="Vsz-RP-AEE" secondAttribute="leading" id="7kR-gw-dx3"/>
-                                    <constraint firstAttribute="bottom" secondItem="Z4E-uo-jQB" secondAttribute="bottom" id="FQz-eb-ogK"/>
-                                    <constraint firstAttribute="trailing" secondItem="Z4E-uo-jQB" secondAttribute="trailing" id="dOn-rR-rLd"/>
-                                    <constraint firstItem="Z4E-uo-jQB" firstAttribute="top" secondItem="Vsz-RP-AEE" secondAttribute="top" id="hzC-gQ-7wZ"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="B0y-aw-8Ig"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="8Ek-Tw-yvP"/>
-                            </scrollView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Ho-MM-NNX">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Vsz-RP-AEE" secondAttribute="bottom" id="Ulf-Yy-0CE"/>
-                            <constraint firstAttribute="trailing" secondItem="Vsz-RP-AEE" secondAttribute="trailing" id="Xxt-FF-aQM"/>
-                            <constraint firstItem="Vsz-RP-AEE" firstAttribute="top" secondItem="uSy-Fx-zND" secondAttribute="top" id="dB4-qT-7TM"/>
-                            <constraint firstItem="Z4E-uo-jQB" firstAttribute="centerX" secondItem="sZK-hO-rgL" secondAttribute="centerX" id="md5-Gt-xFH"/>
-                            <constraint firstItem="Vsz-RP-AEE" firstAttribute="leading" secondItem="sZK-hO-rgL" secondAttribute="leading" id="uhk-6P-zFv"/>
-                            <constraint firstItem="Z4E-uo-jQB" firstAttribute="centerY" secondItem="sZK-hO-rgL" secondAttribute="centerY" id="x5I-an-htF"/>
+                            <constraint firstItem="3Ho-MM-NNX" firstAttribute="top" secondItem="uSy-Fx-zND" secondAttribute="top" id="bNf-PY-3i2"/>
+                            <constraint firstItem="uSy-Fx-zND" firstAttribute="bottom" secondItem="3Ho-MM-NNX" secondAttribute="bottom" id="mm1-MK-Vkq"/>
+                            <constraint firstItem="3Ho-MM-NNX" firstAttribute="leading" secondItem="uSy-Fx-zND" secondAttribute="leading" id="qYs-11-Z8h"/>
+                            <constraint firstItem="uSy-Fx-zND" firstAttribute="trailing" secondItem="3Ho-MM-NNX" secondAttribute="trailing" id="ycn-mm-8Rk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uSy-Fx-zND"/>
                     </view>
                     <navigationItem key="navigationItem" id="sBc-8N-Tdf"/>
+                    <connections>
+                        <outlet property="chatTableView" destination="3Ho-MM-NNX" id="fFb-oD-Cu6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOM-BZ-lLb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
