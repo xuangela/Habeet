@@ -63,7 +63,7 @@
     [sentReq whereKey:@"sender" equalTo:[PFUser currentUser]];
     [sentReq whereKey:@"completed" equalTo:@YES];
     [sentReq includeKey:@"receiver"];
-    [sentReq orderByDescending:@"updatedAt"];
+    [sentReq orderByAscending:@"updatedAt"];
     sentReq.limit = 5;
     sentReq.skip = 5 * self.numFetch;
     
@@ -77,7 +77,7 @@
         [receivedReq whereKey:@"receiver" equalTo:[PFUser currentUser]];
         [receivedReq includeKey:@"sender"];
         [receivedReq whereKey:@"completed" equalTo:@YES];
-        [receivedReq orderByDescending:@"updatedAt"];
+        [receivedReq orderByAscending:@"updatedAt"];
         receivedReq.limit = 5;
         receivedReq.skip = 5 * self.numFetch;
         self.numFetch++;
@@ -86,15 +86,15 @@
             if (!error) {
                 NSArray* moreMatches = [Match matchesWithArray:objects];
                 [newlyFetchedMatches addObjectsFromArray:moreMatches];
-                
-                NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"updatedAt" ascending:NO];
-                [self.completedMatches sortUsingDescriptors:@[sd]];
             }
             
             if (newlyFetchedMatches.count == 0) {
                 [self presentViewController:self.noMoreMatchAlert animated:YES completion:^{  }];
             } else {
                 [self.completedMatches addObjectsFromArray:newlyFetchedMatches];
+                
+                NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"updatedAt" ascending:NO];
+                [self.completedMatches sortUsingDescriptors:@[sd]];
             }
             
             [self.activityIndicator stopAnimating];

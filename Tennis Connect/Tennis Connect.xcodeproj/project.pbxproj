@@ -10,6 +10,9 @@
 		3262A875E6217B8CCDF21F3D /* Pods_Tennis_Connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3253282C5981F1DA60A651DA /* Pods_Tennis_Connect.framework */; };
 		9143678081977CF6772FB8DF /* Pods_Tennis_ConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8062F7951C9CC35071001ACB /* Pods_Tennis_ConnectTests.framework */; };
 		B92070F324DB8829009ACC46 /* EmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B92070F224DB8829009ACC46 /* EmptyCell.m */; };
+		B92070F624DC8172009ACC46 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B92070F524DC8172009ACC46 /* MessageViewController.m */; };
+		B92070F924DC82AD009ACC46 /* ChatRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B92070F824DC82AD009ACC46 /* ChatRoomCell.m */; };
+		B92070FC24DC875B009ACC46 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = B92070FB24DC875B009ACC46 /* Message.m */; };
 		B9303DAD24C254DD002B875A /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B9303DAC24C254DD002B875A /* Player.m */; };
 		B935560624C0C0ED0040F7BC /* SuggestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B935560524C0C0ED0040F7BC /* SuggestViewController.m */; };
 		B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B970F73E24BCCB9E00B2BAF8 /* ProfileViewController.m */; };
@@ -66,6 +69,12 @@
 		9E56DC2D3A1557528FD84A23 /* Pods-Tennis Connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tennis Connect.debug.xcconfig"; path = "Target Support Files/Pods-Tennis Connect/Pods-Tennis Connect.debug.xcconfig"; sourceTree = "<group>"; };
 		B92070F124DB8829009ACC46 /* EmptyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptyCell.h; sourceTree = "<group>"; };
 		B92070F224DB8829009ACC46 /* EmptyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptyCell.m; sourceTree = "<group>"; };
+		B92070F424DC8172009ACC46 /* MessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		B92070F524DC8172009ACC46 /* MessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		B92070F724DC82AD009ACC46 /* ChatRoomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatRoomCell.h; sourceTree = "<group>"; };
+		B92070F824DC82AD009ACC46 /* ChatRoomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatRoomCell.m; sourceTree = "<group>"; };
+		B92070FA24DC875B009ACC46 /* Message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		B92070FB24DC875B009ACC46 /* Message.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		B9303DAB24C254DD002B875A /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		B9303DAC24C254DD002B875A /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		B935560424C0C0ED0040F7BC /* SuggestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuggestViewController.h; sourceTree = "<group>"; };
@@ -161,6 +170,8 @@
 				B9BB467524CB4DE400275A3F /* MatchHistoryCell.m */,
 				B92070F124DB8829009ACC46 /* EmptyCell.h */,
 				B92070F224DB8829009ACC46 /* EmptyCell.m */,
+				B92070F724DC82AD009ACC46 /* ChatRoomCell.h */,
+				B92070F824DC82AD009ACC46 /* ChatRoomCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,6 +185,8 @@
 				B9879B8524BE69DF00EC2794 /* Match.m */,
 				B9303DAB24C254DD002B875A /* Player.h */,
 				B9303DAC24C254DD002B875A /* Player.m */,
+				B92070FA24DC875B009ACC46 /* Message.h */,
+				B92070FB24DC875B009ACC46 /* Message.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +273,8 @@
 				B9BB467124CB4C4800275A3F /* MatchHistoryViewController.m */,
 				B9F8336424CF4E93002FE119 /* SettingsViewController.h */,
 				B9F8336524CF4E93002FE119 /* SettingsViewController.m */,
+				B92070F424DC8172009ACC46 /* MessageViewController.h */,
+				B92070F524DC8172009ACC46 /* MessageViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -533,6 +548,8 @@
 				B9BB466324C7550400275A3F /* SuggestedPlayerView.m in Sources */,
 				B9879B8324BE670E00EC2794 /* Court.m in Sources */,
 				B9BB466C24C9069D00275A3F /* MatchReqCell.m in Sources */,
+				B92070FC24DC875B009ACC46 /* Message.m in Sources */,
+				B92070F624DC8172009ACC46 /* MessageViewController.m in Sources */,
 				B970F74224BCCFD900B2BAF8 /* RegisterViewController.m in Sources */,
 				B9BB466624C79BEE00275A3F /* MatchRequestViewController.m in Sources */,
 				B9F8336624CF4E93002FE119 /* SettingsViewController.m in Sources */,
@@ -544,6 +561,7 @@
 				B9D6814B24BCC085005CCBB3 /* main.m in Sources */,
 				B9D6813D24BCC084005CCBB3 /* SceneDelegate.m in Sources */,
 				B970F73F24BCCB9E00B2BAF8 /* ProfileViewController.m in Sources */,
+				B92070F924DC82AD009ACC46 /* ChatRoomCell.m in Sources */,
 				B9BB466924C8E2E600275A3F /* CourtDetailViewController.m in Sources */,
 				B935560624C0C0ED0040F7BC /* SuggestViewController.m in Sources */,
 				B9BB466F24CA388C00275A3F /* LogScoreViewController.m in Sources */,

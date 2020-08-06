@@ -22,6 +22,17 @@
     return playerArray;
 }
 
++ (NSMutableArray<Player*> *)playersWithPFUserFromSet: (NSMutableSet<PFUser *> *)users {
+    NSMutableArray *playerArray = [[NSMutableArray alloc] init];
+    
+    for (PFUser *player in users) {
+        Player *thisPlayer = [[Player alloc] initWithPFUser:player];
+        [playerArray addObject:thisPlayer];
+    }
+
+    return playerArray;
+}
+
 - (id)initWithPFUser:(PFUser *)userPF {
     self = [super init];
     

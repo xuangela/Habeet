@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) long compatibility;
 
 + (NSMutableArray *)playersWithPFUserObjects: (NSArray<PFUser *> *)dictionaries;
++ (NSMutableArray<Player*> *)playersWithPFUserFromSet: (NSMutableSet<PFUser *> *)users;
 
 - (id)initWithPFUser:(PFUser *)userPF;
 
