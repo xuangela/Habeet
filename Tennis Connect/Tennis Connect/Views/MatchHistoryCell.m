@@ -26,31 +26,29 @@
     
     _match = match;
     
-    PFUser *opponent;
-    BOOL isReceiver;
     
     if ([match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) {
-        opponent = match.sender;
-        isReceiver = YES;
+        self.opponent = match.sender;
+        self.isReceiver = YES;
     } else {
-        opponent = match.receiver;
-        isReceiver = NO;
+        self.opponent = match.receiver;
+        self.isReceiver = NO;
     }
     
     NSArray<NSString *> *formattedString = [self getScore:match.score];
-    [self setScores:formattedString receiving:isReceiver];
+    [self setScores:formattedString receiving:self.isReceiver];
     
-    if ([opponent valueForKey:@"picture"]) {
-        self.pfpView.file = [opponent valueForKey:@"picture"];
+    if ([self.opponent valueForKey:@"picture"]) {
+        self.pfpView.file = [self.opponent valueForKey:@"picture"];
         [self.pfpView loadInBackground];
     }
     
-    self.nameLabel.text = [opponent objectForKey:@"name"];
+    self.nameLabel.text = [self.opponent objectForKey:@"name"];
     
     NSDate *playedDate = match[@"updatedAt"];
     self.dateLabel.text = [playedDate formattedDateWithStyle:NSDateFormatterFullStyle];
     
-    int exp = [[opponent valueForKey:@"rating"] intValue];
+    int exp = [[self.opponent valueForKey:@"rating"] intValue];
     
     if (exp <= 500) {
         self.expLabel.text = @"Beginner";
@@ -64,7 +62,7 @@
         self.validationButton.alpha = 0;
     } else {
         self.validationButton.alpha = 1;
-        if (isReceiver) {
+        if (self.isReceiver) {
             [self.validationButton setTitle:@"Validate score" forState:UIControlStateNormal];
             UIColor *myPink = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
             [self.validationButton setTitleColor:myPink forState:UIControlStateNormal];
@@ -126,8 +124,10 @@
     UIColor *color;
     if ([bits[0] intValue]< [bits[1] intValue]) {
         color = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
+        self.iWon = NO;
     } else {
         color = [[UIColor alloc] initWithRed:111.0/255.0 green:179.0/255.0 blue:70.0/255.0 alpha:1];
+        self.iWon = YES;
     }
     self.setLabel.textColor = color;
 }
@@ -140,16 +140,67 @@
 }
 
 - (IBAction)onTapValidate:(id)sender {
-    NSLog(@"tappedTheValidateButton");
     [UIView animateWithDuration:.2 animations:^{
         self.validationButton.alpha = 0;
     }];
+    
+    int smallRandom = arc4random() % 20;
+    int medRandom = arc4random() % 20 + 10;
+    int bigRandom = arc4random() % 30 + 20;
+    
+    int opponentRating = [[self.opponent valueForKey:@"rating"] intValue];
+    int myRating = [[[PFUser currentUser] valueForKey:@"rating"] intValue];
+    
+    int ratingDiff = myRating - opponentRating;
+    BOOL bigDiff = abs(ratingDiff) > 250;
+    
+    if (self.iWon) {
+        if (!bigDiff) {
+            myRating += medRandom;
+            opponentRating -= medRandom;
+        } else if (ratingDiff > 0) {
+            myRating += smallRandom;
+            opponentRating -= smallRandom;
+        } else {
+            myRating += bigRandom;
+            opponentRating -= medRandom;
+        }
+    } else {
+        if (!bigDiff) {
+            opponentRating += medRandom;
+            myRating -= medRandom;
+        } else if (ratingDiff < 0) {
+            opponentRating += smallRandom;
+            myRating -= smallRandom;
+        } else {
+            opponentRating += bigRandom;
+            myRating -= medRandom;
+        }
+    }
     
     PFQuery *query = [Match query];
     [query getObjectInBackgroundWithId:self.match.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
         object[@"scoreValidated"] = @YES;
         
         [object saveInBackground];
+    }];
+    
+    PFQuery *userRatingUpdateQuery = [PFUser query];
+    [userRatingUpdateQuery getObjectInBackgroundWithId:[PFUser currentUser].objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        object[@"rating"] = [NSNumber numberWithInt:myRating];
+        
+        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            NSLog(@"my score updated");
+        }];
+    }];
+    
+    PFQuery *opponentRatingUpdateQuery = [PFUser query];
+    [opponentRatingUpdateQuery getObjectInBackgroundWithId:self.opponent.objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        object[@"rating"] = [NSNumber numberWithInt:opponentRating];
+        
+        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            NSLog(@"their score updated");
+        }];
     }];
 }
 @end

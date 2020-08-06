@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Match.h"
+@import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *validationButton;
 
 @property (nonatomic, strong) Match *match;
+@property (nonatomic, strong) PFUser *opponent;
+@property (nonatomic, assign) BOOL isReceiver;
+@property (nonatomic, assign) BOOL iWon; 
 
 - (void) setMatch:(Match *)match;
 
