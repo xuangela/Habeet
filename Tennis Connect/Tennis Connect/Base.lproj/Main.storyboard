@@ -541,14 +541,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Ho-MM-NNX">
-                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="591"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="3Ho-MM-NNX" firstAttribute="top" secondItem="uSy-Fx-zND" secondAttribute="top" id="bNf-PY-3i2"/>
-                            <constraint firstItem="uSy-Fx-zND" firstAttribute="bottom" secondItem="3Ho-MM-NNX" secondAttribute="bottom" id="mm1-MK-Vkq"/>
+                            <constraint firstItem="uSy-Fx-zND" firstAttribute="bottom" secondItem="3Ho-MM-NNX" secondAttribute="bottom" constant="50" id="mm1-MK-Vkq"/>
                             <constraint firstItem="3Ho-MM-NNX" firstAttribute="leading" secondItem="uSy-Fx-zND" secondAttribute="leading" id="qYs-11-Z8h"/>
                             <constraint firstItem="uSy-Fx-zND" firstAttribute="trailing" secondItem="3Ho-MM-NNX" secondAttribute="trailing" id="ycn-mm-8Rk"/>
                         </constraints>

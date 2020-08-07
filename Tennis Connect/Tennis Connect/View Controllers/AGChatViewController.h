@@ -12,6 +12,5 @@
 
 //IBOutlets
 @property (weak, nonatomic) IBOutlet UITableView *chatTableView;
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 @end
