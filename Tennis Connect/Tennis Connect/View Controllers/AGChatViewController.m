@@ -48,9 +48,9 @@
     [self createExampleChat];
 
     double screenWidth = self.view.frame.size.width;
+    double vertHeight = self.view.frame.size.height - self.view.safeAreaInsets.bottom - 50;
     
-    UIView *viewB = [[UIView alloc] initWithFrame:CGRectMake(-1, 0, screenWidth+1, 50)];
-    viewB.backgroundColor = [UIColor whiteColor];
+    UIView *viewB = [[UIView alloc] initWithFrame:CGRectMake(0, vertHeight, screenWidth+1, 50)];
     viewB.layer.borderWidth = 1.0;
     viewB.layer.borderColor = [Rgb2UIColor(204, 204, 204) CGColor];
     
@@ -68,7 +68,7 @@
     self.sendButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.sendButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:self.messageTV];
+    [self.view addSubview:viewB];
     [viewB addSubview:self.sendButton];
     
     self.viewBar = viewB;
