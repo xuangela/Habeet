@@ -1755,12 +1755,10 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="cancelButton" destination="6qE-pF-5Vy" id="2CL-M2-tuN"/>
                         <outlet property="contactField" destination="08T-eH-INX" id="cAE-xT-gkz"/>
                         <outlet property="dateOfBirthPicker" destination="QHh-15-lIz" id="CFN-0X-L4m"/>
                         <outlet property="genderSegControl" destination="H7t-fG-H3Y" id="2Gl-Np-J6H"/>
                         <outlet property="nameField" destination="yYe-5I-3xW" id="1vM-2v-7pQ"/>
-                        <outlet property="registerButon" destination="Okl-pE-ca9" id="CEj-DD-WK0"/>
                         <outlet property="skillSegControl" destination="WIz-3I-eVH" id="PGj-kQ-fE8"/>
                         <segue destination="UGC-Bq-fxb" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="bNz-L8-dut"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="delSegue" modalPresentationStyle="fullScreen" id="o0Q-64-p98"/>
@@ -1773,7 +1771,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-307.24637681159425" y="314.73214285714283"/>
+            <point key="canvasLocation" x="-274" y="477"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Gtx-V4-Ay7">
@@ -1833,7 +1831,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yJg-LI-zZr"/>
+        <segue reference="bNz-L8-dut"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>

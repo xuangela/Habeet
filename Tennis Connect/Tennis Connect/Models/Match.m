@@ -14,7 +14,7 @@
 @dynamic sender;
 @dynamic receiver;
 @dynamic court;
-@dynamic updatedAt;
+@dynamic timeLogged;
 @dynamic confirmed;
 @dynamic scoreValidated;
 @dynamic completed;
@@ -42,7 +42,7 @@
     self.receiver = [matchPF objectForKey:@"receiver"];
     self.court = [matchPF objectForKey:@"court"];
     self.objectId = matchPF.objectId;
-    self.updatedAt = matchPF.updatedAt;
+    self.timeLogged = matchPF.updatedAt;
     
     self.completed = [[matchPF valueForKey:@"completed"] boolValue];
     self.confirmed = [[matchPF valueForKey:@"confirmed"] boolValue];

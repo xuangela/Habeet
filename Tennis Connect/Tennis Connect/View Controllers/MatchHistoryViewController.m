@@ -63,7 +63,7 @@
     [sentReq whereKey:@"sender" equalTo:[PFUser currentUser]];
     [sentReq whereKey:@"completed" equalTo:@YES];
     [sentReq includeKey:@"receiver"];
-    [sentReq orderByAscending:@"updatedAt"];
+    [sentReq orderByDescending:@"updatedAt"];
     sentReq.limit = 5;
     sentReq.skip = 5 * self.numFetch;
     
@@ -77,7 +77,7 @@
         [receivedReq whereKey:@"receiver" equalTo:[PFUser currentUser]];
         [receivedReq includeKey:@"sender"];
         [receivedReq whereKey:@"completed" equalTo:@YES];
-        [receivedReq orderByAscending:@"updatedAt"];
+        [receivedReq orderByDescending:@"updatedAt"];
         receivedReq.limit = 5;
         receivedReq.skip = 5 * self.numFetch;
         self.numFetch++;
@@ -93,8 +93,11 @@
             } else {
                 [self.completedMatches addObjectsFromArray:newlyFetchedMatches];
                 
-                NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"updatedAt" ascending:NO];
-                [self.completedMatches sortUsingDescriptors:@[sd]];
+                NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"timeLogged" ascending:NO];
+                NSArray *sortDescriptors = @[sd];
+                NSArray *sortedArray = [self.completedMatches sortedArrayUsingDescriptors:sortDescriptors];
+                
+                self.completedMatches = [NSMutableArray arrayWithArray:sortedArray];
             }
             
             [self.activityIndicator stopAnimating];

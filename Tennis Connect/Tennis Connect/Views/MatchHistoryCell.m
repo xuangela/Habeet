@@ -26,7 +26,6 @@
     
     _match = match;
     
-    
     if ([match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) {
         self.opponent = match.sender;
         self.isReceiver = YES;
@@ -45,7 +44,7 @@
     
     self.nameLabel.text = [self.opponent objectForKey:@"name"];
     
-    NSDate *playedDate = match[@"updatedAt"];
+    NSDate *playedDate = match.timeLogged;
     self.dateLabel.text = [playedDate formattedDateWithStyle:NSDateFormatterFullStyle];
     
     int exp = [[self.opponent valueForKey:@"rating"] intValue];
@@ -58,7 +57,7 @@
         self.expLabel.text = @"Experienced";
     }
     
-    if ([match[@"scoreValidated"] boolValue]) {
+    if (match.scoreValidated) {
         self.validationButton.alpha = 0;
     } else {
         self.validationButton.alpha = 1;

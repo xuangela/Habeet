@@ -131,7 +131,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.matches.count > 0 && self.matches[indexPath.row].confirmed) {
-        [self performSegueWithIdentifier:@"newMsgSegue" sender: self.matches[indexPath.row]];
+        [self performSegueWithIdentifier:@"logScoreSegue" sender: self.matches[indexPath.row]];
     }
 }
 
@@ -224,9 +224,11 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"newMsgSegue"]) {
-        UIViewController *viewControl = [segue destinationViewController];
+    if ([segue.identifier isEqualToString:@"logScoreSegue"]) {
+        LogScoreViewController *viewControl = [segue destinationViewController];
         
+        viewControl.delegate = self;
+        viewControl.match = sender;
     }
 }
 
