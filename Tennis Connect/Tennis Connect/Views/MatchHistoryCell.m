@@ -59,7 +59,9 @@
     
     if (match.scoreValidated) {
         self.validationButton.alpha = 0;
+        self.setScoreTopConstraint.constant = 20;
     } else {
+        self.setScoreTopConstraint.constant = 8;
         self.validationButton.alpha = 1;
         if (self.isReceiver) {
             [self.validationButton setTitle:@"Validate score" forState:UIControlStateNormal];
@@ -141,6 +143,7 @@
 - (IBAction)onTapValidate:(id)sender {
     [UIView animateWithDuration:.2 animations:^{
         self.validationButton.alpha = 0;
+        self.setScoreTopConstraint.constant = 20;
     }];
     
     int smallRandom = arc4random() % 20;

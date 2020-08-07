@@ -426,8 +426,6 @@
     }
 }
 
-
-
 - (void)dispNext {
     self.currPlayer += 1;
     
