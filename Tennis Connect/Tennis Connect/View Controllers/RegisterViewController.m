@@ -30,6 +30,17 @@
     [super viewDidLoad];
     
     [self setUpAlerts];
+    [self fontSetUp];
+}
+
+- (void)fontSetUp {
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+    self.nameField.font = font;
+    self.contactField.font = font;
+    
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
+    [self.genderSegControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    [self.skillSegControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
 }
 
 -(void)setUpAlerts {

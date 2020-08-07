@@ -48,9 +48,11 @@
     [self.registerButton applyTextThemeWithScheme:containerScheme];
     [self.loginButton applyTextThemeWithScheme:containerScheme];
     
-    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
-    [self.registerButton.titleLabel setFont:font];
-    [self.loginButton.titleLabel setFont:font];
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
+    [self.registerButton setTitleFont:font forState:UIControlStateNormal];
+    [self.loginButton setTitleFont:font forState:UIControlStateNormal];
+    [self.registerButton setTitleFont:font forState:UIControlStateHighlighted];
+    [self.loginButton setTitleFont:font forState:UIControlStateHighlighted];
 }
 
 - (void) alertSetUp {
