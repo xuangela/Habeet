@@ -17,8 +17,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
-@property (nonatomic, strong) NSArray<Player*> *possibleChats;
-
 @end
 
 @implementation NewMsgViewController
@@ -63,6 +61,7 @@
             }
             
             [self.tableview reloadData];
+            
         }];
     }];
 }
@@ -75,10 +74,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.possibleChats.count > 0) {
+    if ([self.possibleRooms allValues].count > 0) {
         PossibleChatCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"PossibleChatCell"];
-        
-        [cell setPlayer:self.possibleChats[indexPath.row]];
+        [cell setPlayer:[self.possibleRooms allValues][indexPath.row]];
         cell.userInteractionEnabled = YES;
         
         return cell;
@@ -92,13 +90,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"newMsgSegue" sender: self.possibleChats[indexPath.row]];
+    [self performSegueWithIdentifier:@"newMsgSegue" sender: [self.possibleRooms allValues][indexPath.row]];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.possibleChats.count > 0) {
-        return self.possibleChats.count;
+    if ([self.possibleRooms allValues].count > 0) {
+        return [self.possibleRooms allValues].count;
     } else {
         return 1;
     }

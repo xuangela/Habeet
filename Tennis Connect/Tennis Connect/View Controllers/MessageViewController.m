@@ -119,11 +119,13 @@
     
         for (NSString* playerId in [self.uniqueRooms allKeys]) {
             Message *msg = [self.uniqueRooms valueForKey:playerId];
+            Player *player;
             if (msg.isReceived) {
-                [possibleChat setObject:msg.sender forKey:playerId];
+                player = [[Player alloc] initWithPFUser:msg.sender];
             } else {
-                [possibleChat setObject:msg.receiver forKey:playerId];
+                player = [[Player alloc] initWithPFUser:msg.receiver];
             }
+            [possibleChat setObject:player forKey:playerId];
         }
         viewController.possibleRooms = possibleChat;
         
