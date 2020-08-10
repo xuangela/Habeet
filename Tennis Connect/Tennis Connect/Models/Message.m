@@ -65,6 +65,7 @@
     self.receiver = them;
     self.sender =[PFUser currentUser];
     self.msg =content;
+    self.timeLogged = [NSDate date];
 
     self.isReceived = NO; 
 

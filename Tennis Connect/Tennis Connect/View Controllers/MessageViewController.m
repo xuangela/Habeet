@@ -44,7 +44,8 @@
     
     [querySender findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
-            for (Message* msg in objects) {
+            for (PFObject* msgPF in objects) {
+                Message *msg = [[Message alloc] initWithPFObject:msgPF];
                 [self.uniqueRooms setObject:msg forKey:msg.receiver.objectId];
             }
         }
@@ -56,12 +57,13 @@
         
         [queryReceiver findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
-                for (Message* msg in objects) {
-                    Message *currMsg = [self.uniqueRooms objectForKey:msg.receiver.objectId];
-                    if (!currMsg) {//msg date after that of the curr set one))
-                        
-                        NSDate *thisMsgSent = msg.updatedAt;
-                        NSDate *currMsgSent = currMsg.updatedAt;
+                for (PFObject* msgPF in objects) {
+                    Message *msg = [[Message alloc] initWithPFObject:msgPF];
+                    Message *currMsg = [self.uniqueRooms objectForKey:msg.sender.objectId];
+                    NSLog(@"%@", currMsg.timeLogged);
+                    if (currMsg) { // already in the dictionary
+                        NSDate *thisMsgSent = msg.timeLogged;
+                        NSDate *currMsgSent = currMsg.timeLogged;
                         if ([thisMsgSent compare:currMsgSent] == NSOrderedDescending) {
                             [self.uniqueRooms setObject:msg forKey:msg.sender.objectId];
                         }
