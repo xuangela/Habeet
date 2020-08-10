@@ -42,7 +42,7 @@
     }
     
     self.nameLabel.text = self.player.name;
-    self.timestampLabel.text = [self getDateTimeStringFromNSDate:msg.updatedAt];
+    self.timestampLabel.text = [self getDateTimeStringFromNSDate:msg.timeLogged];
     self.messageLabel.text = msg.msg;
 }
 
