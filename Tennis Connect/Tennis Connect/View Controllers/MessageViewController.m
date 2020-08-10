@@ -57,7 +57,18 @@
         [queryReceiver findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
                 for (Message* msg in objects) {
-                    [self.uniqueRooms setObject:msg forKey:msg.sender.objectId];
+                    Message *currMsg = [self.uniqueRooms objectForKey:msg.receiver.objectId];
+                    if (!currMsg) {//msg date after that of the curr set one))
+                        
+                        NSDate *thisMsgSent = msg.updatedAt;
+                        NSDate *currMsgSent = currMsg.updatedAt;
+                        if ([thisMsgSent compare:currMsgSent] == NSOrderedDescending) {
+                            [self.uniqueRooms setObject:msg forKey:msg.sender.objectId];
+                        }
+                        
+                    } else {
+                        [self.uniqueRooms setObject:msg forKey:msg.sender.objectId];
+                    }
                 }
             }
             [self displayExistingRooms];
