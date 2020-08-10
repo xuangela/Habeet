@@ -12,7 +12,7 @@
 
 @dynamic receiver;
 @dynamic sender;
-@dynamic updatedAt;
+@dynamic timeLogged;
 @dynamic isReceived;
 @dynamic msg;
 
@@ -39,7 +39,7 @@
     self.msg =[msgPF objectForKey:@"msg"];
     
     self.objectId = msgPF.objectId;
-    self.updatedAt = msgPF.updatedAt;
+    self.timeLogged = msgPF.updatedAt;
     
     if ([self.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) {
         self.isReceived = YES;

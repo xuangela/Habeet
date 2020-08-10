@@ -99,8 +99,12 @@
             if (!error) {
                 [self.messages addObjectsFromArray:[Message messagesWithArray:objects]];
             }
-            NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"updatedAt" ascending:NO];
-            [self.messages sortUsingDescriptors:@[sd]];
+            
+            NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"timeLogged" ascending:YES];
+            NSArray *sortDescriptors = @[sd];
+            NSArray *sortedArray = [self.messages sortedArrayUsingDescriptors:sortDescriptors];
+            
+            self.messages = [NSMutableArray arrayWithArray:sortedArray];
             
             [self makeViewsForMessages];
         }];
