@@ -33,6 +33,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self registerNotifications];
+    [self viewSetUp];
+
+    self.view.translatesAutoresizingMaskIntoConstraints = YES;
+    
     self.navigationItem.title = self.player.name;
     
     self.screenWidth = self.view.frame.size.width;
@@ -43,10 +48,6 @@
     
     [self getMessagesWithPlayer];
     
-}
-
-- (void)viewDidLayoutSubviews {
-    [self viewSetUp];
 }
 
 - (void)viewSetUp {
@@ -73,9 +74,6 @@
     [self.sendButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-//- (UIView *)inputAccessoryView {
-//    return self.textView;
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -355,6 +353,32 @@
     dateTimeString = [dateFormatter stringFromDate:date];
     
     return dateTimeString;
+}
+
+#pragma mark - Keyboard
+
+- (void) registerNotifications {
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) keyboardWillShow:(NSNotification *) notif {
+    NSDictionary* userInfo = notif.userInfo;
+    CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    if (self.view.frame.origin.y ==0) {
+        CGRect oldFrame = self.view.frame;
+        CGRect newFrame = CGRectMake(0, oldFrame.origin.y-keyboardFrame.size.height + 85, oldFrame.size.width, oldFrame.size.height);
+        [self.view setFrame:newFrame];
+    }
+}
+
+- (void) keyboardWillHide:(NSNotification *) notif {
+    if (self.view.frame.origin.y != 0) {
+        CGRect oldFrame = self.view.frame;
+        CGRect newFrame = CGRectMake(0,0, oldFrame.size.width, oldFrame.size.height);
+        [self.view setFrame:newFrame];
+    }
 }
 
 @end
