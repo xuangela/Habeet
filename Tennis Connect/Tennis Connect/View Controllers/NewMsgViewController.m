@@ -7,6 +7,7 @@
 //
 
 #import "NewMsgViewController.h"
+#import "AGChatViewController.h"
 #import "Match.h"
 #import "PossibleChatCell.h"
 #import "EmptyCell.h"
@@ -108,7 +109,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"newMsgSegue"]) {
-        
+        AGChatViewController *viewControl = [segue destinationViewController];
+        viewControl.player = sender; 
     }
 }
 

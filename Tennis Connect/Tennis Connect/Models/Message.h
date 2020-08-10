@@ -15,11 +15,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) PFUser *sender;
 @property (nonatomic, strong) PFUser *receiver;
+@property (nonatomic, strong) NSString* msg; 
+@property (nonatomic, strong) NSDate *updatedAt;
+@property (nonatomic, assign) BOOL isReceived; 
 
 + (NSString *) parseClassName;
 + (NSMutableArray *)messagesWithArray: (NSArray<PFObject *> *)messages;
 
 - (id)initWithPFObject:(PFObject *)msgPF;
+- (id)initFromText:(NSString*) content WithReceiver:(PFUser*) them;
 
 @end
 

@@ -7,12 +7,16 @@
 //
 
 #import "AGChatViewController.h"
+#import "Message.h"
+@import Parse;
 
 @interface AGChatViewController ()
 
-//All messages array (contains UIViews)
-@property (nonatomic) NSMutableArray *allMessages;
-//Subview(s)
+@property (weak, nonatomic) IBOutlet UITableView *chatTableView;
+
+@property (nonatomic) NSMutableArray<UIView*> *allMessages;
+@property (nonatomic, strong) NSMutableArray <Message *> *messages;
+
 @property (nonatomic) UIView *viewBar;
 @property (nonatomic) UITextView *messageTV;
 @property (nonatomic) UIButton *sendButton;
@@ -28,14 +32,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"CJ";
+    self.navigationItem.title = self.player.name;
     
     self.screenWidth = self.view.frame.size.width;
     
     self.chatTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.chatTableView.delegate = self;
     self.chatTableView.dataSource = self;
-    [self createExampleChat];
+    
+    [self getMessagesWithPlayer];
     
 }
 
@@ -93,6 +98,45 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) getMessagesWithPlayer {
+    PFUser *me = [PFUser currentUser];
+    PFUser *them =self.player.user;
+    
+    PFQuery *query = [Message query];
+    [query whereKey:@"sender" equalTo:me];
+    [query whereKey:@"receiver" equalTo:them];
+    [query orderByAscending:@"createdAt"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (!error) {
+            self.messages = [Message messagesWithArray:objects];
+        }
+        
+        PFQuery *query = [Message query];
+        [query whereKey:@"receiver" equalTo:me];
+        [query whereKey:@"sender" equalTo:them];
+        [query orderByAscending:@"createdAt"];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            if (!error) {
+                [self.messages addObjectsFromArray:[Message messagesWithArray:objects]];
+            }
+            NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:@"updatedAt" ascending:NO];
+            [self.messages sortUsingDescriptors:@[sd]];
+            
+            [self makeViewsForMessages];
+        }];
+    }];
+}
+
+- (void)makeViewsForMessages {
+    
+}
+
+- (IBAction)tapOther:(id)sender {
+    [self.view endEditing:YES];
+}
+
 #pragma mark - UITableView delegate methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -140,9 +184,10 @@
 #pragma mark - Buttons' Actions
 
 - (void)sendAction: (id)selector {
-    UIView *newMsg = [self createMessageWithText:self.messageTV.text Image:nil DateTime:[self getDateTimeStringFromNSDate:[NSDate date]] isReceived:0];
+    Message *newMsg = [[Message alloc] initFromText:self.messageTV.text WithReceiver:self.player.user];
+    UIView *newMsgView = [self createMessageWithMessage:newMsg DateTime:[self getDateTimeStringFromNSDate:[NSDate date]]];
 
-    [self.allMessages addObject:newMsg];
+    [self.allMessages addObject:newMsgView];
     [self.chatTableView reloadData];
     [self scrollToTheBottom:YES];
     
@@ -152,8 +197,10 @@
 
 #pragma mark - Message UI creation function(s)
 
-- (UIView*)createMessageWithText: (NSString*)text Image: (UIImage*)image DateTime: (NSString*)dateTimeString isReceived: (BOOL)isReceived {
-
+- (UIView*)createMessageWithMessage: (Message*)msg DateTime: (NSString*)dateTimeString {
+    
+    NSString *text = msg.msg;
+    BOOL isReceived = msg.isReceived;
 
     CGFloat maxBubbleWidth = self.screenWidth-50;
     
@@ -183,38 +230,19 @@
         [chatBubbleContentView addSubview:chatTimeLabel];
     }
     
-    //Add Image
-    UIImageView *chatBubbleImageView;
-    if (image != nil) {
-        chatBubbleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 26, maxBubbleWidth-30, maxBubbleWidth-30)];
-        chatBubbleImageView.image = image;
-        chatBubbleImageView.contentMode = UIViewContentModeScaleAspectFill;
-        chatBubbleImageView.layer.masksToBounds = YES;
-        chatBubbleImageView.layer.cornerRadius = 4;
-        
-        [chatBubbleContentView addSubview:chatBubbleImageView];
-    }
-    
     //Add Text
     UILabel *chatBubbleLabel;
     if (text != nil) {
         UIFont *messageLabelFont = [UIFont systemFontOfSize:16];
         
-        CGSize maximumLabelSize;
-        if (chatBubbleImageView != nil) {
-            maximumLabelSize = CGSizeMake(chatBubbleImageView.frame.size.width, 1000);
-            
-            CGSize expectedLabelSize = [text sizeWithFont:messageLabelFont constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByWordWrapping];
-            
-            chatBubbleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 21+chatBubbleImageView.frame.size.height, expectedLabelSize.width, expectedLabelSize.height+10)];
-        }
-        else {
-            maximumLabelSize = CGSizeMake(maxBubbleWidth, 1000);
-            
-            CGSize expectedLabelSize = [text sizeWithFont:messageLabelFont constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByWordWrapping];
-            
-            chatBubbleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, expectedLabelSize.width, expectedLabelSize.height)];
-        }
+        CGSize maximumLabelSize = CGSizeMake(maxBubbleWidth, 1000);
+        
+        NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        [style setLineBreakMode:NSLineBreakByWordWrapping];
+        NSStringDrawingContext *context     = [[NSStringDrawingContext alloc] init];
+        
+        CGRect expectedLblSize = [text boundingRectWithSize:maximumLabelSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:messageLabelFont} context:context];
+        chatBubbleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, expectedLblSize.size.width, expectedLblSize.size.height)];
         
         chatBubbleLabel.frame = CGRectMake(chatBubbleLabel.frame.origin.x, chatBubbleLabel.frame.origin.y+5, chatBubbleLabel.frame.size.width, chatBubbleLabel.frame.size.height+10);
         
@@ -277,14 +305,16 @@
     return outerView;
 }
 
+
+
 #pragma mark - Other functions
 
 - (void)createExampleChat {
-    NSMutableArray *bubbles = [[NSMutableArray alloc] init];
-    
-    //Current date and time formatted string
-    NSString *dateTimeString = [self getDateTimeStringFromNSDate:[NSDate date]];
-    
+//    NSMutableArray *bubbles = [[NSMutableArray alloc] init];
+//
+//    //Current date and time formatted string
+//    NSString *dateTimeString = [self getDateTimeStringFromNSDate:[NSDate date]];
+
     //Some custom hardcoded messages
     //Example 1
     /*
@@ -293,34 +323,34 @@
     UIView *msg2 = [self createMessageWithScreenWidth:screenWidth Text:@"Yeah uh huh you know what it iss...." Image:nil DateTime:dateTimeString isReceived:1];
     UIView *msg3 = [self createMessageWithScreenWidth:screenWidth Text:@"Black and yellow black and yellow black and yellow black and yellow" Image:[UIImage imageNamed:@"blackAndYellow.jpeg"] DateTime:dateTimeString isReceived:0];
     */
-    
+
     //Example 2
-    UIView *msg0 = [self createMessageWithText:@"Hey! Movie tonight?" Image:nil DateTime:dateTimeString isReceived:1];
-    UIView *msg1 = [self createMessageWithText:@"Which?" Image:nil DateTime:dateTimeString isReceived:0];
-    UIView *msg2 = [self createMessageWithText:@"Kung fu panda 3" Image:nil DateTime:dateTimeString isReceived:1];
-    UIView *msg3 = [self createMessageWithText:@"I'm in." Image:nil DateTime:dateTimeString isReceived:0];
-    UIView *msg4 = [self createMessageWithText:@"Great, i'll get the tickets." Image:nil DateTime:dateTimeString isReceived:1];
-    UIView *msg5 = [self createMessageWithText:@"Anyways, what about that new job opening you told me about. Can i still apply ?" Image:nil DateTime:dateTimeString isReceived:1];
-    UIView *msg6 = [self createMessageWithText:@"Just wondering..." Image:nil DateTime:dateTimeString isReceived:1];
-    UIView *msg7 = [self createMessageWithText:@"Yes, you can. Let me refer you to my Manager." Image:nil DateTime:dateTimeString isReceived:0];
-    UIView *msg8 = [self createMessageWithText:@"Thanks a lot dude !" Image:nil DateTime:dateTimeString isReceived:1];
-
-    [bubbles addObject:msg0];
-    [bubbles addObject:msg1];
-    [bubbles addObject:msg2];
-    [bubbles addObject:msg3];
-    [bubbles addObject:msg4];
-    [bubbles addObject:msg5];
-    [bubbles addObject:msg6];
-    [bubbles addObject:msg7];
-    [bubbles addObject:msg8];
-    
-    //Populate data in the chat table
-    self.allMessages = bubbles;
-    [self.chatTableView reloadData];
-
-    //Scroll the table to bottom
-    [self scrollToTheBottom:NO];
+//    UIView *msg0 = [self createMessageWithText:@"Hey! Movie tonight?" Image:nil DateTime:dateTimeString isReceived:1];
+//    UIView *msg1 = [self createMessageWithText:@"Which?" Image:nil DateTime:dateTimeString isReceived:0];
+//    UIView *msg2 = [self createMessageWithText:@"Kung fu panda 3" Image:nil DateTime:dateTimeString isReceived:1];
+//    UIView *msg3 = [self createMessageWithText:@"I'm in." Image:nil DateTime:dateTimeString isReceived:0];
+//    UIView *msg4 = [self createMessageWithText:@"Great, i'll get the tickets." Image:nil DateTime:dateTimeString isReceived:1];
+//    UIView *msg5 = [self createMessageWithText:@"Anyways, what about that new job opening you told me about. Can i still apply ?" Image:nil DateTime:dateTimeString isReceived:1];
+//    UIView *msg6 = [self createMessageWithText:@"Just wondering..." Image:nil DateTime:dateTimeString isReceived:1];
+//    UIView *msg7 = [self createMessageWithText:@"Yes, you can. Let me refer you to my Manager." Image:nil DateTime:dateTimeString isReceived:0];
+//    UIView *msg8 = [self createMessageWithText:@"Thanks a lot dude !" Image:nil DateTime:dateTimeString isReceived:1];
+//
+//    [bubbles addObject:msg0];
+//    [bubbles addObject:msg1];
+//    [bubbles addObject:msg2];
+//    [bubbles addObject:msg3];
+//    [bubbles addObject:msg4];
+//    [bubbles addObject:msg5];
+//    [bubbles addObject:msg6];
+//    [bubbles addObject:msg7];
+//    [bubbles addObject:msg8];
+//
+//    //Populate data in the chat table
+//    self.allMessages = bubbles;
+//    [self.chatTableView reloadData];
+//
+//    //Scroll the table to bottom
+//    [self scrollToTheBottom:NO];
 }
 
 - (void)scrollToTheBottom:(BOOL)animated {

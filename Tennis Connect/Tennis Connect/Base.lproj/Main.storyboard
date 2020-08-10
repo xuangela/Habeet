@@ -547,6 +547,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="3Ho-MM-NNX" firstAttribute="top" secondItem="uSy-Fx-zND" secondAttribute="top" id="bNf-PY-3i2"/>
                             <constraint firstItem="uSy-Fx-zND" firstAttribute="bottom" secondItem="3Ho-MM-NNX" secondAttribute="bottom" constant="50" id="mm1-MK-Vkq"/>
@@ -554,6 +555,9 @@
                             <constraint firstItem="uSy-Fx-zND" firstAttribute="trailing" secondItem="3Ho-MM-NNX" secondAttribute="trailing" id="ycn-mm-8Rk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uSy-Fx-zND"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="YgW-C5-Iqq" appends="YES" id="7Bl-eU-GBV"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="sBc-8N-Tdf"/>
                     <connections>
@@ -561,6 +565,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOM-BZ-lLb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="YgW-C5-Iqq">
+                    <connections>
+                        <action selector="tapOther:" destination="TqI-81-vI6" id="eXu-H5-GKU"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="7098" y="942"/>
         </scene>

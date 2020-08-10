@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Player.h"
 
 @interface AGChatViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
 
-//IBOutlets
-@property (weak, nonatomic) IBOutlet UITableView *chatTableView;
+@property (nonatomic, strong) Player* player;
 
 @end

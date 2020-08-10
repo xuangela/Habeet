@@ -11,7 +11,10 @@
 @implementation Message
 
 @dynamic receiver;
-@dynamic sender; 
+@dynamic sender;
+@dynamic updatedAt;
+@dynamic isReceived;
+@dynamic msg;
 
 + (NSString *) parseClassName{
     return @"Message";
@@ -33,10 +36,32 @@
     
     self.receiver = [msgPF objectForKey:@"receiver"];
     self.sender =[msgPF objectForKey:@"sender"];
+    self.msg =[msgPF objectForKey:@"msg"];
+    
     self.objectId = msgPF.objectId;
+    self.updatedAt = msgPF.updatedAt;
+    
+    if ([self.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) {
+        self.isReceived = YES;
+    } else {
+        self.isReceived = NO;
+    }
     
     return self;
 }
+
+- (id)initFromText:(NSString*) content WithReceiver:(PFUser*) them {
+    self = [super init];
+
+    self.receiver = them;
+    self.sender =[PFUser currentUser];
+    self.msg =content;
+
+    self.isReceived = NO; 
+
+    return self;
+}
+ 
 
 
 
