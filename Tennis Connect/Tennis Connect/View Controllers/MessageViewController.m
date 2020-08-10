@@ -57,7 +57,7 @@
         [queryReceiver findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
                 for (Message* msg in objects) {
-                    [self.uniqueRooms setObject:msg forKey:msg.receiver.objectId];
+                    [self.uniqueRooms setObject:msg forKey:msg.sender.objectId];
                 }
             }
             [self displayExistingRooms];

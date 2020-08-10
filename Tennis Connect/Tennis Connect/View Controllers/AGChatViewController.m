@@ -280,20 +280,20 @@
         chatBubbleContentView.frame = CGRectMake(5, 5, decidedWidth, totalHeight);
         chatBubbleView.frame = CGRectMake(screenWidth-(chatBubbleContentView.frame.size.width+10)-10, 10, chatBubbleContentView.frame.size.width+10, chatBubbleContentView.frame.size.height+10);
         
-        /*
-        chatBubbleView.backgroundColor = Rgb2UIColor(191,179,183);
-        chatTimeLabel.backgroundColor = Rgb2UIColor(191,179,183);
-        chatBubbleLabel.backgroundColor = Rgb2UIColor(191,179,183);
-        chatBubbleContentView.backgroundColor = Rgb2UIColor(191,179,183);
-        */
+        UIColor *myLightPink = [[UIColor alloc] initWithRed:255.0/255.0 green:204.0/255.0 blue:238.0/255.0 alpha:1];
+        
+        chatBubbleView.backgroundColor = myLightPink;
+        chatTimeLabel.backgroundColor = myLightPink;
+        chatBubbleLabel.backgroundColor = myLightPink;
+        chatBubbleContentView.backgroundColor = myLightPink;
         
         arrowIV.transform = CGAffineTransformMakeScale(-1, 1);
         arrowIV.frame = CGRectMake(chatBubbleView.frame.origin.x+chatBubbleView.frame.size.width-4, chatBubbleView.frame.size.height-10, 11, 14);
         
         outerView.frame = CGRectMake(screenWidth-((screenWidth+chatBubbleView.frame.size.width)-chatBubbleView.frame.size.width)-7, 0, chatBubbleView.frame.size.width, chatBubbleView.frame.size.height);
 
-        //arrowIV.image = [arrowIV.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        //[arrowIV setTintColor:Rgb2UIColor(191,179,183)];
+        arrowIV.image = [arrowIV.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [arrowIV setTintColor:myLightPink];
     }
     
     [outerView addSubview:arrowIV];

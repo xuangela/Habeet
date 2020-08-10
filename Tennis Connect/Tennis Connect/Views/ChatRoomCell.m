@@ -24,6 +24,12 @@
 - (void)setMsg:(Message *)msg {
     _msg = msg;
     
+    if ([msg.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) {
+        msg.isReceived = YES;
+    } else {
+        msg.isReceived = NO; 
+    }
+    
     if (msg.isReceived) {
         _player = [[Player alloc] initWithPFUser:msg.sender];
     } else {
