@@ -8,6 +8,7 @@
 
 #import "MessageViewController.h"
 #import "NewMsgViewController.h"
+#import "AGChatViewController.h"
 #import "Player.h"
 #import "ChatRoomCell.h"
 #import "EmptyCell.h"
@@ -106,9 +107,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 138;
 }
-
-
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -127,9 +125,18 @@
                 [possibleChat setObject:msg.receiver forKey:playerId];
             }
         }
-        
-    
         viewController.possibleRooms = possibleChat;
+        
+    } else if ([segue.identifier isEqualToString:@"existingRoomSegue"]) {
+        AGChatViewController *viewControl = [segue destinationViewController];
+        ChatRoomCell *selectedCell = sender;
+        
+        Message *selected = selectedCell.msg;
+        if (selected.isReceived) {
+            viewControl.player = [[Player alloc] initWithPFUser:selected.sender];
+        } else {
+            viewControl.player = [[Player alloc] initWithPFUser:selected.receiver];
+        }
     }
 }
 

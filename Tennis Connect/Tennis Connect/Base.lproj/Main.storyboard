@@ -484,6 +484,7 @@
                                             <outlet property="nameLabel" destination="Af1-Yp-4Nr" id="Ccd-5h-sB2"/>
                                             <outlet property="pfpview" destination="6pP-UR-bwN" id="lQo-kA-qJf"/>
                                             <outlet property="timestampLabel" destination="OYf-hG-OU7" id="0i4-du-wC1"/>
+                                            <segue destination="TqI-81-vI6" kind="show" identifier="existingRoomSegue" id="C7u-n1-PNA"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmptyCell" rowHeight="106" id="Bz0-3A-bty" customClass="EmptyCell">
@@ -614,7 +615,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="7096.8000000000002" y="941.37931034482767"/>
+            <point key="canvasLocation" x="5153" y="1603"/>
         </scene>
         <!--New Msg View Controller-->
         <scene sceneID="91g-rq-c5g">
@@ -747,7 +748,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H3d-Gu-s3d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6017" y="717"/>
+            <point key="canvasLocation" x="6575" y="831"/>
         </scene>
         <!--Court Detail View Controller-->
         <scene sceneID="pur-0r-bCR">
@@ -1884,6 +1885,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="C7u-n1-PNA"/>
         <segue reference="yJg-LI-zZr"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

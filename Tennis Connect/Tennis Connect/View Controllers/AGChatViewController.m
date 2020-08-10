@@ -107,7 +107,12 @@
 }
 
 - (void)makeViewsForMessages {
-    
+    for (Message *msg in self.messages) {
+        UIView *newMsgView = [self createMessageWithMessage:msg DateTime:[self getDateTimeStringFromNSDate:[NSDate date]]];
+        [self.allMessages addObject:newMsgView];
+    }
+    [self.chatTableView reloadData];
+    [self scrollToTheBottom:YES];
 }
 
 - (IBAction)tapOther:(id)sender {
