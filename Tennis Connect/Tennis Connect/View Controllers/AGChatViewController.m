@@ -20,7 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIView *textView;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 @end
 
 @implementation AGChatViewController
