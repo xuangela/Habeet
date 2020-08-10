@@ -79,11 +79,13 @@
         PossibleChatCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"PossibleChatCell"];
         
         [cell setPlayer:self.possibleChats[indexPath.row]];
+        cell.userInteractionEnabled = YES;
         
         return cell;
     } else {
         EmptyCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"EmptyCell"];
         cell.messageLabel.text = @"Send match requests to chat with other players!";
+        cell.userInteractionEnabled = NO;
         return cell;
     }
     
