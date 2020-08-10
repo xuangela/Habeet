@@ -7,6 +7,7 @@
 //
 
 #import "AGChatViewController.h"
+#import "MessageViewController.h"
 #import "Message.h"
 @import Parse;
 
@@ -20,9 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *textView;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 @end
 
 @implementation AGChatViewController
@@ -171,16 +170,24 @@
 
 - (void)sendAction: (id)selector {
     if (![self.textField.text isEqualToString:@""]) {
+        NSString *timeString = [self getDateTimeStringFromNSDate:[NSDate date]];
+        
         Message *newMsg = [[Message alloc] initFromText:self.textField.text WithReceiver:self.player.user];
         [newMsg addToParse];
         
-        UIView *newMsgView = [self createMessageWithMessage:newMsg DateTime:[self getDateTimeStringFromNSDate:[NSDate date]]];
+        self.delegate.messageLabel.text = self.textField.text;
+        self.delegate.timestampLabel.text = timeString;
+        
+        
+        UIView *newMsgView = [self createMessageWithMessage:newMsg DateTime:timeString];
         
         [self.allMessages addObject:newMsgView];
         [self.chatTableView reloadData];
         [self scrollToTheBottom:YES];
         
         self.textField.text = @"";
+        
+        
     }
 }
 
@@ -340,5 +347,6 @@
         [self.view setFrame:newFrame];
     }
 }
+
 
 @end

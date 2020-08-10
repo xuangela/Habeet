@@ -50,4 +50,8 @@
     return dateTimeString;
 }
 
+- (void)sentMessage {
+    
+}
+
 @end

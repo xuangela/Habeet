@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "Player.h"
 
+
+@protocol ChatDelegate
+
+@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+
+@end
+
 @interface AGChatViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
 
 @property (nonatomic, strong) Player* player;
+@property (nonatomic, weak) id<ChatDelegate> delegate;
 
 @end

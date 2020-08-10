@@ -551,9 +551,6 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Ho-MM-NNX">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="591"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="591" id="NHm-dV-be9"/>
-                                        </constraints>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Sb-XK-q3N">
                                         <rect key="frame" x="0.0" y="591" width="375" height="50"/>
@@ -605,10 +602,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="sBc-8N-Tdf"/>
                     <connections>
-                        <outlet property="bottomConstraint" destination="0jw-ln-HO5" id="njn-lW-phK"/>
                         <outlet property="chatTableView" destination="3Ho-MM-NNX" id="fFb-oD-Cu6"/>
                         <outlet property="sendButton" destination="NCk-eq-Ul2" id="j4x-No-6X1"/>
-                        <outlet property="tableViewHeightConstraint" destination="NHm-dV-be9" id="3Um-Db-ZnZ"/>
                         <outlet property="textField" destination="6uk-wt-xMP" id="BOl-kk-Rg3"/>
                         <outlet property="textView" destination="7Sb-XK-q3N" id="i7A-YG-Trx"/>
                     </connections>

@@ -74,6 +74,11 @@
     [self.tableview reloadData];
 }
 
+- (void)sentMessage {
+    
+    [self.tableview reloadData];
+}
+
 #pragma mark - Table Set Up
 
 - (void)tableSetUp {
@@ -134,6 +139,8 @@
         ChatRoomCell *selectedCell = sender;
         
         Message *selected = selectedCell.msg;
+        viewControl.delegate = selectedCell; 
+        
         if (selected.isReceived) {
             viewControl.player = [[Player alloc] initWithPFUser:selected.sender];
         } else {

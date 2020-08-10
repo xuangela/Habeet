@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AGChatViewController.h"
 #import "Player.h"
 #import "Message.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ChatRoomCell : UITableViewCell
+@interface ChatRoomCell : UITableViewCell <ChatDelegate>
 
 @property (weak, nonatomic) IBOutlet PFImageView *pfpview;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -22,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) Player* player;
 @property (nonatomic, strong) Message* msg;
+
+- (void)sentMessage;
 
 @end
 
