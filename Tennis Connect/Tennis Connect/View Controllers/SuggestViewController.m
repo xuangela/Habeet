@@ -332,6 +332,7 @@
 }
 
 -(void)bucketReady:(int)index {
+    [self printAll];
     [self.activityIndicator stopAnimating];
     self.view.userInteractionEnabled = YES;
     
@@ -344,6 +345,15 @@
         [self.players addObjectsFromArray:self.suggestedPlayerBuckets[self.bestBucket]];
         [self.suggestedPlayerBuckets[self.bestBucket] removeAllObjects];
         self.bestBucket++;
+    }
+}
+
+- (void)printAll {
+    for (int i = 0; i < self.suggestedPlayerBuckets.count; i++) {
+        for (int j = 0; j < self.suggestedPlayerBuckets[i].count; j++) {
+            Player* player = self.suggestedPlayerBuckets[i][j];
+            NSLog(@"%@", player.name);
+        }
     }
 }
 
@@ -401,6 +411,7 @@
         double xDiff = self.initialPan.x - currPoint.x;
         
         if (xDiff > 100) {
+            NSLog(@"displaying next");
             [self dispNext];
             CGAffineTransform rotate = CGAffineTransformMakeRotation(0);
             self.suggestedview.transform = rotate;
@@ -427,22 +438,11 @@
 }
 
 - (void)dispNext {
-    self.currPlayer += 1;
     
-    if (self.players.count - self.currPlayer < 5 && self.bestBucket < self.suggestedPlayerBuckets.count) {
+    
+    if (self.players.count - self.currPlayer <= 5 && self.bestBucket < self.suggestedPlayerBuckets.count) {
         self.specializedRefilling = YES;
         [self fetchPlayers];
-    }
-    
-    if (self.randomDone && self.randomPlayers.count > 0) {
-        float randomPerc = [[[PFUser currentUser] valueForKey:@"random"] floatValue];
-        
-        float randomNum = (float) (arc4random() % 101) / 100;
-        
-        if (randomNum <= randomPerc) {
-            [self.players insertObject:self.randomPlayers[self.randomPlayers.count - 1] atIndex:self.currPlayer];
-            [self.randomPlayers removeLastObject];
-        }
     }
     
     if (self.randomPlayers.count < 5) {
@@ -450,10 +450,28 @@
         [self fetchRandomPlayers];
     }
     
-    if (self.currPlayer == self.players.count) {
-        [self presentViewController:self.noMoreSuggestAlert animated:YES completion:^{  }];
+    BOOL dispRandom = NO;
+    
+    if (self.randomDone && self.randomPlayers.count > 0) {
+        float randomPerc = [[[PFUser currentUser] valueForKey:@"random"] floatValue];
+        
+        float randomNum = (float) (arc4random() % 101) / 100;
+        
+        if (randomNum <= randomPerc) {
+            dispRandom = YES;
+        }
+    }
+    
+    if (dispRandom) {
+        [self.suggestedview setPlayer:self.randomPlayers[self.randomPlayers.count - 1]];
+        [self.randomPlayers removeLastObject];
     } else {
-        [self.suggestedview setPlayer:self.players[self.currPlayer]];
+        self.currPlayer += 1;
+        if (self.currPlayer == self.players.count) {
+            [self presentViewController:self.noMoreSuggestAlert animated:YES completion:^{  }];
+        } else {
+            [self.suggestedview setPlayer:self.players[self.currPlayer]];
+        }
     }
 }
 
