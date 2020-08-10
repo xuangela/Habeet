@@ -50,6 +50,15 @@
     return self;
 }
 
+- (void)addToParse {
+    Message *newMessage = [Message object];
+    newMessage.sender = [PFUser currentUser];
+    newMessage.receiver = self.receiver;
+    newMessage.msg = self.msg;
+    
+    [newMessage saveInBackground];
+}
+
 - (id)initFromText:(NSString*) content WithReceiver:(PFUser*) them {
     self = [super init];
 

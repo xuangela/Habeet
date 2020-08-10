@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)initWithPFObject:(PFObject *)msgPF;
 - (id)initFromText:(NSString*) content WithReceiver:(PFUser*) them;
+- (void)addToParse;
 
 @end
 
