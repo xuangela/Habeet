@@ -616,14 +616,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ani-WK-3it" customClass="PFImageView">
-                                                    <rect key="frame" x="23" y="23" width="100" height="104"/>
+                                                    <rect key="frame" x="23" y="22" width="100" height="106"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="4ZL-xX-UEi"/>
                                                         <constraint firstAttribute="height" constant="100" id="bmM-gr-WCa"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fred" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdN-oW-Hb1">
-                                                    <rect key="frame" x="233" y="22" width="38.333333333333314" height="23"/>
+                                                    <rect key="frame" x="233" y="21" width="38.333333333333314" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -635,7 +635,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mY3-TL-wbV">
-                                                    <rect key="frame" x="131" y="23" width="55" height="21"/>
+                                                    <rect key="frame" x="131" y="22" width="55" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -647,13 +647,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Experience: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7N9-wY-Jtf">
-                                                    <rect key="frame" x="131" y="106" width="94" height="21"/>
+                                                    <rect key="frame" x="131" y="107" width="94" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="intermediate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTD-AE-zTq">
-                                                    <rect key="frame" x="233" y="105" width="106" height="23"/>
+                                                    <rect key="frame" x="233" y="106" width="106" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -665,8 +665,8 @@
                                                 <constraint firstItem="Ani-WK-3it" firstAttribute="leading" secondItem="EGJ-SC-NIG" secondAttribute="leadingMargin" constant="8" id="ASq-2Z-ISc"/>
                                                 <constraint firstItem="zTD-AE-zTq" firstAttribute="centerY" secondItem="7N9-wY-Jtf" secondAttribute="centerY" id="GiC-ZR-lf3"/>
                                                 <constraint firstItem="OfL-p8-yOy" firstAttribute="leading" secondItem="AdN-oW-Hb1" secondAttribute="leading" id="Msq-L6-aHv"/>
-                                                <constraint firstItem="Ani-WK-3it" firstAttribute="top" secondItem="EGJ-SC-NIG" secondAttribute="topMargin" constant="12" id="SGU-VP-mzb"/>
-                                                <constraint firstItem="Ani-WK-3it" firstAttribute="centerY" secondItem="EGJ-SC-NIG" secondAttribute="centerY" id="WzM-nM-6kN"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Ani-WK-3it" secondAttribute="bottom" constant="11" id="RSF-9c-yu8"/>
+                                                <constraint firstItem="Ani-WK-3it" firstAttribute="top" secondItem="EGJ-SC-NIG" secondAttribute="topMargin" constant="11" id="SGU-VP-mzb"/>
                                                 <constraint firstItem="mY3-TL-wbV" firstAttribute="leading" secondItem="Ani-WK-3it" secondAttribute="trailing" constant="8" id="Xmx-DI-gny"/>
                                                 <constraint firstItem="zTD-AE-zTq" firstAttribute="leading" secondItem="7N9-wY-Jtf" secondAttribute="trailing" constant="8" id="ZdW-kA-hi5"/>
                                                 <constraint firstItem="zTD-AE-zTq" firstAttribute="leading" secondItem="AdN-oW-Hb1" secondAttribute="leading" id="iXo-BO-kUe"/>

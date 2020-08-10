@@ -152,6 +152,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.userInteractionEnabledWhileDragging = NO;
+        cell.userInteractionEnabled = NO;
     }
     
     UIView *chatBubble = [self.allMessages objectAtIndex:indexPath.row];
