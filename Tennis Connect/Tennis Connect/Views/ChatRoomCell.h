@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Player.h"
+#import "Message.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
 @property (nonatomic, strong) Player* player;
+@property (nonatomic, strong) Message* msg;
 
 @end
 

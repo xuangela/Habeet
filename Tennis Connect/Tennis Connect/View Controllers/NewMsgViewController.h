@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Player.h"
+#import "Message.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NewMsgViewController : UIViewController
 
-@property (nonatomic, strong) NSMutableSet<PFUser *> *possibleChatsPF;
+@property (nonatomic, strong) NSMutableDictionary<NSString*, Player*> *possibleRooms;
 
 @end
 

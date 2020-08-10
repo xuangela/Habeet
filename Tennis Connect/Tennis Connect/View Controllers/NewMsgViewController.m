@@ -41,7 +41,9 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
             for (Match* match in objects) {
-                [self.possibleChatsPF addObject:match.receiver];
+                PFUser *opponentPF = [match objectForKey:@"receiver"];
+                Player *opponent = [[Player alloc] initWithPFUser:opponentPF];
+                [self.possibleRooms setObject:opponent forKey:opponent.objectId];
             }
         }
         
@@ -54,11 +56,11 @@
         [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
                 for (Match* match in objects) {
-                    [self.possibleChatsPF addObject:match.sender];
+                    PFUser *opponentPF = [match objectForKey:@"receiver"];
+                    Player *opponent = [[Player alloc] initWithPFUser:opponentPF];
+                    [self.possibleRooms setObject:opponent forKey:opponent.objectId];
                 }
             }
-            
-            self.possibleChats = [Player playersWithPFUserFromSet:self.possibleChatsPF];
             
             [self.tableview reloadData];
         }];

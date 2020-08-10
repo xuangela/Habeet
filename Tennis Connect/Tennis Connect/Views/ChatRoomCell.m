@@ -21,4 +21,33 @@
     // Configure the view for the selected state
 }
 
+- (void)setMsg:(Message *)msg {
+    _msg = msg;
+    
+    if (msg.isReceived) {
+        _player = [[Player alloc] initWithPFUser:msg.sender];
+    } else {
+        _player = [[Player alloc] initWithPFUser:msg.receiver];
+    }
+    
+    if (self.player.pfp) {
+        self.pfpview.file = self.player.pfp;
+        [self.pfpview loadInBackground];
+    }
+    
+    self.nameLabel.text = self.player.name;
+    self.timestampLabel.text = [self getDateTimeStringFromNSDate:msg.updatedAt];
+    self.messageLabel.text = msg.msg;
+}
+
+- (NSString*)getDateTimeStringFromNSDate: (NSDate*)date {
+    NSString *dateTimeString = @"";
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd MMM, hh:mm a"];
+    dateTimeString = [dateFormatter stringFromDate:date];
+    
+    return dateTimeString;
+}
+
 @end

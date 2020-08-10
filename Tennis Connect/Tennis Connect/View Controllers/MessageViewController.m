@@ -17,8 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
-@property (nonatomic, strong) NSMutableSet *messageRoomsPF;
-@property (nonatomic, strong) NSMutableArray<Player*> *messageRooms;
+@property (nonatomic, strong) NSMutableDictionary<NSString*, Message*> *uniqueRooms;
+@property (nonatomic, strong) NSMutableArray<Message *> *displayingRooms;
 
 @property (nonatomic, assign) int fetchOcc;
 
@@ -34,32 +34,43 @@
 }
 
 - (void)getExistingMsgs {
+    self.uniqueRooms = [[NSMutableDictionary alloc] init];
     
-    self.messageRoomsPF = [[NSMutableSet alloc] init];
+    PFQuery *querySender = [Message query];
+    [querySender whereKey:@"sender" equalTo:[PFUser currentUser]];
+    [querySender orderByAscending:@"updatedAt"];
+    [querySender includeKey:@"receiver"];
     
-    PFUser *me = [PFUser currentUser];
-    PFRelation *relation = [me relationForKey:@"messaging"];
-    PFQuery *query = [relation query];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+    [querySender findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
-            [self.messageRoomsPF addObjectsFromArray:objects];
+            for (Message* msg in objects) {
+                [self.uniqueRooms setObject:msg forKey:msg.receiver.objectId];
+            }
         }
         
-        PFQuery *query = [PFQuery queryWithClassName:@"User"];
-        [query whereKey:@"messaging" equalTo:me];
+        PFQuery *queryReceiver = [Message query];
+        [queryReceiver whereKey:@"receiver" equalTo:[PFUser currentUser]];
+        [queryReceiver includeKey:@"sender"];
+        [queryReceiver orderByAscending:@"updatedAt"];
         
-        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        [queryReceiver findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
-                [self.messageRoomsPF addObjectsFromArray:objects];
-                
-                self.messageRooms = [Player playersWithPFUserFromSet:self.messageRoomsPF];
-                NSLog(@"got all existing chat rooms");
-                
-                [self.tableview reloadData];
+                for (Message* msg in objects) {
+                    [self.uniqueRooms setObject:msg forKey:msg.receiver.objectId];
+                }
             }
+            [self displayExistingRooms];
         }];
     }];
+}
+
+- (void)displayExistingRooms {
+    self.displayingRooms = [[NSMutableArray alloc] init];
+    for (NSString* playerId in [self.uniqueRooms allKeys]) {
+        Message *thismsg = [self.uniqueRooms valueForKey:playerId];
+        [self.displayingRooms addObject:thismsg];
+    }
+    [self.tableview reloadData];
 }
 
 #pragma mark - Table Set Up
@@ -70,17 +81,18 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.messageRooms.count > 0) {
-        return self.messageRooms.count;
+    if (self.displayingRooms.count > 0) {
+        return self.displayingRooms.count;
     } else {
         return 1;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.messageRooms.count > 0) {
+    if (self.displayingRooms.count > 0) {
         ChatRoomCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"ChatRoomCell"];
-
+        [cell setMsg:self.displayingRooms[indexPath.row]];
+        
         return cell;
         
     } else {
@@ -104,8 +116,20 @@
 
     if ([segue.identifier isEqualToString:@"newMsgUsersSegue"]) {
         NewMsgViewController *viewController = [segue destinationViewController];
-            
-        viewController.possibleChatsPF = [NSMutableSet setWithSet:self.messageRoomsPF];
+         
+        NSMutableDictionary *possibleChat = [[NSMutableDictionary alloc] init];
+    
+        for (NSString* playerId in [self.uniqueRooms allKeys]) {
+            Message *msg = [self.uniqueRooms valueForKey:playerId];
+            if (msg.isReceived) {
+                [possibleChat setObject:msg.sender forKey:playerId];
+            } else {
+                [possibleChat setObject:msg.receiver forKey:playerId];
+            }
+        }
+        
+    
+        viewController.possibleRooms = possibleChat;
     }
 }
 
