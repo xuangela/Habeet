@@ -17,9 +17,10 @@
 @property (nonatomic) NSMutableArray<UIView*> *allMessages;
 @property (nonatomic, strong) NSMutableArray <Message *> *messages;
 
-@property (nonatomic) UIView *viewBar;
-@property (nonatomic) UITextView *messageTV;
-@property (nonatomic) UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet UIView *textView;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
+
 
 @property (nonatomic, assign) double screenWidth;
 
@@ -49,49 +50,32 @@
 }
 
 - (void)viewSetUp {
-    double vertHeight = self.view.frame.size.height - self.view.safeAreaInsets.bottom - 50;
-    
-    self.viewBar.backgroundColor = [UIColor whiteColor];
-    self.viewBar = [[UIView alloc] initWithFrame:CGRectMake(0, vertHeight, self.screenWidth+1, 50)];
-    self.viewBar.layer.borderWidth = 1.0;
-    self.viewBar.layer.borderColor = [Rgb2UIColor(204, 204, 204) CGColor];
+    self.textView.backgroundColor = [UIColor whiteColor];
+    self.textView.layer.borderWidth = 1.0;
+    self.textView.layer.borderColor = [Rgb2UIColor(204, 204, 204) CGColor];
     
     [self messageFieldSetUp];
     [self buttonSetUp];
-    
-    [self.viewBar addSubview:self.sendButton];
-    [self.viewBar addSubview:self.messageTV];
-    [self.view addSubview:self.viewBar];
 }
 
 - (void)messageFieldSetUp {
-    self.messageTV = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, self.screenWidth-80, 30)];
-    self.messageTV.layer.cornerRadius = 5.0;
-    self.messageTV.clipsToBounds = YES;
-    self.messageTV.layer.borderColor = [[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor];
-    self.messageTV.layer.borderWidth = 1.0;
-    self.messageTV.font = [UIFont systemFontOfSize:16];
-    self.messageTV.delegate = self;
+    self.textField.layer.cornerRadius = 5.0;
+    self.textField.clipsToBounds = YES;
+    self.textField.layer.borderColor = [[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor];
+    self.textField.layer.borderWidth = 1.0;
+    self.textField.font = [UIFont systemFontOfSize:16];
 }
 
+
 - (void)buttonSetUp {
-    self.sendButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.sendButton.frame = CGRectMake(self.screenWidth-70, 0, 70, 50);
     [self.sendButton setTitle:@"Send" forState:UIControlStateNormal];
     self.sendButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.sendButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
-    
 }
 
-- (BOOL)canBecomeFirstResponder{
-    
-    return YES;
-}
-
-- (UIView *)inputAccessoryView {
-    
-    return self.viewBar;
-}
+//- (UIView *)inputAccessoryView {
+//    return self.textView;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -134,7 +118,7 @@
 }
 
 - (IBAction)tapOther:(id)sender {
-    [self.view endEditing:YES];
+    [self.textField resignFirstResponder];
 }
 
 #pragma mark - UITableView delegate methods
@@ -180,21 +164,21 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.messageTV resignFirstResponder];
+    [self.textField resignFirstResponder];
 }
 
 #pragma mark - Buttons' Actions
 
 - (void)sendAction: (id)selector {
-    Message *newMsg = [[Message alloc] initFromText:self.messageTV.text WithReceiver:self.player.user];
+    Message *newMsg = [[Message alloc] initFromText:self.textField.text WithReceiver:self.player.user];
     UIView *newMsgView = [self createMessageWithMessage:newMsg DateTime:[self getDateTimeStringFromNSDate:[NSDate date]]];
 
     [self.allMessages addObject:newMsgView];
     [self.chatTableView reloadData];
     [self scrollToTheBottom:YES];
     
-    [self.messageTV resignFirstResponder];
-    self.messageTV.text = @"";
+    [self.textField resignFirstResponder];
+    self.textField.text = @"";
 }
 
 #pragma mark - Message UI creation function(s)
