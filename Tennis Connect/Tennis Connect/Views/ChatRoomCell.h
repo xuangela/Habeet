@@ -24,8 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) Player* player;
 @property (nonatomic, strong) Message* msg;
 
-- (void)sentMessage;
-
 @end
 
 NS_ASSUME_NONNULL_END

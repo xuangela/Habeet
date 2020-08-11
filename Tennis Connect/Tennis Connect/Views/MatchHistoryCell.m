@@ -26,6 +26,8 @@
     
     _match = match;
     
+    self.userInteractionEnabled = NO;
+    
     if ([match.receiver.objectId isEqualToString:[PFUser currentUser].objectId]) {
         self.opponent = match.sender;
         self.isReceiver = YES;
@@ -68,6 +70,7 @@
             UIColor *myPink = [[UIColor alloc] initWithRed:246.0/255.0 green:106.0/255.0 blue:172.0/255.0 alpha:1];
             [self.validationButton setTitleColor:myPink forState:UIControlStateNormal];
             self.validationButton.userInteractionEnabled = YES;
+            self.userInteractionEnabled = YES; 
         } else {
             [self.validationButton setTitle:@"Awaiting validation" forState:UIControlStateNormal];
             [self.validationButton setTitleColor:UIColor.grayColor forState:UIControlStateNormal];
