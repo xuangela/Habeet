@@ -439,7 +439,6 @@
 
 - (void)dispNext {
     
-    
     if (self.players.count - self.currPlayer <= 5 && self.bestBucket < self.suggestedPlayerBuckets.count) {
         self.specializedRefilling = YES;
         [self fetchPlayers];
@@ -465,6 +464,7 @@
     if (dispRandom) {
         [self.suggestedview setPlayer:self.randomPlayers[self.randomPlayers.count - 1]];
         [self.randomPlayers removeLastObject];
+        NSLog(@"displaying random");
     } else {
         self.currPlayer += 1;
         if (self.currPlayer == self.players.count) {
