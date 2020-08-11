@@ -230,14 +230,14 @@
     [query4 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:prevSmallestRating]];
     [query4 whereKey:@"age" lessThanOrEqualTo:prevEarliestdobQuery];
     
-    if (!boundAge) {
+    if (boundAge) {
         [query1 whereKey:@"age" lessThanOrEqualTo:latestdobQuery];
         [query2 whereKey:@"age" lessThanOrEqualTo:latestdobQuery];
         [query3 whereKey:@"age" greaterThan:earliestdobQuery];
         [query4 whereKey:@"age" greaterThan:earliestdobQuery];
     }
     
-    if (!boundRating) {
+    if (boundRating) {
         [query1 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:largestRating]];
         [query2 whereKey:@"rating" greaterThan:[NSNumber numberWithInt:smallestRating]];
         [query3 whereKey:@"rating" lessThanOrEqualTo:[NSNumber numberWithInt:largestRating]];
@@ -350,6 +350,7 @@
 
 - (void)printAll {
     for (int i = 0; i < self.suggestedPlayerBuckets.count; i++) {
+        NSLog(@"bucket number: %d", i);
         for (int j = 0; j < self.suggestedPlayerBuckets[i].count; j++) {
             Player* player = self.suggestedPlayerBuckets[i][j];
             NSLog(@"%@", player.name);
