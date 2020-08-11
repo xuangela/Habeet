@@ -21,9 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray<Player*> *players;
 @property (nonatomic, assign) int currPlayer;
 
-- (void)initialize;
-- (void) fetchPlayers;
-- (void) fetchRandomPlayers;
+
+- (void)settingsChanged; 
 
 @end
 

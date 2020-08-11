@@ -107,8 +107,8 @@
                         <segue destination="J53-Bf-CVy" kind="relationship" relationship="viewControllers" id="2qH-ko-htd"/>
                         <segue destination="Lt5-ms-lho" kind="relationship" relationship="viewControllers" id="OMZ-8o-Dk8"/>
                         <segue destination="lhe-f4-HFZ" kind="relationship" relationship="viewControllers" id="p4B-q4-AYd"/>
-                        <segue destination="aft-pf-NAT" kind="relationship" relationship="viewControllers" id="YtH-tD-pAw"/>
                         <segue destination="9eg-ek-nbf" kind="relationship" relationship="viewControllers" id="UPN-C7-2YQ"/>
+                        <segue destination="aft-pf-NAT" kind="relationship" relationship="viewControllers" id="YtH-tD-pAw"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAf-zH-v7J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -556,13 +556,16 @@
                                         <rect key="frame" x="0.0" y="591" width="375" height="50"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6uk-wt-xMP">
-                                                <rect key="frame" x="8" y="8" width="305" height="34"/>
+                                                <rect key="frame" x="8" y="8" width="315" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCk-eq-Ul2">
-                                                <rect key="frame" x="321" y="10" width="46" height="30"/>
-                                                <state key="normal" title="Button"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCk-eq-Ul2">
+                                                <rect key="frame" x="331" y="10" width="36" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="36" id="o4Y-sX-pGy"/>
+                                                </constraints>
+                                                <state key="normal" title="Send"/>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

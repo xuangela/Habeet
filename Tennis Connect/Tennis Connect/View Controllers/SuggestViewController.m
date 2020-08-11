@@ -53,6 +53,16 @@
     [self fetchRandomPlayers];
 }
 
+- (void)settingsChanged {
+    if (self.players) {
+        [self initialize];
+        [self fetchPlayers];
+        [self fetchRandomPlayers];
+    }
+}
+
+
+
 -(void)setAnchorPointforSuggestedView {
     
     CGPoint newPoint = CGPointMake(0, self.suggestedview.bounds.size.height);
@@ -292,7 +302,7 @@
                             [self bucketReady:self.bestBucket];
                             if (!self.specializedRefilling) {
                                 self.currPlayer++;
-                                if (self.players) {
+                                if (self.players.count > 0) {
                                     [self.suggestedview setPlayer:self.players[self.currPlayer]];
                                 }
                             }
