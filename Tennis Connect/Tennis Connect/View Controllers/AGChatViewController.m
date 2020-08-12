@@ -45,9 +45,7 @@
 }
 
 - (void)customBackButton {
-    self.navigationItem.hidesBackButton = YES;
-    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(clickedBack)];
-    self.navigationItem.leftBarButtonItem = newBackButton;
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(clickedBack)];
 }
 
 - (void)viewSetUp {
