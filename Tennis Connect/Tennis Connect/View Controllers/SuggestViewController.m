@@ -61,8 +61,6 @@
     }
 }
 
-
-
 -(void)setAnchorPointforSuggestedView {
     
     CGPoint newPoint = CGPointMake(0, self.suggestedview.bounds.size.height);
@@ -263,7 +261,6 @@
     int index = [self calculateIndexwithAgeDiff:ageDiff andRatingDiff:ratingDiff];
     NSMutableArray *thisBucket = self.suggestedPlayerBuckets[index];
     
-    
     [queries[0] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         NSMutableArray *resultingPlayer = [Player playersWithPFUserObjects:objects];
         [thisBucket addObjectsFromArray:resultingPlayer];
@@ -342,23 +339,25 @@
 }
 
 -(void)bucketReady:(int)index {
-    [self printAll];
+    [self printAllInBucket];
     [self.activityIndicator stopAnimating];
     self.view.userInteractionEnabled = YES;
+    
     
     if (self.bestBucket < self.suggestedPlayerBuckets.count && self.suggestedPlayerBuckets[self.bestBucket].count >= 5) {
         [self.players addObjectsFromArray:self.suggestedPlayerBuckets[self.bestBucket]];
         [self.suggestedPlayerBuckets[self.bestBucket] removeAllObjects];
-    }
+    } else {
     
-    while (self.bestBucket < self.suggestedPlayerBuckets.count && self.suggestedPlayerBuckets[self.bestBucket].count < 5) {
-        [self.players addObjectsFromArray:self.suggestedPlayerBuckets[self.bestBucket]];
-        [self.suggestedPlayerBuckets[self.bestBucket] removeAllObjects];
-        self.bestBucket++;
+        while (self.bestBucket < self.suggestedPlayerBuckets.count && self.suggestedPlayerBuckets[self.bestBucket].count < 5) {
+            [self.players addObjectsFromArray:self.suggestedPlayerBuckets[self.bestBucket]];
+            [self.suggestedPlayerBuckets[self.bestBucket] removeAllObjects];
+            self.bestBucket++;
+        }
     }
 }
 
-- (void)printAll {
+- (void)printAllInBucket {
     for (int i = 0; i < self.suggestedPlayerBuckets.count; i++) {
         NSLog(@"bucket number: %d", i);
         for (int j = 0; j < self.suggestedPlayerBuckets[i].count; j++) {
@@ -384,9 +383,9 @@
     PFQuery *query = [PFUser query];
     
     [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
+    
     Court *court =[[PFUser currentUser] valueForKey:@"homeCourt"];
     [query whereKey:@"courts" equalTo:court];
-    [query orderByDescending:@"createdAt"];
     
     if ([[[PFUser currentUser] valueForKey:@"genderSearch"] boolValue]== YES) {
         [query whereKey:@"gender" equalTo:[[PFUser currentUser] valueForKey:@"gender"]];
@@ -449,7 +448,6 @@
 }
 
 - (void)dispNext {
-    
     if (self.players.count - self.currPlayer <= 5 && self.bestBucket < self.suggestedPlayerBuckets.count) {
         self.specializedRefilling = YES;
         [self fetchPlayers];
