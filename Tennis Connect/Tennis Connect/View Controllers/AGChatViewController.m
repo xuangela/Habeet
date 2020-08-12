@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
+@property (nonatomic, assign) BOOL sentMsg;
+
 @end
 
 @implementation AGChatViewController
@@ -31,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self customBackButton];
     [self registerNotifications];
     [self viewSetUp];
 
@@ -39,6 +42,12 @@
 
     [self tableSetUp];
     [self getMessagesWithPlayer];
+}
+
+- (void)customBackButton {
+    self.navigationItem.hidesBackButton = YES;
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(clickedBack)];
+    self.navigationItem.leftBarButtonItem = newBackButton;
 }
 
 - (void)viewSetUp {
@@ -105,6 +114,10 @@
             NSArray *sortedArray = [self.messages sortedArrayUsingDescriptors:sortDescriptors];
             
             self.messages = [NSMutableArray arrayWithArray:sortedArray];
+            
+            if (self.messages.count != 0) {
+                self.newRoom = NO;
+            }
             
             [self makeViewsForMessages];
         }];
@@ -174,10 +187,13 @@
 
 - (void)sendAction: (id)selector {
     if (![self.textField.text isEqualToString:@""]) {
+        self.sentMsg = YES;
         NSString *timeString = [self getDateTimeStringFromNSDate:[NSDate date]];
         
         Message *newMsg = [[Message alloc] initFromText:self.textField.text WithReceiver:self.player.user];
         [newMsg addToParse];
+        
+        [self.messages addObject:newMsg];
         
         self.delegate.messageLabel.text = self.textField.text;
         self.delegate.timestampLabel.text = timeString;
@@ -190,8 +206,6 @@
         [self scrollToTheBottom:YES];
         
         self.textField.text = @"";
-        
-        
     }
 }
 
@@ -351,6 +365,21 @@
         [self.view setFrame:newFrame];
     }
 }
+
+#pragma mark - Navigation
+
+
+- (void)clickedBack {
+    if (self.newRoom && self.sentMsg) {
+        UINavigationController *navigationControl = (UINavigationController*)self.parentViewController;
+        MessageViewController *viewControl = navigationControl.viewControllers[0];
+        [viewControl.displayingRooms insertObject:self.messages[self.messages.count - 1] atIndex:0];
+        [viewControl.tableview reloadData];
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 
 @end

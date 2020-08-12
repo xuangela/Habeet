@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Message.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MessageViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
+
+@property (nonatomic, strong) NSMutableArray<Message *> *displayingRooms;
+
+- (void) addNewRoomWithUser: (Player*) user;
+
 
 
 @end

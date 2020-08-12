@@ -21,5 +21,6 @@
 
 @property (nonatomic, strong) Player* player;
 @property (nonatomic, weak) id<ChatDelegate> delegate;
+@property (nonatomic, assign) BOOL newRoom; 
 
 @end

@@ -72,7 +72,14 @@
     return self;
 }
  
+- (id)initNewMessageWithUser:(Player*) player {
+    self = [super init];
 
+    self.receiver = player.user;
+    self.sender =[PFUser currentUser];
+
+    return self;
+}
 
 
 @end

@@ -17,6 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
+@property (nonatomic, strong) NSMutableArray *possiblePlayers;
+
 @end
 
 @implementation NewMsgViewController
@@ -60,10 +62,19 @@
                 }
             }
             
-            [self.tableview reloadData];
+            [self fillPlayerArray];
             
         }];
     }];
+}
+
+- (void)fillPlayerArray {
+    self.possiblePlayers = [[NSMutableArray alloc] init];
+    for (Player* plyr in [self.possibleRooms allValues]) {
+        [self.possiblePlayers addObject:plyr];
+    }
+        
+    [self.tableview reloadData];
 }
 
 #pragma mark - Table Set Up
@@ -74,9 +85,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.possibleRooms allValues].count > 0) {
+    if (self.possiblePlayers.count > 0) {
         PossibleChatCell *cell = [self.tableview dequeueReusableCellWithIdentifier:@"PossibleChatCell"];
-        [cell setPlayer:[self.possibleRooms allValues][indexPath.row]];
+        [cell setPlayer:self.possiblePlayers[indexPath.row]];
         cell.userInteractionEnabled = YES;
         
         return cell;
@@ -86,17 +97,16 @@
         cell.userInteractionEnabled = NO;
         return cell;
     }
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"newMsgSegue" sender: [self.possibleRooms allValues][indexPath.row]];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate addNewRoomWithUser:self.possiblePlayers[indexPath.row]];
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([self.possibleRooms allValues].count > 0) {
-        return [self.possibleRooms allValues].count;
+    if (self.possiblePlayers.count > 0) {
+        return self.possiblePlayers.count;
     } else {
         return 1;
     }
@@ -107,14 +117,11 @@
     return 144;
 }
 
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"newMsgSegue"]) {
-        AGChatViewController *viewControl = [segue destinationViewController];
-        viewControl.player = sender; 
-    }
-}
+//#pragma mark - Navigation
+//
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//
+//}
 
 
 @end

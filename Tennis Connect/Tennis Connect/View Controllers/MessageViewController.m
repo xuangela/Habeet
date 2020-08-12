@@ -12,14 +12,12 @@
 #import "Player.h"
 #import "ChatRoomCell.h"
 #import "EmptyCell.h"
-#import "Message.h"
 
-@interface MessageViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface MessageViewController () <UITableViewDelegate, UITableViewDataSource, NewMsgDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @property (nonatomic, strong) NSMutableDictionary<NSString*, Message*> *uniqueRooms;
-@property (nonatomic, strong) NSMutableArray<Message *> *displayingRooms;
+
 
 @property (nonatomic, assign) int fetchOcc;
 
@@ -87,11 +85,10 @@
     [self.tableview reloadData];
 }
 
-- (void)sentMessage {
+- (void) addNewRoomWithUser: (Player*) user {
+    [self performSegueWithIdentifier:@"newRoomSegue" sender:user];
     
-    [self.tableview reloadData];
 }
-
 #pragma mark - Table Set Up
 
 - (void)tableSetUp {
@@ -146,6 +143,7 @@
             [possibleChat setObject:player forKey:playerId];
         }
         viewController.possibleRooms = possibleChat;
+        viewController.delegate = self;
         
     } else if ([segue.identifier isEqualToString:@"existingRoomSegue"]) {
         AGChatViewController *viewControl = [segue destinationViewController];
@@ -159,7 +157,13 @@
         } else {
             viewControl.player = [[Player alloc] initWithPFUser:selected.receiver];
         }
+    } else if ([segue.identifier isEqualToString:@"newRoomSegue"]) {
+        AGChatViewController *viewControl = [segue destinationViewController];
+        viewControl.player = sender;
+        viewControl.newRoom = YES;
     }
+    
+    
 }
 
 

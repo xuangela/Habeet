@@ -13,9 +13,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol NewMsgDelegate
+
+- (void) addNewRoomWithUser: (Player*) user;
+
+@end
+
 @interface NewMsgViewController : UIViewController
 
 @property (nonatomic, strong) NSMutableDictionary<NSString*, Player*> *possibleRooms;
+@property (nonatomic, weak) id<NewMsgDelegate> delegate;
 
 @end
 

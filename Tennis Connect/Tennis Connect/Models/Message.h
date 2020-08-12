@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Player.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -24,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)initWithPFObject:(PFObject *)msgPF;
 - (id)initFromText:(NSString*) content WithReceiver:(PFUser*) them;
+- (id)initNewMessageWithUser:(Player*) player;
 - (void)addToParse;
 
 @end

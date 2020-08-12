@@ -531,11 +531,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableview" destination="pJI-QA-Zxx" id="RqN-SI-ge9"/>
+                        <segue destination="TqI-81-vI6" kind="show" identifier="newRoomSegue" id="rib-KL-4EM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FpD-Ge-goH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5172" y="670.93596059113304"/>
+            <point key="canvasLocation" x="5228" y="683"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="KYf-lR-YtC">
@@ -746,7 +747,6 @@
                     <navigationItem key="navigationItem" id="xr6-iP-5h9"/>
                     <connections>
                         <outlet property="tableview" destination="zax-DI-WwF" id="L0r-jC-x0w"/>
-                        <segue destination="TqI-81-vI6" kind="show" identifier="newMsgSegue" id="m1v-j1-QRk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H3d-Gu-s3d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1888,7 +1888,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="C7u-n1-PNA"/>
+        <segue reference="rib-KL-4EM"/>
         <segue reference="yJg-LI-zZr"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.45932732679999999" blue="0.66938532340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
