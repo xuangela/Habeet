@@ -54,7 +54,7 @@
         [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if (!error) {
                 for (Match* match in objects) {
-                    PFUser *opponentPF = [match objectForKey:@"receiver"];
+                    PFUser *opponentPF = [match objectForKey:@"sender"];
                     Player *opponent = [[Player alloc] initWithPFUser:opponentPF];
                     [self.possibleRooms setObject:opponent forKey:opponent.objectId];
                 }
