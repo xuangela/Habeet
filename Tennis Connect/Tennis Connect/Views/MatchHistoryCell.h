@@ -12,6 +12,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+@protocol HistoryCellDelegate
+
+- (void)updateRating:(int)rating; 
+
+@end
+
 @interface MatchHistoryCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
@@ -26,7 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) Match *match;
 @property (nonatomic, strong) PFUser *opponent;
 @property (nonatomic, assign) BOOL isReceiver;
-@property (nonatomic, assign) BOOL iWon; 
+@property (nonatomic, assign) BOOL iWon;
+
+@property (nonatomic, weak) id<HistoryCellDelegate> delegate;
 
 - (void) setMatch:(Match *)match;
 

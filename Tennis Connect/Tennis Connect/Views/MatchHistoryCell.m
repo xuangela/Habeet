@@ -7,6 +7,7 @@
 //
 
 #import "MatchHistoryCell.h"
+#import "ProfileViewController.h"
 #import "NSDate+DateTools.h"
 
 @implementation MatchHistoryCell
@@ -193,7 +194,7 @@
     PFQuery *userRatingUpdateQuery = [PFUser query];
     [userRatingUpdateQuery getObjectInBackgroundWithId:[PFUser currentUser].objectId block:^(PFObject * _Nullable object, NSError * _Nullable error) {
         object[@"rating"] = [NSNumber numberWithInt:myRating];
-        
+        [self.delegate updateRating:myRating];
         [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             NSLog(@"my score updated");
         }];

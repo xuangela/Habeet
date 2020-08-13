@@ -18,8 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet PFImageView *pfpView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *skillLabel;
-@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
+
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerVC;
 

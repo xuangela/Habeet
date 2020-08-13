@@ -7,12 +7,13 @@
 //
 
 #import "MatchHistoryViewController.h"
+#import "ProfileViewController.h"
 #import "MatchHistoryCell.h"
 #import "EmptyCell.h"
 @import Parse;
 @import MaterialComponents;
 
-@interface MatchHistoryViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+@interface MatchHistoryViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, HistoryCellDelegate>
 
 @property (strong, nonatomic) IBOutlet MDCActivityIndicator *activityIndicator;
 
@@ -33,6 +34,21 @@
     [self loadingIndicatorSetUp];
     [self tableSetUp];
     [self getMatches];
+}
+
+- (void)updateRating:(int)rating {
+    UINavigationController *navigationControl = self.tabBarController.viewControllers[4];
+    ProfileViewController *profileControl = navigationControl.viewControllers[0];
+    profileControl.skillLabel.text = [NSString stringWithFormat: @"%d", rating];
+    
+    if (rating <= 500) {
+        profileControl.levelLabel.text = @"Beginner";
+    } else if (rating <= 1000) {
+        profileControl.levelLabel.text = @"Intermediate";
+    } else {
+        profileControl.levelLabel.text = @"Expert";
+    }
+    
 }
 
 - (void) alertSetUp {
@@ -135,6 +151,7 @@
 
         Match *match = self.completedMatches[indexPath.row];
         [cell setMatch:match];
+        cell.delegate = self;
 
         return cell;
     } else {
