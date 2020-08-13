@@ -146,6 +146,8 @@ App that connects local tennis players for matches and practice. Accounts made b
 | ratingDiffSearch    | NSNumber | how different rating players wants to play |
 | random     | NSNumber | percentage of suggestion results that are random |
 | homeCourt     | pointer to Court | closest court, used to filter for suggested users |
+| courts   | PFRelation to courts | 10 closest courts |
+
 
 
 **Court** 
@@ -156,13 +158,24 @@ App that connects local tennis players for matches and practice. Accounts made b
 | lat | Number | CLLocationCoordinate2D, latitude|
 | lng | Number | CLLocationCoordinate2D, longitude|
 
+**Message** 
+
+| Property    | Type            | Description                         |
+| ----------- | --------------- | ----------------------------------- |
+| sender        | pointer to User          | user who sent the msg   |
+| receiver        | pointer to User          | user who received the msg   |
+| msg        | String          | content of msg   |
+
+
+
+
 
 ### Networking
 
 * Login/Register
     * (Create/POST) make a new user 
 * Map View
-    * (Read/GET) view all match requests
+    * (Read/GET) view all match requests 
     * (Read/GET) view all courts 
 * Detail: match request (present modally)
     * (Update/PUT) confirm/reject received match requests 
